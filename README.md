@@ -1,7 +1,7 @@
 # Dados abertos NPI
 Alguns Scrips para consulta na base de dados do Portal da Transparência nos anos de 2016, e 2017 (meses 1,2,3)
 
-Dados abertos NPI  crislanio.wordpress.com
+Dados abertos NPI 
 Scripts feito com Python 3 e/ou **Jupyter Notebook** utilizando *Pandas, Numpy
 
 ## Dependências
@@ -21,6 +21,4 @@ Responder algumas questões referentes a base de dados do Portal da transparênc
 - Pessoas sem Cargo, sem Função e sem Vínculo recebem remuneração ?.
 - Relação de Função e Cargo
 - Verificar se ID_SERVIDOR_PORTAL é mantido para o mesmo servidor ao longo dos meses
-
-### Screenshots
 
