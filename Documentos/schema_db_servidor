@@ -1,0 +1,168 @@
+﻿-- Modelo Físico do DW de Servidores
+-- Gerado em 28/05/2017
+CREATE TABLE servidor (
+	id_servidor_portal INTEGER PRIMARY KEY,
+	nome TEXT,
+	cpf TEXT,
+	matricula TEXT
+);
+
+CREATE TABLE orgao (
+	cod_orgao DECIMAL PRIMARY KEY,
+	descricao TEXT
+);
+
+CREATE TABLE tempo (
+	ano BIGINT, 
+	mes BIGINT,
+PRIMARY KEY (ano, mes)
+);
+
+CREATE TABLE cargo (
+	cod_cargo BIGINT PRIMARY KEY,
+	descricao_cargo TEXT
+);
+
+CREATE TABLE funcao (
+	cod_atividade BIGINT PRIMARY KEY,
+	sigla TEXT,
+	nivel_funcao BIGINT,
+	funcao TEXT,
+	opcao_parcial TEXT
+);
+
+CREATE TABLE vinculo (
+	cod_vinculo BIGINT PRIMARY KEY,
+	tipo TEXT,
+	situacao TEXT
+);
+
+CREATE TABLE carreira (
+	cod_carreira BIGINT PRIMARY KEY,
+	classe TEXT,
+	referencia TEXT,
+	nivel TEXT,
+	cod_cargo BIGINT,
+FOREIGN KEY(cod_cargo) REFERENCES cargo (cod_cargo)
+
+);
+
+CREATE TABLE observacao (
+	id_servidor_portal BIGINT,
+	mes BIGINT,
+	ano BIGINT,
+	descricao TEXT,
+PRIMARY KEY (id_servidor_portal, mes, ano),
+FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
+FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano)
+);
+
+CREATE TABLE honorarios (
+	id_servidor_portal BIGINT,
+	mes BIGINT,
+	ano BIGINT,
+	empresa TEXT,
+	valor DECIMAL,
+PRIMARY KEY (id_servidor_portal, mes, ano),
+FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
+FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano)
+);
+
+CREATE TABLE afastamento (
+	id_servidor_portal BIGINT,
+	mes BIGINT,
+	ano BIGINT,
+	data_inicio DATE,
+	data_fim DATE,
+PRIMARY KEY (id_servidor_portal, mes, ano),
+FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
+FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano)
+);
+
+CREATE TABLE fato_cargo (
+	cod_carreira BIGINT,
+	cod_cargo BIGINT,
+	id_servidor_portal BIGINT,
+	mes BIGINT,
+	ano BIGINT,
+	cod_uorg DECIMAL,
+	cod_org DECIMAL,
+	cod_org_sup DECIMAL,
+PRIMARY KEY (cod_carreira, cod_cargo, id_servidor_portal, mes, ano),
+FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
+FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano),
+FOREIGN KEY (cod_carreira) REFERENCES carreira(cod_carreira),
+FOREIGN KEY (cod_cargo) REFERENCES cargo (cod_cargo)
+);
+
+CREATE TABLE fato_vinculo (
+	id_servidor_portal BIGINT,
+	cod_vinculo BIGINT,
+	cod_uorg DECIMAL,
+	cod_org DECIMAL,
+	cod_org_sup DECIMAL,
+PRIMARY KEY (id_servidor_portal, cod_vinculo),
+FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
+FOREIGN KEY (cod_vinculo) REFERENCES vinculo (cod_vinculo)	
+);
+
+CREATE TABLE fato_funcao (
+	id_servidor_portal BIGINT,
+	cod_atividade BIGINT,
+	mes BIGINT,
+	ano BIGINT,
+	cod_uorg DECIMAL,
+	cod_org DECIMAL,
+	cod_org_sup DECIMAL,
+PRIMARY KEY (id_servidor_portal, cod_atividade, mes, ano),
+FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
+FOREIGN KEY (cod_atividade) REFERENCES funcao (cod_atividade),
+FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano)
+);
+
+CREATE TABLE fato_sem_cargo_funcao_vinculo (
+	id_servidor_portal BIGINT PRIMARY KEY,
+	cod_uorg DECIMAL,
+	cod_org DECIMAL,
+	cod_org_sup DECIMAL,
+FOREIGN KEY (id_servidor_portal) REFERENCES servidor(id_servidor_portal)
+
+);
+
+CREATE TABLE fato_remuneracao (
+	id_servidor_portal BIGINT,
+	mes BIGINT,
+	ano BIGINT,
+	remuneracao_basica_bruta_dolar DECIMAL,
+	abate_teto_real DECIMAL,
+	abate_teto_dolar DECIMAL,
+	gratificacao_natalina_real DECIMAL,
+	gratificacao_natalina_dolar DECIMAL,
+	abate_teto_gratificacao_natal_real DECIMAL,
+	abate_teto_gratificacao_natal_dolar DECIMAL,
+	ferias_real DECIMAL,
+	ferias_dolar DECIMAL,
+	outras_remuneracoes_eventuais_real DECIMAL,
+	outras_remuneracoes_eventuais_dolar DECIMAL,
+	irrf_real DECIMAL,
+	irrf_dolar DECIMAL,
+	pss_rpgs_real DECIMAL,
+	pss_rpgs_dolar DECIMAL,
+	pensao_militar_real DECIMAL,
+	pensao_militar_dolar DECIMAL,
+	fundo_de_saude_real DECIMAL,
+	fundo_de_saude_dolar DECIMAL,
+	demais_deducoes_real DECIMAL,
+	demais_deducoes_dolar DECIMAL,
+	remuneracao_apos_deducoes_obrigatorias_real DECIMAL,
+	remuneracao_apos_deducoes_obrigatorias_dolar DECIMAL,
+	verbas_indenizatorias_de_pessoal_civil_real DECIMAL,
+	verbas_indenizatorias_de_pessoal_civil_dolar DECIMAL,
+	verbas_indenizatorias_de_pessoal_militar_real DECIMAL,
+	verbas_indenizatorias_de_pessoal_militar_dolar DECIMAL,
+	total_de_honorarios_jetons DECIMAL,
+	remuneracao_basica_bruta_real DECIMAL,
+PRIMARY KEY (id_servidor_portal, mes, ano),
+FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
+FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano)
+);
