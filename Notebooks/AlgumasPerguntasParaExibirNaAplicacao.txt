@@ -1,0 +1,32 @@
+Geral - Exibir Orgão que gasta mais -(ORGÃO SUP - subcategorias com orgãos de lotação)
+Geral - Quantidade de servidores por ORGÃO.
+
+Geral - Exibir gráfico com os gastos dos meses.
+
+Geral - Exibir gráfico de gastos por Estado.
+Específico - Exibir gastos Orgão sup no estado (Ex: Quanto o Estado recebe no Ministério do Trabalho, Educação)
+
+Específico - Exibir gastos gerais por CARGO - (Professores, Médicos)				** INVESTIGAR
+
+
+Geral - Total de gastos com o Exterior (Em dolar) (* GRÁFICO) - por mês.
+Geral - Quantidade de pessoas por mês.
+
+Específico - Exibir cargos (10...) com maior remuneração - (De acordo com o orgão superior -(MINISTÉRIO DA EDUCAÇÃO, MINISTÉRIO DA SAÚDE, GOVERNO DO ESTADO DO CEARÁ ...) )
+Específico Exibir cargos (10...) com maior remuneração de acordo com o orgão superior - Por estado.
+
+
+Geral - Exibir gastos de acordo com a SITUAÇÃO VÍNCULO (Contratado, Concursado) * SEGUINDO A HIERARQUIA ACIMA - Por ORGÃO, ORGÃO SUP
+Geral - Exibir gastos de acordo com a OBSERVAÇÃO: pessoas ativos, inativos, Aposentados, Pensionistas.
+
+Geral - Exibir gastos gerais em honorários por mês.
+Específico - (VER EMPRESAS QUE RECEBEM MAIS)
+
+Geral - Quanto que é o gasto por cargo comissionados por função, e somente cargo comissionados que não são concursado (Ex: nomeação - Cargos Políticos)				** INVESTIGAR
+
+
+
+
+** INVESTIGAR: Fazer uma exploração para entender melhor a pergunta.
+
+
