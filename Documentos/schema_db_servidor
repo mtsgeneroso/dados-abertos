@@ -1,4 +1,4 @@
-﻿-- Modelo Físico do DW de Servidores
+-- Modelo Físico do DW de Servidores
 -- Gerado em 28/05/2017
 CREATE TABLE servidor (
 	id_servidor_portal INTEGER PRIMARY KEY,
@@ -88,6 +88,9 @@ CREATE TABLE fato_cargo (
 	cod_uorg DECIMAL,
 	cod_org DECIMAL,
 	cod_org_sup DECIMAL,
+	regime_juridico TEXT,
+	uf_exercicio TEXT,
+	jornada_de_trabalho TEXT,
 PRIMARY KEY (cod_carreira, cod_cargo, id_servidor_portal, mes, ano),
 FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
 FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano),
@@ -101,6 +104,9 @@ CREATE TABLE fato_vinculo (
 	cod_uorg DECIMAL,
 	cod_org DECIMAL,
 	cod_org_sup DECIMAL,
+	regime_juridico TEXT,
+	uf_exercicio TEXT,
+	jornada_de_trabalho TEXT,
 PRIMARY KEY (id_servidor_portal, cod_vinculo),
 FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
 FOREIGN KEY (cod_vinculo) REFERENCES vinculo (cod_vinculo)	
@@ -114,6 +120,9 @@ CREATE TABLE fato_funcao (
 	cod_uorg DECIMAL,
 	cod_org DECIMAL,
 	cod_org_sup DECIMAL,
+	regime_juridico TEXT,
+	uf_exercicio TEXT,
+	jornada_de_trabalho TEXT,
 PRIMARY KEY (id_servidor_portal, cod_atividade, mes, ano),
 FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
 FOREIGN KEY (cod_atividade) REFERENCES funcao (cod_atividade),
@@ -125,6 +134,9 @@ CREATE TABLE fato_sem_cargo_funcao_vinculo (
 	cod_uorg DECIMAL,
 	cod_org DECIMAL,
 	cod_org_sup DECIMAL,
+	regime_juridico TEXT,
+	uf_exercicio TEXT,
+	jornada_de_trabalho TEXT,
 FOREIGN KEY (id_servidor_portal) REFERENCES servidor(id_servidor_portal)
 
 );
@@ -166,3 +178,36 @@ PRIMARY KEY (id_servidor_portal, mes, ano),
 FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
 FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano)
 );
+
+
+--Criação dos Indices
+
+create index idx_btree_vinculo on vinculo using btree(cod_vinculo);
+create index idx_btree_funcao on funcao using btree(cod_atividade);
+create index idx_btree_carreira on carreira using btree(cod_carreira);
+create index idx_btree_cargo on cargo using btree(cod_cargo);
+create index idx_btree_orgao on orgao using btree(cod_org);
+create index idx_btree_tempo on tempo using btree(mes,ano);
+create index idx_btree_servidor on servidor using btree(id_servidor_portal);create index idx_btree_afastamento on afastamento using btree(id_servidor_portal,mes,ano);
+create index idx_btree_honorarios on honorarios using btree(id_servidor_portal,mes,ano);
+create index idx_btree_observacao on observacao using btree(id_servidor_portal,mes,ano);create index idx_btree_fato_sem_cargo_funcao_vinculo on fato_sem_cargo_funcao_vinculo using btree(id_servidor_portal);
+create index idx_btree_fato_vinculo on fato_vinculo using btree(id_servidor_portal,cod_vinculo);
+create index idx_btree_fato_cargo on fato_cargo using btree(cod_carreira,cod_cargo,id_servidor_portal,mes,ano);
+create index idx_btree_fato_remuneracao on fato_remuneracao using btree(id_servidor_portal,mes,ano);
+create index idx_btree_fato_funcao on fato_funcao using btree(id_servidor_portal,cod_atividade,mes,ano);
+
+-- Clustering
+
+cluster vinculo using idx_btree_vinculo;
+cluster funcao using idx_btree_funcao;
+cluster carreira using idx_btree_carreira;
+cluster cargo using idx_btree_cargo;
+cluster orgao using idx_btree_orgao;
+cluster tempo using idx_btree_tempo;
+cluster servidor using idx_btree_servidor;cluster afastamento using idx_btree_afastamento;
+cluster honorarios using idx_btree_honorarios;
+cluster observacao using idx_btree_observacao;cluster fato_sem_cargo_funcao_vinculo using idx_btree_fato_sem_cargo_funcao_vinculo;
+cluster fato_vinculo using idx_btree_fato_vinculo;
+cluster fato_cargo using idx_btree_fato_cargo;
+cluster fato_remuneracao using idx_btree_fato_remuneracao;
+cluster fato_funcao using idx_btree_fato_funcao;
