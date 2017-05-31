@@ -215,3 +215,23 @@ cluster fato_vinculo using idx_btree_fato_vinculo;
 cluster fato_cargo using idx_btree_fato_cargo;
 cluster fato_remuneracao using idx_btree_fato_remuneracao;
 cluster fato_funcao using idx_btree_fato_funcao;
+
+
+
+-- Alteracoes necessárias para adicionar chaves estrangeiras que estavam faltando
+
+ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_uorg) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_org) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_org_sup) REFERENCES orgao (cod_orgao);
+
+ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_uorg) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_org) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_org_sup) REFERENCES orgao (cod_orgao);
+
+ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_uorg) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_org) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_org_sup) REFERENCES orgao (cod_orgao);
+
+ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_uorg) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_org) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_org_sup) REFERENCES orgao (cod_orgao);
