@@ -85,9 +85,9 @@ CREATE TABLE fato_cargo (
 	id_servidor_portal BIGINT,
 	mes BIGINT,
 	ano BIGINT,
-	cod_uorg DECIMAL,
-	cod_org DECIMAL,
-	cod_org_sup DECIMAL,
+	cod_uorg BIGINT,
+	cod_org BIGINT,
+	cod_org_sup BIGINT,
 	regime_juridico TEXT,
 	uf_exercicio TEXT,
 	jornada_de_trabalho TEXT,
@@ -101,9 +101,9 @@ FOREIGN KEY (cod_cargo) REFERENCES cargo (cod_cargo)
 CREATE TABLE fato_vinculo (
 	id_servidor_portal BIGINT,
 	cod_vinculo BIGINT,
-	cod_uorg DECIMAL,
-	cod_org DECIMAL,
-	cod_org_sup DECIMAL,
+	cod_uorg BIGINT,
+	cod_org BIGINT,
+	cod_org_sup BIGINT,
 	regime_juridico TEXT,
 	uf_exercicio TEXT,
 	jornada_de_trabalho TEXT,
@@ -117,9 +117,9 @@ CREATE TABLE fato_funcao (
 	cod_atividade BIGINT,
 	mes BIGINT,
 	ano BIGINT,
-	cod_uorg DECIMAL,
-	cod_org DECIMAL,
-	cod_org_sup DECIMAL,
+	cod_uorg BIGINT,
+	cod_org BIGINT,
+	cod_org_sup BIGINT,
 	regime_juridico TEXT,
 	uf_exercicio TEXT,
 	jornada_de_trabalho TEXT,
@@ -131,9 +131,9 @@ FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano)
 
 CREATE TABLE fato_sem_cargo_funcao_vinculo (
 	id_servidor_portal BIGINT PRIMARY KEY,
-	cod_uorg DECIMAL,
-	cod_org DECIMAL,
-	cod_org_sup DECIMAL,
+	cod_uorg BIGINT,
+	cod_org BIGINT,
+	cod_org_sup BIGINT,
 	regime_juridico TEXT,
 	uf_exercicio TEXT,
 	jornada_de_trabalho TEXT,
@@ -216,9 +216,6 @@ cluster fato_cargo using idx_btree_fato_cargo;
 cluster fato_remuneracao using idx_btree_fato_remuneracao;
 cluster fato_funcao using idx_btree_fato_funcao;
 
-
-
--- Alteracoes necessárias para adicionar chaves estrangeiras que estavam faltando
 
 ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_uorg) REFERENCES orgao (cod_orgao);
 ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_org) REFERENCES orgao (cod_orgao);
