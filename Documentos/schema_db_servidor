@@ -8,7 +8,7 @@ CREATE TABLE servidor (
 );
 
 CREATE TABLE orgao (
-	cod_orgao DECIMAL PRIMARY KEY,
+	cod_orgao BIGINT PRIMARY KEY,
 	descricao TEXT
 );
 
