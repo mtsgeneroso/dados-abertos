@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dados abertos NPI
 Alguns Scrips para consulta na base de dados do Portal da Transparência nos anos de 2016, e 2017 (meses 1,2,3)
 
@@ -22,3 +23,6 @@ Responder algumas questões referentes a base de dados do Portal da transparênc
 - Relação de Função e Cargo
 - Verificar se ID_SERVIDOR_PORTAL é mantido para o mesmo servidor ao longo dos meses
 
+=======
+# Dados_abertos_PortalDaTransparencia
+>>>>>>> ed1b582ad6241ed76c3c17a98b330ec5f2b67526
