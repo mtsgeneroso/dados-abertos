@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: Pagamentos
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: 05773607360
+Implementation-Vendor-Id: br.ufc.npi
+Build-Jdk: 1.8.0_121
+Implementation-URL: http://projects.spring.io/spring-boot/dados-aberto
+ s/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
