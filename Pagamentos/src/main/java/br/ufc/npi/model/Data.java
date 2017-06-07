@@ -19,8 +19,14 @@ public class Data {
 	
 	@OneToMany(mappedBy="pagamentos",
 			   targetEntity=Data.class)
-	List<Pagamento> pagamentos;
+	private List<Pagamento> pagamentos;
 	
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
+	}
 	public int getDia() {
 		return dia;
 	}
@@ -44,6 +50,6 @@ public class Data {
 	}
 	public void setId_data(int id_data) {
 		this.id_data = id_data;
-	} 
+} 
 
 }

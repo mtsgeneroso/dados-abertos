@@ -13,30 +13,28 @@ import javax.persistence.OneToMany;
 public class OrgaoSubordinado {
 	
 	@Id
-	@Column(nullable=false)
-	private int cod_orgao_subordinado; 
-	private String nome_orgao_subordinado;
+	@Column(nullable=false, name="cod_orgao_subordinado")
+	private int codOrgaoSubordinado;
+	
+	@Column(name="nome_orgao_subordinado")
+	private String nomeOrgaoSubordinado;
 
 	@Column(insertable=false, 
 			updatable=false,
-			nullable=false)
-	private int cod_orgao_superior;
+			nullable=false, 
+			name="cod_orgao_superior")
+	private int codOrgaoSuperior;
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name="cod_orgao_superior", 
-	referencedColumnName="cod_orgao_superior")
-	OrgaoSuperior orgao_superior;
+	referencedColumnName="cod_orgao_Superior")
+	private OrgaoSuperior orgao_superior;
 	
 	@OneToMany(mappedBy="unidades_gestoras",
 			   targetEntity=OrgaoSubordinado.class)
-	List<UnidadeGestora> unidades_gestoras;
+	private List<UnidadeGestora> unidades_gestoras;
 	
-	public int getCod_orgao_superior() {
-		return cod_orgao_superior;
-	}
-	public void setCod_orgao_superior(int cod_orgao_superior) {
-		this.cod_orgao_superior = cod_orgao_superior;
-	}
+	
 	public OrgaoSuperior getOrgao_superior() {
 		return orgao_superior;
 	}
@@ -49,17 +47,23 @@ public class OrgaoSubordinado {
 	public void setUnidades_gestoras(List<UnidadeGestora> unidades_gestoras) {
 		this.unidades_gestoras = unidades_gestoras;
 	}
-	public int getCod_orgao_subordinado() {
-		return cod_orgao_subordinado;
+	public int getCodOrgaoSubordinado() {
+		return codOrgaoSubordinado;
 	}
-	public void setCod_orgao_subordinado(int cod_orgao_subordinado) {
-		this.cod_orgao_subordinado = cod_orgao_subordinado;
+	public void setCodOrgaoSubordinado(int codOrgaoSubordinado) {
+		this.codOrgaoSubordinado = codOrgaoSubordinado;
 	}
-	public String getNome_orgao_subordinado() {
-		return nome_orgao_subordinado;
+	public String getNomeOrgaoSubordinado() {
+		return nomeOrgaoSubordinado;
 	}
-	public void setNome_orgao_subordinado(String nome_orgao_subordinado) {
-		this.nome_orgao_subordinado = nome_orgao_subordinado;
+	public void setNomeOrgaoSubordinado(String nomeOrgaoSubordinado) {
+		this.nomeOrgaoSubordinado = nomeOrgaoSubordinado;
+	}
+	public int getCodOrgaoSuperior() {
+		return codOrgaoSuperior;
+	}
+	public void setCodOrgaoSuperior(int codOrgaoSuperior) {
+		this.codOrgaoSuperior = codOrgaoSuperior;
 	}
 	
 

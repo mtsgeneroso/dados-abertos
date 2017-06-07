@@ -1,11 +1,10 @@
 package br.ufc.npi.model;
 
 import java.util.List;
-
+import javax.persistence.JoinColumn;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -14,16 +13,18 @@ import javax.persistence.OneToMany;
 public class Acao {
 	
 	@Id
-	@Column(nullable=false)
-	private int id_acao;
-	
-	private int cod_acao; 
-	private String nome_acao;
-	private String liguagem_cidada; 
+	@Column(nullable=false, name="id_acao")
+	private int idAcao;
+	@Column(name="cod_acao")
+	private int codAcao;
+	@Column(name="nome_acao")
+	private String nomeAcao;
+	@Column(name = "linguagem_cidada")
+	private String liguagemCidada; 
 	
 	@OneToMany(mappedBy="pagamentos",
 			   targetEntity=Acao.class)
-	List<Pagamento> pagamentos; 
+	private List<Pagamento> pagamentos; 
 
 	@ManyToMany
 	@JoinTable(name="acao_unidade_gestora",
@@ -44,29 +45,47 @@ public class Acao {
 	private List<Programa> programas;
 
 	
-	public int getId_acao() {
-		return id_acao;
+	public int getIdAcao() {
+		return idAcao;
 	}
-	public void setId_acao(int id_acao) {
-		this.id_acao = id_acao;
+	public void setIdAcao(int idAcao) {
+		this.idAcao = idAcao;
 	}
-	public int getCod_acao() {
-		return cod_acao;
+	public int getCodAcao() {
+		return codAcao;
 	}
-	public void setCod_acao(int cod_acao) {
-		this.cod_acao = cod_acao;
+	public void setCodAcao(int codAcao) {
+		this.codAcao = codAcao;
 	}
-	public String getNome_acao() {
-		return nome_acao;
+	public String getNomeAcao() {
+		return nomeAcao;
 	}
-	public void setNome_acao(String nome_acao) {
-		this.nome_acao = nome_acao;
+	public void setNomeAcao(String nomeAcao) {
+		this.nomeAcao = nomeAcao;
 	}
-	public String getLiguagem_cidada() {
-		return liguagem_cidada;
+	public String getLiguagemCidada() {
+		return liguagemCidada;
 	}
-	public void setLiguagem_cidada(String liguagem_cidada) {
-		this.liguagem_cidada = liguagem_cidada;
-	} 
+	public void setLiguagemCidada(String liguagemCidada) {
+		this.liguagemCidada = liguagemCidada;
+	}
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
+	}
+	public List<UnidadeGestora> getUnidades() {
+		return unidades;
+	}
+	public void setUnidades(List<UnidadeGestora> unidades) {
+		this.unidades = unidades;
+	}
+	public List<Programa> getProgramas() {
+		return programas;
+	}
+	public void setProgramas(List<Programa> programas) {
+		this.programas = programas;
+	}
 
 }

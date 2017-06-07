@@ -11,33 +11,41 @@ import javax.persistence.OneToMany;
 public class Favorecido {
 	
 	@Id
-	@Column(nullable=false)
-	private int id_favorecido;
-	private int cod_favorecido; 
-	private String nome_favorecido;
+	@Column(nullable=false, name="id_favorecido")
+	private int idFavorecido;
+	@Column(name="cod_favorecido")
+	private int codFavorecido; 
+	@Column(name="nome_favorecido")
+	private String nomeFavorecido;
 	
 	@OneToMany(mappedBy="pagamentos",
 			   targetEntity=Favorecido.class)
-	List<Pagamento> pagamentos;
+	private List<Pagamento> pagamentos;
 	
-	public int getId_favorecido() {
-		return id_favorecido;
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
 	}
-	public void setId_favorecido(int id_favorecido) {
-		this.id_favorecido = id_favorecido;
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
 	}
-	public int getCod_favorecido() {
-		return cod_favorecido;
+	public int getIdFavorecido() {
+		return idFavorecido;
 	}
-	public void setCod_favorecido(int cod_favorecido) {
-		this.cod_favorecido = cod_favorecido;
+	public void setIdFavorecido(int idFavorecido) {
+		this.idFavorecido = idFavorecido;
 	}
-	public String getNome_favorecido() {
-		return nome_favorecido;
+	public int getCodFavorecido() {
+		return codFavorecido;
 	}
-	public void setNome_favorecido(String nome_favorecido) {
-		this.nome_favorecido = nome_favorecido;
-	} 
+	public void setCodFavorecido(int codFavorecido) {
+		this.codFavorecido = codFavorecido;
+	}
+	public String getNomeFavorecido() {
+		return nomeFavorecido;
+	}
+	public void setNomeFavorecido(String nomeFavorecido) {
+		this.nomeFavorecido = nomeFavorecido;
+	}
 	
 
 }

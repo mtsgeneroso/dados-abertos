@@ -13,15 +13,18 @@ import javax.persistence.ManyToOne;
 public class UnidadeGestora {
 	
 	@Id
-	@Column(nullable=false)	
-	private int cod_unidade_gestora; 
-	private String nome_unidade_gestora; 
-	private int cod_gestao_pagamento;
+	@Column(nullable=false, name="cod_unidade_gestora")	
+	private int codUnidadeGestora; 
+	@Column(name="nome_unidade_gestora")
+	private String nomeUnidadeGestora;
+	@Column(name="cod_gestao_pagamento")
+	private int codGestaoPagamento;
 	
 	@Column(insertable=false, 
 			updatable=false,
-			nullable=false)
-	private int cod_orgao_subordinado;
+			nullable=false, 
+			name="cod_orgao_subordinado")
+	private int codOrgaoSubordinado;
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name="cod_orgao_subordinado", 
@@ -31,36 +34,43 @@ public class UnidadeGestora {
 	@ManyToMany(mappedBy="unidades")
 	private List<Acao> acoes;
 	
+	
 	public OrgaoSubordinado getOrgaoSubordinado() {
 		return orgaoSubordinado;
 	}
 	public void setOrgaoSubordinado(OrgaoSubordinado orgaoSubordinado) {
 		this.orgaoSubordinado = orgaoSubordinado;
 	}
-	public int getCod_unidade_gestora() {
-		return cod_unidade_gestora;
+	public List<Acao> getAcoes() {
+		return acoes;
 	}
-	public void setCod_unidade_gestora(int cod_unidade_gestora) {
-		this.cod_unidade_gestora = cod_unidade_gestora;
+	
+	public int getCodUnidadeGestora() {
+		return codUnidadeGestora;
 	}
-	public String getNome_unidade_gestora() {
-		return nome_unidade_gestora;
+	public void setCodUnidadeGestora(int codUnidadeGestora) {
+		this.codUnidadeGestora = codUnidadeGestora;
 	}
-	public void setNome_unidade_gestora(String nome_unidade_gestora) {
-		this.nome_unidade_gestora = nome_unidade_gestora;
+	public String getNomeUnidadeGestora() {
+		return nomeUnidadeGestora;
 	}
-	public int getCod_gestao_pagamento() {
-		return cod_gestao_pagamento;
+	public void setNomeUnidadeGestora(String nomeUnidadeGestora) {
+		this.nomeUnidadeGestora = nomeUnidadeGestora;
 	}
-	public void setCod_gestao_pagamento(int cod_gestao_pagamento) {
-		this.cod_gestao_pagamento = cod_gestao_pagamento;
+	public int getCodGestaoPagamento() {
+		return codGestaoPagamento;
 	}
-	public int getCod_orgao_subordinado() {
-		return cod_orgao_subordinado;
+	public void setCodGestaoPagamento(int codGestaoPagamento) {
+		this.codGestaoPagamento = codGestaoPagamento;
 	}
-	public void setCod_orgao_subordinado(int cod_orgao_subordinado) {
-		this.cod_orgao_subordinado = cod_orgao_subordinado;
+	public int getCodOrgaoSubordinado() {
+		return codOrgaoSubordinado;
+	}
+	public void setCodOrgaoSubordinado(int codOrgaoSubordinado) {
+		this.codOrgaoSubordinado = codOrgaoSubordinado;
+	}
+	public void setAcoes(List<Acao> acoes) {
+		this.acoes = acoes;
 	}
 
-	
 }

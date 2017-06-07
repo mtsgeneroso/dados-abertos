@@ -11,25 +11,13 @@ import javax.persistence.ManyToMany;
 public class Programa {
 	
 	@Id
-	@Column(nullable=false)
-	private int cod_programa; 
-	private String nome_programa;
+	@Column(nullable=false, name="cod_programa")
+	private int codPrograma;
+	@Column(name="nome_programa")
+	private String nomePrograma;
 	
 	@ManyToMany(mappedBy="programas")
 	private List<Acao> acoes;
 	
-	public int getCod_programa() {
-		return cod_programa;
-	}
-	public void setCod_programa(int cod_programa) {
-		this.cod_programa = cod_programa;
-	}
-	public String getNome_programa() {
-		return nome_programa;
-	}
-	public void setNome_programa(String nome_programa) {
-		this.nome_programa = nome_programa;
-	}
-	
-	
+
 }

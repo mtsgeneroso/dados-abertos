@@ -8,26 +8,28 @@ import javax.persistence.ManyToOne;
 
 @Entity(name="pagamento")
 public class Pagamento {
-	
+
 	@Id
-	@Column(nullable=false)
-	private int cod_pagamento; 
+	@Column(nullable=false, name="cod_pagamento")
+	private int codPagamento; 
 	private float valor; 
 	
 	@Column(insertable=false, 
 			updatable=false,
-			nullable=false)
-	private int id_favorecido; 	
+			nullable=false, 
+			name="id_favorecido")
+	private int idFavorecido; 	
 		
 	@ManyToOne(optional=false)
 	@JoinColumn(name="id_favorecido", 
 	referencedColumnName="id_favorecido")
-	Favorecido favorecido;
+	private Favorecido favorecido;
 
 	@Column(insertable=false, 
 			updatable=false,
-			nullable=false)
-	private int cod_subfuncao;
+			nullable=false, 
+			name="cod_sub_funcao")
+	private int codSubfuncao;
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name="cod_subfuncao", 
@@ -36,8 +38,9 @@ public class Pagamento {
 	
 	@Column(insertable=false, 
 			updatable=false,
-			nullable=false)
-	private int id_acao;
+			nullable=false, 
+			name="id_acao")
+	private int idAcao;
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name="id_acao", 
@@ -46,8 +49,9 @@ public class Pagamento {
 
 	@Column(insertable=false, 
 			updatable=false,
-			nullable=false)
-	private int id_data;
+			nullable=false, 
+			name="id_data")
+	private int idData;
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name="id_data", 
@@ -56,8 +60,9 @@ public class Pagamento {
 	
 	@Column(insertable=false, 
 			updatable=false,
-			nullable=false)
-	private int cod_elemento_despesa; 
+			nullable=false, 
+			name="cod_elemento")
+	private int codElementoDespesa; 
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name="cod_elemento_despesa", 
@@ -65,50 +70,78 @@ public class Pagamento {
 	private ElementoDespesa despesa;
 
 	
-	public int getCod_pagamento() {
-		return cod_pagamento;
+	public Favorecido getFavorecido() {
+		return favorecido;
 	}
-	public void setCod_pagamento(int cod_pagamento) {
-		this.cod_pagamento = cod_pagamento;
+	public void setFavorecido(Favorecido favorecido) {
+		this.favorecido = favorecido;
 	}
+	public Subfuncao getSubfuncao() {
+		return subfuncao;
+	}
+	public void setSubfuncao(Subfuncao subfuncao) {
+		this.subfuncao = subfuncao;
+	}
+	public Acao getAcao() {
+		return acao;
+	}
+	public void setAcao(Acao acao) {
+		this.acao = acao;
+	}
+	public Data getData() {
+		return data;
+	}
+	public void setData(Data data) {
+		this.data = data;
+	}
+	
 	public float getValor() {
 		return valor;
 	}
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
-	public int getId_favorecido() {
-		return id_favorecido;
+	public int getCodPagamento() {
+		return codPagamento;
 	}
-	public void setId_favorecido(int cod_favorecido) {
-		this.id_favorecido = cod_favorecido;
-	}	
-	
-	public int getCod_subfuncao() {
-		return cod_subfuncao;
+	public void setCodPagamento(int codPagamento) {
+		this.codPagamento = codPagamento;
 	}
-	public void setCod_subfuncao(int cod_subfuncao) {
-		this.cod_subfuncao = cod_subfuncao;
+	public int getIdFavorecido() {
+		return idFavorecido;
 	}
-	public int getId_acao() {
-		return id_acao;
+	public void setIdFavorecido(int idFavorecido) {
+		this.idFavorecido = idFavorecido;
 	}
-	public void setId_acao(int id_acao) {
-		this.id_acao = id_acao;
+	public int getCodSubfuncao() {
+		return codSubfuncao;
 	}
-	/*public int getCod_elemento_despesa() {
-		return cod_elemento_despesa;
+	public void setCodSubfuncao(int codSubfuncao) {
+		this.codSubfuncao = codSubfuncao;
 	}
-	public void setCod_elemento_despesa(int cod_elemento_despesa) {
-		this.cod_elemento_despesa = cod_elemento_despesa;
-	}*/
-	public int getId_data() {
-		return id_data;
+	public int getIdAcao() {
+		return idAcao;
 	}
-	public void setId_data(int id_data) {
-		this.id_data = id_data;
-	} 
-	
-	
-	
+	public void setIdAcao(int idAcao) {
+		this.idAcao = idAcao;
+	}
+	public int getIdData() {
+		return idData;
+	}
+	public void setIdData(int idData) {
+		this.idData = idData;
+	}
+	public int getCodElementoDespesa() {
+		return codElementoDespesa;
+	}
+	public void setCodElementoDespesa(int codElementoDespesa) {
+		this.codElementoDespesa = codElementoDespesa;
+	}
+	public ElementoDespesa getDespesa() {
+		return despesa;
+	}
+	public void setDespesa(ElementoDespesa despesa) {
+		this.despesa = despesa;
+	}
+		
 }

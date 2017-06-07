@@ -10,30 +10,45 @@ import javax.persistence.OneToMany;
 
 @Entity(name="subfuncao")
 public class Subfuncao {
-	
-	private String nome_subfuncao; 
+
+	@Column(name="nome_subfuncao")
+	private String nomeSubfuncao; 
 	@Id
-	@Column(nullable=false)
-	private int cod_subfuncao;
+	@Column(nullable=false, name="cod_subfuncao")
+	private int codSufuncao;
 	
 	@OneToMany(mappedBy="pagamentos",
 			   targetEntity=Subfuncao.class)
-	List<Pagamento> pagamentos;
+	private List<Pagamento> pagamentos;
 	
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
+	}
+	public List<Funcao> getFuncoes() {
+		return funcoes;
+	}
+	public void setFuncoes(List<Funcao> funcoes) {
+		this.funcoes = funcoes;
+	}
 	@ManyToMany(mappedBy="subfuncoes")
 	private List<Funcao> funcoes;
-	
-	public String getNome_subfuncao() {
-		return nome_subfuncao;
-	}
-	public void setNome_subfuncao(String nome_subfuncao) {
-		this.nome_subfuncao = nome_subfuncao;
-	}
-	public int getCod_subfuncao() {
-		return cod_subfuncao;
-	}
-	public void setCod_subfuncao(int cod_subfuncao) {
-		this.cod_subfuncao = cod_subfuncao;
-	}
 
+	public String getNomeSubfuncao() {
+		return nomeSubfuncao;
+	}
+	public void setNomeSubfuncao(String nomeSubfuncao) {
+		this.nomeSubfuncao = nomeSubfuncao;
+	}
+	public int getCodSufuncao() {
+		return codSufuncao;
+	}
+	public void setCodSufuncao(int codSufuncao) {
+		this.codSufuncao = codSufuncao;
+	}
+	
+	
+	
 }
