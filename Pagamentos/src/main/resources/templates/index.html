@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+<title>Starter Template - Materialize</title>
+
+<!-- CSS  -->
+<link
+	th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}"
+	rel="stylesheet" />
+<link th:href="@{webjars/materializecss/css/materialize.min.css}"
+	type="text/css" rel="stylesheet" media="screen,projection" />
+<link th:href="@{css/nouislider.css}" type="text/css" rel="stylesheet" />
+<link th:href="@{css/style.css}" type="text/css" rel="stylesheet"
+	media="screen,projection" />
+</head>
+<body>
+	<nav class="light-blue lighten-1" role="navigation">
+		<div class="nav-wrapper container">
+			<a id="logo-container" th:href="@{#}" class="brand-logo">Logo</a>
+		</div>
+	</nav>
+	<div class="section no-pad-bot" id="index-banner">
+		<div class="container">
+
+			<p>
+			<div id="range1"></div>
+			</p>
+			<br /> <br />
+			<canvas id="myChart"></canvas>
+
+			<div class="row">
+				<div th:each="i : ${#numbers.sequence(1, 20)}">
+					<div class="col s12 m4 l2">
+						<a th:href="@{#}">
+							<div class="card-panel blue white-text center hoverable">
+								<i class="material-icons">assessment</i>
+								<p>Presidência da República</p>
+							</div>
+						</a>
+
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+
+	<footer class="page-footer orange">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Company Bio</h5>
+					<p class="grey-text text-lighten-4">We are a team of college
+						students working on this project like it's our full time job. Any
+						amount would help support and continue development on this project
+						and is greatly appreciated.</p>
+
+
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Settings</h5>
+					<ul>
+						<li><a class="white-text" th:href="@{#}">Link 1</a></li>
+						<li><a class="white-text" th:href="@{#}">Link 2</a></li>
+						<li><a class="white-text" th:href="@{#}">Link 3</a></li>
+						<li><a class="white-text" th:href="@{#}">Link 4</a></li>
+					</ul>
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Connect</h5>
+					<ul>
+						<li><a class="white-text" th:href="@{#}">Link 1</a></li>
+						<li><a class="white-text" th:href="@{#}">Link 2</a></li>
+						<li><a class="white-text" th:href="@{#}">Link 3</a></li>
+						<li><a class="white-text" th:href="@{#}">Link 4</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				Made by <a class="orange-text text-lighten-3"
+					href="http://materializecss.com">Materialize</a>
+			</div>
+		</div>
+	</footer>
+
+
+	<!--  Scripts-->
+	<script th:src="@{webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{webjars/materializecss/js/materialize.min.js}"></script>
+	<script th:src="@{webjars/chartjs/Chart.min.js}"></script>
+	<script th:src="@{js/nouislider.min.js}"></script>
+	<script th:src="@{js/init.js}"></script>
+</body>
+</html>
