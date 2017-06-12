@@ -35,15 +35,13 @@
 			<canvas id="myChart"></canvas>
 
 			<div class="row">
-				<div th:each="i : ${#numbers.sequence(1, 20)}">
+				<div th:each="orgao : ${orgaosSuperiores}">
 					<div class="col s12 m4 l2">
-						<a th:href="@{#}">
-							<div class="card-panel blue white-text center hoverable">
-								<i class="material-icons">assessment</i>
-								<p>Presidência da República</p>
+						<a th:href="@{#}" th:title="${orgao.nomeOrgaoSuperior}">
+							<div class="card-panel blue white-text hoverable" style="padding-top:2px;height:120px;">
+								<p th:text="${orgao.nomeOrgaoSuperior}" style="font-size:12px">[...]</p>
 							</div>
 						</a>
-
 					</div>
 				</div>
 

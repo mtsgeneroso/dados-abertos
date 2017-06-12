@@ -1,10 +1,10 @@
-package br.ufc.npi.interfaces;
+package br.ufc.npi.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.ufc.npi.model.Data;
 
-public interface IDataDAO extends JpaRepository<Data, Integer> {
+public interface DataRepository extends JpaRepository<Data, Integer> {
 
 	
 	

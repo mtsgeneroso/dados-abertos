@@ -1,10 +1,10 @@
-package br.ufc.npi.interfaces;
+package br.ufc.npi.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.ufc.npi.model.Acao;
 
-public interface IAcaoDAO extends JpaRepository<Acao, Integer>{
+public interface AcaoRepository extends JpaRepository<Acao, Integer>{
 	
 	
 }
