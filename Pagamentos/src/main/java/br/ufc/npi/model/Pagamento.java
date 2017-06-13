@@ -28,7 +28,7 @@ public class Pagamento {
 	@Column(insertable=false, 
 			updatable=false,
 			nullable=false, 
-			name="cod_sub_funcao")
+			name = "cod_subfuncao")
 	private int codSubfuncao;
 	
 	@ManyToOne(optional=false)
@@ -61,7 +61,7 @@ public class Pagamento {
 	@Column(insertable=false, 
 			updatable=false,
 			nullable=false, 
-			name="cod_elemento")
+			name = "cod_elemento_despesa")
 	private int codElementoDespesa; 
 	
 	@ManyToOne(optional=false)
