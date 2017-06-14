@@ -1,5 +1,3 @@
--- Modelo Físico do DW de Servidores
--- Gerado em 28/05/2017
 CREATE TABLE servidor (
 	id_servidor_portal INTEGER PRIMARY KEY,
 	nome TEXT,
@@ -231,18 +229,30 @@ cluster fato_funcao using idx_btree_fato_funcao;
 
 -- Adição das chaves estrangeiras nas tabelas referentes a tabela orgao
 
-ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_uorg) REFERENCES orgao (cod_orgao);
-ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_org) REFERENCES orgao (cod_orgao);
-ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_org_sup) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_uorg_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_org_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_org_sup_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_uorg_lotacao) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_org_lotacao) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_funcao ADD FOREIGN KEY(cod_org_sup_lotacao) REFERENCES orgao (cod_orgao);
 
-ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_uorg) REFERENCES orgao (cod_orgao);
-ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_org) REFERENCES orgao (cod_orgao);
-ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_org_sup) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_uorg_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_org_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_org_sup_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_uorg_lotacao) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_org_lotacao) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_cargo ADD FOREIGN KEY(cod_org_sup_lotacao) REFERENCES orgao (cod_orgao);
 
-ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_uorg) REFERENCES orgao (cod_orgao);
-ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_org) REFERENCES orgao (cod_orgao);
-ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_org_sup) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_uorg_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_org_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_org_sup_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_uorg_lotacao) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_org_lotacao) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_vinculo ADD FOREIGN KEY(cod_org_sup_lotacao) REFERENCES orgao (cod_orgao);
 
-ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_uorg) REFERENCES orgao (cod_orgao);
-ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_org) REFERENCES orgao (cod_orgao);
-ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_org_sup) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_uorg_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_org_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_org_sup_exercicio) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_uorg_lotacao) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_org_lotacao) REFERENCES orgao (cod_orgao);
+ALTER TABLE fato_sem_cargo_funcao_vinculo ADD FOREIGN KEY(cod_org_sup_lotacao) REFERENCES orgao (cod_orgao);
