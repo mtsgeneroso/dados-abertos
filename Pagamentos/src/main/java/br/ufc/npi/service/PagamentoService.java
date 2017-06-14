@@ -18,7 +18,7 @@ public class PagamentoService {
 		return pagamentoRepository.findAll();
 	}
 	
-	public List<Pagamento> findByMonths(int m1, int m2){
+	public List<Object[]> findByMonths(int m1, int m2){
 		return pagamentoRepository.listByDataBetween(m1, m2);
 	}
 	
