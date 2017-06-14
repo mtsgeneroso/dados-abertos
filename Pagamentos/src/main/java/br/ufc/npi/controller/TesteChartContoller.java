@@ -20,13 +20,30 @@ public class TesteChartContoller {
 	@RequestMapping(path="/teste")
 	public Chart teste(){
 		
-		Dataset dataset = new Dataset(
-				"Tetando o Chart via Java", 
-				new Double[]{0., 10., 5., 2., 20., 30., 45.});
+		/*List<Pagamento> pagamentos = pagamentoService.findByMonths(1, 12);
+		
+		Double valores[] = new Double[pagamentos.size()];
+		
+		for(int i = 0; i<pagamentos.size(); i++){
+			valores[i] = (double) pagamentos.get(i).getValor();
+		}*/
+		
+		Dataset datasetPagamentos = new Dataset(
+				"Pagamentos",
+				new Double[]{10., 2., 1., 20., 30., 7., 20.});
+		
+		datasetPagamentos.setBackgroundColor("rgba(100,100,100,.6)");
+		
+		Dataset datasetServidores = new Dataset(
+				"Servidores",
+				new Double[]{10., 20., 10., 5., 13., 21., 16.});
+		
+		datasetServidores.setBackgroundColor("rgb(100, 100, 255)");
+		datasetServidores.setBorderColor("rgb(50, 50, 150)");
 		
 		Data data = new Data(
 				new String[]{"January", "February", "March", "April", "May", "June", "July"}, 
-				new Dataset[]{dataset});
+				new Dataset[]{datasetPagamentos, datasetServidores});
 		
 		Chart chart = new Chart("line", data);
 		

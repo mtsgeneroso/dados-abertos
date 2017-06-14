@@ -15,7 +15,7 @@ public class OrgaoSuperiorService {
 	private OrgaoSuperiorRepository orgaoSuperiorRepository;
 	
 	public List<OrgaoSuperior> findAll(){
-		return orgaoSuperiorRepository.findAll();
+		return orgaoSuperiorRepository.findByOrderByNomeOrgaoSuperiorAsc();
 	}
 	
 }
