@@ -17,7 +17,7 @@ PRIMARY KEY (ano, mes)
 );
 
 CREATE TABLE cargo (
-	cod_cargo BIGINT PRIMARY KEY,
+	cod_cargo SERIAL PRIMARY KEY,
 	descricao_cargo TEXT
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE vinculo (
 );
 
 CREATE TABLE carreira (
-	cod_carreira BIGINT PRIMARY KEY,
+	cod_carreira SERIAL PRIMARY KEY,
 	classe TEXT,
 	referencia TEXT,
 	nivel TEXT,
