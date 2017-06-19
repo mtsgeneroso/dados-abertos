@@ -14,8 +14,7 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Integer>{
 			+ "JOIN data AS dt ON pg.id_data = dt.id_data "
 			+ "WHERE dt.mes BETWEEN :m1 and :m2 "
 			+ "GROUP BY dt.mes "
-			+ "ORDER BY dt.mes ASC "
-			+ "LIMIT 100;", 
+			+ "ORDER BY dt.mes ASC;", 
 			nativeQuery=true)
 	public List<Object[]> listByDataBetween(@Param("m1")int m1, @Param("m2")int m2);
 	

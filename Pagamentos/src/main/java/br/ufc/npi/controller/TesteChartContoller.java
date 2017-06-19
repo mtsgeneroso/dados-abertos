@@ -42,7 +42,7 @@ public class TesteChartContoller {
 				"Pagamentos",
 				valores);
 		
-		datasetPagamentos.setBackgroundColor("rgba(100,100,100,.6)");
+		datasetPagamentos.setBackgroundColor("rgba(10, 50, 100,.6)");
 		
 		Data data = new Data(
 				meses, 
