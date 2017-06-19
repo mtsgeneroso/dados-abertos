@@ -6,7 +6,7 @@
 
 $.getJSON("/teste", function(chart){
 	var labels = chart.data.labels;
-	var dados = []
+	var dados = [];
 	for(var i=0; i<chart.data.datasets.length; i++){
 		dados.push(chart.data.datasets[i].data);
 	}
