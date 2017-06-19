@@ -4,7 +4,7 @@
 	}); // end of document ready
 })(jQuery); // end of jQuery name space
 
-$.getJSON("/teste", function(chart){
+$.getJSON("/getData/0", function(chart){
 	var labels = chart.data.labels;
 	var dados = [];
 	for(var i=0; i<chart.data.datasets.length; i++){
