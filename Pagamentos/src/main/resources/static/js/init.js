@@ -11,8 +11,9 @@
 	var id = $("input[name=currentId]").val();
 
 	$.getJSON("/getData/" + id, function(chart){
-		var labels = chart.data.labels;
-		var dados = [];
+		labels = chart.data.labels;
+		console.log(labels);
+		dados = [];
 		for(var i=0; i<chart.data.datasets.length; i++){
 			dados.push(chart.data.datasets[i].data);
 		}
@@ -41,8 +42,7 @@
 			},
 			pips: {
 				mode: 'steps',
-//				stepped: true,
-				density: 1,
+				stepped: true,
 				filter: function(value){
 					return 1;
 				},
@@ -52,10 +52,12 @@
 				}
 			},
 			connect: true,
-			format: {
-				to: number2month,
-				from: month2number
-			}
+			format: wNumb({
+				decimals: 0,
+				encoder: function(value){
+					return (parseInt(value)+1);
+				}
+			})
 		});
 		
 		//Cria gráfico inicial
@@ -63,11 +65,9 @@
 		var grafico = new Chart(ctx, chart);
 		
 		//Método chamado ao atualizar o slider
-		slider.noUiSlider.on('update', function(values){
-			var mesIni = labels.indexOf(values[0]);
-			var mesFim = labels.indexOf(values[1]);
-			
-			console.log([mesIni, mesFim]);
+		slider.noUiSlider.on('update', function(values, handle){
+			var mesIni = parseInt(values[0])-1;
+			var mesFim = parseInt(values[1])-1;
 			
 			newChart = chart;
 			newChart.data.labels = labels.slice(mesIni, mesFim+1);
@@ -82,6 +82,7 @@
 			}else{
 				newChart.type = 'line'; //Caso contrário, altera para o tipo 'line'
 			}
+			
 			grafico.destroy();
 			grafico = new Chart(ctx, newChart);
 			
