@@ -60,7 +60,6 @@
 			})
 		});
 		
-		//Cria gráfico inicial
 		var ctx = $('#chart');
 		var grafico = new Chart(ctx, chart);
 		
@@ -71,7 +70,6 @@
 			
 			newChart = chart;
 			newChart.data.labels = labels.slice(mesIni, mesFim+1);
-					
 			for(var i=0; i<newChart.data.datasets.length; i++){
 				newChart.data.datasets[i].data = dados[i].slice(mesIni, mesFim+1);
 			}
