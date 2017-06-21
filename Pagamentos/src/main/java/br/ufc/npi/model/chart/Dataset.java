@@ -6,6 +6,7 @@ public class Dataset {
 	private String backgroundColor = "rgb(100,100,100)";
 	private String borderColor = "rgb(0,0,0)";
 	private Double[] data;
+	private boolean fill = true;
 	
 	public Dataset(String label, Double[] data) {
 		super();
@@ -35,6 +36,12 @@ public class Dataset {
 	}
 	public void setData(Double[] data) {
 		this.data = data;
+	}
+	public boolean isFill() {
+		return fill;
+	}
+	public void setFill(boolean fill) {
+		this.fill = fill;
 	}
 	
 }

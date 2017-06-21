@@ -89,12 +89,12 @@
 			</div>
 			
 			<div class="row" id="botoes">
-				<div th:each="orgao : ${orgaosSuperiores}">
+				<div th:each="orgao : ${orgaosSubordinados}">
 					<div class="col s12 m4 l2">
-						<a th:href="@{#}" th:title="${orgao.nomeOrgaoSuperior}">
+						<a th:href="@{#}" th:title="${orgao.nomeOrgaoSubordinado}">
 							<div class="card-panel blue white-text hoverable"
 								style="padding-top: 2px; height: 120px;">
-								<p th:text="${orgao.nomeOrgaoSuperior}" style="font-size: 12px">[...]</p>
+								<p th:text="${orgao.nomeOrgaoSubordinado}" style="font-size: 12px">[...]</p>
 							</div>
 						</a>
 					</div>
