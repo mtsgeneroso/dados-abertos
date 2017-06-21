@@ -101,7 +101,7 @@ FOREIGN KEY (cod_cargo) REFERENCES cargo (cod_cargo)
 
 CREATE TABLE fato_vinculo (
 	id_servidor_portal BIGINT,
-	cod_vinculo BIGINT,
+	cod_vinculo SERIAL,
 	cod_uorg_exercicio BIGINT,
 	cod_org_exercicio BIGINT,
 	cod_org_sup_exercicio BIGINT,
