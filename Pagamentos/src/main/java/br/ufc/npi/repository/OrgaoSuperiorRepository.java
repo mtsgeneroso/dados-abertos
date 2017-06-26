@@ -9,7 +9,7 @@ import br.ufc.npi.model.OrgaoSubordinado;
 import br.ufc.npi.model.OrgaoSuperior;
 
 @Repository
-public interface OrgaoSuperiorRepository extends JpaRepository<OrgaoSuperior, Integer>{
+public interface OrgaoSuperiorRepository extends JpaRepository<OrgaoSuperior, Long>{
 
 	public List<OrgaoSuperior> findByOrderByNomeOrgaoSuperiorAsc();
 	

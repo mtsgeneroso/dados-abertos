@@ -26,4 +26,8 @@ public class PagamentoService {
 		return pagamentoRepository.listPagamentosOrgSuperiorByDataBetween(m1, m2, codigoOrgSuperior);
 	}
 	
+	public List<Object[]> findPagamentosOrgSubordinadoByMonths(int m1, int m2, Long codigoOrgSubordinado){
+		return pagamentoRepository.listPagamentosOrgSubordinadoByDataBetween(m1, m2, codigoOrgSubordinado);
+	}
+	
 }

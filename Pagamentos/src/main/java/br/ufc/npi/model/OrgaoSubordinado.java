@@ -14,7 +14,7 @@ public class OrgaoSubordinado {
 	
 	@Id
 	@Column(nullable=false, name="cod_orgao_subordinado")
-	private int codOrgaoSubordinado;
+	private Long codOrgaoSubordinado;
 	
 	@Column(name="nome_orgao_subordinado")
 	private String nomeOrgaoSubordinado;
@@ -23,7 +23,7 @@ public class OrgaoSubordinado {
 			updatable=false,
 			nullable=false, 
 			name="cod_orgao_superior")
-	private int codOrgaoSuperior;
+	private Long codOrgaoSuperior;
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name="cod_orgao_superior", 
@@ -47,10 +47,10 @@ public class OrgaoSubordinado {
 	public void setUnidades_gestoras(List<UnidadeGestora> unidades_gestoras) {
 		this.unidades_gestoras = unidades_gestoras;
 	}
-	public int getCodOrgaoSubordinado() {
+	public Long getCodOrgaoSubordinado() {
 		return codOrgaoSubordinado;
 	}
-	public void setCodOrgaoSubordinado(int codOrgaoSubordinado) {
+	public void setCodOrgaoSubordinado(Long codOrgaoSubordinado) {
 		this.codOrgaoSubordinado = codOrgaoSubordinado;
 	}
 	public String getNomeOrgaoSubordinado() {
@@ -59,10 +59,10 @@ public class OrgaoSubordinado {
 	public void setNomeOrgaoSubordinado(String nomeOrgaoSubordinado) {
 		this.nomeOrgaoSubordinado = nomeOrgaoSubordinado;
 	}
-	public int getCodOrgaoSuperior() {
+	public Long getCodOrgaoSuperior() {
 		return codOrgaoSuperior;
 	}
-	public void setCodOrgaoSuperior(int codOrgaoSuperior) {
+	public void setCodOrgaoSuperior(Long codOrgaoSuperior) {
 		this.codOrgaoSuperior = codOrgaoSuperior;
 	}
 	

@@ -20,18 +20,13 @@ public class DataChartContoller {
 	@Autowired
 	private PagamentoService pagamentoService;
 
-	@RequestMapping(path="/getData/{id}")
-	public Object getData(@PathVariable("id")Long id){
+	@RequestMapping(path="/pagamentos")
+	public Chart getData(){
 
 		List<Object[]> pagamentos;
 		
-		if(id == 0){
-			pagamentos = pagamentoService.findByMonths(1, 12);
-		}else{
-			pagamentos = pagamentoService.findPagamentosOrgSuperiorByMonths(1, 12, id);
-		}
+		pagamentos = pagamentoService.findByMonths(1, 12);
 		
-
 		Double valores[] = new Double[pagamentos.size()];
 
 		String meses[] = new String[pagamentos.size()];
@@ -49,8 +44,6 @@ public class DataChartContoller {
 				"Pagamentos",
 				valores);
 
-		datasetPagamentos.setBackgroundColor("rgba(10, 50, 100,.6)");
-
 		Data data = new Data(
 				meses, 
 				new Dataset[]{datasetPagamentos});
@@ -61,11 +54,73 @@ public class DataChartContoller {
 		
 	}
 
-	@RequestMapping(path="/pagamentos")
-	public List<Pagamento> testePagamento(){
+	@RequestMapping(path="/pagamentos/orgaoSuperior/{id}")
+	public Chart paagamentosOrgaoSuperior(@PathVariable("id")Long id){
 
-		return pagamentoService.findAll();
+		List<Object[]> pagamentos;
+		
+		pagamentos = pagamentoService.findPagamentosOrgSuperiorByMonths(1, 12, id);
+		
+		Double valores[] = new Double[pagamentos.size()];
+
+		String meses[] = new String[pagamentos.size()];
+
+		DateFormatSymbols dfs = new DateFormatSymbols();
+		String[] months = dfs.getMonths();
+
+		for (int i = 0; i<pagamentos.size(); i++){
+			valores[i] = (Double)(pagamentos.get(i)[1]);
+			meses[i] = months[(int)(pagamentos.get(i)[0])-1].substring(0, 3);
+		}
+
+
+		Dataset datasetPagamentos = new Dataset(
+				"Pagamentos",
+				valores);
+
+
+		Data data = new Data(
+				meses, 
+				new Dataset[]{datasetPagamentos});
+
+		Chart chart = new Chart("line", data);
+
+		return chart;
 
 	}
 
+	@RequestMapping(path="/pagamentos/orgaoSubordinado/{id}")
+	public Chart pagamentosOrgaoSubordinado(@PathVariable("id")Long id){
+
+		List<Object[]> pagamentos;
+		
+		pagamentos = pagamentoService.findPagamentosOrgSubordinadoByMonths(1, 12, id);
+		
+		Double valores[] = new Double[pagamentos.size()];
+
+		String meses[] = new String[pagamentos.size()];
+
+		DateFormatSymbols dfs = new DateFormatSymbols();
+		String[] months = dfs.getMonths();
+
+		for (int i = 0; i<pagamentos.size(); i++){
+			valores[i] = (Double)(pagamentos.get(i)[1]);
+			meses[i] = months[(int)(pagamentos.get(i)[0])-1].substring(0, 3);
+		}
+
+
+		Dataset datasetPagamentos = new Dataset(
+				"Pagamentos",
+				valores);
+
+		Data data = new Data(
+				meses, 
+				new Dataset[]{datasetPagamentos});
+
+		Chart chart = new Chart("line", data);
+
+		return chart;
+
+	}
+	
 }

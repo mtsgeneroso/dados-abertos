@@ -6,6 +6,7 @@
  * Made By MaterializeCSS.com
  */
 body {
+	background-color: #eeeeee;
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;

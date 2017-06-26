@@ -3,7 +3,7 @@ package br.ufc.npi.model.chart;
 public class Dataset {
 
 	private String label;
-	private String backgroundColor = "rgb(100,100,100)";
+	private String backgroundColor = "rgba(50,50,50,.8)";
 	private String borderColor = "rgb(0,0,0)";
 	private Double[] data;
 	private boolean fill = true;

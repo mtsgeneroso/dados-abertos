@@ -20,11 +20,9 @@
 	media="screen,projection" />
 </head>
 <body>
-	<nav class="light-blue lighten-1" role="navigation">
-		<div class="nav-wrapper container">
-			<a id="logo-container" th:href="@{#}" class="brand-logo">Logo</a>
-		</div>
-	</nav>
+	
+	<div th:include="fragments/navbar"></div>
+	
 	<div class="section no-pad-bot" id="index-banner">
 		<div class="container center">
 			
@@ -35,8 +33,6 @@
 			<br/><br/>
 			<canvas id="chart"></canvas>
 			<br/>
-			
-			<input type="hidden" name="currentId" th:value="${currentId}"/>
 			
 			<div class="preloader-wrapper big active" id="loadChart" style="margin-bottom:80px">
 				<div class="spinner-layer spinner-blue">
@@ -91,8 +87,8 @@
 			<div class="row" id="botoes">
 				<div th:each="orgao : ${orgaosSuperiores}">
 					<div class="col s12 m4 l2">
-						<a th:href="@{#}" th:title="${orgao.nomeOrgaoSuperior}">
-							<div class="card-panel blue white-text hoverable"
+						<a th:href="@{/orgaoSuperior/{id}(id=${orgao.codOrgaoSuperior})}" th:title="${orgao.nomeOrgaoSuperior}">
+							<div class="card-panel grey darken-3 white-text hoverable"
 								style="padding-top: 2px; height: 120px;">
 								<p th:text="${orgao.nomeOrgaoSuperior}" style="font-size: 12px">[...]</p>
 							</div>
@@ -106,45 +102,7 @@
 		</div>
 	</div>
 
-	<footer class="page-footer orange">
-		<div class="container">
-			<div class="row">
-				<div class="col l6 s12">
-					<h5 class="white-text">Company Bio</h5>
-					<p class="grey-text text-lighten-4">We are a team of college
-						students working on this project like it's our full time job. Any
-						amount would help support and continue development on this project
-						and is greatly appreciated.</p>
-
-
-				</div>
-				<div class="col l3 s12">
-					<h5 class="white-text">Settings</h5>
-					<ul>
-						<li><a class="white-text" th:href="@{#}">Link 1</a></li>
-						<li><a class="white-text" th:href="@{#}">Link 2</a></li>
-						<li><a class="white-text" th:href="@{#}">Link 3</a></li>
-						<li><a class="white-text" th:href="@{#}">Link 4</a></li>
-					</ul>
-				</div>
-				<div class="col l3 s12">
-					<h5 class="white-text">Connect</h5>
-					<ul>
-						<li><a class="white-text" th:href="@{#}">Link 1</a></li>
-						<li><a class="white-text" th:href="@{#}">Link 2</a></li>
-						<li><a class="white-text" th:href="@{#}">Link 3</a></li>
-						<li><a class="white-text" th:href="@{#}">Link 4</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="footer-copyright">
-			<div class="container">
-				Made by <a class="orange-text text-lighten-3"
-					href="http://materializecss.com">Materialize</a>
-			</div>
-		</div>
-	</footer>
+	<div th:include="fragments/footer"></div>
 
 
 	<!--  Scripts-->
@@ -153,5 +111,8 @@
 	<script th:src="@{webjars/chartjs/Chart.min.js}"></script>
 	<script th:src="@{js/nouislider.min.js}"></script>
 	<script th:src="@{js/init.js}"></script>
+	<script>
+		initInterface("");	
+	</script>
 </body>
 </html>

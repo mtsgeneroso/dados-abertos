@@ -14,8 +14,12 @@ public class OrgaoSubordinadoService {
 	@Autowired
 	OrgaoSubordinadoRepository orgaoSubordinadoRepository;
 	
+	public OrgaoSubordinado getById(Long id){
+		return orgaoSubordinadoRepository.findOne(id);
+	}
+	
 	public List<OrgaoSubordinado> listByCodOrgaoSuperior(Long codOrgaoSuperior){
-		return orgaoSubordinadoRepository.findByCodOrgaoSuperiorLike(codOrgaoSuperior); 
+		return orgaoSubordinadoRepository.findByCodOrgaoSuperior(codOrgaoSuperior); 
 	}
 	
 	

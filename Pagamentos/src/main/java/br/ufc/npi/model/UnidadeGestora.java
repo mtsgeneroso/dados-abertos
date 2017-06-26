@@ -14,7 +14,7 @@ public class UnidadeGestora {
 	
 	@Id
 	@Column(nullable=false, name="cod_unidade_gestora")	
-	private int codUnidadeGestora; 
+	private Long codUnidadeGestora; 
 	@Column(name="nome_unidade_gestora")
 	private String nomeUnidadeGestora;
 	@Column(name="cod_gestao_pagamento")
@@ -24,7 +24,7 @@ public class UnidadeGestora {
 			updatable=false,
 			nullable=false, 
 			name="cod_orgao_subordinado")
-	private int codOrgaoSubordinado;
+	private Long codOrgaoSubordinado;
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name="cod_orgao_subordinado", 
@@ -45,10 +45,10 @@ public class UnidadeGestora {
 		return acoes;
 	}
 	
-	public int getCodUnidadeGestora() {
+	public Long getCodUnidadeGestora() {
 		return codUnidadeGestora;
 	}
-	public void setCodUnidadeGestora(int codUnidadeGestora) {
+	public void setCodUnidadeGestora(Long codUnidadeGestora) {
 		this.codUnidadeGestora = codUnidadeGestora;
 	}
 	public String getNomeUnidadeGestora() {
@@ -63,10 +63,10 @@ public class UnidadeGestora {
 	public void setCodGestaoPagamento(int codGestaoPagamento) {
 		this.codGestaoPagamento = codGestaoPagamento;
 	}
-	public int getCodOrgaoSubordinado() {
+	public Long getCodOrgaoSubordinado() {
 		return codOrgaoSubordinado;
 	}
-	public void setCodOrgaoSubordinado(int codOrgaoSubordinado) {
+	public void setCodOrgaoSubordinado(Long codOrgaoSubordinado) {
 		this.codOrgaoSubordinado = codOrgaoSubordinado;
 	}
 	public void setAcoes(List<Acao> acoes) {

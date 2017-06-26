@@ -14,7 +14,7 @@ public class OrgaoSuperior {
 	private String nomeOrgaoSuperior; 
 	@Id
 	@Column(nullable=false, name="cod_orgao_superior")
-	private int codOrgaoSuperior;
+	private Long codOrgaoSuperior;
 	
 	@OneToMany(mappedBy="orgaos_subordinados",
 			   targetEntity=OrgaoSuperior.class)
@@ -32,10 +32,10 @@ public class OrgaoSuperior {
 	public void setNomeOrgaoSuperior(String nomeOrgaoSuperior) {
 		this.nomeOrgaoSuperior = nomeOrgaoSuperior;
 	}
-	public int getCodOrgaoSuperior() {
+	public Long getCodOrgaoSuperior() {
 		return codOrgaoSuperior;
 	}
-	public void setCodOrgaoSuperior(int codOrgaoSuperior) {
+	public void setCodOrgaoSuperior(Long codOrgaoSuperior) {
 		this.codOrgaoSuperior = codOrgaoSuperior;
 	}
 	
