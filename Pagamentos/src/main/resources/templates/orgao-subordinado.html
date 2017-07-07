@@ -23,87 +23,56 @@
 	
 	<div th:include="fragments/navbar"></div>
 	
-	<div class="section no-pad-bot" id="index-banner">
-		<div class="container center">
-			
-			<p>
-			<div id="rangeMeses"></div>
-			</p>
-			
-			<br/><br/>
-			<canvas id="chart"></canvas>
-			<br/>
-			
-			<input type="hidden" name="currentId" th:value="${currentId}"/>
-			
-			<div class="preloader-wrapper big active" id="loadChart" style="margin-bottom:80px">
-				<div class="spinner-layer spinner-blue">
-					<div class="circle-clipper left">
-						<div class="circle"></div>
-					</div>
-					<div class="gap-patch">
-						<div class="circle"></div>
-					</div>
-					<div class="circle-clipper right">
-						<div class="circle"></div>
-					</div>
+	<main>
+		<div class="section no-pad-bot" id="index-banner">
+			<div class="container center">
+				
+				<p>
+				<div id="rangeMeses"></div>
+				</p>
+				
+				<div id="mensagemChart">
+					<h5>Sem dados disponíveis</h5>
 				</div>
-
-				<div class="spinner-layer spinner-red">
-					<div class="circle-clipper left">
-						<div class="circle"></div>
-					</div>
-					<div class="gap-patch">
-						<div class="circle"></div>
-					</div>
-					<div class="circle-clipper right">
-						<div class="circle"></div>
-					</div>
+				
+				<br/><br/>
+				<canvas id="chart"></canvas>
+				<br/>
+				
+				<input type="hidden" name="currentId" th:value="${currentId}"/>
+				
+				<div class="preloader-wrapper active" id="loadChart">
+					<div class="spinner-layer spinner-red-only">
+				      <div class="circle-clipper left">
+				        <div class="circle"></div>
+				      </div><div class="gap-patch">
+				        <div class="circle"></div>
+				      </div><div class="circle-clipper right">
+				        <div class="circle"></div>
+				      </div>
+				    </div>
 				</div>
-
-				<div class="spinner-layer spinner-yellow">
-					<div class="circle-clipper left">
-						<div class="circle"></div>
+				
+				<div class="row" id="botoes">
+					<h4>Unidades Gestoras</h4>
+					<div th:each="unidade : ${unidadesGestoras}">
+						<div class="col s12 m4 l2">
+							<a th:href="@{/unidadeGestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}">
+								<div class="card-panel red-bods white-text hoverable"
+									style="padding-top: 2px; height: 120px;">
+									<p th:text="${unidade.nomeUnidadeGestora}" th:classappend="${#strings.length(unidade.nomeUnidadeGestora) > 75} ? 'truncate'" style="font-size: 12px">[...]</p>
+								</div>
+							</a>
+						</div>
 					</div>
-					<div class="gap-patch">
-						<div class="circle"></div>
-					</div>
-					<div class="circle-clipper right">
-						<div class="circle"></div>
-					</div>
+	
 				</div>
-
-				<div class="spinner-layer spinner-green">
-					<div class="circle-clipper left">
-						<div class="circle"></div>
-					</div>
-					<div class="gap-patch">
-						<div class="circle"></div>
-					</div>
-					<div class="circle-clipper right">
-						<div class="circle"></div>
-					</div>
-				</div>
+	
+	
 			</div>
-			
-			<div class="row" id="botoes">
-				<div th:each="unidade : ${unidadesGestoras}">
-					<div class="col s12 m4 l2">
-						<a th:href="@{/unidadesGestoras/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}">
-							<div class="card-panel grey darken-3 white-text hoverable"
-								style="padding-top: 2px; height: 120px;">
-								<p th:text="${unidade.nomeUnidadeGestora}" style="font-size: 12px">[...]</p>
-							</div>
-						</a>
-					</div>
-				</div>
-
-			</div>
-
-
 		</div>
-	</div>
-
+	</main>
+	
 	<div th:include="fragments/footer"></div>
 
 
@@ -112,6 +81,7 @@
 	<script th:src="@{/webjars/materializecss/js/materialize.min.js}"></script>
 	<script th:src="@{/webjars/chartjs/Chart.min.js}"></script>
 	<script th:src="@{/js/nouislider.min.js}"></script>
+	<script th:src="@{/webjars/numeral-js/min/numeral.min.js}"></script>
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();

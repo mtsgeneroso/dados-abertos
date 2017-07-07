@@ -14,9 +14,9 @@ public class Acao {
 	
 	@Id
 	@Column(nullable=false, name="id_acao")
-	private int idAcao;
+	private Long idAcao;
 	@Column(name="cod_acao")
-	private int codAcao;
+	private String codAcao;
 	@Column(name="nome_acao")
 	private String nomeAcao;
 	@Column(name = "linguagem_cidada")
@@ -45,16 +45,16 @@ public class Acao {
 	private List<Programa> programas;
 
 	
-	public int getIdAcao() {
+	public Long getIdAcao() {
 		return idAcao;
 	}
-	public void setIdAcao(int idAcao) {
+	public void setIdAcao(Long idAcao) {
 		this.idAcao = idAcao;
 	}
-	public int getCodAcao() {
+	public String getCodAcao() {
 		return codAcao;
 	}
-	public void setCodAcao(int codAcao) {
+	public void setCodAcao(String codAcao) {
 		this.codAcao = codAcao;
 	}
 	public String getNomeAcao() {

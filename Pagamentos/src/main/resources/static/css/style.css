@@ -23,3 +23,12 @@ main {
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+.red-bods{
+	background-color: #800000;
+}
+
+.red-bods-dark{
+	background-color: #2b0000;
+}
+	

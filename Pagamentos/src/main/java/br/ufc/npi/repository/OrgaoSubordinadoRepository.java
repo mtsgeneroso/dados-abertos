@@ -12,6 +12,6 @@ import br.ufc.npi.model.OrgaoSubordinado;
 @Transactional
 public interface OrgaoSubordinadoRepository extends JpaRepository<OrgaoSubordinado, Long> {
 	
-	public List<OrgaoSubordinado> findByCodOrgaoSuperior(Long codOrgaoSuperior);
+	public List<OrgaoSubordinado> findByCodOrgaoSuperiorOrderByNomeOrgaoSubordinadoAsc(Long codOrgaoSuperior);
 	
 }

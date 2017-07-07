@@ -18,16 +18,19 @@ public class PagamentoService {
 		return pagamentoRepository.findAll();
 	}
 	
-	public List<Object[]> findByMonths(int m1, int m2){
-		return pagamentoRepository.listByDataBetween(m1, m2);
+	public List<Object[]> findByMonths(){
+		return pagamentoRepository.listByDataBetween();
 	}
 	
-	public List<Object[]> findPagamentosOrgSuperiorByMonths(int m1, int m2, Long codigoOrgSuperior){
-		return pagamentoRepository.listPagamentosOrgSuperiorByDataBetween(m1, m2, codigoOrgSuperior);
+	public List<Object[]> findPagamentosOrgSuperiorByMonths(Long codigoOrgSuperior){
+		return pagamentoRepository.listPagamentosOrgSuperiorByDataBetween(codigoOrgSuperior);
 	}
 	
-	public List<Object[]> findPagamentosOrgSubordinadoByMonths(int m1, int m2, Long codigoOrgSubordinado){
-		return pagamentoRepository.listPagamentosOrgSubordinadoByDataBetween(m1, m2, codigoOrgSubordinado);
+	public List<Object[]> findPagamentosOrgSubordinadoByMonths(Long codigoOrgSubordinado){
+		return pagamentoRepository.listPagamentosOrgSubordinadoByDataBetween(codigoOrgSubordinado);
 	}
 	
+	public List<Object[]> findPagamentosUnidadeGestoraByMonths(Long codigoUnidadeGestora){
+		return pagamentoRepository.listPagamentosUnidadeGestoraByDataBetween(codigoUnidadeGestora);
+	}
 }

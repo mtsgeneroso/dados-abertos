@@ -97,7 +97,7 @@
   border: 1px solid transparent;
 }
 .noUi-connect {
-  background: #424242;
+  background: #2b0000;
   -webkit-transition: background 450ms;
   transition: background 450ms;
 }
@@ -301,7 +301,7 @@
   height: 15px;
   border-radius: 50%;
   box-shadow: none;
-  background-color: #424242;
+  background-color: #2b0000;
   border: none;
   left: -5px;
   top: -6px;
@@ -330,7 +330,7 @@
   width: 30px;
   top: -17px;
   left: -2px;
-  background-color: #424242;
+  background-color: #2b0000;
   border-radius: 50%;
   transition: border-radius .25s cubic-bezier(0.215, 0.610, 0.355, 1.000),
   transform .25s cubic-bezier(0.215, 0.610, 0.355, 1.000);
@@ -369,7 +369,7 @@
   width: 30px;
   top: -17px;
   left: -2px;
-  background-color: #212121;
+  background-color: #2b0000;
   border-radius: 50%;
   transition: border-radius .25s cubic-bezier(0.215, 0.610, 0.355, 1.000),
   transform .25s cubic-bezier(0.215, 0.610, 0.355, 1.000);

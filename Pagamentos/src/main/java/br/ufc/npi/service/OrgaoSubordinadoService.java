@@ -19,7 +19,7 @@ public class OrgaoSubordinadoService {
 	}
 	
 	public List<OrgaoSubordinado> listByCodOrgaoSuperior(Long codOrgaoSuperior){
-		return orgaoSubordinadoRepository.findByCodOrgaoSuperior(codOrgaoSuperior); 
+		return orgaoSubordinadoRepository.findByCodOrgaoSuperiorOrderByNomeOrgaoSubordinadoAsc(codOrgaoSuperior); 
 	}
 	
 	

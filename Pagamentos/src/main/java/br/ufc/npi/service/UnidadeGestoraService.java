@@ -20,7 +20,7 @@ public class UnidadeGestoraService {
 	}
 	
 	public List<UnidadeGestora> findByCodOrgaoSubordinado(Long codOrgaoSubordinado){
-		return unidadeGestoraRepository.findByCodOrgaoSubordinado(codOrgaoSubordinado);
+		return unidadeGestoraRepository.findByCodOrgaoSubordinadoOrderByNomeUnidadeGestoraAsc(codOrgaoSubordinado);
 	}
 	
 }

@@ -3,8 +3,8 @@ package br.ufc.npi.model.chart;
 public class Dataset {
 
 	private String label;
-	private String backgroundColor = "rgba(50,50,50,.8)";
-	private String borderColor = "rgb(0,0,0)";
+	private String backgroundColor = "rgba(128,0,0,.8)";
+	private String borderColor = "rgb(43,0,0)";
 	private Double[] data;
 	private boolean fill = true;
 	

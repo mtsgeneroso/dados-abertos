@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.ufc.npi.model.Acao;
 import br.ufc.npi.model.OrgaoSubordinado;
 import br.ufc.npi.model.OrgaoSuperior;
 import br.ufc.npi.model.UnidadeGestora;
@@ -67,7 +68,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(path="/orgaoSubordinado/{id}")
-	public String orgaoSubordinado(@PathVariable("id")Long id, Model model, HttpSession session){
+	public String orgaoSubordinado(@PathVariable("id")Long id, Model model){
 		
 		OrgaoSubordinado orgaoSubordinado = orgaoSubordinadoService.getById(id);
 		
@@ -87,5 +88,31 @@ public class MainController {
 		return "orgao-subordinado";
 		
 	}
+	
+	@RequestMapping(path="/unidadeGestora/{id}")
+	public String unidadeGestora(@PathVariable("id")Long id, Model model){
+		
+		UnidadeGestora unidadeGestora = unidadeGestoraService.getById(id);
+		
+		List<Acao> acoes = unidadeGestora.getAcoes();
+		
+		model.addAttribute("acoes", acoes);
+		model.addAttribute("currentId", id);
+		
+		OrgaoSubordinado orgaoSubordinado = unidadeGestora.getOrgaoSubordinado();
+		OrgaoSuperior orgaoSuperior = orgaoSubordinado.getOrgao_superior();
+		
+		ArrayList<Breadcumb> caminho = new ArrayList<>();
+		caminho.add(inicio);
+		caminho.add(new Breadcumb(orgaoSuperior.getCodOrgaoSuperior(), orgaoSuperior.getNomeOrgaoSuperior(), "/orgaoSuperior/" + orgaoSuperior.getCodOrgaoSuperior()));
+		caminho.add(new Breadcumb(orgaoSubordinado.getCodOrgaoSubordinado(), orgaoSubordinado.getNomeOrgaoSubordinado(),"/orgaoSubordinado/"+orgaoSubordinado.getCodOrgaoSubordinado()));
+		caminho.add(new Breadcumb(unidadeGestora.getCodUnidadeGestora(), unidadeGestora.getNomeUnidadeGestora(), "/unidadeGestora/" + id));
+		
+		model.addAttribute("caminho", caminho);
+		
+		return "unidade-gestora";
+		
+	}
+	
 	
 }
