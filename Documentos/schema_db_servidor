@@ -46,33 +46,33 @@ FOREIGN KEY(cod_cargo) REFERENCES cargo (cod_cargo)
 );
 
 CREATE TABLE observacao (
+	cod_observacao SERIAL PRIMARY KEY,
 	id_servidor_portal BIGINT,
 	mes BIGINT,
 	ano BIGINT,
 	descricao TEXT,
-PRIMARY KEY (id_servidor_portal, mes, ano),
 FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
 FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano)
 );
 
 CREATE TABLE honorarios (
+	cod_honorario SERIAL PRIMARY KEY,
 	id_servidor_portal BIGINT,
 	mes BIGINT,
 	ano BIGINT,
 	empresa TEXT,
 	valor DECIMAL,
-PRIMARY KEY (id_servidor_portal, mes, ano),
 FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
 FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano)
 );
 
 CREATE TABLE afastamento (
+	cod_afastamento SERIAL PRIMARY KEY,
 	id_servidor_portal BIGINT,
 	mes BIGINT,
 	ano BIGINT,
 	data_inicio DATE,
 	data_fim DATE,
-PRIMARY KEY (id_servidor_portal, mes, ano),
 FOREIGN KEY (id_servidor_portal) REFERENCES servidor (id_servidor_portal),
 FOREIGN KEY (mes,ano) REFERENCES tempo (mes,ano)
 );
