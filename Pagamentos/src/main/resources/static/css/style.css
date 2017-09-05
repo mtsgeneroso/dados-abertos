@@ -24,11 +24,8 @@ main {
 	font-size: inherit;
 }
 
-.red-bods{
-	background-color: #800000;
+@media only screen and (max-width : 992px) {
+	header, main, footer {
+		padding-left: 0;
+	}
 }
-
-.red-bods-dark{
-	background-color: #2b0000;
-}
-	

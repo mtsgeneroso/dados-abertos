@@ -1,0 +1,66 @@
+<!-- Side Nav -->
+	<ul id="slide-out" class="side-nav fixed">
+	
+		<li>
+			<div class="background center">
+				<a id="logo-container" th:href="@{/}" class="brand-logo"><img th:src="@{/img/logo.png}" height="64px"/></a>
+			</div>
+		</li>
+		
+		<li><a class="collapsible-header" th:href="@{/consultaSimples}">Consulta Simples</a></li>
+		<li><a class="collapsible-header" th:href="@{/consultaHierarquica}">Consulta Hierárquica</a></li>
+		
+		<hr/>
+		 
+		<li th:if="${not #lists.isEmpty(session.orgaosSuperiores)}">
+	        <ul class="collapsible collapsible-accordion">
+	          <li>
+	            <a class="collapsible-header">Órgãos Superiores</a>
+	            
+	            <div class="collapsible-body">
+	              <ul>
+					<li th:each="orgao : ${session.orgaosSuperiores}">
+						<a class="truncate" th:href="@{/orgaoSuperior/{id}(id=${orgao.codOrgaoSuperior})}" th:title="${orgao.nomeOrgaoSuperior}" th:text="${orgao.nomeOrgaoSuperior}">[...]</a>
+					</li>
+				  </ul>
+				</div>
+	          
+	          </li>
+	        </ul>
+      	</li>
+      	
+      	<li th:if="${not #lists.isEmpty(session.orgaosSubordinados)}">
+	        <ul class="collapsible collapsible-accordion">
+	          <li>
+	            <a class="collapsible-header">Órgãos Subordinados</a>
+	            
+	            <div class="collapsible-body">
+	              <ul>
+					<li th:each="orgao : ${session.orgaosSubordinados}">
+						<a class="truncate" th:href="@{/orgaoSubordinado/{id}(id=${orgao.codOrgaoSubordinado})}" th:title="${orgao.nomeOrgaoSubordinado}" th:text="${orgao.nomeOrgaoSubordinado}">[...]</a>
+					</li>
+				  </ul>
+				</div>     
+	          </li>
+	        </ul>
+	     </li>
+	      
+	      
+	     <li th:if="${not #lists.isEmpty(session.unidadesGestoras)}">
+	        <ul class="collapsible collapsible-accordion">
+	          <li>
+	            <a class="collapsible-header">Unidades Gestoras</a>
+	            
+	            <div class="collapsible-body">
+	              <ul>
+					<li th:each="unidade : ${session.unidadesGestoras}">
+						<a class="truncate" th:href="@{/unidadeGestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}" th:text="${unidade.nomeUnidadeGestora}">[...]</a>
+					</li>
+				  </ul>
+				</div>     
+	          </li>
+	        </ul>
+	     </li> 
+	      
+	</ul>
+	<!-- Fim Side Nav -->

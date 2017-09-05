@@ -14,5 +14,6 @@ import br.ufc.npi.model.UnidadeGestora;
 public interface UnidadeGestoraRepository extends JpaRepository<UnidadeGestora, Long>{
 	
 	public List<UnidadeGestora> findByCodOrgaoSubordinadoOrderByNomeUnidadeGestoraAsc(Long codOrgaoSubordinado);
+	public List<UnidadeGestora> findByOrderByNomeUnidadeGestoraAsc();
 	
 }

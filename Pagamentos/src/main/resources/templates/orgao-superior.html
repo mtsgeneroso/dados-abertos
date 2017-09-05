@@ -24,6 +24,7 @@
 	<div th:include="fragments/navbar"></div>
 	
 	<main>
+		
 		<div class="section no-pad-bot" id="index-banner">
 			<div class="container center">
 				
@@ -34,6 +35,7 @@
 				<div id="mensagemChart">
 					<h5>Sem dados disponíveis</h5>
 				</div>
+				
 				
 				<br/><br/>
 				<canvas id="chart"></canvas>
@@ -52,22 +54,6 @@
 				      </div>
 				    </div>
 				</div>
-				
-				<div class="row" id="botoes">
-					<h4>Órgãos Subordinados</h4>
-					<div th:each="orgao : ${orgaosSubordinados}">
-						<div class="col s12 m4 l2">
-							<a th:href="@{/orgaoSubordinado/{id}(id=${orgao.codOrgaoSubordinado})}" th:title="${orgao.nomeOrgaoSubordinado}">
-								<div class="card-panel red-bods white-text hoverable"
-									style="padding-top: 2px; height: 120px;">
-									<p th:text="${orgao.nomeOrgaoSubordinado}" th:classappend="${#strings.length(orgao.nomeOrgaoSubordinado) > 75} ? 'truncate'" style="font-size: 12px">[...]</p>
-								</div>
-							</a>
-						</div>
-					</div>
-	
-				</div>
-	
 	
 			</div>
 		</div>

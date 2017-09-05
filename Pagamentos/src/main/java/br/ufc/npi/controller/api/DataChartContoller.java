@@ -1,4 +1,4 @@
-package br.ufc.npi.controller;
+package br.ufc.npi.controller.api;
 
 import java.text.DateFormatSymbols;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufc.npi.model.Pagamento;
-import br.ufc.npi.model.chart.Chart;
-import br.ufc.npi.model.chart.Data;
-import br.ufc.npi.model.chart.Dataset;
+import br.ufc.npi.model.request.Chart;
+import br.ufc.npi.model.request.Data;
+import br.ufc.npi.model.request.Dataset;
 import br.ufc.npi.service.PagamentoService;
 
 @RestController
@@ -69,8 +69,8 @@ public class DataChartContoller {
 		String[] months = dfs.getMonths();
 
 		for (int i = 0; i<pagamentos.size(); i++){
-			valores[i] = (Double)(pagamentos.get(i)[1]);
-			meses[i] = months[(int)(pagamentos.get(i)[0])-1].substring(0, 3);
+			valores[i] = (Double)(pagamentos.get(i)[2]);
+			meses[i] = months[(int)(pagamentos.get(i)[1])-1].substring(0, 3);
 		}
 
 
@@ -104,8 +104,8 @@ public class DataChartContoller {
 		String[] months = dfs.getMonths();
 
 		for (int i = 0; i<pagamentos.size(); i++){
-			valores[i] = (Double)(pagamentos.get(i)[1]);
-			meses[i] = months[(int)(pagamentos.get(i)[0])-1].substring(0, 3);
+			valores[i] = (Double)(pagamentos.get(i)[2]);
+			meses[i] = months[(int)(pagamentos.get(i)[1])-1].substring(0, 3);
 		}
 
 
@@ -138,8 +138,8 @@ public class DataChartContoller {
 		String[] months = dfs.getMonths();
 
 		for (int i = 0; i<pagamentos.size(); i++){
-			valores[i] = (Double)(pagamentos.get(i)[1]);
-			meses[i] = months[(int)(pagamentos.get(i)[0])-1].substring(0, 3);
+			valores[i] = (Double)(pagamentos.get(i)[2]);
+			meses[i] = months[(int)(pagamentos.get(i)[1])-1].substring(0, 3);
 		}
 
 

@@ -53,22 +53,6 @@
 				    </div>
 				</div>
 				
-				<div class="row" id="botoes">
-					<h4>Unidades Gestoras</h4>
-					<div th:each="unidade : ${unidadesGestoras}">
-						<div class="col s12 m4 l2">
-							<a th:href="@{/unidadeGestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}">
-								<div class="card-panel red-bods white-text hoverable"
-									style="padding-top: 2px; height: 120px;">
-									<p th:text="${unidade.nomeUnidadeGestora}" th:classappend="${#strings.length(unidade.nomeUnidadeGestora) > 75} ? 'truncate'" style="font-size: 12px">[...]</p>
-								</div>
-							</a>
-						</div>
-					</div>
-	
-				</div>
-	
-	
 			</div>
 		</div>
 	</main>

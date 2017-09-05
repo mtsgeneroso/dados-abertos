@@ -1,6 +1,5 @@
 package br.ufc.npi.controller;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,12 +33,9 @@ public class MainController {
 	
 	private Breadcumb inicio = new Breadcumb(0L, "INÍCIO", "/");
 	
+	
 	@RequestMapping(path="/")
 	public String index(Model model){
-		
-		List<OrgaoSuperior> orgaosSuperiores = orgaoSuperiorService.findAll();
-		model.addAttribute("orgaosSuperiores", orgaosSuperiores);
-		model.addAttribute("currentId", "");
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
@@ -47,6 +43,73 @@ public class MainController {
 		model.addAttribute("caminho", caminho);
 		
 		return "index";
+	}
+	
+	@RequestMapping(path="/consulta-hierarquica")
+	public String consultaHierarquica(Model model){
+		
+		ArrayList<Breadcumb> caminho = new ArrayList<>();
+		caminho.add(inicio);
+		caminho.add(new Breadcumb(0L, "CONSULTA HIERÁRQUICA", "/consulta-hierarquica"));
+		model.addAttribute("caminho", caminho);
+		
+		return "consulta-hierarquica";
+	}
+	
+	@RequestMapping(path="/consulta-simples")
+	public String consultaSimples(Model model){
+		
+		ArrayList<Breadcumb> caminho = new ArrayList<>();
+		caminho.add(inicio);
+		caminho.add(new Breadcumb(0L, "CONSULTA SIMPLES", "/consulta-simples"));
+		model.addAttribute("caminho", caminho);
+		
+		return "consulta-simples";
+	}
+	
+	@RequestMapping(path="/orgaos-superiores")
+	public String paginaOrgaosSuperiores(Model model){
+		
+		List<OrgaoSuperior> orgaosSuperiores = orgaoSuperiorService.findAll();
+		model.addAttribute("orgaosSuperiores", orgaosSuperiores);
+		
+		ArrayList<Breadcumb> caminho = new ArrayList<>();
+		caminho.add(inicio);
+		caminho.add(new Breadcumb(0L, "ÓRGÃOS SUPERIORES", "/orgaos-superiores"));
+		model.addAttribute("caminho", caminho);
+		
+		return "orgaos-superiores";
+		
+	}
+	
+	@RequestMapping(path="/orgaos-subordinados")
+	public String paginaOrgaosSubordinados(Model model){
+		
+		List<OrgaoSubordinado> orgaosSubordinados = orgaoSubordinadoService.findAll();
+		model.addAttribute("orgaosSubordinados", orgaosSubordinados);
+		
+		ArrayList<Breadcumb> caminho = new ArrayList<>();
+		caminho.add(inicio);
+		caminho.add(new Breadcumb(0L, "ÓRGÃOS SUBORDINADOS", "/orgaos-subordinados"));
+		model.addAttribute("caminho", caminho);
+		
+		return "orgaos-subordinados";
+		
+	}
+	
+	@RequestMapping(path="/unidades-gestoras")
+	public String paginaUnidadesGestoras(Model model){
+		
+		List<UnidadeGestora> unidadesGestoras = unidadeGestoraService.findAll();
+		model.addAttribute("unidadesGestoras", unidadesGestoras);
+		
+		ArrayList<Breadcumb> caminho = new ArrayList<>();
+		caminho.add(inicio);
+		caminho.add(new Breadcumb(0L, "UNIDADES GESTORAS", "/unidades-gestoras"));
+		model.addAttribute("caminho", caminho);
+		
+		return "unidades-gestoras";
+		
 	}
 	
 	@RequestMapping(path="/orgaoSuperior/{id}")
