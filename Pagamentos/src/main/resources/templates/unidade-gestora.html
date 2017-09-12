@@ -55,6 +55,21 @@
 				    </div>
 				</div>
 				
+				<div class="row" id="botoes">
+					<h4>Ações</h4>
+					<div th:each="acao : ${acoes}">
+						<div class="col s12 m4 l2">
+							<a th:href="@{#}" th:title="${acao.nomeAcao}">
+								<div class="card-panel red white-text hoverable"
+									style="padding-top: 2px; height: 120px;">
+									<p th:text="${acao.nomeAcao}" th:classappend="${#strings.length(acao.nomeAcao) > 75} ? 'truncate'" style="font-size: 12px">[...]</p>
+								</div>
+							</a>
+						</div>
+					</div>
+	
+				</div>
+				
 			</div>
 		</div>
 	</main>

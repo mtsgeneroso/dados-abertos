@@ -12,6 +12,7 @@ import br.ufc.npi.model.Pagamento;
 import br.ufc.npi.model.request.Chart;
 import br.ufc.npi.model.request.Data;
 import br.ufc.npi.model.request.Dataset;
+import br.ufc.npi.model.request.Orgao;
 import br.ufc.npi.service.PagamentoService;
 
 @RestController
@@ -54,7 +55,7 @@ public class DataChartContoller {
 		
 	}
 
-	@RequestMapping(path="/pagamentos/orgaoSuperior/{id}")
+	@RequestMapping(path="/pagamentos/"+Orgao.ORGAO_SUPERIOR+"/{id}")
 	public Chart paagamentosOrgaoSuperior(@PathVariable("id")Long id){
 
 		List<Object[]> pagamentos;
@@ -89,7 +90,7 @@ public class DataChartContoller {
 
 	}
 
-	@RequestMapping(path="/pagamentos/orgaoSubordinado/{id}")
+	@RequestMapping(path="/pagamentos/"+Orgao.ORGAO_SUBORDINADO+"/{id}")
 	public Chart pagamentosOrgaoSubordinado(@PathVariable("id")Long id){
 
 		List<Object[]> pagamentos;
@@ -123,7 +124,7 @@ public class DataChartContoller {
 
 	}
 	
-	@RequestMapping(path="/pagamentos/unidadeGestora/{id}")
+	@RequestMapping(path="/pagamentos/"+Orgao.UNIDADE_GESTORA+"/{id}")
 	public Chart pagamentosUnidadeGestora(@PathVariable("id")Long id){
 
 		List<Object[]> pagamentos;
