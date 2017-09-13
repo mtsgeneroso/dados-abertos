@@ -24,76 +24,44 @@
 
 	<main> <!-- <div th:include="fragments/sidenav"></div> -->
 
-	<div class="container center">
+	<div class="container main-container">
 
-		<div class="section">
+		<div class="row">
 			<!--   Icon Section   -->
-			<div class="row">
-				<p class="left">Consultas:</p>
+			<div class="col l12 s12 m12">
+				<h5>Órgãos do Governo Federal:</h5>
 			</div>
-			<div class="row">
-				<div class="col s12 m3">
-					<a th:href="@{/consulta-simples}">
-						<div class="card-panel hoverable red white-text">
-							<h2 class="center">
-								<i class="material-icons medium">search</i>
-							</h2>
-							<p class="center">Consulta Simples</p>
-						</div>
-					</a>
-				</div>
-				
-				<div class="col s12 m3">
-					<a th:href="@{/consulta-hierarquica}">
-						<div class="card-panel hoverable red white-text">
-							<h2 class="center">
-								<i class="material-icons medium">search</i>
-							</h2>
-							<p class="center">Consulta Hierárquica</p>
-						</div>
-					</a>
-				</div>
-
+			<div class="col l4 s12 m4">
+				<a th:href="@{/orgaos-superiores}" class="center">
+					<div class="card-panel hoverable red white-text">
+						<h2 class="center">
+							<i class="material-icons medium">settings</i>
+						</h2>
+						<p class="center">Órgãos Superiores</p>
+					</div>
+				</a>
 			</div>
-	
-			<!--   Icon Section   -->
-			<div class="row">
-				<p class="left">Órgãos:</p>
+				
+			<div class="col l4 s12 m4">
+				<a th:href="@{/orgaos-subordinados}">
+					<div class="card-panel hoverable red white-text">
+						<h2 class="center">
+							<i class="material-icons medium">settings</i>
+						</h2>
+						<p class="center">Órgãos Subordinados</p>
+					</div>
+				</a>
 			</div>
-			<div class="row">
-				<div class="col s12 m3">
-					<a th:href="@{/orgaos-superiores}">
-						<div class="card-panel hoverable red white-text">
-							<h2 class="center">
-								<i class="material-icons medium">settings</i>
-							</h2>
-							<p class="center">Órgãos Superiores</p>
-						</div>
-					</a>
-				</div>
 				
-				<div class="col s12 m3">
-					<a th:href="@{/orgaos-subordinados}">
-						<div class="card-panel hoverable red white-text">
-							<h2 class="center">
-								<i class="material-icons medium">settings</i>
-							</h2>
-							<p class="center">Órgãos Subordinados</p>
-						</div>
-					</a>
-				</div>
-				
-				<div class="col s12 m3">
-					<a th:href="@{/unidades-gestoras}">
-						<div class="card-panel hoverable red white-text">
-							<h2 class="center">
-								<i class="material-icons medium">settings</i>
-							</h2>
-							<p class="center">Unidades Gestoras</p>
-						</div>
-					</a>
-				</div>
-
+			<div class="col l4 s12 m4">
+				<a th:href="@{/unidades-gestoras}">
+					<div class="card-panel hoverable red white-text">
+						<h2 class="center">
+							<i class="material-icons medium">settings</i>
+						</h2>
+						<p class="center">Unidades Gestoras</p>
+					</div>
+				</a>
 			</div>
 		</div>
 		</div>

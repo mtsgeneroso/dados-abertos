@@ -3,6 +3,7 @@ $(document).ready(function(){
 	$('.modal').modal();
 	
 	$(".grafico-container").hide();
+	$(".detalhes-container").hide();
 	
 	var chips = {};
 
@@ -32,13 +33,16 @@ $(document).ready(function(){
 	//Alerta para quando uma tag inválida é adicionada
 	$('.chips').on('chip.add', function(e, chip){
 		if(chips[chip.tag] === undefined)
-			alert("Esse elemento não existe e será ignorado na consulta.");	
+			$("#modal-orgaos-inexistentes").modal('open');
 	});
 
 	//Ação de click no botão
 	$('#btn-consultar').click(function(){
 		$(".grafico-container").show();
 		$(".grafico-container").empty();
+		
+		$(".detalhes-container").show();
+		$(".detalhes-container").empty();
 		
 		$(".grafico-container").append("<p><div id='rangeMeses'></div>" +
 				"</p><br/><br/>" +
@@ -51,15 +55,11 @@ $(document).ready(function(){
 			if(chips[elem.tag] != undefined)
 				orgaosConsulta.push(chips[elem.tag]);
 		});
-		console.log(orgaosConsulta);
+		//console.log(orgaosConsulta);
 		
 		//Se apenas uma uma tag foi selecionada, redireciona para consulta antiga
 		if (orgaosConsulta.length == 0){
 			$("#modal-consulta").modal('open');
-		}
-		
-		else if(orgaosConsulta.length == 1){
-			window.location = "/" + orgaosConsulta[0].tipo + "/" + orgaosConsulta[0].id;
 		}
 
 		//Caso contrário
@@ -165,6 +165,17 @@ $(document).ready(function(){
 					});
 				}
 			});
+			
+			$(".detalhes-container").append("<p>Clique para ver detalhes:</p>");
+			for(var i = 0; i<orgaosConsulta.length; i++){
+				$(".detalhes-container").append("<a target='_blank' class='waves-effect waves-light btn red' href='/"+orgaosConsulta[i].tipo+"/"+orgaosConsulta[i].id+"'><i class='material-icons right'>open_in_new</i>" + orgaosConsulta[i].nome + "</a>")
+			}
+			
+			
 		}
+		
+		
+		
+		
 	});
 });
