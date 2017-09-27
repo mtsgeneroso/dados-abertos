@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>TransformacaoFatoDim</name>
+    <name>TransServidor_modelo_hibrido</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -428,20 +428,41 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2017&#x2f;06&#x2f;07 14&#x3a;02&#x3a;00.137</created_date>
+    <created_date>2017&#x2f;08&#x2f;22 15&#x3a;02&#x3a;19.078</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2017&#x2f;06&#x2f;07 14&#x3a;02&#x3a;00.137</modified_date>
+    <modified_date>2017&#x2f;08&#x2f;22 15&#x3a;02&#x3a;19.078</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
+    <notepad>
+      <note>Transforma&#xe7;&#xe3;o destinada a inser&#xe7;&#xe3;o das dimen&#xe7;&#xf5;es de servidores&#xa;- Codifica&#xe7;&#xe3;o&#x3a; ISO-8859-9</note>
+      <xloc>592</xloc>
+      <yloc>48</yloc>
+      <width>455</width>
+      <heigth>44</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
-    <name>con_servidor</name>
+    <name>con_public</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>dados_abertos_servidores</database>
+    <database>dados_abertos_servidores_hibrido</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7f2e4bb16bd64d980aac9</password>
@@ -462,11 +483,6 @@
   </connection>
   <order>
     <hop>
-      <from>cadastro_servidor</from>
-      <to>campos_ano_mes</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>inserir_cargo</from>
       <to>selecionar_cargo</to>
       <enabled>Y</enabled>
@@ -477,13 +493,58 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>inserir_carreira</from>
-      <to>selecionar_carreira</to>
+      <from>inserir_orgao_sup_exercicio</from>
+      <to>inserir_orgao_sup_lotacao</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>inserir_funcao</from>
-      <to>inserir_vinculo</to>
+      <from>inserir_orgao_sup_lotacao</from>
+      <to>inserir_orgao_exercicio</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_orgao_exercicio</from>
+      <to>inserir_orgao_lotacao</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_orgao_lotacao</from>
+      <to>inserir_uni_orgao_exercicio</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_uni_orgao_exercicio</from>
+      <to>inserir_uni_orgao_lotacao</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>If COD value is null</from>
+      <to>validate_orgs</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>validate_orgs</from>
+      <to>inserir_orgao_sup_exercicio</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_servidor</from>
+      <to>test values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>test values</from>
+      <to>inserir_cargo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_carreira</from>
+      <to>If COD value is null</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>teste_atividade_validacao_nulos</from>
+      <to>Switch_funcao_vinculo</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -499,6 +560,11 @@
     <hop>
       <from>Switch&#x2f;Case_fato</from>
       <to>inserir_fato_sem_cargo_vinculo_funcao</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Switch&#x2f;Case_fato</from>
+      <to>inserir_fato_cargo_sem_vinculo</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -522,113 +588,58 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Switch&#x2f;Case_fato</from>
-      <to>inserir_fato_cargo_sem_vinculo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_funcao</from>
-      <to>selecionar_vinculo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_funcao</from>
+      <from>Switch_funcao_vinculo</from>
       <to>inserir_funcao</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>inserir_funcao</from>
+      <to>selecionar_funcao</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>selecionar_funcao</from>
+      <to>inserir_atividade</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_atividade</from>
+      <to>selecionar_atividade</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>selecionar_atividade</from>
+      <to>inserir_vinculo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>cadastro_servidor</from>
+      <to>split_data_diploma_sp</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>split_data_diploma_sp</from>
+      <to>split_ingresso_orgao</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>split_ingresso_orgao</from>
+      <to>split_ingresso_cf</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>split_ingresso_cf</from>
+      <to>campos_ano_mes_datas</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Switch_funcao_vinculo</from>
+      <to>selecionar_atividade</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>selecionar_carreira</from>
-      <to>validacao_orgao_sup_exercicio</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_orgao_sup_exercicio</from>
-      <to>inserir_orgao_sup_exercicio</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>inserir_orgao_sup_exercicio</from>
-      <to>validacao_orgao_sup_lotacao</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_orgao_sup_lotacao</from>
-      <to>inserir_orgao_sup_lotacao</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_orgao_sup_lotacao</from>
-      <to>validacao_orgao_exercicio</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>inserir_orgao_sup_lotacao</from>
-      <to>validacao_orgao_exercicio</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_orgao_exercicio</from>
-      <to>inserir_orgao_exercicio</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>inserir_orgao_exercicio</from>
-      <to>validacao_orgao_lotacao</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_orgao_exercicio</from>
-      <to>validacao_orgao_lotacao</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_orgao_lotacao</from>
-      <to>inserir_orgao_lotacao</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_orgao_lotacao</from>
-      <to>validacao_uni_orgao_exercicio</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>inserir_orgao_lotacao</from>
-      <to>validacao_uni_orgao_exercicio</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_uni_orgao_exercicio</from>
-      <to>inserir_uni_orgao_exercicio</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_uni_orgao_exercicio</from>
-      <to>validacao_uni_orgao_lotacao</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>inserir_uni_orgao_exercicio</from>
-      <to>validacao_uni_orgao_lotacao</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_uni_orgao_lotacao</from>
-      <to>inserir_uni_orgao_lotacao</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_uni_orgao_lotacao</from>
-      <to>validacao_funcao</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>inserir_uni_orgao_lotacao</from>
-      <to>validacao_funcao</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>validacao_orgao_sup_exercicio</from>
-      <to>validacao_orgao_sup_lotacao</to>
+      <to>teste_atividade_validacao_nulos</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -637,16 +648,127 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>campos_ano_mes</from>
+      <from>campos_ano_mes_datas</from>
+      <to>inserir_tempo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_tempo</from>
       <to>inserir_servidor</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>inserir_servidor</from>
-      <to>inserir_cargo</to>
+      <from>inserir_uni_orgao_lotacao</from>
+      <to>inserir_orgao_individual_exer</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_orgao_individual_exer</from>
+      <to>inserir_orgao_individual_lot</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_orgao_sup_exer</from>
+      <to>inserir_orgao_sup_lot</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_orgao_individual_lot</from>
+      <to>inserir_orgao_sup_exer</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_orgao_uni_exer</from>
+      <to>inserir_orgao_uni_lot</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_orgao_sup_lot</from>
+      <to>inserir_orgao_uni_exer</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>inserir_orgao_uni_lot</from>
+      <to>selecionar_carreira</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>If COD value is null</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+      <replaceAllByValue/>
+      <replaceAllMask/>
+      <selectFields>Y</selectFields>
+      <selectValuesType>N</selectValuesType>
+      <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      <valuetype>
+        <name>-</name>
+        <value/>
+        <mask/>
+        <set_type_empty_string>N</set_type_empty_string>
+        </valuetype>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>COD_ORGSUP_EXERCICIO</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>COD_ORGSUP_LOTACAO</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>COD_ORG_LOTACAO</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>COD_ORG_EXERCICIO</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>COD_UORG_EXERCICIO</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>COD_UORG_LOTACAO</name>
+        <value>0</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
   <step>
     <name>Switch&#x2f;Case_fato</name>
     <type>SwitchCase</type>
@@ -681,8 +803,44 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>496</yloc>
+      <xloc>320</xloc>
+      <yloc>848</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Switch_funcao_vinculo</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+<fieldname>testFunction</fieldname>
+<use_contains>N</use_contains>
+<case_value_type>String</case_value_type>
+<case_value_format/>
+<case_value_decimal/>
+<case_value_group/>
+<default_target_step/>
+<cases><case><value>F</value>
+<target_step>inserir_funcao</target_step>
+</case><case><value>N</value>
+<target_step>selecionar_atividade</target_step>
+</case></cases>    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -702,7 +860,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#x2f;&#x2f;Valores de result&#x3a;&#xa;&#x2f;&#x2f; C - Possui cargo sem vinculo&#xa;&#x2f;&#x2f; F - Possui fun&#xe7;&#xe3;o&#xa;&#x2f;&#x2f; V - Possui cargo com vinculo&#xa;&#x2f;&#x2f; S - N&#xe3;o possui cargo, nem fun&#xe7;&#xe3;o e nem vinculo&#xa;var result &#x3d; null&#x3b;&#xa;if&#x28;SITUACAO_VINCULO &#x3d;&#x3d; &#x27;&#x27; &#x26;&#x26; TIPO_VINCULO &#x3d;&#x3d; &#x27;&#x27; &#x26;&#x26; &#xa;	DESCRICAO_CARGO &#x3d;&#x3d; &#x27;&#x27; &#x26;&#x26; CODIGO_ATIVIDADE &#x3d;&#x3d; &#x27;&#x27; &#x26;&#x26; ATIVIDADE &#x3d;&#x3d; &#x27;&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;S&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;CODIGO_ATIVIDADE &#x21;&#x3d; &#x27;&#x27; &#x26;&#x26; ATIVIDADE &#x21;&#x3d; &#x27;&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;F&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;SITUACAO_VINCULO &#x21;&#x3d; &#x27;&#x27; &#x26;&#x26; TIPO_VINCULO &#x21;&#x3d; &#x27;&#x27; &#x26;&#x26; DESCRICAO_CARGO &#x21;&#x3d; &#x27;&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;V&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;SITUACAO_VINCULO &#x3d;&#x3d; &#x27;&#x27; &#x26;&#x26; TIPO_VINCULO &#x3d;&#x3d; &#x27;&#x27; &#x26;&#x26; DESCRICAO_CARGO &#x21;&#x3d; &#x27;&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;C&#x27;&#x3b;&#xa;&#x7d;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#x2f;&#x2f;Valores de result&#x3a;&#xa;&#x2f;&#x2f; C - Possui cargo sem vinculo&#xa;&#x2f;&#x2f; F - Possui fun&#xe7;&#xe3;o&#xa;&#x2f;&#x2f; V - Possui cargo com vinculo&#xa;&#x2f;&#x2f; S - N&#xe3;o possui cargo, nem fun&#xe7;&#xe3;o e nem vinculo&#xa;var result &#x3d; null&#x3b;&#xa;if&#x28;escape&#x28;SITUACAO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;TIPO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; &#xa;	escape&#x28;DESCRICAO_CARGO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; &#x28;COD_ATIVIDADE &#x3d;&#x3d;&#x3d; 0 &#x7c;&#x7c; escape&#x28;CODIGO_ATIVIDADE&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29; &#x26;&#x26; escape&#x28;ATIVIDADE&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;S&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;&#x28;escape&#x28;COD_ATIVIDADE&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27; &#x7c;&#x7c; escape&#x28;COD_ATIVIDADE&#x29; &#x21;&#x3d; 0 &#x29; &#x26;&#x26; escape&#x28;ATIVIDADE&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;F&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;escape&#x28;SITUACAO_VINCULO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;TIPO_VINCULO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;DESCRICAO_CARGO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;V&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;escape&#x28;SITUACAO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;TIPO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;DESCRICAO_CARGO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;C&#x27;&#x3b;&#xa;&#x7d;&#xa;&#x2f;&#x2f;Alert&#x28;NOME&#x2b;&#x22;,&#x22;&#x2b;COD_CARREIRA&#x2b;&#x22;&#x3a; &#x22;&#x2b;CLA_CARGO&#x2b;&#x22;, &#x22;&#x2b;COD_CARGO&#x2b;&#x22;, &#x22;&#x2b;NI_CARGO&#x2b;&#x22;, &#x22;&#x2b;REF_CARGO&#x29;&#x3b;&#xa;&#x2f;&#x2f;Alert&#x28;COD_CARREIRA&#x29;&#x3b;&#xa;&#x2f;&#x2f;Alert&#x28;ATIVIDADE_ID&#x29;&#x3b;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>result</name>
         <rename>RESULTADO_AVALIACAO</rename>
         <type>String</type>
@@ -717,8 +875,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
-      <yloc>496</yloc>
+      <xloc>320</xloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -734,12 +892,12 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;2017&#x2f;201701_Servidores&#x2f;20170131_NewCadastro.csv</filename>
+    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;dados servidores&#x2f;2016&#x2f;Particionamentos&#x2f;Result&#x2f;20160131_Cadastro_div3.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
-    <separator>&#x3b;</separator>
-    <enclosure>&#x22;</enclosure>
+    <separator>&#x23;</separator>
+    <enclosure/>
     <header>Y</header>
     <buffer_size>50000</buffer_size>
     <lazy_conversion>Y</lazy_conversion>
@@ -860,8 +1018,8 @@
       </field>
       <field>
         <name>NIVEL_FUNCAO</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
+        <type>String</type>
+        <format/>
         <currency>R&#x24;</currency>
         <decimal>,</decimal>
         <group>.</group>
@@ -882,8 +1040,8 @@
       </field>
       <field>
         <name>CODIGO_ATIVIDADE</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
+        <type>String</type>
+        <format/>
         <currency>R&#x24;</currency>
         <decimal>,</decimal>
         <group>.</group>
@@ -915,8 +1073,8 @@
       </field>
       <field>
         <name>COD_UORG_LOTACAO</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
+        <type>String</type>
+        <format/>
         <currency>R&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -937,8 +1095,8 @@
       </field>
       <field>
         <name>COD_ORG_LOTACAO</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
+        <type>String</type>
+        <format/>
         <currency>R&#x24;</currency>
         <decimal>,</decimal>
         <group>.</group>
@@ -959,8 +1117,8 @@
       </field>
       <field>
         <name>COD_ORGSUP_LOTACAO</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
+        <type>String</type>
+        <format/>
         <currency>R&#x24;</currency>
         <decimal>,</decimal>
         <group>.</group>
@@ -981,8 +1139,8 @@
       </field>
       <field>
         <name>COD_UORG_EXERCICIO</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
+        <type>String</type>
+        <format/>
         <currency>R&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1003,8 +1161,8 @@
       </field>
       <field>
         <name>COD_ORG_EXERCICIO</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
+        <type>String</type>
+        <format/>
         <currency>R&#x24;</currency>
         <decimal>,</decimal>
         <group>.</group>
@@ -1025,8 +1183,8 @@
       </field>
       <field>
         <name>COD_ORGSUP_EXERCICIO</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
+        <type>String</type>
+        <format/>
         <currency>R&#x24;</currency>
         <decimal>,</decimal>
         <group>.</group>
@@ -1113,8 +1271,8 @@
       </field>
       <field>
         <name>DATA_INGRESSO_CARGOFUNCAO</name>
-        <type>Date</type>
-        <format>dd&#x2f;MM&#x2f;yyyy</format>
+        <type>String</type>
+        <format/>
         <currency>R&#x24;</currency>
         <decimal>,</decimal>
         <group>.</group>
@@ -1135,8 +1293,8 @@
       </field>
       <field>
         <name>DATA_INGRESSO_ORGAO</name>
-        <type>Date</type>
-        <format>dd&#x2f;MM&#x2f;yyyy</format>
+        <type>String</type>
+        <format/>
         <currency>R&#x24;</currency>
         <decimal>,</decimal>
         <group>.</group>
@@ -1219,8 +1377,133 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>0</yloc>
+      <xloc>1424</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>campos_ano_mes_datas</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var ANO &#x3d; 2017&#x3b;&#xa;var MES &#x3d; 1&#x3b;&#xa;&#xa;&#x2f;&#x2f;datas&#xa;var data_ingresso_cf &#x3d; new Date&#x28;mm_ingresso_cf&#x2b;&#x22;&#x2f;&#x22;&#x2b;dd_ingresso_cf&#x2b;&#x22;&#x2f;&#x22;&#x2b;aaaa_ingresso_cf&#x29;&#x3b;&#xa;var data_ingresso_orgao &#x3d; new Date&#x28;mm_ingresso_orgao&#x2b;&#x22;&#x2f;&#x22;&#x2b;dd_ingresso_orgao&#x2b;&#x22;&#x2f;&#x22;&#x2b;aaaa_ingresso_orgao&#x29;&#x3b;&#xa;var data_diploma_sp &#x3d; new Date&#x28;mm_diploma_sp&#x2b;&#x22;&#x2f;&#x22;&#x2b;dd_diploma_sp&#x2b;&#x22;&#x2f;&#x22;&#x2b;aaaa_diploma_sp&#x29;&#x3b;&#xa;&#xa;&#x2f;&#x2f;textos&#xa;var diploma_isp &#x3d; DIPLOMA_INGRESSO_SERVICOPUBLICO&#x3b;&#xa;var documento_isp &#x3d; DOCUMENTO_INGRESSO_SERVICOPUBLICO&#x3b;&#xa;&#xa;if&#x28;escape&#x28;diploma_isp&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;diploma_isp&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;documento_isp&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;documento_isp&#x3d;&#x22;&#x22;&#x3b;&#x7d;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>ANO</name>
+        <rename>ANO</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>MES</name>
+        <rename>MES</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>data_ingresso_cf</name>
+        <rename>data_ingresso_cf</rename>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>data_ingresso_orgao</name>
+        <rename>data_ingresso_orgao</rename>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>data_diploma_sp</name>
+        <rename>data_diploma_sp</rename>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>diploma_isp</name>
+        <rename>diploma_isp</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>documento_isp</name>
+        <rename>documento_isp</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1120</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>inserir_atividade</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>con_public</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>atividade</table>
+      <key>
+        <name>COD_ATIVIDADE</name>
+        <field>cod_atividade</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>atividade</name>
+        <rename>nome_atividade</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>cod_atividade</name>
+        <rename>COD_ATIVIDADE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>cod_funcao</name>
+        <rename>COD_FUNCAO</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>768</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -1236,21 +1519,21 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
-    <commit>100</commit>
+    <connection>con_public</connection>
+    <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>public</schema>
       <table>cargo</table>
       <key>
-        <name>DESCRICAO_CARGO</name>
+        <name>DESC_CARGO</name>
         <field>descricao_cargo</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
         <name>descricao_cargo</name>
-        <rename>DESCRICAO_CARGO</rename>
+        <rename>DESC_CARGO</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -1262,8 +1545,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>304</yloc>
+      <xloc>608</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -1279,43 +1562,49 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
-    <commit>100</commit>
+    <connection>con_public</connection>
+    <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>public</schema>
       <table>carreira</table>
       <key>
-        <name>CLASSE_CARGO</name>
+        <name>CLA_CARGO</name>
         <field>classe</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <key>
-        <name>REFERENCIA_CARGO</name>
+        <name>REF_CARGO</name>
         <field>referencia</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <key>
-        <name>NIVEL_CARGO</name>
+        <name>NI_CARGO</name>
         <field>nivel</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>COD_CARGO</name>
+        <field>cod_cargo</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
         <name>classe</name>
-        <rename>CLASSE_CARGO</rename>
+        <rename>CLA_CARGO</rename>
         <update>N</update>
       </value>
       <value>
         <name>referencia</name>
-        <rename>REFERENCIA_CARGO</rename>
+        <rename>REF_CARGO</rename>
         <update>N</update>
       </value>
       <value>
         <name>nivel</name>
-        <rename>NIVEL_CARGO</rename>
+        <rename>NI_CARGO</rename>
         <update>N</update>
       </value>
       <value>
@@ -1332,8 +1621,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>544</yloc>
+      <xloc>304</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -1349,11 +1638,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>public</schema>
+      <schema/>
       <table>fato_cargo</table>
       <key>
         <name>Id_SERVIDOR_PORTAL</name>
@@ -1392,32 +1681,32 @@
       </value>
       <value>
         <name>cod_uorg_lotacao</name>
-        <rename>COD_UORG_LOTACAO</rename>
+        <rename>codUorgLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_lotacao</name>
-        <rename>COD_ORG_LOTACAO</rename>
+        <rename>codOrgLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_sup_lotacao</name>
-        <rename>COD_ORGSUP_LOTACAO</rename>
+        <rename>codOrgSupLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_uorg_exercicio</name>
-        <rename>COD_UORG_EXERCICIO</rename>
+        <rename>codUorgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_exercicio</name>
-        <rename>COD_ORG_EXERCICIO</rename>
+        <rename>codOrgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_sup_exercicio</name>
-        <rename>COD_ORGSUP_EXERCICIO</rename>
+        <rename>codOrgSupExercicio</rename>
         <update>N</update>
       </value>
       <value>
@@ -1442,17 +1731,32 @@
       </value>
       <value>
         <name>regime_juridico</name>
-        <rename>REGIME_JURIDICO</rename>
+        <rename>regime_juridico_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>uf_exercicio</name>
-        <rename>UF_EXERCICIO</rename>
+        <rename>uf_exercicio_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>jornada_de_trabalho</name>
-        <rename>JORNADA_DE_TRABALHO</rename>
+        <rename>jornada_trabalho</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>data_ingresso_cargo_funcao</name>
+        <rename>data_ingresso_cf</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>diploma_ingresso_orgao</name>
+        <rename>diploma_ingresso_orgao_1</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>data_ingresso_orgao</name>
+        <rename>data_ingresso_orgao</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -1464,8 +1768,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
-      <yloc>224</yloc>
+      <xloc>480</xloc>
+      <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -1481,11 +1785,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>public</schema>
+      <schema/>
       <table>fato_cargo</table>
       <key>
         <name>Id_SERVIDOR_PORTAL</name>
@@ -1500,7 +1804,7 @@
         <name2/>
       </key>
       <key>
-        <name>MES</name>
+        <name>ANO</name>
         <field>ano</field>
         <condition>&#x3d;</condition>
         <name2/>
@@ -1524,32 +1828,32 @@
       </value>
       <value>
         <name>cod_uorg_lotacao</name>
-        <rename>COD_UORG_LOTACAO</rename>
+        <rename>codUorgLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_lotacao</name>
-        <rename>COD_ORG_LOTACAO</rename>
+        <rename>codOrgLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_sup_lotacao</name>
-        <rename>COD_ORGSUP_LOTACAO</rename>
+        <rename>codOrgSupLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_uorg_exercicio</name>
-        <rename>COD_UORG_EXERCICIO</rename>
+        <rename>codUorgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_exercicio</name>
-        <rename>COD_ORG_EXERCICIO</rename>
+        <rename>codOrgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_sup_exercicio</name>
-        <rename>COD_ORGSUP_EXERCICIO</rename>
+        <rename>codOrgSupExercicio</rename>
         <update>N</update>
       </value>
       <value>
@@ -1574,17 +1878,32 @@
       </value>
       <value>
         <name>regime_juridico</name>
-        <rename>REGIME_JURIDICO</rename>
+        <rename>regime_juridico_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>uf_exercicio</name>
-        <rename>UF_EXERCICIO</rename>
+        <rename>uf_exercicio_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>jornada_de_trabalho</name>
-        <rename>JORNADA_DE_TRABALHO</rename>
+        <rename>jornada_trabalho</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>data_ingresso_cargo_funcao</name>
+        <rename>data_ingresso_cf</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>data_ingresso_orgao</name>
+        <rename>data_ingresso_orgao</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>diploma_ingresso_orgao</name>
+        <rename>diploma_ingresso_orgao_1</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -1596,8 +1915,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>960</xloc>
-      <yloc>112</yloc>
+      <xloc>608</xloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -1613,11 +1932,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
-    <commit>100</commit>
+    <connection>con_public</connection>
+    <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>public</schema>
+      <schema/>
       <table>fato_funcao</table>
       <key>
         <name>Id_SERVIDOR_PORTAL</name>
@@ -1626,8 +1945,8 @@
         <name2/>
       </key>
       <key>
-        <name>CODIGO_ATIVIDADE</name>
-        <field>cod_atividade</field>
+        <name>ATIVIDADE_ID</name>
+        <field>atividade_id</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -1649,63 +1968,78 @@
         <update>N</update>
       </value>
       <value>
-        <name>cod_atividade</name>
-        <rename>CODIGO_ATIVIDADE</rename>
+        <name>atividade_id</name>
+        <rename>ATIVIDADE_ID</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_uorg_lotacao</name>
-        <rename>COD_UORG_LOTACAO</rename>
+        <rename>codUorgLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_lotacao</name>
-        <rename>COD_ORG_LOTACAO</rename>
+        <rename>codOrgLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_sup_lotacao</name>
-        <rename>COD_ORGSUP_LOTACAO</rename>
+        <rename>codOrgSupLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_uorg_exercicio</name>
-        <rename>COD_UORG_EXERCICIO</rename>
+        <rename>codUorgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_exercicio</name>
-        <rename>COD_ORG_EXERCICIO</rename>
+        <rename>codOrgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_sup_exercicio</name>
-        <rename>COD_ORGSUP_EXERCICIO</rename>
+        <rename>codOrgSupExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>ano</name>
-        <rename>MES</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>mes</name>
         <rename>ANO</rename>
         <update>N</update>
       </value>
       <value>
+        <name>mes</name>
+        <rename>MES</rename>
+        <update>N</update>
+      </value>
+      <value>
         <name>regime_juridico</name>
-        <rename>REGIME_JURIDICO</rename>
+        <rename>regime_juridico_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>uf_exercicio</name>
-        <rename>UF_EXERCICIO</rename>
+        <rename>uf_exercicio_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>jornada_de_trabalho</name>
-        <rename>JORNADA_DE_TRABALHO</rename>
+        <rename>jornada_trabalho</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>data_ingresso_cargo_funcao</name>
+        <rename>data_ingresso_cf</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>diploma_ingresso_orgao</name>
+        <rename>diploma_ingresso_orgao_1</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>data_ingresso_orgao</name>
+        <rename>data_ingresso_orgao</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -1717,8 +2051,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1088</xloc>
-      <yloc>384</yloc>
+      <xloc>304</xloc>
+      <yloc>976</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -1734,7 +2068,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -1753,47 +2087,57 @@
       </value>
       <value>
         <name>cod_uorg_exercicio</name>
-        <rename>COD_UORG_EXERCICIO</rename>
+        <rename>codUorgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_exercicio</name>
-        <rename>COD_ORG_EXERCICIO</rename>
+        <rename>codOrgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_sup_exercicio</name>
-        <rename>COD_ORGSUP_EXERCICIO</rename>
+        <rename>codOrgSupExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_uorg_lotacao</name>
-        <rename>COD_UORG_LOTACAO</rename>
+        <rename>codUorgLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_lotacao</name>
-        <rename>COD_ORG_LOTACAO</rename>
+        <rename>codOrgLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_sup_lotacao</name>
-        <rename>COD_ORGSUP_LOTACAO</rename>
+        <rename>codOrgSupLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>regime_juridico</name>
-        <rename>REGIME_JURIDICO</rename>
+        <rename>regime_juridico_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>uf_exercicio</name>
-        <rename>UF_EXERCICIO</rename>
+        <rename>uf_exercicio_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>jornada_de_trabalho</name>
-        <rename>JORNADA_DE_TRABALHO</rename>
+        <rename>jornada_trabalho</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>diploma_ingresso_orgao</name>
+        <rename>diploma_ingresso_orgao_1</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>data_ingresso_orgao</name>
+        <rename>data_ingresso_orgao</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -1805,8 +2149,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1088</xloc>
-      <yloc>496</yloc>
+      <xloc>128</xloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -1822,7 +2166,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -1846,47 +2190,57 @@
       </value>
       <value>
         <name>cod_uorg_exercicio</name>
-        <rename>COD_UORG_EXERCICIO</rename>
+        <rename>codUorgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_exercicio</name>
-        <rename>COD_ORG_EXERCICIO</rename>
+        <rename>codOrgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_sup_exercicio</name>
-        <rename>COD_ORGSUP_EXERCICIO</rename>
+        <rename>codOrgSupExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_uorg_lotacao</name>
-        <rename>COD_UORG_LOTACAO</rename>
+        <rename>codUorgLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_lotacao</name>
-        <rename>COD_ORG_LOTACAO</rename>
+        <rename>codOrgLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_org_sup_lotacao</name>
-        <rename>COD_ORGSUP_LOTACAO</rename>
+        <rename>codOrgSupLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>regime_juridico</name>
-        <rename>REGIME_JURIDICO</rename>
+        <rename>regime_juridico_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>uf_exercicio</name>
-        <rename>UF_EXERCICIO</rename>
+        <rename>uf_exercicio_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>jornada_de_trabalho</name>
-        <rename>JORNADA_DE_TRABALHO</rename>
+        <rename>jornada_trabalho</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>data_ingresso_orgao</name>
+        <rename>data_ingresso_orgao</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>diploma_ingresso_orgao</name>
+        <rename>diploma_ingresso_orgao_1</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -1898,8 +2252,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1216</xloc>
-      <yloc>256</yloc>
+      <xloc>368</xloc>
+      <yloc>1232</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -1908,48 +2262,43 @@
     <name>inserir_funcao</name>
     <type>InsertUpdate</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
-    <commit>100</commit>
+    <connection>con_public</connection>
+    <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>public</schema>
+      <schema/>
       <table>funcao</table>
       <key>
-        <name>CODIGO_ATIVIDADE</name>
-        <field>cod_atividade</field>
+        <name>funcao_1</name>
+        <field>funcao</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
-        <name>cod_atividade</name>
-        <rename>CODIGO_ATIVIDADE</rename>
-        <update>N</update>
-      </value>
-      <value>
         <name>sigla</name>
-        <rename>SIGLA_FUNCAO</rename>
+        <rename>sigla</rename>
         <update>N</update>
       </value>
       <value>
         <name>nivel_funcao</name>
-        <rename>NIVEL_FUNCAO</rename>
+        <rename>nivel_funcao_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>funcao</name>
-        <rename>ATIVIDADE</rename>
+        <rename>funcao_1</rename>
         <update>N</update>
       </value>
       <value>
         <name>opcao_parcial</name>
-        <rename>OPCAO_PARCIAL</rename>
+        <rename>opcao_parcial_1</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -1961,8 +2310,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
-      <yloc>128</yloc>
+      <xloc>768</xloc>
+      <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -1978,26 +2327,26 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>public</schema>
       <table>orgao</table>
       <key>
-        <name>COD_ORG_EXERCICIO</name>
+        <name>codOrgExercicio</name>
         <field>cod_orgao</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
         <name>descricao</name>
-        <rename>ORG_EXERCICIO</rename>
+        <rename>orgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_orgao</name>
-        <rename>COD_ORG_EXERCICIO</rename>
+        <rename>codOrgExercicio</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -2009,8 +2358,94 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>256</yloc>
+      <xloc>816</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>inserir_orgao_individual_exer</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>con_public</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>orgao_individual</table>
+      <key>
+        <name>codOrgExercicio</name>
+        <field>cod_orgao</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_orgao</name>
+        <rename>codOrgExercicio</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1248</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>inserir_orgao_individual_lot</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>con_public</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>orgao_individual</table>
+      <key>
+        <name>codOrgLotacao</name>
+        <field>cod_orgao</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_orgao</name>
+        <rename>codOrgLotacao</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1312</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -2026,26 +2461,26 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
-    <commit>100</commit>
+    <connection>con_public</connection>
+    <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>public</schema>
       <table>orgao</table>
       <key>
-        <name>COD_ORG_LOTACAO</name>
+        <name>codOrgLotacao</name>
         <field>cod_orgao</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
         <name>descricao</name>
-        <rename>ORG_LOTACAO</rename>
+        <rename>orgLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_orgao</name>
-        <rename>COD_ORG_LOTACAO</rename>
+        <rename>codOrgLotacao</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -2057,8 +2492,62 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>160</yloc>
+      <xloc>896</xloc>
+      <yloc>448</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>inserir_orgao_sup_exer</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>con_public</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>orgao_superior</table>
+      <key>
+        <name>codOrgExercicio</name>
+        <field>cod_org_ind</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>codOrgSupExercicio</name>
+        <field>cod_org_sup</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_org_ind</name>
+        <rename>codOrgExercicio</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>cod_org_sup</name>
+        <rename>codOrgSupExercicio</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1456</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -2074,26 +2563,26 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>public</schema>
       <table>orgao</table>
       <key>
-        <name>COD_ORGSUP_EXERCICIO</name>
+        <name>codOrgSupExercicio</name>
         <field>cod_orgao</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
         <name>descricao</name>
-        <rename>ORGSUP_EXERCICIO</rename>
+        <rename>orgSupExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_orgao</name>
-        <rename>COD_ORGSUP_EXERCICIO</rename>
+        <rename>codOrgSupExercicio</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -2105,8 +2594,62 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>464</yloc>
+      <xloc>624</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>inserir_orgao_sup_lot</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>con_public</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>orgao_superior</table>
+      <key>
+        <name>codOrgLotacao</name>
+        <field>cod_org_ind</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>codOrgSupLotacao</name>
+        <field>cod_org_sup</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_org_ind</name>
+        <rename>codOrgLotacao</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>cod_org_sup</name>
+        <rename>codOrgSupLotacao</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1520</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -2122,26 +2665,26 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>public</schema>
       <table>orgao</table>
       <key>
-        <name>COD_ORGSUP_LOTACAO</name>
+        <name>codOrgSupLotacao</name>
         <field>cod_orgao</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
         <name>descricao</name>
-        <rename>ORGSUP_LOTACAO</rename>
+        <rename>orgSupLotacao</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_orgao</name>
-        <rename>COD_ORGSUP_LOTACAO</rename>
+        <rename>codOrgSupLotacao</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -2153,8 +2696,116 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>368</yloc>
+      <xloc>688</xloc>
+      <yloc>448</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>inserir_orgao_uni_exer</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>con_public</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>unidade_orgao</table>
+      <key>
+        <name>codOrgExercicio</name>
+        <field>cod_org_ind</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>codUorgExercicio</name>
+        <field>cod_uni_org</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_org_ind</name>
+        <rename>codOrgExercicio</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>cod_uni_org</name>
+        <rename>codUorgExercicio</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1664</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>inserir_orgao_uni_lot</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>con_public</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>unidade_orgao</table>
+      <key>
+        <name>codOrgLotacao</name>
+        <field>cod_org_ind</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>codUorgLotacao</name>
+        <field>cod_uni_org</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_org_ind</name>
+        <rename>codOrgLotacao</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>cod_uni_org</name>
+        <rename>codUorgLotacao</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1664</xloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -2170,11 +2821,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
-    <commit>100</commit>
+    <connection>con_public</connection>
+    <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>public</schema>
+      <schema/>
       <table>servidor</table>
       <key>
         <name>Id_SERVIDOR_PORTAL</name>
@@ -2202,6 +2853,21 @@
         <rename>MATRICULA</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>data_diploma_ingresso_servico_publico</name>
+        <rename>data_diploma_sp</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>diploma_ingresso_servico_publico</name>
+        <rename>diploma_isp</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>documento_ingresso_servico_publico</name>
+        <rename>documento_isp</rename>
+        <update>N</update>
+      </value>
     </lookup>
     <cluster_schema/>
     <remotesteps>
@@ -2211,8 +2877,62 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>208</yloc>
+      <xloc>832</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>inserir_tempo</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>con_public</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>tempo</table>
+      <key>
+        <name>ANO</name>
+        <field>ano</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>MES</name>
+        <field>mes</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>ano</name>
+        <rename>ANO</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>mes</name>
+        <rename>MES</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -2228,26 +2948,26 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>public</schema>
       <table>orgao</table>
       <key>
-        <name>COD_UORG_EXERCICIO</name>
+        <name>codUorgExercicio</name>
         <field>cod_orgao</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
         <name>descricao</name>
-        <rename>UORG_EXERCICIO</rename>
+        <rename>uorgExercicio</rename>
         <update>N</update>
       </value>
       <value>
         <name>cod_orgao</name>
-        <rename>COD_UORG_EXERCICIO</rename>
+        <rename>codUorgExercicio</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -2259,8 +2979,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>64</yloc>
+      <xloc>1024</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -2276,27 +2996,27 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>public</schema>
       <table>orgao</table>
       <key>
-        <name>COD_UORG_LOTACAO</name>
+        <name>codUorgLotacao</name>
         <field>cod_orgao</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
         <name>descricao</name>
-        <rename>UORG_LOTACAO</rename>
-        <update>Y</update>
+        <rename>uorgLotacao</rename>
+        <update>N</update>
       </value>
       <value>
         <name>cod_orgao</name>
-        <rename>COD_UORG_LOTACAO</rename>
-        <update>Y</update>
+        <rename>codUorgLotacao</rename>
+        <update>N</update>
       </value>
     </lookup>
     <cluster_schema/>
@@ -2307,8 +3027,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>32</yloc>
+      <xloc>1104</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -2324,8 +3044,8 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
-    <commit>100</commit>
+    <connection>con_public</connection>
+    <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>public</schema>
@@ -2361,8 +3081,56 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
-      <yloc>240</yloc>
+      <xloc>496</xloc>
+      <yloc>672</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>selecionar_atividade</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>con_public</connection>
+    <cache>Y</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>1</cache_size>
+    <lookup>
+      <schema/>
+      <table>atividade</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>COD_ATIVIDADE</name>
+        <field>cod_atividade</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>atividade_id</name>
+        <rename>ATIVIDADE_ID</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>768</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -2378,7 +3146,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -2389,7 +3157,7 @@
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>DESCRICAO_CARGO</name>
+        <name>DESC_CARGO</name>
         <field>descricao_cargo</field>
         <condition>&#x3d;</condition>
         <name2/>
@@ -2409,8 +3177,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>416</yloc>
+      <xloc>480</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -2426,10 +3194,10 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
-    <cache>N</cache>
+    <connection>con_public</connection>
+    <cache>Y</cache>
     <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
+    <cache_size>1</cache_size>
     <lookup>
       <schema>public</schema>
       <table>carreira</table>
@@ -2437,7 +3205,7 @@
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>CLASSE_CARGO</name>
+        <name>CLA_CARGO</name>
         <field>classe</field>
         <condition>&#x3d;</condition>
         <name2/>
@@ -2449,13 +3217,13 @@
         <name2/>
       </key>
       <key>
-        <name>NIVEL_CARGO</name>
+        <name>NI_CARGO</name>
         <field>nivel</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <key>
-        <name>REFERENCIA_CARGO</name>
+        <name>REF_CARGO</name>
         <field>referencia</field>
         <condition>&#x3d;</condition>
         <name2/>
@@ -2464,7 +3232,7 @@
         <name>cod_carreira</name>
         <rename>COD_CARREIRA</rename>
         <default/>
-        <type>Number</type>
+        <type>Integer</type>
       </value>
     </lookup>
     <cluster_schema/>
@@ -2475,8 +3243,56 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
-      <yloc>544</yloc>
+      <xloc>1168</xloc>
+      <yloc>560</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>selecionar_funcao</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>con_public</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>funcao</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>FUNCAO</name>
+        <field>funcao</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_funcao</name>
+        <rename>COD_FUNCAO</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>768</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -2492,7 +3308,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -2518,7 +3334,7 @@
         <name>cod_vinculo</name>
         <rename>COD_VINCULO</rename>
         <default/>
-        <type>None</type>
+        <type>Integer</type>
       </value>
     </lookup>
     <cluster_schema/>
@@ -2529,123 +3345,15 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>validacao_funcao</name>
-    <type>Validator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-<validate_all>N</validate_all>
-<concat_errors>N</concat_errors>
-<concat_separator>&#x7c;</concat_separator>
-       <validator_field><name>CODIGO_ATIVIDADE</name>
-<validation_name>validar_funcao</validation_name>
-<max_length/>
-<min_length/>
-<null_allowed>N</null_allowed>
-<only_null_allowed>N</only_null_allowed>
-<only_numeric_allowed>N</only_numeric_allowed>
-<data_type>String</data_type>
-<data_type_verified>Y</data_type_verified>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<max_value/>
-<min_value/>
-<start_string/>
-<end_string/>
-<start_string_not_allowed>&#x27;</start_string_not_allowed>
-<end_string_not_allowed>&#x27;</end_string_not_allowed>
-<regular_expression/>
-<regular_expression_not_allowed/>
-<error_code/>
-<error_description/>
-<is_sourcing_values>N</is_sourcing_values>
-<sourcing_step/>
-<sourcing_field/>
-<allowed_value></allowed_value></validator_field>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>688</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>validacao_orgao_exercicio</name>
-    <type>Validator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-<validate_all>N</validate_all>
-<concat_errors>N</concat_errors>
-<concat_separator>&#x7c;</concat_separator>
-       <validator_field><name>COD_ORG_EXERCICIO</name>
-<validation_name>validacao_orgao_exercicio</validation_name>
-<max_length/>
-<min_length/>
-<null_allowed>N</null_allowed>
-<only_null_allowed>N</only_null_allowed>
-<only_numeric_allowed>Y</only_numeric_allowed>
-<data_type>Integer</data_type>
-<data_type_verified>Y</data_type_verified>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<max_value/>
-<min_value/>
-<start_string/>
-<end_string/>
-<start_string_not_allowed/>
-<end_string_not_allowed/>
-<regular_expression/>
-<regular_expression_not_allowed/>
-<error_code/>
-<error_description/>
-<is_sourcing_values>N</is_sourcing_values>
-<sourcing_step/>
-<sourcing_field/>
-<allowed_value></allowed_value></validator_field>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
       <xloc>496</xloc>
-      <yloc>320</yloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>validacao_orgao_lotacao</name>
-    <type>Validator</type>
+    <name>split_data_diploma_sp</name>
+    <type>FieldSplitter</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2654,36 +3362,49 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-<validate_all>N</validate_all>
-<concat_errors>N</concat_errors>
-<concat_separator>&#x7c;</concat_separator>
-       <validator_field><name>COD_ORG_LOTACAO</name>
-<validation_name>validacao_orgao_lotacao</validation_name>
-<max_length/>
-<min_length/>
-<null_allowed>N</null_allowed>
-<only_null_allowed>N</only_null_allowed>
-<only_numeric_allowed>Y</only_numeric_allowed>
-<data_type>Integer</data_type>
-<data_type_verified>Y</data_type_verified>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<max_value/>
-<min_value/>
-<start_string/>
-<end_string/>
-<start_string_not_allowed/>
-<end_string_not_allowed/>
-<regular_expression/>
-<regular_expression_not_allowed/>
-<error_code/>
-<error_description/>
-<is_sourcing_values>N</is_sourcing_values>
-<sourcing_step/>
-<sourcing_field/>
-<allowed_value></allowed_value></validator_field>
-    <cluster_schema/>
+   <splitfield>DATA_DIPLOMA_INGRESSO_SERVICOPUBLICO</splitfield>
+   <delimiter>&#x2f;</delimiter>
+   <enclosure/>
+    <fields>      <field>        <name>dd_diploma_sp</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format>&#x23;&#x23;</format>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>2</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>mm_diploma_sp</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format>&#x23;&#x23;</format>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>2</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>aaaa_diploma_sp</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format>&#x23;&#x23;&#x23;&#x23;</format>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>4</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>    </fields>    <cluster_schema/>
     <remotesteps>
       <input>
       </input>
@@ -2691,15 +3412,15 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>224</yloc>
+      <xloc>1424</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>validacao_orgao_sup_exercicio</name>
-    <type>Validator</type>
+    <name>split_ingresso_cf</name>
+    <type>FieldSplitter</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2708,36 +3429,49 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-<validate_all>N</validate_all>
-<concat_errors>N</concat_errors>
-<concat_separator>&#x7c;</concat_separator>
-       <validator_field><name>COD_ORGSUP_EXERCICIO</name>
-<validation_name>validacao_orgao_sup_exercicio</validation_name>
-<max_length/>
-<min_length/>
-<null_allowed>N</null_allowed>
-<only_null_allowed>N</only_null_allowed>
-<only_numeric_allowed>Y</only_numeric_allowed>
-<data_type>Integer</data_type>
-<data_type_verified>Y</data_type_verified>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<max_value/>
-<min_value/>
-<start_string/>
-<end_string/>
-<start_string_not_allowed/>
-<end_string_not_allowed/>
-<regular_expression/>
-<regular_expression_not_allowed/>
-<error_code/>
-<error_description/>
-<is_sourcing_values>N</is_sourcing_values>
-<sourcing_step>cadastro_servidor</sourcing_step>
-<sourcing_field>COD_ORGSUP_EXERCICIO</sourcing_field>
-<allowed_value></allowed_value></validator_field>
-    <cluster_schema/>
+   <splitfield>DATA_INGRESSO_CARGOFUNCAO</splitfield>
+   <delimiter>&#x2f;</delimiter>
+   <enclosure/>
+    <fields>      <field>        <name>dd_ingresso_cf</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format>&#x23;&#x23;</format>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>2</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>mm_ingresso_cf</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format>&#x23;&#x23;</format>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>2</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>aaaa_ingresso_cf</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format>&#x23;&#x23;&#x23;&#x23;</format>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>4</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>    </fields>    <cluster_schema/>
     <remotesteps>
       <input>
       </input>
@@ -2745,15 +3479,15 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>544</yloc>
+      <xloc>1280</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>validacao_orgao_sup_lotacao</name>
-    <type>Validator</type>
+    <name>split_ingresso_orgao</name>
+    <type>FieldSplitter</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2762,36 +3496,49 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-<validate_all>N</validate_all>
-<concat_errors>N</concat_errors>
-<concat_separator>&#x7c;</concat_separator>
-       <validator_field><name>COD_ORGSUP_LOTACAO</name>
-<validation_name>validacao_orgao_sup_lotacao</validation_name>
-<max_length/>
-<min_length/>
-<null_allowed>N</null_allowed>
-<only_null_allowed>N</only_null_allowed>
-<only_numeric_allowed>Y</only_numeric_allowed>
-<data_type>Integer</data_type>
-<data_type_verified>Y</data_type_verified>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<max_value/>
-<min_value/>
-<start_string/>
-<end_string/>
-<start_string_not_allowed/>
-<end_string_not_allowed/>
-<regular_expression/>
-<regular_expression_not_allowed/>
-<error_code/>
-<error_description/>
-<is_sourcing_values>N</is_sourcing_values>
-<sourcing_step/>
-<sourcing_field/>
-<allowed_value></allowed_value></validator_field>
-    <cluster_schema/>
+   <splitfield>DATA_INGRESSO_ORGAO</splitfield>
+   <delimiter>&#x2f;</delimiter>
+   <enclosure/>
+    <fields>      <field>        <name>dd_ingresso_orgao</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format>&#x23;&#x23;</format>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>2</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>mm_ingresso_orgao</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format>&#x23;&#x23;</format>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>2</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>aaaa_ingresso_orgao</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format>&#x23;&#x23;&#x23;&#x23;</format>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>4</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>    </fields>    <cluster_schema/>
     <remotesteps>
       <input>
       </input>
@@ -2799,122 +3546,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>432</yloc>
+      <xloc>1424</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>validacao_uni_orgao_exercicio</name>
-    <type>Validator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-<validate_all>N</validate_all>
-<concat_errors>N</concat_errors>
-<concat_separator>&#x5b;DEU ERRO AQUI&#x5d;</concat_separator>
-       <validator_field><name>COD_UORG_EXERCICIO</name>
-<validation_name>validacao_uni_orgao_exercicio</validation_name>
-<max_length/>
-<min_length/>
-<null_allowed>N</null_allowed>
-<only_null_allowed>N</only_null_allowed>
-<only_numeric_allowed>N</only_numeric_allowed>
-<data_type>String</data_type>
-<data_type_verified>N</data_type_verified>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<max_value/>
-<min_value/>
-<start_string/>
-<end_string/>
-<start_string_not_allowed>&#x27;</start_string_not_allowed>
-<end_string_not_allowed>&#x27;</end_string_not_allowed>
-<regular_expression/>
-<regular_expression_not_allowed/>
-<error_code/>
-<error_description/>
-<is_sourcing_values>N</is_sourcing_values>
-<sourcing_step/>
-<sourcing_field/>
-<allowed_value></allowed_value></validator_field>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>validacao_uni_orgao_lotacao</name>
-    <type>Validator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-<validate_all>N</validate_all>
-<concat_errors>N</concat_errors>
-<concat_separator>&#x7c;</concat_separator>
-       <validator_field><name>COD_UORG_LOTACAO</name>
-<validation_name>validacao_uni_orgao_lotacao</validation_name>
-<max_length/>
-<min_length/>
-<null_allowed>N</null_allowed>
-<only_null_allowed>N</only_null_allowed>
-<only_numeric_allowed>Y</only_numeric_allowed>
-<data_type>Integer</data_type>
-<data_type_verified>Y</data_type_verified>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<max_value/>
-<min_value/>
-<start_string/>
-<end_string/>
-<start_string_not_allowed/>
-<end_string_not_allowed/>
-<regular_expression/>
-<regular_expression_not_allowed/>
-<error_code/>
-<error_description/>
-<is_sourcing_values>N</is_sourcing_values>
-<sourcing_step/>
-<sourcing_field/>
-<allowed_value></allowed_value></validator_field>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>campos_ano_mes</name>
+    <name>test values</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -2928,18 +3567,30 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xa;var ANO &#x3d; 2017&#x3b;&#xa;var MES &#x3d; 1&#x3b;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>ANO</name>
-        <rename>ANO</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;var DESC_CARGO &#x3d; DESCRICAO_CARGO&#x3b;&#xa;var CLA_CARGO &#x3d; CLASSE_CARGO&#x3b;&#xa;var REF_CARGO &#x3d; REFERENCIA_CARGO&#x3b;&#xa;var NI_CARGO &#x3d; NIVEL_CARGO&#x3b;&#xa;&#xa;if&#x28;escape&#x28;DESCRICAO_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	DESC_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;CLASSE_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	CLA_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;REFERENCIA_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	REF_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;NIVEL_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	NI_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>DESC_CARGO</name>
+        <rename>DESC_CARGO</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>MES</name>
-        <rename>MES</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
+      </field>      <field>        <name>CLA_CARGO</name>
+        <rename>CLA_CARGO</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>REF_CARGO</name>
+        <rename>REF_CARGO</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>NI_CARGO</name>
+        <rename>NI_CARGO</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
         <replace>N</replace>
       </field>    </fields>    <cluster_schema/>
     <remotesteps>
@@ -2949,97 +3600,211 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>112</yloc>
+      <xloc>720</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>teste_atividade_validacao_nulos</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f; Valores do testFunction&#xa;&#x2f;&#x2f;	F - Valor padr&#xe3;o, possui CODIGO_ATIVIDADE e FUN&#xc7;&#xc3;O&#xa;&#x2f;&#x2f;	N - N&#xe3;o possui CODIGO_ATIVIDADE e nem FUN&#xc7;&#xc3;O&#xa;var testFunction &#x3d; &#x27;F&#x27;&#x3b;&#xa;var COD_ATIVIDADE &#x3d; 0&#x3b;&#xa;var sigla &#x3d; SIGLA_FUNCAO&#x3b;&#xa;var nivel_funcao &#x3d; NIVEL_FUNCAO&#x3b;&#xa;var opcao_parcial &#x3d; OPCAO_PARCIAL&#x3b;&#xa;var funcao &#x3d; FUNCAO&#x3b;&#xa;var nome_atividade &#x3d; ATIVIDADE&#x3b;&#xa;if&#x28;escape&#x28;CODIGO_ATIVIDADE&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;FUNCAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	testFunction &#x3d; &#x27;N&#x27;&#x3b;&#xa;&#x7d;else if&#x28;escape&#x28;CODIGO_ATIVIDADE&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;FUNCAO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	COD_ATIVIDADE &#x3d; 0&#x3b;&#xa;	nome_atividade &#x3d; &#x22;&#x22;&#x3b;&#xa;&#x7d;else&#x7b;&#xa;	COD_ATIVIDADE &#x3d; CODIGO_ATIVIDADE&#x3b;&#xa;	&#xa;	&#x2f;&#x2f;	C&#xd3;DIGO PARA TRANFORMAR O &#x22;CODIGO_ATIVIDADE&#x22; que possue letras&#xa;	&#x2f;&#x2f;	em um c&#xf3;digo num&#xe9;rico.&#xa;	if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;CODIGO_ATIVIDADE&#x29;&#x29;&#x7b; &#x2f;&#x2f;Testar se possue letras&#xa;		var hash &#x3d; &#x22;&#x22;&#x3b;&#xa;		for&#x28;var i&#x3d;0&#x3b;i&#x3c;CODIGO_ATIVIDADE.length&#x3b;i&#x2b;&#x2b; &#x29;&#x7b;&#xa;			if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;CODIGO_ATIVIDADE&#x5b;i&#x5d;&#x29;&#x29;&#x7b;&#x2f;&#x2f;se o caracter for uma letra&#xa;				hash &#x2b;&#x3d; CODIGO_ATIVIDADE.charCodeAt&#x28;i&#x29;&#x3b;&#x2f;&#x2f;pega o c&#xf3;digo ASCII da letra&#xa;			&#x7d;else&#x7b;&#xa;				hash &#x2b;&#x3d; CODIGO_ATIVIDADE&#x5b;i&#x5d;&#x3b;&#x2f;&#x2f;caso n&#xe3;o seja letra, pega o n&#xfa;mero&#xa;			&#x7d;&#xa;		&#x7d;&#xa;		COD_ATIVIDADE &#x3d; hash&#x3b;	&#xa;	&#x7d;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;sigla&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b; sigla &#x3d; &#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;funcao&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;funcao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;nivel_funcao&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b; nivel_funcao &#x3d; &#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;opcao_parcial&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b; opcao_parcial &#x3d; &#x22;&#x22;&#x3b;&#x7d;&#xa;&#xa;&#x2f;&#x2f;valida&#xe7;&#xe3;o de campos nulos&#xa;&#x2f;&#x2f;subtitui&#xe7;&#xe3;o por valores em UTF-8&#xa;var regime_juridico &#x3d; REGIME_JURIDICO&#x3b;&#xa;var uf_exercicio &#x3d; UF_EXERCICIO&#x3b;&#xa;var jornada_trabalho &#x3d; JORNADA_DE_TRABALHO&#x3b;&#xa;var diploma_ingresso_orgao &#x3d; DIPLOMA_INGRESSO_ORGAO&#x3b;&#xa;&#xa;if&#x28;escape&#x28;regime_juridico&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;regime_juridico&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;uf_exercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;uf_exercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;jornada_trabalho&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;jornada_trabalho&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;diploma_ingresso_orgao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;diploma_ingresso_orgao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>testFunction</name>
+        <rename>testFunction</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>COD_ATIVIDADE</name>
+        <rename>COD_ATIVIDADE</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>sigla</name>
+        <rename>sigla</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>nivel_funcao</name>
+        <rename>nivel_funcao</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>opcao_parcial</name>
+        <rename>opcao_parcial</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>nome_atividade</name>
+        <rename>nome_atividade</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>funcao</name>
+        <rename>funcao</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>regime_juridico</name>
+        <rename>regime_juridico</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>uf_exercicio</name>
+        <rename>uf_exercicio</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>jornada_trabalho</name>
+        <rename>jornada_trabalho</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>diploma_ingresso_orgao</name>
+        <rename>diploma_ingresso_orgao</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>976</xloc>
+      <yloc>560</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>validate_orgs</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;C&#xd3;DIGOS DOS &#xd3;RG&#xc3;OS&#xa;function hashing&#x28;string&#x29;&#x7b;&#xa;	if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;string&#x29;&#x29;&#x7b; &#x2f;&#x2f;Testar se possue letras&#xa;		var hash &#x3d; &#x22;&#x22;&#x3b;&#xa;		for&#x28;var i&#x3d;0&#x3b;i&#x3c;string.length&#x3b;i&#x2b;&#x2b; &#x29;&#x7b;&#xa;			if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;string&#x5b;i&#x5d;&#x29;&#x29;&#x7b;&#x2f;&#x2f;se o caracter for uma letra&#xa;				hash &#x2b;&#x3d; string.charCodeAt&#x28;i&#x29;&#x3b;&#x2f;&#x2f;pega o c&#xf3;digo ASCII da letra&#xa;			&#x7d;else&#x7b;&#xa;				hash &#x2b;&#x3d; string&#x5b;i&#x5d;&#x3b;&#x2f;&#x2f;caso n&#xe3;o seja letra, pega o n&#xfa;mero&#xa;			&#x7d;&#xa;		&#x7d;&#xa;		return hash&#x3b;	&#xa;	&#x7d;else&#x7b;&#xa;		return string&#x3b;&#xa;	&#x7d;&#xa;&#x7d;&#xa;&#xa;var codUorgLotacao &#x3d; hashing&#x28;COD_UORG_LOTACAO&#x29;&#x3b;&#xa;var codOrgLotacao &#x3d; hashing&#x28;COD_ORG_LOTACAO&#x29;&#x3b;&#xa;var codOrgSupLotacao &#x3d; hashing&#x28;COD_ORGSUP_LOTACAO&#x29;&#x3b;&#xa;var codUorgExercicio &#x3d; hashing&#x28;COD_UORG_EXERCICIO&#x29;&#x3b;&#xa;var codOrgExercicio &#x3d; hashing&#x28;COD_ORG_EXERCICIO&#x29;&#x3b;&#xa;var codOrgSupExercicio &#x3d; hashing&#x28;COD_ORGSUP_EXERCICIO&#x29;&#x3b;&#xa;&#xa;if&#x28;escape&#x28;COD_UORG_LOTACAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codUorgLotacao &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;COD_ORG_LOTACAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codOrgLotacao &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;COD_ORGSUP_LOTACAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x29;&#x7b;&#xa;	codOrgSupLotacao &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;COD_UORG_EXERCICIO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codUorgExercicio &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;COD_ORG_EXERCICIO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x29;&#x7b;&#xa;	codOrgExercicio &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;COD_ORGSUP_EXERCICIO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codOrgSupExercicio &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;&#xa;&#x2f;&#x2f; descri&#xe7;&#xe3;o dos org&#xe3;os&#xa;var uorgLotacao &#x3d; UORG_LOTACAO&#x3b;&#xa;var orgLotacao &#x3d; ORG_LOTACAO&#x3b;&#xa;var orgSupLotacao &#x3d; ORGSUP_LOTACAO&#x3b;&#xa;var uorgExercicio &#x3d; UORG_EXERCICIO&#x3b;&#xa;var orgExercicio &#x3d; ORG_EXERCICIO&#x3b;&#xa;var orgSupExercicio &#x3d; ORGSUP_EXERCICIO&#x3b;&#xa;&#xa;if&#x28;escape&#x28;uorgLotacao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;uorgLotacao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;orgLotacao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;orgLotacao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;orgSupLotacao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;orgSupLotacao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;uorgExercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27; &#x29;&#x7b;uorgExercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;orgExercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27; &#x29;&#x7b;orgExercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;orgSupExercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27; &#x29;&#x7b;orgSupExercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>codUorgLotacao</name>
+        <rename>codUorgLotacao</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>codOrgLotacao</name>
+        <rename>codOrgLotacao</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>codOrgSupLotacao</name>
+        <rename>codOrgSupLotacao</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>codUorgExercicio</name>
+        <rename>codUorgExercicio</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>codOrgExercicio</name>
+        <rename>codOrgExercicio</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>codOrgSupExercicio</name>
+        <rename>codOrgSupExercicio</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>uorgLotacao</name>
+        <rename>uorgLotacao</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>orgLotacao</name>
+        <rename>orgLotacao</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>orgSupLotacao</name>
+        <rename>orgSupLotacao</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>uorgExercicio</name>
+        <rename>uorgExercicio</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>orgExercicio</name>
+        <rename>orgExercicio</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>orgSupExercicio</name>
+        <rename>orgSupExercicio</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step_error_handling>
-      <error>
-        <source_step>validacao_funcao</source_step>
-        <target_step>selecionar_vinculo</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename/>
-        <fields_valuename/>
-        <codes_valuename/>
-        <max_errors/>
-        <max_pct_errors/>
-        <min_pct_rows/>
-      </error>
-      <error>
-        <source_step>validacao_orgao_exercicio</source_step>
-        <target_step>validacao_orgao_lotacao</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename/>
-        <fields_valuename/>
-        <codes_valuename/>
-        <max_errors/>
-        <max_pct_errors/>
-        <min_pct_rows/>
-      </error>
-      <error>
-        <source_step>validacao_orgao_lotacao</source_step>
-        <target_step>validacao_uni_orgao_exercicio</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename/>
-        <fields_valuename/>
-        <codes_valuename/>
-        <max_errors/>
-        <max_pct_errors/>
-        <min_pct_rows/>
-      </error>
-      <error>
-        <source_step>validacao_orgao_sup_exercicio</source_step>
-        <target_step>validacao_orgao_sup_lotacao</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename/>
-        <fields_valuename/>
-        <codes_valuename/>
-        <max_errors/>
-        <max_pct_errors/>
-        <min_pct_rows/>
-      </error>
-      <error>
-        <source_step>validacao_orgao_sup_lotacao</source_step>
-        <target_step>validacao_orgao_exercicio</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename/>
-        <fields_valuename/>
-        <codes_valuename/>
-        <max_errors/>
-        <max_pct_errors/>
-        <min_pct_rows/>
-      </error>
-      <error>
-        <source_step>validacao_uni_orgao_exercicio</source_step>
-        <target_step>validacao_uni_orgao_lotacao</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename/>
-        <fields_valuename/>
-        <codes_valuename/>
-        <max_errors/>
-        <max_pct_errors/>
-        <min_pct_rows/>
-      </error>
-      <error>
-        <source_step>validacao_uni_orgao_lotacao</source_step>
-        <target_step>validacao_funcao</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename/>
-        <fields_valuename/>
-        <codes_valuename/>
-        <max_errors/>
-        <max_pct_errors/>
-        <min_pct_rows/>
-      </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>
