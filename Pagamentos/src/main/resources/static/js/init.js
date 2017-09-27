@@ -1,10 +1,16 @@
+$(document).ready(function(){
+	$("#filter").keypress(function(){
+		console.log($("#filter").val());
+	});
+});
+
 function initInterface(urlQuery){
 	
 	$("#rangeMeses").hide();
 	$("#chart").hide();
 	$("#mensagemChart").hide();
 
-	$.getJSON("/pagamentos" + urlQuery, function(chart){
+	$.getJSON("/api/pagamentos" + urlQuery, function(chart){
 		if(chart.data.datasets[0].data.length === 0){
 			$("#loadChart").hide();
 			$("#mensagemChart").show();
@@ -28,38 +34,8 @@ function initInterface(urlQuery){
 			function month2number(month){
 				return labels.indexOf(month);
 			}
-
-			//Cria slider
-			var slider = document.getElementById('rangeMeses');
-			noUiSlider.create(slider, {
-				start: [0, labels.length-1],
-				step: 1,
-				range: {
-					'min': 0,
-					'max': labels.length-1
-				},
-				pips: {
-					mode: 'steps',
-					stepped: true,
-					filter: function(value){
-						return 1;
-					},
-					format: {
-						to: number2month,
-						from: month2number
-					}
-				},
-				connect: true,
-				format: wNumb({
-					decimals: 0,
-					encoder: function(value){
-						return (parseInt(value)+1);
-					}
-				})
-			});
-
-			var ctx = $('#chart');
 			
+			var ctx = $('#chart');
 			chart.options =  {
 			        scales: {
 			            yAxes: [{
@@ -72,32 +48,64 @@ function initInterface(urlQuery){
 			            }]
 			        }
 			    };
-			
+			if(labels.length == 1){
+				chart.type = 'bar';
+			}
 			var grafico = new Chart(ctx, chart);
-
-			//Método chamado ao atualizar o slider
-			slider.noUiSlider.on('update', function(values, handle){
-				var mesIni = parseInt(values[0])-1;
-				var mesFim = parseInt(values[1])-1;
-
-				newChart = chart;
-				newChart.data.labels = labels.slice(mesIni, mesFim+1);
-				for(var i=0; i<newChart.data.datasets.length; i++){
-					newChart.data.datasets[i].data = dados[i].slice(mesIni, mesFim+1);
-				}
-
-				//Se o intervalo é composto por apenas um único mês
-				if(mesIni == mesFim){
-					newChart.type = 'bar'; //Altera o tipo para gráfico de barras ('bar')
-				}else{
-					newChart.type = 'line'; //Caso contrário, altera para o tipo 'line'
-				}
-
-				grafico.destroy();
-				grafico = new Chart(ctx, newChart);
-
-			});
-
+			
+			if(labels.length != 1){
+				//Cria slider
+				var slider = document.getElementById('rangeMeses');
+				noUiSlider.create(slider, {
+					start: [0, labels.length-1],
+					step: 1,
+					range: {
+						'min': 0,
+						'max': labels.length-1
+					},
+					pips: {
+						mode: 'steps',
+						stepped: true,
+						filter: function(value){
+							return 1;
+						},
+						format: {
+							to: number2month,
+							from: month2number
+						}
+					},
+					connect: true,
+					format: wNumb({
+						decimals: 0,
+						encoder: function(value){
+							return (parseInt(value)+1);
+						}
+					})
+				});
+			
+				//Método chamado ao atualizar o slider
+				slider.noUiSlider.on('update', function(values, handle){
+					var mesIni = parseInt(values[0])-1;
+					var mesFim = parseInt(values[1])-1;
+	
+					newChart = chart;
+					newChart.data.labels = labels.slice(mesIni, mesFim+1);
+					for(var i=0; i<newChart.data.datasets.length; i++){
+						newChart.data.datasets[i].data = dados[i].slice(mesIni, mesFim+1);
+					}
+	
+					//Se o intervalo é composto por apenas um único mês
+					if(mesIni == mesFim){
+						newChart.type = 'bar'; //Altera o tipo para gráfico de barras ('bar')
+					}else{
+						newChart.type = 'line'; //Caso contrário, altera para o tipo 'line'
+					}
+	
+					grafico.destroy();
+					grafico = new Chart(ctx, newChart);
+	
+				});
+			}
 		}
 		
 	});

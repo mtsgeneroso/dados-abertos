@@ -54,7 +54,7 @@
 			</div>
 				
 			<div class="col l4 s12 m4">
-				<a th:href="@{/unidades-gestoras}">
+				<a th:href="@{#}">
 					<div class="card-panel hoverable red white-text">
 						<h2 class="center">
 							<i class="material-icons medium">settings</i>
@@ -71,10 +71,7 @@
 
 
 	<!--  Scripts-->
-	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-	<script th:src="@{/webjars/materializecss/js/materialize.min.js}"></script>
-	<script th:src="@{/webjars/chartjs/Chart.min.js}"></script>
-	<script th:src="@{/js/nouislider.min.js}"></script>
-	<script th:src="@{/webjars/numeral-js/min/numeral.min.js}"></script>
+	<div th:include="fragments/scripts"></div>
+	
 </body>
 </html>

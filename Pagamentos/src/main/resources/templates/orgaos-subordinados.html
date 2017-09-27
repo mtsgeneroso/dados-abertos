@@ -26,15 +26,47 @@
 	<main>
 		
 		<div class="section no-pad-bot" id="index-banner">
-			<div class="container center">
+			<div class="container">
+				
+				<div class="row">
+					<div class="col s12 m6">
+						<p>
+						<div id="rangeMeses"></div>
+						</p>
+						
+						<div id="mensagemChart">
+							<h5>Sem dados disponíveis</h5>
+						</div>
+						
+						
+						<br/><br/>
+						<canvas id="chart"></canvas>
+						<br/>
+					</div>
+					<div class="col s6">
+					</div>
+				</div>
+				
+				<h5>Órgãos Subordinados:</h5>
+				
+				<div class="row">
+					<div class="col s12 m6">
+						<div class="input-field">
+							<input id="filter" type="text" class="validate"/>
+		          			<label for="filter">Filtrar Órgãos</label>
+						</div>
+					</div>
+				</div>
+				
+				<input type="hidden" name="currentId" value="0"/>
 				
 				<div class="row" id="botoes">
 					<div th:each="orgao : ${orgaosSubordinados}">
 						<div class="col s12 m3 l2">
 							<a th:href="@{/orgaoSubordinado/{id}(id=${orgao.codOrgaoSubordinado})}" th:title="${orgao.nomeOrgaoSubordinado}">
 								<div class="card-panel red white-text hoverable"
-									style="padding-top: 2px; height: 120px;">
-									<p th:text="${orgao.nomeOrgaoSubordinado}" th:classappend="${#strings.length(orgao.nomeOrgaoSubordinado) > 75} ? 'truncate'" style="font-size: 12px">[...]</p>
+									style="height: 120px;">
+									<p th:text="${orgao.nomeOrgaoSubordinado}" style="font-size: 12px">[...]</p>
 								</div>
 							</a>
 						</div>
@@ -50,15 +82,12 @@
 
 
 	<!--  Scripts-->
-	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-	<script th:src="@{/webjars/materializecss/js/materialize.min.js}"></script>
-	<script th:src="@{/webjars/chartjs/Chart.min.js}"></script>
-	<script th:src="@{/js/nouislider.min.js}"></script>
-	<script th:src="@{/webjars/numeral-js/min/numeral.min.js}"></script>
+	<div th:include="fragments/scripts"></div>
+	<script th:src="@{/js/filtrarOrgaos.js}"></script>
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();
-		initInterface("/orgaoSuperior/" + id);	
+		initInterface("/orgaoSubordinado/" + id);	
 	</script>
 </body>
 </html>

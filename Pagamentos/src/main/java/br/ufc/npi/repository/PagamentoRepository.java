@@ -10,20 +10,20 @@ import br.ufc.npi.model.Pagamento;
 
 public interface PagamentoRepository extends JpaRepository<Pagamento, Integer>{
 
-	@Query(value="SELECT * FROM view_pagamentos_gerais;", 
+	@Query(value="SELECT mes, sum FROM view_pagamentos_gerais;", 
 			nativeQuery=true)
 	public List<Object[]> listByDataBetween();
 	
 	
-	@Query(value="SELECT * FROM view_pagamentos_orgaosuperior WHERE cod_org_sup = :cod", 
+	@Query(value="SELECT mes,sum FROM view_pagamentos_orgaosuperior WHERE cod_org_sup = :cod", 
 			nativeQuery=true)
 	public List<Object[]> listPagamentosOrgSuperiorByDataBetween(@Param("cod")Long codOrgSuperior);
 	
-	@Query(value="SELECT * FROM view_pagamentos_orgsubordinado WHERE cod_org_sub = :cod", 
+	@Query(value="SELECT mes,sum FROM view_pagamentos_orgsubordinado WHERE cod_org_sub = :cod", 
 			nativeQuery=true)
 	public List<Object[]> listPagamentosOrgSubordinadoByDataBetween(@Param("cod")Long codOrgSuperior);
 	
-	@Query(value="SELECT * FROM view_pagamentos_unidadegestora WHERE cod_unid_gest = :cod", 
+	@Query(value="SELECT mes,sum FROM view_pagamentos_unidadegestora WHERE cod_unid_gest = :cod", 
 			nativeQuery=true)
 	public List<Object[]> listPagamentosUnidadeGestoraByDataBetween(@Param("cod")Long codUnidadeGestora);
 	

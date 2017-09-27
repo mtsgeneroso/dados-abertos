@@ -40,7 +40,7 @@
 			<div class="grafico-container">
 			</div>	
 			
-			<div class="detalhes-container">
+			<div class="detalhes-container row">
 			</div>
 				
 		</div>
@@ -79,11 +79,7 @@
 
 
 	<!--  Scripts-->
-	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-	<script th:src="@{/webjars/materializecss/js/materialize.min.js}"></script>
-	<script th:src="@{/webjars/chartjs/Chart.min.js}"></script>
-	<script th:src="@{/js/nouislider.min.js}"></script>
-	<script th:src="@{/webjars/numeral-js/min/numeral.min.js}"></script>
+	<div th:include="fragments/scripts"></div>
 	<script th:src="@{/js/initConsultaSimples.js}"></script>
 </body>
 </html>

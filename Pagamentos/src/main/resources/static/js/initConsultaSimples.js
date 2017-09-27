@@ -1,3 +1,14 @@
+var colors = ["rgb(255,0,0)",
+			"rgb(0,0,255)",
+			"rgb(0,200,0)",
+			"rgb(200,200,0)",
+			"rgb(51,204,255)",
+			"rgb(255,102,0)",
+			"rgb(0,0,0)",
+			"rgb(153,255,153)",
+			"rgb(51,204,204)",
+			"rgb(102,51,0)"];
+
 $(document).ready(function(){
 	
 	$('.modal').modal();
@@ -57,6 +68,8 @@ $(document).ready(function(){
 		});
 		//console.log(orgaosConsulta);
 		
+		console.log(JSON.stringify(orgaosConsulta));
+		
 		//Se apenas uma uma tag foi selecionada, redireciona para consulta antiga
 		if (orgaosConsulta.length == 0){
 			$("#modal-consulta").modal('open');
@@ -72,6 +85,7 @@ $(document).ready(function(){
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function(chart){
+					console.log(chart);
 					labels = chart.data.labels;
 					console.log(labels);
 					dados = [];
@@ -166,9 +180,16 @@ $(document).ready(function(){
 				}
 			});
 			
-			$(".detalhes-container").append("<p>Clique para ver detalhes:</p>");
+			$(".detalhes-container").append("<h5>Clique para ver detalhes:</h5>");
 			for(var i = 0; i<orgaosConsulta.length; i++){
-				$(".detalhes-container").append("<a target='_blank' class='waves-effect waves-light btn red' href='/"+orgaosConsulta[i].tipo+"/"+orgaosConsulta[i].id+"'><i class='material-icons right'>open_in_new</i>" + orgaosConsulta[i].nome + "</a>")
+				$(".detalhes-container").append("<div class='col l4 s12 m4'>" +
+						"<a href='/"+orgaosConsulta[i].tipo+"/"+orgaosConsulta[i].id+"' class='truncate' target='_blank'>" +
+						"<div class='card-panel hoverable white-text ' style='background-color:"+colors[i]+"'>" +
+						"<p class='center'>" +
+						"<i class='material-icons small'>open_in_new</i>" +
+						"</p>" +
+						"<p class='center'>" + orgaosConsulta[i].nome + "</p>" +
+						"</div></a></div>")
 			}
 			
 			

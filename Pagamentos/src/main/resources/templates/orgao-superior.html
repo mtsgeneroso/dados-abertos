@@ -26,7 +26,7 @@
 	<main>
 		
 		<div class="section no-pad-bot" id="index-banner">
-			<div class="container center">
+			<div class="container">
 				
 				<p>
 				<div id="rangeMeses"></div>
@@ -55,8 +55,8 @@
 				    </div>
 				</div>
 				
+				<h5>Órgãos Subordinados:</h5>
 				<div class="row" id="botoes">
-					<h4>Órgãos Subordinados</h4>
 					<div th:each="orgao : ${orgaosSubordinados}">
 						<div class="col s12 m4 l2">
 							<a th:href="@{/orgaoSubordinado/{id}(id=${orgao.codOrgaoSubordinado})}" th:title="${orgao.nomeOrgaoSubordinado}">
@@ -78,11 +78,7 @@
 
 
 	<!--  Scripts-->
-	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-	<script th:src="@{/webjars/materializecss/js/materialize.min.js}"></script>
-	<script th:src="@{/webjars/chartjs/Chart.min.js}"></script>
-	<script th:src="@{/js/nouislider.min.js}"></script>
-	<script th:src="@{/webjars/numeral-js/min/numeral.min.js}"></script>
+	<div th:include="fragments/scripts"></div>
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();

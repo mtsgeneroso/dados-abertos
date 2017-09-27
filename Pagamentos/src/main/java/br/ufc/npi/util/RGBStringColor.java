@@ -5,8 +5,8 @@ public class RGBStringColor {
 	private static final String[] colors = {
 			"rgb(255,0,0)",
 			"rgb(0,0,255)",
-			"rgb(0,255,0)",
-			"rgb(255,255,0)",
+			"rgb(0,250,0)",
+			"rgb(200,200,0)",
 			"rgb(51,204,255)",
 			"rgb(255,102,0)",
 			"rgb(0,0,0)",
