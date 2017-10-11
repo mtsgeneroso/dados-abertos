@@ -59,22 +59,18 @@ function pegarValoresBusca(hierarquia, chips){
 $(document).ready(function(){
 
 	$('.modal').modal();
-
 	$("#itens-hierarquia, #hierarquia").sortable({
 		connectWith: ".conexaoHierarquia",
 		placeholder: "item-placeholder",
 		forcePlaceholderSize: false
 	}).disableSelection();
-
 	$(".item-content").hide();
-	
-	tiposOrgaos = ["orgaos-superiores", "orgaos-subordinados", "unidades-gestoras", "acoes", "programas", "favorecidos"];
-
-	chips = initCamposBusca(tiposOrgaos);
-	assistirCamposBusca(tiposOrgaos, chips);	
-
 	$(".oculto").hide();
 	$(".resultado-container").hide();
+	
+	tiposOrgaos = ["orgaos-superiores", "orgaos-subordinados", "unidades-gestoras", "acoes", "programas", "favorecidos"];
+	chips = initCamposBusca(tiposOrgaos);
+	assistirCamposBusca(tiposOrgaos, chips);
 
 	function gerarCollapsible(orgaos){
 		tags_collapsible = "";
