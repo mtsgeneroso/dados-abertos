@@ -18,6 +18,7 @@
 <link th:href="@{css/nouislider.css}" type="text/css" rel="stylesheet" />
 <link th:href="@{css/style.css}" type="text/css" rel="stylesheet"
 	media="screen,projection" />
+<link th:href="@{webjars/jquery-ui/jquery-ui.min.css}"/>
 </head>
 <body>
 	<div th:include="fragments/navbar"></div>
@@ -25,61 +26,144 @@
 	<main>
 
 	<div class="container main-container">
-
 		<div class="consulta-container">
-			<h5>Consulta Hierárquica:</h5>
-
 			<div class="row">
-				<div class="col s12 m3 l2">
-					<div class="btn-tag card-panel red white-text hoverable"
-						style="padding-top: 2px; height: 120px;">
-						<p>Órgão Superior</p>
-					</div>
+				<div class="col s12">
+					<h5>Consulta Hierárquica:</h5>
 				</div>
-
-				<div class="col s12 m3 l2">
-					<div class="btn-tag card-panel red white-text hoverable"
-						style="padding-top: 2px; height: 120px;">
-						<p>Órgão Subordinado</p>
-					</div>
-				</div>
-
-				<div class="col s12 m3 l2">
-					<div class="btn-tag card-panel red white-text hoverable"
-						style="padding-top: 2px; height: 120px;">
-						<p>Unidade Gestora</p>
-					</div>
-				</div>
-
-				<div class="col s12 m3 l2">
-					<div class="btn-tag card-panel red white-text hoverable"
-						style="padding-top: 2px; height: 120px;">
-						<p>Ação</p>
-					</div>
-				</div>
-
-				<div class="col s12 m3 l2">
-					<div class="btn-tag card-panel red white-text hoverable"
-						style="padding-top: 2px; height: 120px;">
-						<p>Programa</p>
-					</div>
-				</div>
-
-				<div class="col s12 m3 l2">
-					<div class="btn-tag card-panel red white-text hoverable"
-						style="padding-top: 2px; height: 120px;">
-						<p>Favorecido</p>
-					</div>
-				</div>
-
 			</div>
-
-			<div class="card-panel green" id="panel-tags">
-				<span>Hierarquia da consulta:</span> <br />
+			<div class="row">
+				<div class="col m5">
+					<div class="card-panel green" id="panel-tags">
+						<span>Ítens:</span><br/>
+						<div id="itens-hierarquia" class="conexaoHierarquia">
+						  <div class="item card" id="orgaos-superiores">
+						  	
+						  	<div class="item-header">
+						  		Órgão Superior
+						  		<a href="#" class="item-config">
+						  			<i class="material-icons right">arrow_drop_down</i>
+						  		</a>
+						  	</div>
+						  	
+						  	<div class="item-content" id="orgao-superior">
+						  		<div class="row">
+									<div class="col s12">
+										<div class="chips chips-autocomplete" id="chips-orgaos-superiores"></div>
+									</div>
+								</div>
+						  	</div>
+						  </div>
+						  
+						  <div class="item card" id="orgaos-subordinados">
+						  	
+						  	<div class="item-header">
+						  		Órgãos Subordinado
+						  		<a href="#" class="item-config">
+						  			<i class="material-icons right">arrow_drop_down</i>
+						  		</a>
+						  	</div>
+						  	
+						  	<div class="item-content" id="orgaos-subordinados">
+						  		<div class="row">
+									<div class="col s12">
+										<div class="chips chips-autocomplete" id="chips-orgaos-subordinados"></div>
+									</div>
+								</div>
+						  	</div>
+						  </div>
+						  <div class="item card" id="unidades-gestoras">
+						  	
+						  	<div class="item-header">
+						  		Unidade Gestora
+						  		<a href="#" class="item-config">
+						  			<i class="material-icons right">arrow_drop_down</i>
+						  		</a>
+						  	</div>
+						  	
+						  	<div class="item-content" id="unidadeGestora">
+						  		<div class="row">
+									<div class="col s12">
+										<div class="chips chips-autocomplete" id="chips-unidades-gestoras"></div>
+									</div>
+								</div>
+						  	</div>
+						  </div>
+						  <div class="item card" id="acoes">
+						  	
+						  	<div class="item-header">
+						  		Ação
+						  		<a href="#" class="item-config">
+						  			<i class="material-icons right">arrow_drop_down</i>
+						  		</a>
+						  	</div>
+						  	
+						  	<div class="item-content" id="acao">
+						  		<div class="row">
+									<div class="col s12">
+										<div class="chips chips-autocomplete" id="chips-acoes"></div>
+									</div>
+								</div>
+						  	</div>
+						  </div>
+						  <div class="item card" id="programas">
+						  	
+						  	<div class="item-header">
+						  		Programa
+						  		<a href="#" class="item-config">
+						  			<i class="material-icons right">arrow_drop_down</i>
+						  		</a>
+						  	</div>
+						  	
+						  	<div class="item-content" id="programa">
+						  		<div class="row">
+									<div class="col s12">
+										<div class="chips chips-autocomplete" id="chips-programas"></div>
+									</div>
+								</div>
+						  	</div>
+						  </div>
+						  <div class="item card" id="favorecidos">
+						  	
+						  	<div class="item-header">
+						  		Favorecido
+						  		<a href="#" class="item-config">
+						  			<i class="material-icons right">arrow_drop_down</i>
+						  		</a>
+						  	</div>
+						  	
+						  	<div class="item-content" id="favorecido">
+						  		<div class="row">
+									<div class="col s12">
+										<div class="chips chips-autocomplete" id="chips-favorecidos"></div>
+									</div>
+								</div>
+						  	</div>
+						  </div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col m2 center">
+					<i class="material-icons large grey-text center-align">swap_horiz</i>
+				</div>
+				
+				<div class="col m5">
+					<div class="card-panel green" id="panel-tags">
+						<span>Hierarquia da consulta:</span><br/>
+						<div id="hierarquia" class="conexaoHierarquia">
+						</div>
+					</div>
+				</div>
+				
 			</div>
-			<a class="waves-effect waves-light btn red center" id="btn-consultar">Consultar</a>
+			<div class="row">
+				<div class="col s12">
+					<a class="waves-effect waves-light btn red right" id="btn-consultar">Prosseguir</a>
+				</div>
+			</div>
 		</div>
-
+		
 		<div class="resultado-container">
 			<a class="waves-effect waves-light btn red" onClick="expandAll();"><i class="material-icons left">fullscreen</i>Expandir todos</a>
   			<a class="waves-effect waves-light btn red" onClick="collapseAll();"><i class="material-icons left">fullscreen_exit</i>Fechar todos</a>
@@ -90,12 +174,25 @@
 		</div>
 
 	</div>
-
+	
+	<!-- Modal Órgãos Inexistentes -->
+		<div id="modal-orgaos-inexistentes" class="modal">
+			<div class="modal-content">
+		    	<h4>Órgão inexistente</h4>
+		      	<p>Esse órgão não existe... Tente selecionar órgãos que aparecem na sugestãos de consulta quando você começa a digitar.
+		      	<br/>
+		      	Você pode prosseguir com a consulta, mas os órgãos inexistentes serão desconsiderados.
+		      	</p>
+				    	
+		    </div>
+		    <div class="modal-footer">
+		      	<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Entendi!</a>
+		    </div>
+		</div>
+	
 	</main>
 
 	<div th:include="fragments/footer"></div>
-
-
 	<!--  Scripts-->
 	<div th:include="fragments/scripts"></div>
 	<script th:src="@{/js/initConsultaHierarquica.js}"></script>

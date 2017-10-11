@@ -181,6 +181,7 @@ $(document).ready(function(){
 			});
 			
 			$(".detalhes-container").append("<h5>Clique para ver detalhes:</h5>");
+			
 			for(var i = 0; i<orgaosConsulta.length; i++){
 				$(".detalhes-container").append("<div class='col l4 s12 m4'>" +
 						"<a href='/"+orgaosConsulta[i].tipo+"/"+orgaosConsulta[i].id+"' class='truncate' target='_blank'>" +

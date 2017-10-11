@@ -2,34 +2,35 @@ package br.ufc.npi.model.request;
 
 import java.util.List;
 
-public class Orgao {
+public class Dado {
 	
 	public static final String UNIDADE_GESTORA = "unidadeGestora";
 	public static final String ORGAO_SUPERIOR = "orgaoSuperior";
 	public static final String ORGAO_SUBORDINADO = "orgaoSubordinado";
+	public static final String PROGRAMA = "programa";
+	public static final String ACAO = "acao";
+	public static final String FAVORECIDO = "favorecido";
 	
 	private String nome;
 	private String tipo;
 	private Long id;
-	private List<Orgao> subordinados;
+	private List<Dado> subordinados;
 	private double valorPagamentos;
 	
-	public Orgao(){
+	public Dado(){
 		this.id = 0L;
 		this.nome = "";
 		this.tipo = "";
 	}
 	
-	public Orgao(String nome, String tipo, Long id) {
+	public Dado(String nome, String tipo, Long id) {
 		super();
 		this.nome = nome;
 		this.tipo = tipo;
 		this.id = id;
 	}
 	
-	
-	
-	public Orgao(String nome, String tipo, Long id, List<Orgao> subordinados, double valorPagamentos) {
+	public Dado(String nome, String tipo, Long id, List<Dado> subordinados, double valorPagamentos) {
 		super();
 		this.nome = nome;
 		this.tipo = tipo;
@@ -57,11 +58,11 @@ public class Orgao {
 		this.id = id;
 	}
 
-	public List<Orgao> getSubordinados() {
+	public List<Dado> getSubordinados() {
 		return subordinados;
 	}
 
-	public void setSubordinados(List<Orgao> subordinados) {
+	public void setSubordinados(List<Dado> subordinados) {
 		this.subordinados = subordinados;
 	}
 
@@ -71,7 +72,7 @@ public class Orgao {
 		}
 		else{
 			double soma = 0;
-			for(Orgao orgSub : subordinados){
+			for(Dado orgSub : subordinados){
 				soma += orgSub.valorPagamentos;
 			}
 			this.valorPagamentos = soma;

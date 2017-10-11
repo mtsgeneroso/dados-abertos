@@ -36,4 +36,33 @@ main {
 
 .detalhes-container{
 	padding-bottom: 20px;
-})
+}
+
+#itens-hierarquia, #hierarquia{
+	padding: 10px;
+	min-height: 300px;
+}
+
+.item{
+	padding: 0.1em 0.2em;
+	margin: 0.3em;
+}
+
+.item-header{
+	padding: 0.2em;
+}
+
+.item-content{
+	padding: 0.3em;
+}
+
+.item-placeholder{
+	background-color: #060;
+	border: 2px dotted black;
+	border-radius: 2px;
+	height: 40px;
+}
+
+.item-config{
+	color: black;
+}

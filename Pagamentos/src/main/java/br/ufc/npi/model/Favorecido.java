@@ -12,9 +12,9 @@ public class Favorecido {
 	
 	@Id
 	@Column(nullable=false, name="id_favorecido")
-	private int idFavorecido;
+	private Long idFavorecido;
 	@Column(name="cod_favorecido")
-	private int codFavorecido; 
+	private String codFavorecido; 
 	@Column(name="nome_favorecido")
 	private String nomeFavorecido;
 	
@@ -28,16 +28,16 @@ public class Favorecido {
 	public void setPagamentos(List<Pagamento> pagamentos) {
 		this.pagamentos = pagamentos;
 	}
-	public int getIdFavorecido() {
+	public Long getIdFavorecido() {
 		return idFavorecido;
 	}
-	public void setIdFavorecido(int idFavorecido) {
+	public void setIdFavorecido(Long idFavorecido) {
 		this.idFavorecido = idFavorecido;
 	}
-	public int getCodFavorecido() {
+	public String getCodFavorecido() {
 		return codFavorecido;
 	}
-	public void setCodFavorecido(int codFavorecido) {
+	public void setCodFavorecido(String codFavorecido) {
 		this.codFavorecido = codFavorecido;
 	}
 	public String getNomeFavorecido() {

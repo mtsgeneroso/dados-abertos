@@ -10,16 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ufc.npi.model.Acao;
+import br.ufc.npi.model.Favorecido;
 import br.ufc.npi.model.OrgaoSubordinado;
 import br.ufc.npi.model.OrgaoSuperior;
+import br.ufc.npi.model.Programa;
 import br.ufc.npi.model.UnidadeGestora;
 import br.ufc.npi.model.request.Chart;
 import br.ufc.npi.model.request.Data;
 import br.ufc.npi.model.request.Dataset;
-import br.ufc.npi.model.request.Orgao;
+import br.ufc.npi.model.request.Dado;
+import br.ufc.npi.service.AcaoService;
+import br.ufc.npi.service.FavorecidoService;
 import br.ufc.npi.service.OrgaoSubordinadoService;
 import br.ufc.npi.service.OrgaoSuperiorService;
 import br.ufc.npi.service.PagamentoService;
+import br.ufc.npi.service.ProgramaService;
 import br.ufc.npi.service.UnidadeGestoraService;
 import br.ufc.npi.util.RGBStringColor;
 
@@ -35,43 +41,121 @@ public class ApiController {
 	private UnidadeGestoraService unidadeGestoraService;
 	@Autowired
 	private PagamentoService pagamentoService;
+	@Autowired
+	private AcaoService acaoService;
+	@Autowired
+	private ProgramaService programaService;
+	@Autowired
+	private FavorecidoService favorecidoService;
 	
 	private String[] meses = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
 	
 	@RequestMapping(path="/orgaos", method=RequestMethod.GET)
-	public List<Orgao> listarTodosOrgaos(){
+	public List<Dado> listarTodosOrgaos(){
 		
 		List<OrgaoSuperior> orgaosSuperiores = orgaoSuperiorService.findAll();
 		List<OrgaoSubordinado> orgaosSubordinados = orgaoSubordinadoService.findAll();
 		List<UnidadeGestora> unidadesGestoras = unidadeGestoraService.findAll();
 		
-		ArrayList<Orgao> orgaos = new ArrayList<Orgao>();
+		ArrayList<Dado> orgaos = new ArrayList<Dado>();
 		
 		for(OrgaoSuperior os : orgaosSuperiores){
-			orgaos.add(new Orgao(os.getNomeOrgaoSuperior(), Orgao.ORGAO_SUPERIOR, os.getCodOrgaoSuperior()));
+			orgaos.add(new Dado(os.getNomeOrgaoSuperior(), Dado.ORGAO_SUPERIOR, os.getCodOrgaoSuperior()));
 		}
 		
 		for(OrgaoSubordinado os : orgaosSubordinados){
-			orgaos.add(new Orgao(os.getNomeOrgaoSubordinado(), Orgao.ORGAO_SUBORDINADO, os.getCodOrgaoSubordinado()));
+			orgaos.add(new Dado(os.getNomeOrgaoSubordinado(), Dado.ORGAO_SUBORDINADO, os.getCodOrgaoSubordinado()));
 		}
 		
 		for(UnidadeGestora ug : unidadesGestoras){
-			orgaos.add(new Orgao(ug.getNomeUnidadeGestora(), Orgao.UNIDADE_GESTORA, ug.getCodUnidadeGestora()));
+			orgaos.add(new Dado(ug.getNomeUnidadeGestora(), Dado.UNIDADE_GESTORA, ug.getCodUnidadeGestora()));
 		}
 		
 		return orgaos;
 		
 	}
 	
+	@RequestMapping(path="/orgaos-superiores")
+	public List<Dado> listarOrgaosSuperiores(){
+		ArrayList<Dado> orgaos = new ArrayList<Dado>();
+		
+		List<OrgaoSuperior> orgaosSuperiores = orgaoSuperiorService.findAll();
+		for(OrgaoSuperior os : orgaosSuperiores){
+			orgaos.add(new Dado(os.getNomeOrgaoSuperior(), Dado.ORGAO_SUPERIOR, os.getCodOrgaoSuperior()));
+		}
+		
+		return orgaos;
+	}
+	
+	@RequestMapping(path="/orgaos-subordinados")
+	public List<Dado> listarOrgaosSubordinados(){
+		ArrayList<Dado> orgaos = new ArrayList<Dado>();
+		
+		List<OrgaoSubordinado> orgaosSubordinados = orgaoSubordinadoService.findAll();
+		for(OrgaoSubordinado os : orgaosSubordinados){
+			orgaos.add(new Dado(os.getNomeOrgaoSubordinado(), Dado.ORGAO_SUBORDINADO, os.getCodOrgaoSubordinado()));
+		}
+		
+		return orgaos;
+	}
+	
+	@RequestMapping(path="/unidades-gestoras")
+	public List<Dado> listarUnidadesGestoras(){
+		ArrayList<Dado> orgaos = new ArrayList<Dado>();
+		
+		List<UnidadeGestora> unidadeGestoras = unidadeGestoraService.findAll();
+		for(UnidadeGestora u : unidadeGestoras){
+			orgaos.add(new Dado(u.getNomeUnidadeGestora(), Dado.UNIDADE_GESTORA, u.getCodUnidadeGestora()));
+		}
+		
+		return orgaos;
+	}
+	
+	@RequestMapping(path="/acoes")
+	public List<Dado> listarAcoes(){
+		ArrayList<Dado> orgaos = new ArrayList<Dado>();
+		
+		List<Acao> acoes = acaoService.findAll();
+		for(Acao a : acoes){
+			orgaos.add(new Dado(a.getNomeAcao(), Dado.ACAO, a.getIdAcao()));
+		}
+		
+		return orgaos;
+	}
+	
+	@RequestMapping(path="/programas")
+	public List<Dado> listarProgramas(){
+		ArrayList<Dado> orgaos = new ArrayList<Dado>();
+		
+		List<Programa> programas = programaService.findAll();
+		for(Programa p : programas){
+			orgaos.add(new Dado(p.getNomePrograma(), Dado.PROGRAMA, p.getCodPrograma()));
+		}
+		
+		return orgaos;
+	}
+	
+	@RequestMapping(path="/favorecidos")
+	public List<Dado> listarFavorecidos(){
+		ArrayList<Dado> orgaos = new ArrayList<Dado>();
+		
+		List<Favorecido> favorecidos = favorecidoService.findAll();
+		for(Favorecido f : favorecidos){
+			orgaos.add(new Dado(f.getNomeFavorecido(), Dado.FAVORECIDO, f.getIdFavorecido()));
+		}
+		
+		return orgaos;
+	}
+	
 	@RequestMapping(path="/consulta-simples", method=RequestMethod.POST)
-	public Chart consultarOrgaos(@RequestBody List<Orgao> orgaos){
+	public Chart consultarOrgaos(@RequestBody List<Dado> orgaos){
 		
 		List<Object[]> pagamentos;
 		
 		Dataset[] datasets = new Dataset[orgaos.size()];
 		
 		int k = 0;
-		for(Orgao o : orgaos){
+		for(Dado o : orgaos){
 			pagamentos = pagamentoService.findPagamentosByMonths(o.getTipo(), o.getId());				
 			
 			Double valores[] = new Double[12];
@@ -101,27 +185,27 @@ public class ApiController {
 	}
 	
 	@RequestMapping(path="/consulta-hierarquica", method=RequestMethod.POST)
-	public List<Orgao> consultaHierarquica(@RequestBody List<String> hierarquia){
+	public List<Dado> consultaHierarquica(@RequestBody List<String> hierarquia){
 		
-		ArrayList<Orgao> orgaos = new ArrayList<Orgao>();
+		ArrayList<Dado> orgaos = new ArrayList<Dado>();
 		
-		List<Orgao> subOs1 = new ArrayList<Orgao>();
+		List<Dado> subOs1 = new ArrayList<Dado>();
 		
-		List<Orgao> subsubOs1 = new ArrayList<Orgao>();
-		subsubOs1.add(new Orgao("Sub Órgão 1", "orgaoSubordinado", 12L, null, 1000));
-		subsubOs1.add(new Orgao("Sub Órgão 2", "orgaoSubordinado", 13L, null, 1000));
+		List<Dado> subsubOs1 = new ArrayList<Dado>();
+		subsubOs1.add(new Dado("Sub Órgão 1", "orgaoSubordinado", 12L, null, 1000));
+		subsubOs1.add(new Dado("Sub Órgão 2", "orgaoSubordinado", 13L, null, 1000));
 		
-		subOs1.add(new Orgao("Sub Órgão 1", "orgaoSubordinado", 12L, subsubOs1, 1000));
-		subOs1.add(new Orgao("Sub Órgão 2", "orgaoSubordinado", 13L, null, 1000));
+		subOs1.add(new Dado("Sub Órgão 1", "orgaoSubordinado", 12L, subsubOs1, 1000));
+		subOs1.add(new Dado("Sub Órgão 2", "orgaoSubordinado", 13L, null, 1000));
 		
-		Orgao os1 = new Orgao("Órgão Superior 1", "orgaoSuperior", 1L, subOs1, 2000);
+		Dado os1 = new Dado("Órgão Superior 1", "orgaoSuperior", 1L, subOs1, 2000);
 		
-		List<Orgao> subOs2 = new ArrayList<Orgao>();
-		subOs2.add(new Orgao("Sub Órgão 1", "orgaoSubordinado", 12L, null, 1000));
-		subOs2.add(new Orgao("Sub Órgão 2", "orgaoSubordinado", 13L, null, 1000));
-		subOs2.add(new Orgao("Sub Órgão 3", "orgaoSubordinado", 14L, null, 3000));
+		List<Dado> subOs2 = new ArrayList<Dado>();
+		subOs2.add(new Dado("Sub Órgão 1", "orgaoSubordinado", 12L, null, 1000));
+		subOs2.add(new Dado("Sub Órgão 2", "orgaoSubordinado", 13L, null, 1000));
+		subOs2.add(new Dado("Sub Órgão 3", "orgaoSubordinado", 14L, null, 3000));
 		
-		Orgao os2 = new Orgao("Órgão Superior 2", "orgaoSuperior", 2L, subOs2, 5000);
+		Dado os2 = new Dado("Órgão Superior 2", "orgaoSuperior", 2L, subOs2, 5000);
 		
 		orgaos.add(os1);
 		orgaos.add(os2);
@@ -161,7 +245,7 @@ public class ApiController {
 		
 	}
 
-	@RequestMapping(path="/pagamentos/"+Orgao.ORGAO_SUPERIOR+"/{id}")
+	@RequestMapping(path="/pagamentos/"+Dado.ORGAO_SUPERIOR+"/{id}")
 	public Chart pagamentosOrgaoSuperior(@PathVariable("id")Long id){
 		
 		List<Object[]> pagamentos;
@@ -197,7 +281,7 @@ public class ApiController {
 
 	}
 
-	@RequestMapping(path="/pagamentos/"+Orgao.ORGAO_SUBORDINADO+"/{id}")
+	@RequestMapping(path="/pagamentos/"+Dado.ORGAO_SUBORDINADO+"/{id}")
 	public Chart pagamentosOrgaoSubordinado(@PathVariable("id")Long id){
 
 		List<Object[]> pagamentos;
@@ -232,7 +316,7 @@ public class ApiController {
 
 	}
 	
-	@RequestMapping(path="/pagamentos/"+Orgao.UNIDADE_GESTORA+"/{id}")
+	@RequestMapping(path="/pagamentos/"+Dado.UNIDADE_GESTORA+"/{id}")
 	public Chart pagamentosUnidadeGestora(@PathVariable("id")Long id){
 
 		List<Object[]> pagamentos;
