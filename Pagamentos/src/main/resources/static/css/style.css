@@ -6,63 +6,144 @@
  * Made By MaterializeCSS.com
  */
 body {
-	background-color: #eeeeee;
-	display: flex;
-	min-height: 100vh;
-	flex-direction: column;
-}
+  background-color: #eeeeee;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
 
 main {
-	flex: 1 0 auto;
-}
+  flex: 1 0 auto; }
 
 .icon-block {
-	padding: 0 15px;
-}
+  padding: 0 15px; }
 
 .icon-block .material-icons {
-	font-size: inherit;
-}
+  font-size: inherit; }
 
-@media only screen and (max-width : 992px) {
-	header, main, footer {
-		padding-left: 0;
-	}
-}
+@media only screen and (max-width: 992px) {
+  header, main, footer {
+    padding-left: 0; } }
+.main-container {
+  padding-top: 30px; }
 
-.main-container{
-	padding-top:30px;
-}
+.detalhes-container {
+  padding-bottom: 20px; }
 
-.detalhes-container{
-	padding-bottom: 20px;
-}
+#itens-hierarquia, #hierarquia {
+  padding: 10px;
+  min-height: 260px; }
 
-#itens-hierarquia, #hierarquia{
-	padding: 10px;
-	min-height: 300px;
-}
+.item {
+  padding: 0.1em 0.2em;
+  margin: 0.3em;
+  cursor: pointer; }
+  .item:active {
+    cursor: move; }
 
-.item{
-	padding: 0.1em 0.2em;
-	margin: 0.3em;
-}
+.item-header {
+  padding: 0.2em; }
+  .item-header:active {
+    cursor: move; }
 
-.item-header{
-	padding: 0.2em;
-}
+.item-placeholder {
+  background-color: #3f7575;
+  border: 2px dotted black;
+  border-radius: 2px;
+  height: 40px; }
 
-.item-content{
-	padding: 0.3em;
-}
+.item-config {
+  color: black; }
+  .item-config:active {
+    cursor: move; }
 
-.item-placeholder{
-	background-color: #060;
-	border: 2px dotted black;
-	border-radius: 2px;
-	height: 40px;
-}
+.main-color {
+  background-color: #90b5b5; }
 
-.item-config{
-	color: black;
-}
+.main-color-black {
+  background-color: #90b5b5; }
+
+.main-color-text {
+  font-style: bold;
+  color: #90b5b5; }
+
+.main-color-black-text {
+  font-style: bold;
+  color: #3f7575; }
+
+.main-color-hoverable {
+  font-style: bold;
+  background-color: #90b5b5;
+  color: #3f7575; }
+  .main-color-hoverable:hover {
+    background-color: #3f7575;
+    color: #90b5b5; }
+
+.main-color-black-hoverable {
+  font-style: bold;
+  background-color: #3f7575;
+  color: #90b5b5; }
+  .main-color-black-hoverable:hover {
+    background-color: #90b5b5;
+    color: #3f7575; }
+
+ul.progress-bar {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  list-style: none; }
+
+li.section {
+  display: inline-block;
+  padding-top: 45px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 16px;
+  color: #90b5b5;
+  vertical-align: top;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+li.section:before {
+  content: '\00b7';
+  position: absolute;
+  top: 2px;
+  left: calc(50% - 15px);
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  color: white;
+  border: 2px solid white;
+  border-radius: 20%;
+  line-height: 30px;
+  background: gray; }
+
+.status-bar {
+  height: 2px;
+  background: #90b5b5;
+  position: relative;
+  top: 20px;
+  margin: 0 auto; }
+
+.current-status {
+  height: 2px;
+  width: 0;
+  border-radius: 2px;
+  background: #3f7575; }
+
+@keyframes changeBackground {
+  from {
+    background: #90b5b5; }
+  to {
+    background: #3f7575; } }
+li.section.visited:before {
+  content: '\2714';
+  animation: changeBackground .5s linear;
+  animation-fill-mode: forwards; }
+
+li.section.visited.current:before {
+  box-shadow: 0 0 0 2px #3f7575; }
+
+/*# sourceMappingURL=style.css.map */

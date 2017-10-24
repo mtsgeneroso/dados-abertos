@@ -20,31 +20,31 @@
 	media="screen,projection" />
 </head>
 <body>
-	
+
 	<div th:include="fragments/navbar"></div>
-	
+
 	<main>
-		
+
 		<div class="section no-pad-bot" id="index-banner">
 			<div class="container">
-				
+
 				<p>
 				<div id="rangeMeses"></div>
 				</p>
-				
+
 				<div id="mensagemChart">
 					<h5>Sem dados disponíveis</h5>
 				</div>
-				
-				
+
+
 				<br/><br/>
 				<canvas id="chart"></canvas>
 				<br/>
-				
+
 				<input type="hidden" name="currentId" th:value="${currentId}"/>
-				
+
 				<div class="preloader-wrapper active" id="loadChart">
-					<div class="spinner-layer spinner-red-only">
+					<div class="spinner-layer spinner-dominant-color-only">
 				      <div class="circle-clipper left">
 				        <div class="circle"></div>
 				      </div><div class="gap-patch">
@@ -54,26 +54,26 @@
 				      </div>
 				    </div>
 				</div>
-				
+
 				<h5>Ações:</h5>
 				<div class="row" id="botoes">
 					<div th:each="acao : ${acoes}">
 						<div class="col s12 m4 l2">
 							<a th:href="@{#}" th:title="${acao.nomeAcao}">
-								<div class="card-panel red white-text hoverable"
+								<div class="card-panel main-color-hoverable"
 									style="padding-top: 2px; height: 120px;">
 									<p th:text="${acao.nomeAcao}" th:classappend="${#strings.length(acao.nomeAcao) > 75} ? 'truncate'" style="font-size: 12px">[...]</p>
 								</div>
 							</a>
 						</div>
 					</div>
-	
+
 				</div>
-				
+
 			</div>
 		</div>
 	</main>
-	
+
 	<div th:include="fragments/footer"></div>
 
 
@@ -82,7 +82,7 @@
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();
-		initInterface("/unidadeGestora/" + id);	
+		initInterface("/unidadeGestora/?id=" + id);
 	</script>
 </body>
 </html>

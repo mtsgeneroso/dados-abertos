@@ -26,156 +26,157 @@
 	<main>
 
 	<div class="container main-container">
-		<div class="consulta-container">
+		<div class="hierarquia-container">
 			<div class="row">
 				<div class="col s12">
 					<h5>Consulta Hierárquica:</h5>
+					<p>Monte uma hierarquia</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col m5">
-					<div class="card-panel green" id="panel-tags">
+					<div class="card-panel main-color" id="panel-tags">
 						<span>Ítens:</span><br/>
 						<div id="itens-hierarquia" class="conexaoHierarquia">
 						  <div class="item card" id="orgaos-superiores">
-						  	
 						  	<div class="item-header">
 						  		Órgão Superior
 						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">arrow_drop_down</i>
+						  			<i class="material-icons right">drag_handle</i>
 						  		</a>
 						  	</div>
-						  	
-						  	<div class="item-content" id="orgao-superior">
-						  		<div class="row">
-									<div class="col s12">
-										<div class="chips chips-autocomplete" id="chips-orgaos-superiores"></div>
-									</div>
-								</div>
-						  	</div>
+
 						  </div>
-						  
+
 						  <div class="item card" id="orgaos-subordinados">
-						  	
 						  	<div class="item-header">
 						  		Órgãos Subordinado
 						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">arrow_drop_down</i>
+						  			<i class="material-icons right">drag_handle</i>
 						  		</a>
 						  	</div>
-						  	
-						  	<div class="item-content" id="orgaos-subordinados">
-						  		<div class="row">
-									<div class="col s12">
-										<div class="chips chips-autocomplete" id="chips-orgaos-subordinados"></div>
-									</div>
-								</div>
-						  	</div>
 						  </div>
+
 						  <div class="item card" id="unidades-gestoras">
-						  	
 						  	<div class="item-header">
 						  		Unidade Gestora
 						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">arrow_drop_down</i>
+						  			<i class="material-icons right">drag_handle</i>
 						  		</a>
 						  	</div>
-						  	
-						  	<div class="item-content" id="unidadeGestora">
-						  		<div class="row">
-									<div class="col s12">
-										<div class="chips chips-autocomplete" id="chips-unidades-gestoras"></div>
-									</div>
-								</div>
-						  	</div>
 						  </div>
+
 						  <div class="item card" id="acoes">
-						  	
 						  	<div class="item-header">
 						  		Ação
 						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">arrow_drop_down</i>
+						  			<i class="material-icons right">drag_handle</i>
 						  		</a>
 						  	</div>
-						  	
-						  	<div class="item-content" id="acao">
-						  		<div class="row">
-									<div class="col s12">
-										<div class="chips chips-autocomplete" id="chips-acoes"></div>
-									</div>
-								</div>
-						  	</div>
 						  </div>
+
 						  <div class="item card" id="programas">
-						  	
 						  	<div class="item-header">
 						  		Programa
 						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">arrow_drop_down</i>
+						  			<i class="material-icons right">drag_handle</i>
 						  		</a>
 						  	</div>
-						  	
-						  	<div class="item-content" id="programa">
-						  		<div class="row">
-									<div class="col s12">
-										<div class="chips chips-autocomplete" id="chips-programas"></div>
-									</div>
-								</div>
-						  	</div>
 						  </div>
+
 						  <div class="item card" id="favorecidos">
-						  	
 						  	<div class="item-header">
 						  		Favorecido
 						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">arrow_drop_down</i>
+						  			<i class="material-icons right">drag_handle</i>
 						  		</a>
-						  	</div>
-						  	
-						  	<div class="item-content" id="favorecido">
-						  		<div class="row">
-									<div class="col s12">
-										<div class="chips chips-autocomplete" id="chips-favorecidos"></div>
-									</div>
-								</div>
 						  	</div>
 						  </div>
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="col m2 center">
 					<i class="material-icons large grey-text center-align">swap_horiz</i>
 				</div>
-				
+
 				<div class="col m5">
-					<div class="card-panel green" id="panel-tags">
+					<div class="card-panel main-color" id="panel-tags">
 						<span>Hierarquia da consulta:</span><br/>
 						<div id="hierarquia" class="conexaoHierarquia">
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="row">
 				<div class="col s12">
-					<a class="waves-effect waves-light btn red right" id="btn-consultar">Prosseguir</a>
+					<a class="waves-effect waves-light btn main-color-hoverable right" id="btn-prosseguir">Prosseguir</a>
 				</div>
 			</div>
 		</div>
-		
+
+		<div class="passos-consulta">
+			<div class="row">
+				<div class="progress-bar-wrapper"></div>
+			</div>
+			<div class="row filtro-orgaos" id="orgaos-superiores-filtro">
+				<div class="col s12">
+					<h5>Órgãos Superiores:</h5>
+					<div class="chips chips-autocomplete" id="chips-orgaos-superiores"></div>
+				</div>
+			</div>
+			<div class="row filtro-orgaos" id="orgaos-subordinados-filtro">
+				<div class="col s12">
+					<h5>Órgãos Subordinados:</h5>
+					<div class="chips chips-autocomplete" id="chips-orgaos-subordinados"></div>
+				</div>
+			</div>
+			<div class="row filtro-orgaos" id="unidades-gestoras-filtro">
+				<div class="col s12">
+					<h5>Unidades Gestoras:</h5>
+					<div class="chips chips-autocomplete" id="chips-unidades-gestoras"></div>
+				</div>
+			</div>
+			<div class="row filtro-orgaos" id="acoes-filtro">
+				<div class="col s12">
+					<h5>Ações:</h5>
+					<div class="chips chips-autocomplete" id="chips-acoes"></div>
+				</div>
+			</div>
+			<div class="row filtro-orgaos" id="programas-filtro">
+				<div class="col s12">
+					<h5>Programas:</h5>
+					<div class="chips chips-autocomplete" id="chips-programas"></div>
+				</div>
+			</div>
+			<div class="row filtro-orgaos" id="favorecidos-filtro">
+				<div class="col s12">
+					<h5>Favorecidos:</h5>
+					<div class="chips chips-autocomplete" id="chips-favorecidos"></div>
+				</div>
+			</div>
+			<div class="row btn-steps">
+				<div class="col s12">
+					<a class="waves-effect waves-light btn main-color-hoverable" id="btn-prev">Anterior</a>
+					<a class="waves-effect waves-light btn main-color-hoverable" id="btn-next">Próximo</a>
+					<a class="waves-effect waves-light btn main-color-hoverable" id="btn-consultar">Consultar</a>
+				</div>
+			</div>
+		</div>
+
 		<div class="resultado-container">
-			<a class="waves-effect waves-light btn red" onClick="expandAll();"><i class="material-icons left">fullscreen</i>Expandir todos</a>
-  			<a class="waves-effect waves-light btn red" onClick="collapseAll();"><i class="material-icons left">fullscreen_exit</i>Fechar todos</a>
-			<a th:href="@{/consulta-hierarquica}" class="waves-effect waves-light btn red" id="btn-consultar">Nova
+			<a class="waves-effect waves-light btn main-color-hoverable" onClick="expandAll();"><i class="material-icons left">fullscreen</i>Expandir todos</a>
+  			<a class="waves-effect waves-light btn main-color-hoverable" onClick="collapseAll();"><i class="material-icons left">fullscreen_exit</i>Fechar todos</a>
+			<a th:href="@{/consulta-hierarquica}" class="waves-effect waves-light btn main-color-hoverable" id="btn-consultar">Nova
 				Consulta</a>
 			<ul class="collapsible" data-collapsible="expandable">
 			</ul>
 		</div>
 
 	</div>
-	
-	<!-- Modal Órgãos Inexistentes -->
+
+		<!-- Modal Órgãos Inexistentes -->
 		<div id="modal-orgaos-inexistentes" class="modal">
 			<div class="modal-content">
 		    	<h4>Órgão inexistente</h4>
@@ -183,18 +184,33 @@
 		      	<br/>
 		      	Você pode prosseguir com a consulta, mas os órgãos inexistentes serão desconsiderados.
 		      	</p>
-				    	
+
 		    </div>
 		    <div class="modal-footer">
-		      	<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Entendi!</a>
+		      	<a href="#!" class="modal-action modal-close waves-effect waves-dominant-color btn-flat">Entendi!</a>
 		    </div>
 		</div>
-	
+		<!-- Model hierarquia vazia -->
+		<div id="modal-hierarquia-vazia" class="modal">
+			<div class="modal-content">
+		    	<h4>Monte uma hierarquia</h4>
+		      	<p>Selecione pelo menos um ítem para compor a hierarquia.
+				<br/>
+				Para adicionar ítens, basta clicar no ítem desejado e arrastá-lo para a caixa do lado direito da tela.
+				</p>
+
+		    </div>
+		    <div class="modal-footer">
+		      	<a href="#!" class="modal-action modal-close waves-effect waves-dominant-color btn-flat">Entendi!</a>
+		    </div>
+		</div>
+
 	</main>
 
 	<div th:include="fragments/footer"></div>
 	<!--  Scripts-->
 	<div th:include="fragments/scripts"></div>
+	<script th:src="@{/js/progress-bar.js}"></script>
 	<script th:src="@{/js/initConsultaHierarquica.js}"></script>
 </body>
 </html>

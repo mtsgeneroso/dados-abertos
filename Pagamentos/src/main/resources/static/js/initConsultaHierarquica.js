@@ -2,15 +2,15 @@ function initCamposBusca(tiposOrgaos){
 	chips = {}
 	tiposOrgaos.forEach(function(tipoOrgao, index){
 		var urlAPI = "/api/"+tipoOrgao;
-		chips[tipoOrgao] = {};	
+		chips[tipoOrgao] = {};
 
 		$.getJSON(urlAPI, function(orgaos){
 
-			var dataSugestions = {};		
+			var dataSugestions = {};
 
 			orgaos.forEach(function(orgao, index){
 				chips[tipoOrgao][orgao.nome] = {
-						"tipo":orgao.tipo, 
+						"tipo":orgao.tipo,
 						"id":orgao.id,
 						"nome":orgao.nome
 				};
@@ -29,7 +29,7 @@ function initCamposBusca(tiposOrgaos){
 		});
 
 	});
-	
+
 	return chips;
 }
 
@@ -43,21 +43,19 @@ function assistirCamposBusca(tiposOrgaos, chips){
 }
 
 function pegarValoresBusca(hierarquia, chips){
-	orgaosConsulta = {};
+	orgaosConsulta = [];
 	hierarquia.forEach(function(tipoOrgao, index){
-		orgaosConsulta[tipoOrgao] = [];
 		$.each($("#chips-"+tipoOrgao).material_chip('data'), function(index, elem){
 			if(chips[tipoOrgao][elem.tag] != undefined)
-				orgaosConsulta[tipoOrgao].push(chips[tipoOrgao][elem.tag]);
+				orgaosConsulta.push(chips[tipoOrgao][elem.tag]);
 		});
-		
+
 	});
-	
+
 	return orgaosConsulta;
 }
 
 $(document).ready(function(){
-
 	$('.modal').modal();
 	$("#itens-hierarquia, #hierarquia").sortable({
 		connectWith: ".conexaoHierarquia",
@@ -65,12 +63,10 @@ $(document).ready(function(){
 		forcePlaceholderSize: false
 	}).disableSelection();
 	$(".item-content").hide();
-	$(".oculto").hide();
+	$(".filtro-orgaos").hide();
 	$(".resultado-container").hide();
-	
-	tiposOrgaos = ["orgaos-superiores", "orgaos-subordinados", "unidades-gestoras", "acoes", "programas", "favorecidos"];
-	chips = initCamposBusca(tiposOrgaos);
-	assistirCamposBusca(tiposOrgaos, chips);
+	$(".btn-steps").hide();
+	$("#btn-prev").addClass("disabled");
 
 	function gerarCollapsible(orgaos){
 		tags_collapsible = "";
@@ -82,7 +78,7 @@ $(document).ready(function(){
 			"<div class='collapsible-body'>";
 
 			if(orgaos[i].subordinados != null){
-				tags_collapsible += 
+				tags_collapsible +=
 					"<ul class='collapsible' data-collapsible='expandable'>" +
 					gerarCollapsible(orgaos[i].subordinados) +
 					"</ul>";
@@ -97,42 +93,105 @@ $(document).ready(function(){
 		return tags_collapsible;
 	}
 
-	var orgaosConsulta = [];
+});
 
-	$('#btn-consultar').click(function(){
-		$(".consulta-container").hide();
+$('#btn-prosseguir').click(function(){
+	hierarquia = $("#hierarquia").sortable("toArray");
 
-		var hierarquia = $("#hierarquia").sortable("toArray");
-		orgaosConsulta = pegarValoresBusca(hierarquia, chips);
-		
-		console.log(hierarquia);
-		console.log(orgaosConsulta);
+	if(hierarquia.length == 0){
+		$("#modal-hierarquia-vazia").modal("open");
+	}
+	else{
+		if(hierarquia.length == 1){
+			$("#btn-next").addClass("disabled");
+		}
+		$(".hierarquia-container").hide();
+		$(".btn-steps").show();
 
-		$.ajax({
-			type: 'POST',
-			url: '/api/consulta-hierarquica',
-			data: JSON.stringify(orgaosConsulta),
-			dataType: 'json',
-			contentType: 'application/json',
-			success: function(orgaos){
-				$(".resultado-container").show();
-				$(".consulta-container").hide();
-				$(".collapsible").append(gerarCollapsible(orgaos));
-				$('.collapsible').collapsible();
+		step = 0;
+		$(".passos-consulta").show();
+		$("#"+hierarquia[step]).show();
+
+		chips = initCamposBusca(hierarquia);
+		assistirCamposBusca(hierarquia, chips);
+
+		ProgressBar.singleStepAnimation = 0;
+		ProgressBar.init(hierarquia,
+			hierarquia[step],
+			"progress-bar-wrapper"
+		);
+
+		$("#" + hierarquia[step] + "-filtro").show();
+
+	}
+
+});
+
+$("#btn-next").click(function(){
+		$("#btn-prev").removeClass("disabled");
+		if(step < hierarquia.length){
+			step++;
+			//Limpa a barra atual
+			$(".progress-bar-wrapper").empty();
+			//Constroi nova barra no passo seguinte
+			ProgressBar.init(hierarquia,
+				hierarquia[step],
+				"progress-bar-wrapper"
+			);
+			if(step >= hierarquia.length-1){
+				$(this).addClass("disabled");
 			}
-		});
+			else{
+				$(this).removeClass("disabled");
+			}
+		}
+		$(".filtro-orgaos").hide();
+		$("#" + hierarquia[step] + "-filtro").show();
+});
 
-	});
+$("#btn-prev").click(function(){
+	$("#btn-next").removeClass("disabled");
+	if(step >= 0){
+		step--;
+		//Limpa a barra atual
+		$(".progress-bar-wrapper").empty();
+		//Constroi nova barra no passo seguinte
+		ProgressBar.init(hierarquia,
+			hierarquia[step],
+			"progress-bar-wrapper"
+		);
+		if(step <= 0){
+			$(this).addClass("disabled");
+		}
+		else{
+			$(this).removeClass("disabled");
+		}
+	}
+	$(".filtro-orgaos").hide();
+	$("#" + hierarquia[step] + "-filtro").show();
+});
 
-	$(".item-config").click(function(){
-		tagI = $(this).closest(".item").find(".item-config").find("i");
-		$(".item-content").not($(this).closest(".item").find(".item-content")).hide("fast");
-		$(".item-config").find("i").not(tagI).text("arrow_drop_down");
-		$(this).closest(".item").find(".item-content").toggle("fast");
-		if(tagI.text() === "arrow_drop_down"){
-			tagI.text("arrow_drop_up");
-		}else{
-			tagI.text("arrow_drop_down");
+$("#btn-consultar").click(function(){
+
+	$(".passos-consulta").hide();
+
+	orgaosConsulta = pegarValoresBusca(hierarquia, chips);
+	var consulta = {
+		"hierarquia" : hierarquia,
+		"orgaosConsulta": orgaosConsulta
+	};
+
+	$.ajax({
+		type: 'POST',
+		url: '/api/consulta-hierarquica',
+		data: JSON.stringify(consulta),
+		dataType: 'json',
+		contentType: 'application/json',
+		success: function(orgaos){
+			$(".resultado-container").show();
+			$(".consulta-container").hide();
+			$(".collapsible").append(gerarCollapsible(orgaos));
+			$('.collapsible').collapsible();
 		}
 	});
 

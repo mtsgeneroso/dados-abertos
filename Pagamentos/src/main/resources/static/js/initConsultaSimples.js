@@ -10,20 +10,20 @@ var colors = ["rgb(255,0,0)",
 			"rgb(102,51,0)"];
 
 $(document).ready(function(){
-	
+
 	$('.modal').modal();
-	
+
 	$(".grafico-container").hide();
 	$(".detalhes-container").hide();
-	
+
 	var chips = {};
 
 	//Lista todos os órgãos para o campo de pesquisa
 	$.getJSON("/api/orgaos", function(orgaos){
-		var dataSugestions = {};		
+		var dataSugestions = {};
 		for(var i = 0; i < orgaos.length; i++){
 			chips[orgaos[i].nome] = {
-					"tipo":orgaos[i].tipo, 
+					"tipo":orgaos[i].tipo,
 					"id":orgaos[i].id,
 					"nome":orgaos[i].nome
 			};
@@ -51,15 +51,15 @@ $(document).ready(function(){
 	$('#btn-consultar').click(function(){
 		$(".grafico-container").show();
 		$(".grafico-container").empty();
-		
+
 		$(".detalhes-container").show();
 		$(".detalhes-container").empty();
-		
+
 		$(".grafico-container").append("<p><div id='rangeMeses'></div>" +
 				"</p><br/><br/>" +
 				"<canvas id='chart'></canvas>" +
 				"<br/>");
-		
+
 		//Coleta as tags que foram adicionadas
 		var orgaosConsulta = []
 		$.each($('.chips-autocomplete').material_chip('data'), function(index, elem){
@@ -67,9 +67,9 @@ $(document).ready(function(){
 				orgaosConsulta.push(chips[elem.tag]);
 		});
 		//console.log(orgaosConsulta);
-		
+
 		console.log(JSON.stringify(orgaosConsulta));
-		
+
 		//Se apenas uma uma tag foi selecionada, redireciona para consulta antiga
 		if (orgaosConsulta.length == 0){
 			$("#modal-consulta").modal('open');
@@ -77,6 +77,7 @@ $(document).ready(function(){
 
 		//Caso contrário
 		else{
+			console.log(orgaosConsulta);
 			//Requisição ao controlado de cosulta para vários órgãos
 			$.ajax({
 				type: 'POST',
@@ -85,9 +86,7 @@ $(document).ready(function(){
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function(chart){
-					console.log(chart);
 					labels = chart.data.labels;
-					console.log(labels);
 					dados = [];
 					for(var i=0; i<chart.data.datasets.length; i++){
 						dados.push(chart.data.datasets[i].data);
@@ -179,25 +178,25 @@ $(document).ready(function(){
 					});
 				}
 			});
-			
+
 			$(".detalhes-container").append("<h5>Clique para ver detalhes:</h5>");
-			
+
 			for(var i = 0; i<orgaosConsulta.length; i++){
 				$(".detalhes-container").append("<div class='col l4 s12 m4'>" +
 						"<a href='/"+orgaosConsulta[i].tipo+"/"+orgaosConsulta[i].id+"' class='truncate' target='_blank'>" +
-						"<div class='card-panel hoverable white-text ' style='background-color:"+colors[i]+"'>" +
+						"<div class='card-panel white-text main-color'>" +
 						"<p class='center'>" +
 						"<i class='material-icons small'>open_in_new</i>" +
 						"</p>" +
 						"<p class='center'>" + orgaosConsulta[i].nome + "</p>" +
 						"</div></a></div>")
 			}
-			
-			
+
+
 		}
-		
-		
-		
-		
+
+
+
+
 	});
 });

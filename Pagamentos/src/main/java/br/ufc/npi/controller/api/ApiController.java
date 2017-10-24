@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufc.npi.model.Acao;
@@ -17,6 +18,7 @@ import br.ufc.npi.model.OrgaoSuperior;
 import br.ufc.npi.model.Programa;
 import br.ufc.npi.model.UnidadeGestora;
 import br.ufc.npi.model.request.Chart;
+import br.ufc.npi.model.request.ConsultaHierarquicaObj;
 import br.ufc.npi.model.request.Data;
 import br.ufc.npi.model.request.Dataset;
 import br.ufc.npi.model.request.Dado;
@@ -185,7 +187,7 @@ public class ApiController {
 	}
 	
 	@RequestMapping(path="/consulta-hierarquica", method=RequestMethod.POST)
-	public List<Dado> consultaHierarquica(@RequestBody List<String> hierarquia){
+	public List<Dado> consultaHierarquica(@RequestBody ConsultaHierarquicaObj objConsulta){
 		
 		ArrayList<Dado> orgaos = new ArrayList<Dado>();
 		
@@ -245,8 +247,8 @@ public class ApiController {
 		
 	}
 
-	@RequestMapping(path="/pagamentos/"+Dado.ORGAO_SUPERIOR+"/{id}")
-	public Chart pagamentosOrgaoSuperior(@PathVariable("id")Long id){
+	@RequestMapping(path="/pagamentos/"+Dado.ORGAO_SUPERIOR, method=RequestMethod.GET)
+	public Chart pagamentosOrgaoSuperior(@RequestParam("id")Long id){
 		
 		List<Object[]> pagamentos;
 		
@@ -281,8 +283,8 @@ public class ApiController {
 
 	}
 
-	@RequestMapping(path="/pagamentos/"+Dado.ORGAO_SUBORDINADO+"/{id}")
-	public Chart pagamentosOrgaoSubordinado(@PathVariable("id")Long id){
+	@RequestMapping(path="/pagamentos/"+Dado.ORGAO_SUBORDINADO, method=RequestMethod.GET)
+	public Chart pagamentosOrgaoSubordinado(@RequestParam("id")Long id){
 
 		List<Object[]> pagamentos;
 		
@@ -316,8 +318,8 @@ public class ApiController {
 
 	}
 	
-	@RequestMapping(path="/pagamentos/"+Dado.UNIDADE_GESTORA+"/{id}")
-	public Chart pagamentosUnidadeGestora(@PathVariable("id")Long id){
+	@RequestMapping(path="/pagamentos/"+Dado.UNIDADE_GESTORA, method=RequestMethod.GET)
+	public Chart pagamentosUnidadeGestora(@RequestParam("id")Long id){
 
 		List<Object[]> pagamentos;
 		

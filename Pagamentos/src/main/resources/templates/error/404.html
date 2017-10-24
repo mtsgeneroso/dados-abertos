@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+<title>BODS - Início</title>
+
+<!-- CSS  -->
+<link
+	th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/materializecss/css/materialize.min.css}"
+	type="text/css" rel="stylesheet" media="screen,projection" />
+<link th:href="@{/css/nouislider.css}" type="text/css" rel="stylesheet" />
+<link th:href="@{/css/style.css}" type="text/css" rel="stylesheet"
+	media="screen,projection" />
+</head>
+<body>
+	<div th:include="fragments/navbar"></div>
+
+	<main> <!-- <div th:include="fragments/sidenav"></div> -->
+
+	<div class="container main-container">
+
+		<div class="row center grey-text">
+			<h4>404<br/>PÁGINA NÃO ENCONTRADA</h4>		
+			
+			<div class="col s4 offset-s4">
+				<a th:href="@{/}" class="center">
+					<div class="card-panel main-color-hoverable">
+						<h2 class="center">
+							<i class="material-icons medium">home</i>
+						</h2>
+						<p class="center">INÍCIO</p>
+					</div>
+				</a>
+			</div>
+			
+		</div>
+	
+	</div>
+	
+	</main>
+
+	<div th:include="/fragments/footer"></div>
+
+
+	<!--  Scripts-->
+	<div th:include="/fragments/scripts"></div>
+
+</body>
+</html>

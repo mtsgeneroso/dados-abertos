@@ -1,0 +1,182 @@
+$main-color: #90b5b5;
+$main-color-black: #3f7575;
+$bg-color: #eeeeee;
+
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+body {
+	background-color: $bg-color;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+.icon-block {
+	padding: 0 15px;
+}
+
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+@media only screen and (max-width : 992px) {
+	header, main, footer {
+		padding-left: 0;
+	}
+}
+
+.main-container{
+	padding-top:30px;
+}
+
+.detalhes-container{
+	padding-bottom: 20px;
+}
+
+#itens-hierarquia, #hierarquia{
+	padding: 10px;
+	min-height: 260px;
+}
+
+.item{
+	padding: 0.1em 0.2em;
+	margin: 0.3em;
+	cursor: pointer;
+	&:active{
+		cursor: move;
+	}
+}
+
+.item-header{
+	padding: 0.2em;
+	&:active{
+		cursor: move;
+	}
+}
+
+.item-placeholder{
+	background-color: $main-color-black;
+	border: 2px dotted black;
+	border-radius: 2px;
+	height: 40px;
+}
+
+.item-config{
+	color: black;
+	&:active{
+		cursor: move;
+	}
+}
+
+.main-color{
+	background-color: $main-color;
+}
+
+.main-color-black{
+	background-color: $main-color;
+}
+
+.main-color-text{
+	font-style: bold;
+	color: $main-color;
+}
+
+.main-color-black-text{
+	font-style: bold;
+	color: $main-color-black;
+}
+
+.main-color-hoverable{
+	font-style: bold;
+	background-color: $main-color;
+	color: $main-color-black;
+	&:hover{
+		background-color: $main-color-black;
+		color: $main-color;
+	}
+}
+
+.main-color-black-hoverable{
+	font-style: bold;
+	background-color: $main-color-black;
+	color: $main-color;
+	&:hover{
+		background-color: $main-color;
+		color: $main-color-black;
+	}
+}
+
+//Progress Bar
+ul.progress-bar {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    list-style: none;
+}
+
+li.section {
+    display: inline-block;
+    padding-top: 45px;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 16px;
+    color: $main-color;
+    vertical-align: top;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+li.section:before {
+    content: '\00b7';
+    position: absolute;
+    top: 2px;
+    left: calc(50% - 15px);
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid white;
+    border-radius: 20%;
+    line-height: 30px;
+    background: gray;
+}
+.status-bar {
+    height: 2px;
+    background: $main-color;
+    position: relative;
+    top: 20px;
+    margin: 0 auto;
+}
+.current-status {
+    height: 2px;
+    width: 0;
+    border-radius: 2px;
+    background: $main-color-black;
+}
+
+@keyframes changeBackground {
+    from {background: $main-color}
+    to {background: $main-color-black}
+}
+
+li.section.visited:before {
+    content: '\2714';
+    animation: changeBackground .5s linear;
+    animation-fill-mode: forwards;
+}
+
+li.section.visited.current:before {
+    box-shadow: 0 0 0 2px $main-color-black;
+}
