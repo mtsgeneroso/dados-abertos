@@ -139,7 +139,7 @@ public class MainController {
 		model.addAttribute("unidadesGestoras", unidadesGestoras);
 		model.addAttribute("currentId", id);
 		
-		OrgaoSuperior orgaoSuperior = orgaoSubordinado.getOrgao_superior();
+		OrgaoSuperior orgaoSuperior = orgaoSubordinado.getOrgaoSuperior();
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
@@ -163,7 +163,7 @@ public class MainController {
 		model.addAttribute("currentId", id);
 		
 		OrgaoSubordinado orgaoSubordinado = unidadeGestora.getOrgaoSubordinado();
-		OrgaoSuperior orgaoSuperior = orgaoSubordinado.getOrgao_superior();
+		OrgaoSuperior orgaoSuperior = orgaoSubordinado.getOrgaoSuperior();
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity(name="programa")
 public class Programa {
@@ -18,6 +19,10 @@ public class Programa {
 	
 	@ManyToMany(mappedBy="programas")
 	private List<Acao> acoes;
+	
+	@OneToMany(mappedBy="pagamentos",
+			targetEntity=Programa.class)
+	private List<Pagamento> pagamentos;
 
 	public Long getCodPrograma() {
 		return codPrograma;
@@ -42,7 +47,13 @@ public class Programa {
 	public void setAcoes(List<Acao> acoes) {
 		this.acoes = acoes;
 	}
-	
-	
 
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
+	}
+	
 }

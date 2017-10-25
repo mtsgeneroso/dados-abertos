@@ -11,8 +11,6 @@ import javax.persistence.OneToMany;
 public class Favorecido {
 	
 	@Id
-	@Column(nullable=false, name="id_favorecido")
-	private Long idFavorecido;
 	@Column(name="cod_favorecido")
 	private String codFavorecido; 
 	@Column(name="nome_favorecido")
@@ -21,31 +19,31 @@ public class Favorecido {
 	@OneToMany(mappedBy="pagamentos",
 			   targetEntity=Favorecido.class)
 	private List<Pagamento> pagamentos;
-	
-	public List<Pagamento> getPagamentos() {
-		return pagamentos;
-	}
-	public void setPagamentos(List<Pagamento> pagamentos) {
-		this.pagamentos = pagamentos;
-	}
-	public Long getIdFavorecido() {
-		return idFavorecido;
-	}
-	public void setIdFavorecido(Long idFavorecido) {
-		this.idFavorecido = idFavorecido;
-	}
+
 	public String getCodFavorecido() {
 		return codFavorecido;
 	}
+
 	public void setCodFavorecido(String codFavorecido) {
 		this.codFavorecido = codFavorecido;
 	}
+
 	public String getNomeFavorecido() {
 		return nomeFavorecido;
 	}
+
 	public void setNomeFavorecido(String nomeFavorecido) {
 		this.nomeFavorecido = nomeFavorecido;
 	}
-	
 
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
+	}
+	
+	
+	
 }

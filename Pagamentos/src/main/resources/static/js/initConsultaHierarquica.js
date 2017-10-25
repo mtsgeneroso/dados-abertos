@@ -55,6 +55,31 @@ function pegarValoresBusca(hierarquia, chips){
 	return orgaosConsulta;
 }
 
+function gerarCollapsible(orgaos){
+	tags_collapsible = "";
+	for(var i = 0; i<orgaos.length; i++){
+		tags_collapsible += "<li>" +
+		"<div class='collapsible-header'>" +
+		"<i class='material-icons'>chevron_right</i>" + orgaos[i].nome + " - R$ " + orgaos[i].valorPagamentos +
+		"</div>" +
+		"<div class='collapsible-body'>";
+
+		if(orgaos[i].subordinados != null){
+			tags_collapsible +=
+				"<ul class='collapsible' data-collapsible='expandable'>" +
+				gerarCollapsible(orgaos[i].subordinados) +
+				"</ul>";
+		}
+
+		else{
+			tags_collapsible += "<p>Sem dados</p>";
+		}
+
+		tags_collapsible += "</div></li>";
+	}
+	return tags_collapsible;
+}
+
 $(document).ready(function(){
 	$('.modal').modal();
 	$("#itens-hierarquia, #hierarquia").sortable({
@@ -67,31 +92,6 @@ $(document).ready(function(){
 	$(".resultado-container").hide();
 	$(".btn-steps").hide();
 	$("#btn-prev").addClass("disabled");
-
-	function gerarCollapsible(orgaos){
-		tags_collapsible = "";
-		for(var i = 0; i<orgaos.length; i++){
-			tags_collapsible += "<li>" +
-			"<div class='collapsible-header'>" +
-			"<i class='material-icons'>chevron_right</i>" + orgaos[i].nome + " - R$ " + orgaos[i].valorPagamentos +
-			"</div>" +
-			"<div class='collapsible-body'>";
-
-			if(orgaos[i].subordinados != null){
-				tags_collapsible +=
-					"<ul class='collapsible' data-collapsible='expandable'>" +
-					gerarCollapsible(orgaos[i].subordinados) +
-					"</ul>";
-			}
-
-			else{
-				tags_collapsible += "<p>Sem dados</p>";
-			}
-
-			tags_collapsible += "</div></li>";
-		}
-		return tags_collapsible;
-	}
 
 });
 

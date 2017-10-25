@@ -13,24 +13,24 @@ public class Dado {
 	
 	private String nome;
 	private String tipo;
-	private Long id;
+	private String id;
 	private List<Dado> subordinados;
 	private double valorPagamentos;
 	
 	public Dado(){
-		this.id = 0L;
+		this.id = "0";
 		this.nome = "";
 		this.tipo = "";
 	}
 	
-	public Dado(String nome, String tipo, Long id) {
+	public Dado(String nome, String tipo, String id) {
 		super();
 		this.nome = nome;
 		this.tipo = tipo;
 		this.id = id;
 	}
 	
-	public Dado(String nome, String tipo, Long id, List<Dado> subordinados, double valorPagamentos) {
+	public Dado(String nome, String tipo, String id, List<Dado> subordinados, double valorPagamentos) {
 		super();
 		this.nome = nome;
 		this.tipo = tipo;
@@ -51,10 +51,10 @@ public class Dado {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

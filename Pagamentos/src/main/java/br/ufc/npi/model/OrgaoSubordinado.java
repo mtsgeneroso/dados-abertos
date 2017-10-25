@@ -28,43 +28,62 @@ public class OrgaoSubordinado {
 	@ManyToOne(optional=false)
 	@JoinColumn(name="cod_orgao_superior", 
 	referencedColumnName="cod_orgao_Superior")
-	private OrgaoSuperior orgao_superior;
+	private OrgaoSuperior orgaoSuperior;
 	
-	@OneToMany(mappedBy="unidades_gestoras",
+	@OneToMany(mappedBy="unidadesGestoras",
 			   targetEntity=OrgaoSubordinado.class)
-	private List<UnidadeGestora> unidades_gestoras;
+	private List<UnidadeGestora> unidadesGestoras;
 	
-	
-	public OrgaoSuperior getOrgao_superior() {
-		return orgao_superior;
-	}
-	public void setOrgao_superior(OrgaoSuperior orgao_superior) {
-		this.orgao_superior = orgao_superior;
-	}
-	public List<UnidadeGestora> getUnidades_gestoras() {
-		return unidades_gestoras;
-	}
-	public void setUnidades_gestoras(List<UnidadeGestora> unidades_gestoras) {
-		this.unidades_gestoras = unidades_gestoras;
-	}
+	@OneToMany(mappedBy="pagamentos",
+			targetEntity=OrgaoSubordinado.class)
+	private List<Pagamento> pagamentos;
+
 	public Long getCodOrgaoSubordinado() {
 		return codOrgaoSubordinado;
 	}
+
 	public void setCodOrgaoSubordinado(Long codOrgaoSubordinado) {
 		this.codOrgaoSubordinado = codOrgaoSubordinado;
 	}
+
 	public String getNomeOrgaoSubordinado() {
 		return nomeOrgaoSubordinado;
 	}
+
 	public void setNomeOrgaoSubordinado(String nomeOrgaoSubordinado) {
 		this.nomeOrgaoSubordinado = nomeOrgaoSubordinado;
 	}
+
 	public Long getCodOrgaoSuperior() {
 		return codOrgaoSuperior;
 	}
+
 	public void setCodOrgaoSuperior(Long codOrgaoSuperior) {
 		this.codOrgaoSuperior = codOrgaoSuperior;
 	}
-	
 
+	public OrgaoSuperior getOrgaoSuperior() {
+		return orgaoSuperior;
+	}
+
+	public void setOrgaoSuperior(OrgaoSuperior orgaoSuperior) {
+		this.orgaoSuperior = orgaoSuperior;
+	}
+
+	public List<UnidadeGestora> getUnidadesGestoras() {
+		return unidadesGestoras;
+	}
+
+	public void setUnidadesGestoras(List<UnidadeGestora> unidadesGestoras) {
+		this.unidadesGestoras = unidadesGestoras;
+	}
+
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
+	}
+	
 }

@@ -62,15 +62,15 @@ public class ApiController {
 		ArrayList<Dado> orgaos = new ArrayList<Dado>();
 		
 		for(OrgaoSuperior os : orgaosSuperiores){
-			orgaos.add(new Dado(os.getNomeOrgaoSuperior(), Dado.ORGAO_SUPERIOR, os.getCodOrgaoSuperior()));
+			orgaos.add(new Dado(os.getNomeOrgaoSuperior(), Dado.ORGAO_SUPERIOR, String.valueOf(os.getCodOrgaoSuperior())));
 		}
 		
 		for(OrgaoSubordinado os : orgaosSubordinados){
-			orgaos.add(new Dado(os.getNomeOrgaoSubordinado(), Dado.ORGAO_SUBORDINADO, os.getCodOrgaoSubordinado()));
+			orgaos.add(new Dado(os.getNomeOrgaoSubordinado(), Dado.ORGAO_SUBORDINADO, String.valueOf(os.getCodOrgaoSubordinado())));
 		}
 		
 		for(UnidadeGestora ug : unidadesGestoras){
-			orgaos.add(new Dado(ug.getNomeUnidadeGestora(), Dado.UNIDADE_GESTORA, ug.getCodUnidadeGestora()));
+			orgaos.add(new Dado(ug.getNomeUnidadeGestora(), Dado.UNIDADE_GESTORA, String.valueOf(ug.getCodUnidadeGestora())));
 		}
 		
 		return orgaos;
@@ -83,7 +83,7 @@ public class ApiController {
 		
 		List<OrgaoSuperior> orgaosSuperiores = orgaoSuperiorService.findAll();
 		for(OrgaoSuperior os : orgaosSuperiores){
-			orgaos.add(new Dado(os.getNomeOrgaoSuperior(), Dado.ORGAO_SUPERIOR, os.getCodOrgaoSuperior()));
+			orgaos.add(new Dado(os.getNomeOrgaoSuperior(), Dado.ORGAO_SUPERIOR, String.valueOf(os.getCodOrgaoSuperior())));
 		}
 		
 		return orgaos;
@@ -95,7 +95,7 @@ public class ApiController {
 		
 		List<OrgaoSubordinado> orgaosSubordinados = orgaoSubordinadoService.findAll();
 		for(OrgaoSubordinado os : orgaosSubordinados){
-			orgaos.add(new Dado(os.getNomeOrgaoSubordinado(), Dado.ORGAO_SUBORDINADO, os.getCodOrgaoSubordinado()));
+			orgaos.add(new Dado(os.getNomeOrgaoSubordinado(), Dado.ORGAO_SUBORDINADO, String.valueOf(os.getCodOrgaoSubordinado())));
 		}
 		
 		return orgaos;
@@ -107,7 +107,7 @@ public class ApiController {
 		
 		List<UnidadeGestora> unidadeGestoras = unidadeGestoraService.findAll();
 		for(UnidadeGestora u : unidadeGestoras){
-			orgaos.add(new Dado(u.getNomeUnidadeGestora(), Dado.UNIDADE_GESTORA, u.getCodUnidadeGestora()));
+			orgaos.add(new Dado(u.getNomeUnidadeGestora(), Dado.UNIDADE_GESTORA, String.valueOf(u.getCodUnidadeGestora())));
 		}
 		
 		return orgaos;
@@ -119,7 +119,7 @@ public class ApiController {
 		
 		List<Acao> acoes = acaoService.findAll();
 		for(Acao a : acoes){
-			orgaos.add(new Dado(a.getNomeAcao(), Dado.ACAO, a.getIdAcao()));
+			orgaos.add(new Dado(a.getNomeAcao(), Dado.ACAO, a.getCodAcao()));
 		}
 		
 		return orgaos;
@@ -131,7 +131,7 @@ public class ApiController {
 		
 		List<Programa> programas = programaService.findAll();
 		for(Programa p : programas){
-			orgaos.add(new Dado(p.getNomePrograma(), Dado.PROGRAMA, p.getCodPrograma()));
+			orgaos.add(new Dado(p.getNomePrograma(), Dado.PROGRAMA, String.valueOf(p.getCodPrograma())));
 		}
 		
 		return orgaos;
@@ -143,7 +143,7 @@ public class ApiController {
 		
 		List<Favorecido> favorecidos = favorecidoService.findAll();
 		for(Favorecido f : favorecidos){
-			orgaos.add(new Dado(f.getNomeFavorecido(), Dado.FAVORECIDO, f.getIdFavorecido()));
+			orgaos.add(new Dado(f.getNomeFavorecido(), Dado.FAVORECIDO, f.getCodFavorecido()));
 		}
 		
 		return orgaos;
@@ -158,7 +158,7 @@ public class ApiController {
 		
 		int k = 0;
 		for(Dado o : orgaos){
-			pagamentos = pagamentoService.findPagamentosByMonths(o.getTipo(), o.getId());				
+			pagamentos = pagamentoService.findPagamentosByMonths(o.getTipo(), Long.valueOf(o.getId()));				
 			
 			Double valores[] = new Double[12];
 			for(int i = 0; i<valores.length; i++){
@@ -194,20 +194,20 @@ public class ApiController {
 		List<Dado> subOs1 = new ArrayList<Dado>();
 		
 		List<Dado> subsubOs1 = new ArrayList<Dado>();
-		subsubOs1.add(new Dado("Sub Órgão 1", "orgaoSubordinado", 12L, null, 1000));
-		subsubOs1.add(new Dado("Sub Órgão 2", "orgaoSubordinado", 13L, null, 1000));
+		subsubOs1.add(new Dado("Sub Órgão 1", "orgaoSubordinado", String.valueOf(12L), null, 1000));
+		subsubOs1.add(new Dado("Sub Órgão 2", "orgaoSubordinado", String.valueOf(13L), null, 1000));
 		
-		subOs1.add(new Dado("Sub Órgão 1", "orgaoSubordinado", 12L, subsubOs1, 1000));
-		subOs1.add(new Dado("Sub Órgão 2", "orgaoSubordinado", 13L, null, 1000));
+		subOs1.add(new Dado("Sub Órgão 1", "orgaoSubordinado", String.valueOf(12L), subsubOs1, 1000));
+		subOs1.add(new Dado("Sub Órgão 2", "orgaoSubordinado", String.valueOf(13L), null, 1000));
 		
-		Dado os1 = new Dado("Órgão Superior 1", "orgaoSuperior", 1L, subOs1, 2000);
+		Dado os1 = new Dado("Órgão Superior 1", "orgaoSuperior", String.valueOf(1L), subOs1, 2000);
 		
 		List<Dado> subOs2 = new ArrayList<Dado>();
-		subOs2.add(new Dado("Sub Órgão 1", "orgaoSubordinado", 12L, null, 1000));
-		subOs2.add(new Dado("Sub Órgão 2", "orgaoSubordinado", 13L, null, 1000));
-		subOs2.add(new Dado("Sub Órgão 3", "orgaoSubordinado", 14L, null, 3000));
+		subOs2.add(new Dado("Sub Órgão 1", "orgaoSubordinado", String.valueOf(12L), null, 1000));
+		subOs2.add(new Dado("Sub Órgão 2", "orgaoSubordinado", String.valueOf(13L), null, 1000));
+		subOs2.add(new Dado("Sub Órgão 3", "orgaoSubordinado", String.valueOf(14L), null, 3000));
 		
-		Dado os2 = new Dado("Órgão Superior 2", "orgaoSuperior", 2L, subOs2, 5000);
+		Dado os2 = new Dado("Órgão Superior 2", "orgaoSuperior", String.valueOf(2L), subOs2, 5000);
 		
 		orgaos.add(os1);
 		orgaos.add(os2);
