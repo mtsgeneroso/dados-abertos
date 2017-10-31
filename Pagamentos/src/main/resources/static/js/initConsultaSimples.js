@@ -11,8 +11,8 @@ var colors = ["rgb(255,0,0)",
 
 $(document).ready(function(){
 
-	$('.modal').modal();
-
+	$(".modal").modal();
+	$("#loadChart").hide();
 	$(".grafico-container").hide();
 	$(".detalhes-container").hide();
 
@@ -49,6 +49,9 @@ $(document).ready(function(){
 
 	//Ação de click no botão
 	$('#btn-consultar').click(function(){
+		
+		$("#loadChart").show();
+		
 		$(".grafico-container").show();
 		$(".grafico-container").empty();
 
@@ -175,11 +178,12 @@ $(document).ready(function(){
 						grafico.destroy();
 						grafico = new Chart(ctx, newChart);
 
+						$("#loadChart").hide();
 					});
 				}
 			});
 
-			$(".detalhes-container").append("<h5>Clique para ver detalhes:</h5>");
+			$(".detalhes-container").append("<div class='row'><h5>Clique para ver detalhes:</h5></div>");
 
 			for(var i = 0; i<orgaosConsulta.length; i++){
 				$(".detalhes-container").append("<div class='col l4 s12 m4'>" +
@@ -194,9 +198,6 @@ $(document).ready(function(){
 
 
 		}
-
-
-
 
 	});
 });

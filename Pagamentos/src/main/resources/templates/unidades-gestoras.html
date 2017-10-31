@@ -29,7 +29,15 @@
 			<div class="container">
 
 				<div class="row">
-					<div class="col s12 m6">
+					<div class="col s12">
+
+						<div id="loadChart" class="container">
+							<p>Carregando gráfico...</p>
+							<div class="progress">
+      							<div class="indeterminate"></div>
+  							</div>
+						</div>
+
 						<p>
 						<div id="rangeMeses"></div>
 						</p>
@@ -42,8 +50,6 @@
 						<br/><br/>
 						<canvas id="chart"></canvas>
 						<br/>
-					</div>
-					<div class="col s6">
 					</div>
 				</div>
 
@@ -63,10 +69,10 @@
 				<div class="row" id="botoes">
 					<div th:each="unidade : ${unidadesGestoras}">
 						<div class="col s12 m3 l2">
-							<a th:href="@{/unidadeGestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}">
+							<a th:href="@{/unidade-gestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}">
 								<div class="card-panel main-color-hoverable"
 									style="height: 120px;">
-									<p th:text="${unidade.nomeUnidadeGestora}" style="font-size: 12px">[...]</p>
+									<p th:text="${unidade.nomeUnidadeGestora}" th:classappend="${#strings.length(unidade.nomeUnidadeGestora) > 60} ? 'truncate'" style="font-size: 12px">[...]</p>
 								</div>
 							</a>
 						</div>
@@ -88,7 +94,7 @@
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();
-		initInterface("/unidadeGestora/?id=" + id);
+		initInterface("/unidade-gestora/?id=" + id);
 	</script>
 </body>
 </html>

@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Dado {
 	
-	public static final String UNIDADE_GESTORA = "unidadeGestora";
-	public static final String ORGAO_SUPERIOR = "orgaoSuperior";
-	public static final String ORGAO_SUBORDINADO = "orgaoSubordinado";
+	public static final String UNIDADE_GESTORA = "unidade-gestora";
+	public static final String ORGAO_SUPERIOR = "orgao-superior";
+	public static final String ORGAO_SUBORDINADO = "orgao-subordinado";
 	public static final String PROGRAMA = "programa";
 	public static final String ACAO = "acao";
 	public static final String FAVORECIDO = "favorecido";

@@ -17,61 +17,73 @@
 	type="text/css" rel="stylesheet" media="screen,projection" />
 <link th:href="@{css/nouislider.css}" type="text/css" rel="stylesheet" />
 <link th:href="@{css/style.css}" type="text/css" rel="stylesheet"
-	media="screen,projection"/>
+	media="screen,projection" />
 </head>
 <body>
 	<div th:include="fragments/navbar"></div>
 
 	<main>
 
-		<div class="container main-container">
-			<div class="consulta-container">
-				<h5>Consulta Simples:</h5>
-				<div class="row">
-					<div class="col s12 m12 l9">
-						<div class="chips chips-autocomplete"></div>
-					</div>
-					<div class="col l3">
-						<a class="waves-effect waves-light btn main-color-hoverable center" id="btn-consultar"><i class="material-icons right">search</i>Consultar</a>	
-					</div>
+	<div class="container main-container">
+		<div class="consulta-container">
+			<h5>Consulta Simples:</h5>
+			<div class="row">
+				<div class="col s12 m12 l9">
+					<div class="chips chips-autocomplete"></div>
+				</div>
+				<div class="col l3">
+					<a class="waves-effect waves-light btn main-color-hoverable center"
+						id="btn-consultar"><i class="material-icons right">search</i>Consultar</a>
 				</div>
 			</div>
+		</div>
 
-			<div class="grafico-container">
+		<div id="loadChart" class="container">
+			<p>Carregando gráfico...</p>
+			<div class="progress">
+				<div class="indeterminate"></div>
 			</div>
-
-			<div class="detalhes-container row">
-			</div>
-
 		</div>
 
-		<!-- Modal Consulta Vazia -->
-		<div id="modal-consulta" class="modal">
-			<div class="modal-content">
-		    	<h4>Digite para consultar</h4>
-		      	<p>Você precisa selecionar os órgãos do governo que serão consultados.
-		      	<br/>Para isso, basta digitar na caixa de pesquisa e selecionar o órgão
-		      	dentre as sugestões que aparecerão.</p>
-		    </div>
-		    <div class="modal-footer">
-		      	<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Entendi!</a>
-		    </div>
-		</div>
+		<div class="grafico-container"></div>
 
-		<!-- Modal Órgãos Inexistentes -->
-		<div id="modal-orgaos-inexistentes" class="modal">
-			<div class="modal-content">
-		    	<h4>Órgão inexistente</h4>
-		      	<p>Esse órgão não existe... Tente selecionar órgãos que aparecem na sugestãos de consulta quando você começa a digitar.
-		      	<br/>
-		      	Você pode prosseguir com a consulta, mas os órgãos inexistentes serão desconsiderados.
-		      	</p>
+		<div class="detalhes-container row"></div>
 
-		    </div>
-		    <div class="modal-footer">
-		      	<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Entendi!</a>
-		    </div>
+	</div>
+
+	<!-- Modal Consulta Vazia -->
+	<div id="modal-consulta" class="modal">
+		<div class="modal-content">
+			<h4>Digite para consultar</h4>
+			<p>
+				Você precisa selecionar os órgãos do governo que serão consultados.
+				<br />Para isso, basta digitar na caixa de pesquisa e selecionar o
+				órgão dentre as sugestões que aparecerão.
+			</p>
 		</div>
+		<div class="modal-footer">
+			<a href="#!"
+				class="modal-action modal-close waves-effect waves-green btn-flat">Entendi!</a>
+		</div>
+	</div>
+
+	<!-- Modal Órgãos Inexistentes -->
+	<div id="modal-orgaos-inexistentes" class="modal">
+		<div class="modal-content">
+			<h4>Órgão inexistente</h4>
+			<p>
+				Esse órgão não existe... Tente selecionar órgãos que aparecem na
+				sugestãos de consulta quando você começa a digitar. <br /> Você
+				pode prosseguir com a consulta, mas os órgãos inexistentes serão
+				desconsiderados.
+			</p>
+
+		</div>
+		<div class="modal-footer">
+			<a href="#!"
+				class="modal-action modal-close waves-effect waves-green btn-flat">Entendi!</a>
+		</div>
+	</div>
 
 	</main>
 

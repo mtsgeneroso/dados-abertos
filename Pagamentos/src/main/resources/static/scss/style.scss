@@ -77,10 +77,12 @@ main {
 
 .main-color{
 	background-color: $main-color;
+	color: $main-color-black;
 }
 
 .main-color-black{
-	background-color: $main-color;
+	background-color: $main-color-black;
+	color: $main-color;
 }
 
 .main-color-text{

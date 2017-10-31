@@ -77,7 +77,7 @@ public class ApiController {
 		
 	}
 	
-	@RequestMapping(path="/orgaos-superiores")
+	@RequestMapping(path="/"+Dado.ORGAO_SUPERIOR)
 	public List<Dado> listarOrgaosSuperiores(){
 		ArrayList<Dado> orgaos = new ArrayList<Dado>();
 		
@@ -89,7 +89,7 @@ public class ApiController {
 		return orgaos;
 	}
 	
-	@RequestMapping(path="/orgaos-subordinados")
+	@RequestMapping(path="/"+Dado.ORGAO_SUBORDINADO)
 	public List<Dado> listarOrgaosSubordinados(){
 		ArrayList<Dado> orgaos = new ArrayList<Dado>();
 		
@@ -101,7 +101,7 @@ public class ApiController {
 		return orgaos;
 	}
 	
-	@RequestMapping(path="/unidades-gestoras")
+	@RequestMapping(path="/"+Dado.UNIDADE_GESTORA)
 	public List<Dado> listarUnidadesGestoras(){
 		ArrayList<Dado> orgaos = new ArrayList<Dado>();
 		
@@ -125,7 +125,7 @@ public class ApiController {
 		return orgaos;
 	}
 	
-	@RequestMapping(path="/programas")
+	@RequestMapping(path="/"+Dado.PROGRAMA)
 	public List<Dado> listarProgramas(){
 		ArrayList<Dado> orgaos = new ArrayList<Dado>();
 		
@@ -137,7 +137,7 @@ public class ApiController {
 		return orgaos;
 	}
 	
-	@RequestMapping(path="/favorecidos")
+	@RequestMapping(path="/"+Dado.FAVORECIDO)
 	public List<Dado> listarFavorecidos(){
 		ArrayList<Dado> orgaos = new ArrayList<Dado>();
 		
@@ -191,26 +191,6 @@ public class ApiController {
 		
 		ArrayList<Dado> orgaos = new ArrayList<Dado>();
 		
-		List<Dado> subOs1 = new ArrayList<Dado>();
-		
-		List<Dado> subsubOs1 = new ArrayList<Dado>();
-		subsubOs1.add(new Dado("Sub Órgão 1", "orgaoSubordinado", String.valueOf(12L), null, 1000));
-		subsubOs1.add(new Dado("Sub Órgão 2", "orgaoSubordinado", String.valueOf(13L), null, 1000));
-		
-		subOs1.add(new Dado("Sub Órgão 1", "orgaoSubordinado", String.valueOf(12L), subsubOs1, 1000));
-		subOs1.add(new Dado("Sub Órgão 2", "orgaoSubordinado", String.valueOf(13L), null, 1000));
-		
-		Dado os1 = new Dado("Órgão Superior 1", "orgaoSuperior", String.valueOf(1L), subOs1, 2000);
-		
-		List<Dado> subOs2 = new ArrayList<Dado>();
-		subOs2.add(new Dado("Sub Órgão 1", "orgaoSubordinado", String.valueOf(12L), null, 1000));
-		subOs2.add(new Dado("Sub Órgão 2", "orgaoSubordinado", String.valueOf(13L), null, 1000));
-		subOs2.add(new Dado("Sub Órgão 3", "orgaoSubordinado", String.valueOf(14L), null, 3000));
-		
-		Dado os2 = new Dado("Órgão Superior 2", "orgaoSuperior", String.valueOf(2L), subOs2, 5000);
-		
-		orgaos.add(os1);
-		orgaos.add(os2);
 		
 		return orgaos;
 		
@@ -335,7 +315,7 @@ public class ApiController {
 		}
 
 		for (int i = 0; i<pagamentos.size(); i++){
-			valores[(int)pagamentos.get(i)[0]-1] = (Double) pagamentos.get(i)[1];
+			valores[(int)pagamentos.get(i)[0]-1] = (Double)pagamentos.get(i)[1];
 		}
 
 

@@ -22,4 +22,5 @@ public class OrgaoSuperiorService {
 		return orgaoSuperiorRepository.findByOrderByNomeOrgaoSuperiorAsc();
 	}
 	
+	
 }

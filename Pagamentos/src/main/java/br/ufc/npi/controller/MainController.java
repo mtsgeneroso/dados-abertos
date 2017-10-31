@@ -15,6 +15,7 @@ import br.ufc.npi.model.Acao;
 import br.ufc.npi.model.OrgaoSubordinado;
 import br.ufc.npi.model.OrgaoSuperior;
 import br.ufc.npi.model.UnidadeGestora;
+import br.ufc.npi.model.request.Dado;
 import br.ufc.npi.model.ui.Breadcumb;
 import br.ufc.npi.service.OrgaoSubordinadoService;
 import br.ufc.npi.service.OrgaoSuperiorService;
@@ -67,7 +68,7 @@ public class MainController {
 		return "consulta-simples";
 	}
 	
-	@RequestMapping(path="/orgaos-superiores")
+	@RequestMapping(path="/"+Dado.ORGAO_SUPERIOR)
 	public String paginaOrgaosSuperiores(Model model){
 		
 		List<OrgaoSuperior> orgaosSuperiores = orgaoSuperiorService.findAll();
@@ -75,14 +76,14 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(0L, "ÓRGÃOS SUPERIORES", "/orgaos-superiores"));
+		caminho.add(new Breadcumb(0L, "ÓRGÃOS SUPERIORES", "/"+Dado.ORGAO_SUPERIOR));
 		model.addAttribute("caminho", caminho);
 		
 		return "orgaos-superiores";
 		
 	}
 	
-	@RequestMapping(path="/orgaos-subordinados")
+	@RequestMapping(path="/"+Dado.ORGAO_SUBORDINADO)
 	public String paginaOrgaosSubordinados(Model model){
 		
 		List<OrgaoSubordinado> orgaosSubordinados = orgaoSubordinadoService.findAll();
@@ -90,14 +91,14 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(0L, "ÓRGÃOS SUBORDINADOS", "/orgaos-subordinados"));
+		caminho.add(new Breadcumb(0L, "ÓRGÃOS SUBORDINADOS", "/"+Dado.ORGAO_SUBORDINADO));
 		model.addAttribute("caminho", caminho);
 		
 		return "orgaos-subordinados";
 		
 	}
 	
-	@RequestMapping(path="/unidades-gestoras")
+	@RequestMapping(path="/"+Dado.UNIDADE_GESTORA)
 	public String paginaUnidadesGestoras(Model model){
 		
 		List<UnidadeGestora> unidadesGestoras = unidadeGestoraService.findAll();
@@ -105,14 +106,14 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(0L, "UNIDADES GESTORAS", "/unidades-gestoras"));
+		caminho.add(new Breadcumb(0L, "UNIDADES GESTORAS", "/"+Dado.UNIDADE_GESTORA));
 		model.addAttribute("caminho", caminho);
 		
 		return "unidades-gestoras";
 		
 	}
 	
-	@RequestMapping(path="/orgaoSuperior/{id}")
+	@RequestMapping(path="/"+Dado.ORGAO_SUPERIOR+"/{id}")
 	public String orgaoSuperior(@PathVariable("id")Long id, Model model){
 		
 		OrgaoSuperior orgaoSuperior = orgaoSuperiorService.getById(id);
@@ -123,14 +124,14 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(orgaoSuperior.getCodOrgaoSuperior(), orgaoSuperior.getNomeOrgaoSuperior(),"/orgaoSuperior/"+id));
+		caminho.add(new Breadcumb(orgaoSuperior.getCodOrgaoSuperior(), orgaoSuperior.getNomeOrgaoSuperior(),"/"+Dado.ORGAO_SUPERIOR+"/"+id));
 		
 		model.addAttribute("caminho", caminho);
 		
 		return "orgao-superior";
 	}
 	
-	@RequestMapping(path="/orgaoSubordinado/{id}")
+	@RequestMapping(path="/"+Dado.ORGAO_SUBORDINADO+"/{id}")
 	public String orgaoSubordinado(@PathVariable("id")Long id, Model model){
 		
 		OrgaoSubordinado orgaoSubordinado = orgaoSubordinadoService.getById(id);
@@ -143,8 +144,8 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(orgaoSuperior.getCodOrgaoSuperior(), orgaoSuperior.getNomeOrgaoSuperior(), "/orgaoSuperior/" + orgaoSuperior.getCodOrgaoSuperior()));
-		caminho.add(new Breadcumb(orgaoSubordinado.getCodOrgaoSubordinado(), orgaoSubordinado.getNomeOrgaoSubordinado(),"/orgaoSubordinado/"+id));
+		caminho.add(new Breadcumb(orgaoSuperior.getCodOrgaoSuperior(), orgaoSuperior.getNomeOrgaoSuperior(), "/"+Dado.ORGAO_SUPERIOR+"/" + orgaoSuperior.getCodOrgaoSuperior()));
+		caminho.add(new Breadcumb(orgaoSubordinado.getCodOrgaoSubordinado(), orgaoSubordinado.getNomeOrgaoSubordinado(),"/"+Dado.ORGAO_SUBORDINADO+"/"+id));
 		
 		model.addAttribute("caminho", caminho);
 		
@@ -152,7 +153,7 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping(path="/unidadeGestora/{id}")
+	@RequestMapping(path="/"+Dado.UNIDADE_GESTORA+"/{id}")
 	public String unidadeGestora(@PathVariable("id")Long id, Model model){
 		
 		UnidadeGestora unidadeGestora = unidadeGestoraService.getById(id);
@@ -167,9 +168,9 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(orgaoSuperior.getCodOrgaoSuperior(), orgaoSuperior.getNomeOrgaoSuperior(), "/orgaoSuperior/" + orgaoSuperior.getCodOrgaoSuperior()));
-		caminho.add(new Breadcumb(orgaoSubordinado.getCodOrgaoSubordinado(), orgaoSubordinado.getNomeOrgaoSubordinado(),"/orgaoSubordinado/"+orgaoSubordinado.getCodOrgaoSubordinado()));
-		caminho.add(new Breadcumb(unidadeGestora.getCodUnidadeGestora(), unidadeGestora.getNomeUnidadeGestora(), "/unidadeGestora/" + id));
+		caminho.add(new Breadcumb(orgaoSuperior.getCodOrgaoSuperior(), orgaoSuperior.getNomeOrgaoSuperior(), "/"+Dado.ORGAO_SUPERIOR+"/" + orgaoSuperior.getCodOrgaoSuperior()));
+		caminho.add(new Breadcumb(orgaoSubordinado.getCodOrgaoSubordinado(), orgaoSubordinado.getNomeOrgaoSubordinado(),"/"+Dado.ORGAO_SUBORDINADO+"/"+orgaoSubordinado.getCodOrgaoSubordinado()));
+		caminho.add(new Breadcumb(unidadeGestora.getCodUnidadeGestora(), unidadeGestora.getNomeUnidadeGestora(), "/"+Dado.UNIDADE_GESTORA+"/" + id));
 		
 		model.addAttribute("caminho", caminho);
 		

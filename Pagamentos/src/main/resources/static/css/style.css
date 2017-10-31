@@ -57,10 +57,12 @@ main {
     cursor: move; }
 
 .main-color {
-  background-color: #90b5b5; }
+  background-color: #90b5b5;
+  color: #3f7575; }
 
 .main-color-black {
-  background-color: #90b5b5; }
+  background-color: #3f7575;
+  color: #90b5b5; }
 
 .main-color-text {
   font-style: bold;

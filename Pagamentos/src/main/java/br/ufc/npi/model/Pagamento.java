@@ -2,6 +2,7 @@ package br.ufc.npi.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +19,7 @@ public class Pagamento {
 	@Column(name="numero_documento")
 	private String numeroDocumento;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="cod_orgao_superior",
 	referencedColumnName="cod_orgao_superior")
 	private OrgaoSuperior orgaoSuperior;
@@ -29,7 +30,7 @@ public class Pagamento {
 			name = "cod_orgao_superior")
 	private Long codOrgaoSuperior;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="cod_orgao_subordinado",
 	referencedColumnName="cod_orgao_subordinado")
 	private OrgaoSubordinado orgaoSubordinado;
@@ -40,7 +41,7 @@ public class Pagamento {
 			name = "cod_orgao_subordinado")
 	private Long codOrgaoSubordinado;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="cod_unidade_gestora",
 	referencedColumnName="cod_unidade_gestora")
 	private UnidadeGestora unidadeGestora;
@@ -51,7 +52,7 @@ public class Pagamento {
 			name = "cod_unidade_gestora")
 	private Long codUnidadeGestora;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="cod_acao",
 	referencedColumnName="cod_acao")
 	private Acao acao;
@@ -62,7 +63,7 @@ public class Pagamento {
 			name="cod_acao")
 	private String codAcao;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="cod_programa",
 	referencedColumnName="cod_programa")
 	private Programa programa;
@@ -73,7 +74,7 @@ public class Pagamento {
 			name = "cod_programa")
 	private Long codPrograma;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="cod_funcao",
 	referencedColumnName="cod_funcao")
 	private Funcao funcao;
@@ -84,7 +85,7 @@ public class Pagamento {
 			name = "cod_funcao")
 	private Long codFuncao;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="cod_subfuncao", 
 	referencedColumnName="cod_subfuncao")
 	private Subfuncao subfuncao;
@@ -95,7 +96,7 @@ public class Pagamento {
 			name = "cod_subfuncao")
 	private Long codSubfuncao;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="cod_favorecido", 
 	referencedColumnName="cod_favorecido")
 	private Favorecido favorecido;
@@ -106,7 +107,7 @@ public class Pagamento {
 			name="cod_favorecido")
 	private String codFavorecido; 
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="cod_data", 
 	referencedColumnName="cod_data")
 	private Data data;
@@ -117,7 +118,7 @@ public class Pagamento {
 			name="cod_data")
 	private Long codData;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="cod_elemento_despesa", 
 	referencedColumnName="cod_elemento_despesa")
 	private ElementoDespesa elementoDespesa;
@@ -128,7 +129,7 @@ public class Pagamento {
 			name = "cod_elemento_despesa")
 	private Long codElementoDespesa; 
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	@JoinColumn(name="cod_grupo_despesa",
 	referencedColumnName="cod_grupo_despesa")
 	private GrupoDespesa grupoDespesa;
