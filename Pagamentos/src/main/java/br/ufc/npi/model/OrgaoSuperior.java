@@ -12,32 +12,49 @@ public class OrgaoSuperior {
 
 	@Column(name="nome_orgao_superior")
 	private String nomeOrgaoSuperior; 
+	
 	@Id
 	@Column(nullable=false, name="cod_orgao_superior")
 	private Long codOrgaoSuperior;
 	
-	@OneToMany(mappedBy="orgaos_subordinados",
+	@OneToMany(mappedBy="orgaosSubordinados",
 			   targetEntity=OrgaoSuperior.class)
-	private List<OrgaoSubordinado> orgaos_subordinados;
+	private List<OrgaoSubordinado> orgaosSubordinados;
 	
-	public List<OrgaoSubordinado> getOrgaos_subordinados() {
-		return orgaos_subordinados;
-	}
-	public void setOrgaos_subordinados(List<OrgaoSubordinado> orgaos_subordinados) {
-		this.orgaos_subordinados = orgaos_subordinados;
-	}
+	@OneToMany(mappedBy="pagamentos", 
+			targetEntity=OrgaoSuperior.class)
+	private List<Pagamento> pagamentos;
+
 	public String getNomeOrgaoSuperior() {
 		return nomeOrgaoSuperior;
 	}
+
 	public void setNomeOrgaoSuperior(String nomeOrgaoSuperior) {
 		this.nomeOrgaoSuperior = nomeOrgaoSuperior;
 	}
+
 	public Long getCodOrgaoSuperior() {
 		return codOrgaoSuperior;
 	}
+
 	public void setCodOrgaoSuperior(Long codOrgaoSuperior) {
 		this.codOrgaoSuperior = codOrgaoSuperior;
 	}
-	
-	
+
+	public List<OrgaoSubordinado> getOrgaosSubordinados() {
+		return orgaosSubordinados;
+	}
+
+	public void setOrgaosSubordinados(List<OrgaoSubordinado> orgaosSubordinados) {
+		this.orgaosSubordinados = orgaosSubordinados;
+	}
+
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
+	}
+		
 }

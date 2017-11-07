@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-<title>Starter Template - Materialize</title>
+<title>BODS - Início</title>
 
 <!-- CSS  -->
 <link
@@ -20,69 +20,58 @@
 	media="screen,projection" />
 </head>
 <body>
-	
 	<div th:include="fragments/navbar"></div>
-	
-	<main>
-		<div class="section no-pad-bot" id="index-banner">
-			<div class="container center">
-				
-				<p>
-				<div id="rangeMeses"></div>
-				</p>
-				
-				<div id="mensagemChart">
-					<h5>Sem dados disponíveis</h5>
-				</div>
-				
-				<br/><br/>
-				<canvas id="chart"></canvas>
-				<br/>
-				
-				<div class="preloader-wrapper active" id="loadChart">
-					<div class="spinner-layer spinner-red-only">
-				      <div class="circle-clipper left">
-				        <div class="circle"></div>
-				      </div><div class="gap-patch">
-				        <div class="circle"></div>
-				      </div><div class="circle-clipper right">
-				        <div class="circle"></div>
-				      </div>
-				    </div>
-				</div>
-				
-				<div class="row" id="botoes">
-					<h4>Ministérios</h4>
-					<div th:each="orgao : ${orgaosSuperiores}">
-						<div class="col s12 m4 l2">
-							<a th:href="@{/orgaoSuperior/{id}(id=${orgao.codOrgaoSuperior})}" th:title="${orgao.nomeOrgaoSuperior}">
-								<div class="card-panel red-bods white-text hoverable"
-									style="padding-top: 2px; height: 120px;">
-									<p th:text="${orgao.nomeOrgaoSuperior}" th:classappend="${#strings.length(orgao.nomeOrgaoSuperior) > 75} ? 'truncate'" style="font-size: 12px">[...]</p>
-								</div>
-							</a>
-						</div>
+
+	<main> <!-- <div th:include="fragments/sidenav"></div> -->
+
+	<div class="container main-container">
+
+		<div class="row">
+			<!--   Icon Section   -->
+			<div class="col l12 s12 m12">
+				<h5>Órgãos do Governo Federal:</h5>
+			</div>
+			<div class="col l4 s12 m4">
+				<a th:href="@{/orgao-superior}" class="center">
+					<div class="card-panel main-color-hoverable">
+						<h2 class="center">
+							<i class="material-icons medium">settings</i>
+						</h2>
+						<p class="center">Órgãos Superiores</p>
 					</div>
-	
-				</div>
-	
-	
+				</a>
+			</div>
+
+			<div class="col l4 s12 m4">
+				<a th:href="@{/orgao-subordinado}">
+					<div class="card-panel main-color-hoverable">
+						<h2 class="center">
+							<i class="material-icons medium">settings</i>
+						</h2>
+						<p class="center">Órgãos Subordinados</p>
+					</div>
+				</a>
+			</div>
+
+			<div class="col l4 s12 m4">
+				<a th:href="@{/unidade-gestora}">
+					<div class="card-panel main-color-hoverable">
+						<h2 class="center">
+							<i class="material-icons medium">settings</i>
+						</h2>
+						<p class="center">Unidades Gestoras</p>
+					</div>
+				</a>
 			</div>
 		</div>
+		</div>
 	</main>
-	
+
 	<div th:include="fragments/footer"></div>
 
 
 	<!--  Scripts-->
-	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-	<script th:src="@{/webjars/materializecss/js/materialize.min.js}"></script>
-	<script th:src="@{/webjars/chartjs/Chart.min.js}"></script>
-	<script th:src="@{/js/nouislider.min.js}"></script>
-	<script th:src="@{/webjars/numeral-js/min/numeral.min.js}"></script>
-	<script th:src="@{/js/init.js}"></script>
-	<script>
-		initInterface("");	
-	</script>
+	<div th:include="fragments/scripts"></div>
+
 </body>
 </html>

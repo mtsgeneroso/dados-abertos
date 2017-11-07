@@ -13,5 +13,6 @@ import br.ufc.npi.model.OrgaoSubordinado;
 public interface OrgaoSubordinadoRepository extends JpaRepository<OrgaoSubordinado, Long> {
 	
 	public List<OrgaoSubordinado> findByCodOrgaoSuperiorOrderByNomeOrgaoSubordinadoAsc(Long codOrgaoSuperior);
+	public List<OrgaoSubordinado> findByOrderByNomeOrgaoSubordinadoAsc();
 	
 }

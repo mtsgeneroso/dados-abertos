@@ -13,7 +13,10 @@ public class UnidadeGestoraService {
 
 	@Autowired
 	private UnidadeGestoraRepository unidadeGestoraRepository;
-	
+
+	public List<UnidadeGestora> findAll(){
+		return unidadeGestoraRepository.findByOrderByNomeUnidadeGestoraAsc();
+	}
 
 	public UnidadeGestora getById(Long id){
 		return unidadeGestoraRepository.findOne(id);

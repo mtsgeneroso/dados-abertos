@@ -1,0 +1,122 @@
+CREATE TABLE orgao_superior (
+nome_orgao_superior VARCHAR (255),
+cod_orgao_superior INTEGER PRIMARY KEY
+);
+
+CREATE TABLE orgao_subordinado (
+cod_orgao_subordinado INTEGER PRIMARY KEY,
+nome_orgao_subordinado VARCHAR (255),
+cod_orgao_superior INTEGER
+);
+
+
+CREATE TABLE unidade_gestora (
+cod_unidade_gestora INTEGER PRIMARY KEY,
+nome_unidade_gestora VARCHAR (255),
+cod_gestao_pagamento INTEGER,
+cod_orgao_subordinado INTEGER,
+FOREIGN KEY(cod_orgao_subordinado) REFERENCES orgao_subordinado (cod_orgao_subordinado)
+);
+
+CREATE TABLE programa (
+cod_programa INTEGER PRIMARY KEY,
+nome_programa VARCHAR (255)
+);
+
+CREATE TABLE acao (
+cod_acao VARCHAR (255) PRIMARY KEY,
+nome_acao VARCHAR (255),
+linguagem_cidada VARCHAR (255)
+
+);
+
+CREATE TABLE subfuncao (
+nome_subfuncao VARCHAR (255),
+cod_subfuncao INTEGER PRIMARY KEY
+);
+
+CREATE TABLE funcao (
+nome_funcao VARCHAR (255),
+cod_funcao INTEGER PRIMARY KEY
+);
+
+CREATE TABLE elemento_despesa (
+nome_elemento_despesa VARCHAR (255),
+cod_elemento_despesa INTEGER PRIMARY KEY
+);
+
+CREATE TABLE grupo_despesa (
+cod_grupo_despesa INTEGER PRIMARY KEY,
+nome_grupo_despesa VARCHAR (255)
+);
+
+CREATE TABLE data (
+dia INTEGER,
+mes INTEGER,
+ano INTEGER,
+id_data SERIAL PRIMARY KEY
+);
+
+CREATE TABLE favorecido (
+cod_favorecido VARCHAR (255) PRIMARY KEY,
+nome_favorecido VARCHAR (255)
+
+);
+
+CREATE TABLE pagamento (
+cod_pagamento SERIAL PRIMARY KEY,
+valor REAL,
+cod_orgao_superior INTEGER,
+cod_orgao_subordinado INTEGER,
+cod_unidade_gestora INTEGER,
+cod_programa INTEGER,
+cod_funcao INTEGER,
+cod_grupo_despesa INTEGER,
+cod_favorecido VARCHAR(255),
+cod_subfuncao INTEGER,
+cod_acao VARCHAR(255),
+cod_elemento_despesa INTEGER,
+id_data INTEGER,
+numero_documento VARCHAR(255), 
+FOREIGN KEY(cod_favorecido) REFERENCES favorecido (cod_favorecido),
+FOREIGN KEY(cod_subfuncao) REFERENCES subfuncao (cod_subfuncao),
+FOREIGN KEY(cod_acao) REFERENCES acao (cod_acao),
+FOREIGN KEY(cod_elemento_despesa) REFERENCES elemento_despesa (cod_elemento_despesa),
+FOREIGN KEY(id_data) REFERENCES data (id_data),
+FOREIGN KEY(cod_orgao_superior) REFERENCES orgao_superior (cod_orgao_superior),
+FOREIGN KEY(cod_orgao_subordinado) REFERENCES orgao_subordinado (cod_orgao_subordinado),
+FOREIGN KEY(cod_unidade_gestora) REFERENCES unidade_gestora (cod_unidade_gestora),
+FOREIGN KEY(cod_funcao) REFERENCES funcao (cod_funcao),
+FOREIGN KEY(cod_programa) REFERENCES programa (cod_programa),
+FOREIGN KEY(cod_grupo_despesa) REFERENCES grupo_despesa (cod_grupo_despesa)
+);
+
+CREATE TABLE funcao_subfuncao (
+cod_subfuncao INTEGER,
+cod_funcao INTEGER,
+FOREIGN KEY(cod_subfuncao) REFERENCES subfuncao (cod_subfuncao),
+FOREIGN KEY(cod_funcao) REFERENCES funcao (cod_funcao)
+);
+
+CREATE TABLE acao_programa (
+cod_acao VARCHAR(255),
+cod_programa INTEGER,
+FOREIGN KEY(cod_acao) REFERENCES acao (cod_acao),
+FOREIGN KEY(cod_programa) REFERENCES programa (cod_programa)
+);
+
+CREATE TABLE acao_unidade_gestora (
+cod_acao VARCHAR(255),
+cod_unidade_gestora INTEGER,
+FOREIGN KEY(cod_acao) REFERENCES acao (cod_acao),
+FOREIGN KEY(cod_unidade_gestora) REFERENCES unidade_gestora (cod_unidade_gestora)
+);
+
+CREATE TABLE elemento_despesa_grupo_despesa (
+cod_elemento_despesa INTEGER,
+cod_grupo_despesa INTEGER,
+FOREIGN KEY(cod_elemento_despesa) REFERENCES elemento_despesa (cod_elemento_despesa),
+FOREIGN KEY(cod_grupo_despesa) REFERENCES grupo_despesa (cod_grupo_despesa)
+);
+
+ALTER TABLE orgao_subordinado ADD FOREIGN KEY(cod_orgao_superior) REFERENCES orgao_superior (cod_orgao_superior);

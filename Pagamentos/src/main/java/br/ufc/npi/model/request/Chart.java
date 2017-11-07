@@ -1,4 +1,4 @@
-package br.ufc.npi.model.chart;
+package br.ufc.npi.model.request;
 
 public class Chart {
 

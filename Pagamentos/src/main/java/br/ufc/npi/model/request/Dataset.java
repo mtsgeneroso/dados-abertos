@@ -1,29 +1,24 @@
-package br.ufc.npi.model.chart;
+package br.ufc.npi.model.request;
+
+import br.ufc.npi.util.RGBStringColor;
 
 public class Dataset {
-
+	
 	private String label;
-	private String backgroundColor = "rgba(128,0,0,.8)";
-	private String borderColor = "rgb(43,0,0)";
+	private String borderColor = RGBStringColor.getColor(0);
 	private Double[] data;
-	private boolean fill = true;
+	private boolean fill = false;
 	
 	public Dataset(String label, Double[] data) {
 		super();
 		this.label = label;
 		this.data = data;
-	}
+		}
 	public String getLabel() {
 		return label;
 	}
 	public void setLabel(String label) {
 		this.label = label;
-	}
-	public String getBackgroundColor() {
-		return backgroundColor;
-	}
-	public void setBackgroundColor(String backgroundColor) {
-		this.backgroundColor = backgroundColor;
 	}
 	public String getBorderColor() {
 		return borderColor;
@@ -43,5 +38,4 @@ public class Dataset {
 	public void setFill(boolean fill) {
 		this.fill = fill;
 	}
-	
 }

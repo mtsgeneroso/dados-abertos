@@ -24,7 +24,7 @@ CREATE TABLE cargo (
 CREATE TABLE funcao (
 	cod_atividade BIGINT PRIMARY KEY,
 	sigla TEXT,
-	nivel_funcao BIGINT,
+	nivel_funcao TEXT,
 	funcao TEXT,
 	opcao_parcial TEXT
 );

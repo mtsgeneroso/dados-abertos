@@ -20,72 +20,65 @@
 	media="screen,projection" />
 </head>
 <body>
-	
+
 	<div th:include="fragments/navbar"></div>
-	
+
 	<main>
-		<div class="section no-pad-bot" id="index-banner">
-			<div class="container center">
-				
-				<p>
-				<div id="rangeMeses"></div>
-				</p>
-				
-				<div id="mensagemChart">
-					<h5>Sem dados disponíveis</h5>
+	<div class="section no-pad-bot" id="index-banner">
+		<div class="container">
+
+			<div id="loadChart" class="container">
+				<p>Carregando gráfico...</p>
+				<div class="progress">
+					<div class="indeterminate"></div>
 				</div>
-				
-				<br/><br/>
-				<canvas id="chart"></canvas>
-				<br/>
-				
-				<input type="hidden" name="currentId" th:value="${currentId}"/>
-				
-				<div class="preloader-wrapper active" id="loadChart">
-					<div class="spinner-layer spinner-red-only">
-				      <div class="circle-clipper left">
-				        <div class="circle"></div>
-				      </div><div class="gap-patch">
-				        <div class="circle"></div>
-				      </div><div class="circle-clipper right">
-				        <div class="circle"></div>
-				      </div>
-				    </div>
-				</div>
-				
-				<div class="row" id="botoes">
-					<h4>Unidades Gestoras</h4>
-					<div th:each="unidade : ${unidadesGestoras}">
-						<div class="col s12 m4 l2">
-							<a th:href="@{/unidadeGestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}">
-								<div class="card-panel red-bods white-text hoverable"
-									style="padding-top: 2px; height: 120px;">
-									<p th:text="${unidade.nomeUnidadeGestora}" th:classappend="${#strings.length(unidade.nomeUnidadeGestora) > 75} ? 'truncate'" style="font-size: 12px">[...]</p>
-								</div>
-							</a>
-						</div>
-					</div>
-	
-				</div>
-	
-	
 			</div>
+
+			<p>
+			<div id="rangeMeses"></div>
+			</p>
+
+			<div id="mensagemChart">
+				<h5>Sem dados disponíveis</h5>
+			</div>
+
+			<br />
+			<br />
+			<canvas id="chart"></canvas>
+			<br /> <input type="hidden" name="currentId" th:value="${currentId}" />
+
+			<h5>Unidades Gestoras:</h5>
+			<div class="row" id="botoes">
+				<div th:each="unidade : ${unidadesGestoras}">
+					<div class="col s12 m4 l2">
+						<a
+							th:href="@{/unidade-gestora/{id}(id=${unidade.codUnidadeGestora})}"
+							th:title="${unidade.nomeUnidadeGestora}">
+							<div class="card-panel main-color main-color-hoverable"
+								style="padding-top: 2px; height: 120px;">
+								<p th:text="${unidade.nomeUnidadeGestora}"
+									th:classappend="${#strings.length(unidade.nomeUnidadeGestora) > 75} ? 'truncate'"
+									style="font-size: 12px">[...]</p>
+							</div>
+						</a>
+					</div>
+				</div>
+
+			</div>
+
 		</div>
+	</div>
 	</main>
-	
+
 	<div th:include="fragments/footer"></div>
 
 
 	<!--  Scripts-->
-	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-	<script th:src="@{/webjars/materializecss/js/materialize.min.js}"></script>
-	<script th:src="@{/webjars/chartjs/Chart.min.js}"></script>
-	<script th:src="@{/js/nouislider.min.js}"></script>
-	<script th:src="@{/webjars/numeral-js/min/numeral.min.js}"></script>
+	<div th:include="fragments/scripts"></div>
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();
-		initInterface("/orgaoSubordinado/" + id);	
+		initInterface("/orgao-subordinado/?id=" + id);
 	</script>
 </body>
 </html>

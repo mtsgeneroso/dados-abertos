@@ -14,6 +14,10 @@ public class OrgaoSubordinadoService {
 	@Autowired
 	OrgaoSubordinadoRepository orgaoSubordinadoRepository;
 	
+	public List<OrgaoSubordinado> findAll(){
+		return orgaoSubordinadoRepository.findByOrderByNomeOrgaoSubordinadoAsc();
+	}
+	
 	public OrgaoSubordinado getById(Long id){
 		return orgaoSubordinadoRepository.findOne(id);
 	}

@@ -18,12 +18,8 @@ public class ElementoDespesa {
 	private String nomeElementoDespesa; 
 	@Id
 	@Column(nullable=false,name="cod_elemento_despesa")
-	private int codElementoDespesa;
+	private Long codElementoDespesa;
 
-	@OneToMany(mappedBy="pagamentos",
-			   targetEntity=ElementoDespesa.class)
-	private List<Pagamento> pagamentos;
-	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="elemento_despesa_grupo_despesa",
 		joinColumns=@JoinColumn(name="cod_elemento_despesa",
@@ -33,30 +29,39 @@ public class ElementoDespesa {
 			  )
 	private List<GrupoDespesa> grupos;
 	
-	public List<Pagamento> getPagamentos() {
-		return pagamentos;
-	}
-	public void setPagamentos(List<Pagamento> pagamentos) {
-		this.pagamentos = pagamentos;
-	}
-	public List<GrupoDespesa> getGrupos() {
-		return grupos;
-	}
-	public void setGrupos(List<GrupoDespesa> grupos) {
-		this.grupos = grupos;
-	}
+	@OneToMany(mappedBy="pagamentos",
+			   targetEntity=ElementoDespesa.class)
+	private List<Pagamento> pagamentos;
+
 	public String getNomeElementoDespesa() {
 		return nomeElementoDespesa;
 	}
+
 	public void setNomeElementoDespesa(String nomeElementoDespesa) {
 		this.nomeElementoDespesa = nomeElementoDespesa;
 	}
-	public int getCodElementoDespesa() {
+
+	public Long getCodElementoDespesa() {
 		return codElementoDespesa;
 	}
-	public void setCodElementoDespesa(int codElementoDespesa) {
+
+	public void setCodElementoDespesa(Long codElementoDespesa) {
 		this.codElementoDespesa = codElementoDespesa;
 	}
-	
 
+	public List<GrupoDespesa> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(List<GrupoDespesa> grupos) {
+		this.grupos = grupos;
+	}
+
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
+	}
 }
