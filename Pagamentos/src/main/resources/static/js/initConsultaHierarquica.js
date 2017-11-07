@@ -1,5 +1,6 @@
 function initCamposBusca(tiposOrgaos){
 	chips = {}
+	console.log(tiposOrgaos);
 	tiposOrgaos.forEach(function(tipoOrgao, index){
 		var urlAPI = "/api/"+tipoOrgao;
 		chips[tipoOrgao] = {};

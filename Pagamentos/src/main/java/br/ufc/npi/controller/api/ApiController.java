@@ -113,7 +113,7 @@ public class ApiController {
 		return orgaos;
 	}
 	
-	@RequestMapping(path="/acoes")
+	@RequestMapping(path="/"+Dado.ACAO)
 	public List<Dado> listarAcoes(){
 		ArrayList<Dado> orgaos = new ArrayList<Dado>();
 		
@@ -189,11 +189,8 @@ public class ApiController {
 	@RequestMapping(path="/consulta-hierarquica", method=RequestMethod.POST)
 	public List<Dado> consultaHierarquica(@RequestBody ConsultaHierarquicaObj objConsulta){
 		
-		ArrayList<Dado> orgaos = new ArrayList<Dado>();
-		
-		
-		return orgaos;
-		
+		pagamentoService.pagamentosConsultaHierarquica(objConsulta);
+		return null;
 	}
 	
 	@RequestMapping(path="/pagamentos")

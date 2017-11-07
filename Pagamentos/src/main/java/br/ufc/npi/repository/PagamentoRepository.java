@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import br.ufc.npi.model.Pagamento;
 
-public interface PagamentoRepository extends JpaRepository<Pagamento, Integer>{
+public interface PagamentoRepository extends JpaRepository<Pagamento, Integer>, PagamentoRepositoryCustom{
 
 	@Query(value="SELECT dt.mes, CAST(sum(pg.valor) as FLOAT) FROM pagamento AS pg, data AS dt "
 			+ "WHERE pg.cod_data = dt.cod_data "
