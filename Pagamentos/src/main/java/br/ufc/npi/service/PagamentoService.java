@@ -51,7 +51,7 @@ public class PagamentoService {
 	
 	public List<Object[]> pagamentosConsultaHierarquica(ConsultaHierarquicaObj obj){
 		
-		String sqlQuery = " SELECT ";
+		String sqlQuery = "SELECT ";
 		
 		for(String h : obj.getHierarquia()){
 			sqlQuery += String.format(" %s.nome_%s, ", h, h);
