@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>con_servidor</name>
-    <server>localhost</server>
+    <server>texas.intranet</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>dados_abertos_servidores</database>
+    <database>servidores_db</database>
     <port>5432</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4bb16bd64d980aac9</password>
+    <username>dmining</username>
+    <password>Encrypted 2be98afc86a84b280a610a079d095ecfa</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -562,11 +562,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;2017&#x2f;201701_Servidores&#x2f;20170131_Afastamentos.csv</filename>
+    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;formata&#xe7;&#xe3;o&#x2f;2017&#x2f;201709_Servidores&#x2f;20170930_Afastamentos.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
-    <separator>	</separator>
+    <separator>&#x23;</separator>
     <enclosure>&#x22;</enclosure>
     <header>Y</header>
     <buffer_size>50000</buffer_size>
@@ -721,7 +721,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;2017&#x2f;201701_Servidores&#x2f;20170131_Honorarios&#x28;Jetons&#x29;.csv</filename>
+    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;formata&#xe7;&#xe3;o&#x2f;2017&#x2f;201709_Servidores&#x2f;20170930_Honorarios&#x28;Jetons&#x29;.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -733,7 +733,7 @@
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
-    <encoding/>
+    <encoding>ISO-8859-9</encoding>
     <fields>
       <field>
         <name>ANO</name>
@@ -838,11 +838,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;2017&#x2f;201701_Servidores&#x2f;20170131_Observacoes.csv</filename>
+    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;formata&#xe7;&#xe3;o&#x2f;2017&#x2f;201709_Servidores&#x2f;20170930_Observacoes.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
-    <separator>	</separator>
+    <separator>&#x23;</separator>
     <enclosure>&#x22;</enclosure>
     <header>Y</header>
     <buffer_size>50000</buffer_size>
@@ -850,7 +850,7 @@
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
-    <encoding/>
+    <encoding>ISO-8859-9</encoding>
     <fields>
       <field>
         <name>ANO</name>

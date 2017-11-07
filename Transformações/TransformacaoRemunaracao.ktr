@@ -430,20 +430,20 @@
     <created_date>2017&#x2f;06&#x2f;27 13&#x3a;35&#x3a;58.649</created_date>
     <modified_user>-</modified_user>
     <modified_date>2017&#x2f;06&#x2f;27 13&#x3a;35&#x3a;58.649</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>con_servidor</name>
-    <server>localhost</server>
+    <name>con_public</name>
+    <server>texas.intranet</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>dados_abertos_servidores</database>
+    <database>servidores_db</database>
     <port>5432</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4bb16bd64d980aac9</password>
+    <username>dmining</username>
+    <password>Encrypted 2be98afc86a84b280a610a079d095ecfa</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -462,12 +462,17 @@
   <order>
     <hop>
       <from>csv_remunaracao</from>
+      <to>insert_tempo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>insert_tempo</from>
       <to>inserir_servidor</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>inserir_servidor</from>
-      <to>fato_remunaracao</to>
+      <to>inserir_fato_remuneracao</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -482,11 +487,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;2017&#x2f;201701_Servidores&#x2f;20170131_NewRemuneracao.csv</filename>
+    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;formata&#xe7;&#xe3;o&#x2f;2017&#x2f;201707_Servidores&#x2f;20170731_Remuneracao.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
-    <separator>,</separator>
+    <separator>&#x23;</separator>
     <enclosure>&#x22;</enclosure>
     <header>Y</header>
     <buffer_size>50000</buffer_size>
@@ -901,7 +906,217 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
+      <xloc>128</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>inserir_fato_remuneracao</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>con_public</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>fato_remuneracao</table>
+      <key>
+        <name>ID_SERVIDOR_PORTAL</name>
+        <field>id_servidor_portal</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>MES</name>
+        <field>mes</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>ANO</name>
+        <field>ano</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>ano</name>
+        <rename>ANO</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>mes</name>
+        <rename>MES</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>id_servidor_portal</name>
+        <rename>ID_SERVIDOR_PORTAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>remuneracao_basica_bruta_dolar</name>
+        <rename>REMUNERACAO_BASICA_BRUTA_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>remuneracao_basica_bruta_real</name>
+        <rename>REMUNERACAO_BASICA_BRUTA_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>abate_teto_real</name>
+        <rename>ABATE_TETO_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>abate_teto_dolar</name>
+        <rename>ABATE_TETO_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>gratificacao_natalina_real</name>
+        <rename>GRATIFICACAO_NATALINA_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>gratificacao_natalina_dolar</name>
+        <rename>GRATIFICACAO_NATALINA_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>ferias_real</name>
+        <rename>FERIAS_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>ferias_dolar</name>
+        <rename>FERIAS_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>outras_remuneracoes_eventuais_real</name>
+        <rename>OUTRAS_REMUNERACOES_EVENTUAIS_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>outras_remuneracoes_eventuais_dolar</name>
+        <rename>OUTRAS_REMUNERACOES_EVENTUAIS_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>abate_teto_gratificacao_natal_real</name>
+        <rename>ABATE_TETO_DA_GRATIFICACAO_NATALINA_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>abate_teto_gratificacao_natal_dolar</name>
+        <rename>ABATE_TETO_DA_GRATIFICACAO_NATALINA_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>irrf_real</name>
+        <rename>IRRF_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>irrf_dolar</name>
+        <rename>IRRF_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>pss_rpgs_real</name>
+        <rename>PSS_RPGS_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>pss_rpgs_dolar</name>
+        <rename>PSS_RPGS_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>pensao_militar_real</name>
+        <rename>PENSAO_MILITAR_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>pensao_militar_dolar</name>
+        <rename>PENSAO_MILITAR_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>fundo_de_saude_real</name>
+        <rename>FUNDO_DE_SAUDE_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>fundo_de_saude_dolar</name>
+        <rename>FUNDO_DE_SAUDE_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>demais_deducoes_real</name>
+        <rename>DEMAIS_DEDUCOES_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>demais_deducoes_dolar</name>
+        <rename>DEMAIS_DEDUCOES_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>remuneracao_apos_deducoes_obrigatorias_real</name>
+        <rename>REMUNERACAO_APOS_DEDUCOES_OBRIGATORIAS_REAL</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>remuneracao_apos_deducoes_obrigatorias_dolar</name>
+        <rename>REMUNERACAO_APOS_DEDUCOES_OBRIGATORIAS_DOLAR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>total_de_honorarios_jetons</name>
+        <rename>TOTAL_DE_HONORARIOS_JETONS</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>verbas_indenizatorias_de_pessoal_civil_real</name>
+        <rename>VERBAS_INDENIZATORIAS_REGISTRADAS_EM_SISTEMAS_DE_PESSOAL_CIVIL_REAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>verbas_indenizatorias_de_pessoal_civil_dolar</name>
+        <rename>VERBAS_INDENIZATORIAS_REGISTRADAS_EM_SISTEMAS_DE_PESSOAL_CIVIL_DOLAR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>verbas_indenizatorias_de_pessoal_militar_real</name>
+        <rename>VERBAS_INDENIZATORIAS_REGISTRADAS_EM_SISTEMAS_DE_PESSOAL_MILITAR_REAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>verbas_indenizatorias_de_pessoal_militar_dolar</name>
+        <rename>VERBAS_INDENIZATORIAS_REGISTRADAS_EM_SISTEMAS_DE_PESSOAL_MILITAR_DOLAR</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
@@ -918,7 +1133,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
+    <connection>con_public</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -954,15 +1169,15 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
+      <xloc>432</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>fato_remunaracao</name>
-    <type>TableOutput</type>
+    <name>insert_tempo</name>
+    <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -971,153 +1186,35 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_servidor</connection>
-    <schema>public</schema>
-    <table>fato_remuneracao</table>
+    <connection>con_public</connection>
     <commit>1</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-        <field>
-          <column_name>ano</column_name>
-          <stream_name>ANO</stream_name>
-        </field>
-        <field>
-          <column_name>mes</column_name>
-          <stream_name>MES</stream_name>
-        </field>
-        <field>
-          <column_name>id_servidor_portal</column_name>
-          <stream_name>ID_SERVIDOR_PORTAL</stream_name>
-        </field>
-        <field>
-          <column_name>remuneracao_basica_bruta_real</column_name>
-          <stream_name>REMUNERACAO_BASICA_BRUTA_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>remuneracao_basica_bruta_dolar</column_name>
-          <stream_name>REMUNERACAO_BASICA_BRUTA_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>abate_teto_real</column_name>
-          <stream_name>ABATE_TETO_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>abate_teto_dolar</column_name>
-          <stream_name>ABATE_TETO_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>gratificacao_natalina_real</column_name>
-          <stream_name>GRATIFICACAO_NATALINA_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>gratificacao_natalina_dolar</column_name>
-          <stream_name>GRATIFICACAO_NATALINA_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>abate_teto_gratificacao_natal_real</column_name>
-          <stream_name>ABATE_TETO_DA_GRATIFICACAO_NATALINA_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>abate_teto_gratificacao_natal_dolar</column_name>
-          <stream_name>ABATE_TETO_DA_GRATIFICACAO_NATALINA_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>ferias_real</column_name>
-          <stream_name>FERIAS_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>ferias_dolar</column_name>
-          <stream_name>FERIAS_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>outras_remuneracoes_eventuais_real</column_name>
-          <stream_name>OUTRAS_REMUNERACOES_EVENTUAIS_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>outras_remuneracoes_eventuais_dolar</column_name>
-          <stream_name>OUTRAS_REMUNERACOES_EVENTUAIS_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>irrf_real</column_name>
-          <stream_name>IRRF_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>irrf_dolar</column_name>
-          <stream_name>IRRF_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>pss_rpgs_real</column_name>
-          <stream_name>PSS_RPGS_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>pss_rpgs_dolar</column_name>
-          <stream_name>PSS_RPGS_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>pensao_militar_real</column_name>
-          <stream_name>PENSAO_MILITAR_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>pensao_militar_dolar</column_name>
-          <stream_name>PENSAO_MILITAR_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>fundo_de_saude_real</column_name>
-          <stream_name>FUNDO_DE_SAUDE_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>fundo_de_saude_dolar</column_name>
-          <stream_name>FUNDO_DE_SAUDE_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>demais_deducoes_real</column_name>
-          <stream_name>DEMAIS_DEDUCOES_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>demais_deducoes_dolar</column_name>
-          <stream_name>DEMAIS_DEDUCOES_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>remuneracao_apos_deducoes_obrigatorias_real</column_name>
-          <stream_name>REMUNERACAO_APOS_DEDUCOES_OBRIGATORIAS_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>remuneracao_apos_deducoes_obrigatorias_dolar</column_name>
-          <stream_name>REMUNERACAO_APOS_DEDUCOES_OBRIGATORIAS_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>verbas_indenizatorias_de_pessoal_civil_real</column_name>
-          <stream_name>VERBAS_INDENIZATORIAS_REGISTRADAS_EM_SISTEMAS_DE_PESSOAL_CIVIL_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>verbas_indenizatorias_de_pessoal_civil_dolar</column_name>
-          <stream_name>VERBAS_INDENIZATORIAS_REGISTRADAS_EM_SISTEMAS_DE_PESSOAL_CIVIL_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>verbas_indenizatorias_de_pessoal_militar_real</column_name>
-          <stream_name>VERBAS_INDENIZATORIAS_REGISTRADAS_EM_SISTEMAS_DE_PESSOAL_MILITAR_REAL</stream_name>
-        </field>
-        <field>
-          <column_name>verbas_indenizatorias_de_pessoal_militar_dolar</column_name>
-          <stream_name>VERBAS_INDENIZATORIAS_REGISTRADAS_EM_SISTEMAS_DE_PESSOAL_MILITAR_DOLAR</stream_name>
-        </field>
-        <field>
-          <column_name>total_de_honorarios_jetons</column_name>
-          <stream_name>TOTAL_DE_HONORARIOS_JETONS</stream_name>
-        </field>
-    </fields>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>tempo</table>
+      <key>
+        <name>ANO</name>
+        <field>ano</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>MES</name>
+        <field>mes</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>ano</name>
+        <rename>ANO</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>mes</name>
+        <rename>MES</rename>
+        <update>N</update>
+      </value>
+    </lookup>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -1126,7 +1223,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
+      <xloc>288</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
