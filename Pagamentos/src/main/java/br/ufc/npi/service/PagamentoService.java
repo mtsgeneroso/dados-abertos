@@ -51,17 +51,17 @@ public class PagamentoService {
 	
 	public List<Object[]> pagamentosConsultaHierarquica(ConsultaHierarquicaObj obj){
 		
-		String sqlQuery = "SELECT ";
+		String sqlQuery = " SELECT ";
 		
 		for(String h : obj.getHierarquia()){
-			sqlQuery += String.format("%s.nome_%s, ", h, h);
+			sqlQuery += String.format(" %s.nome_%s, ", h, h);
 		}
 		
 		sqlQuery += " CAST(SUM(pg.valor) AS FLOAT) ";
 		sqlQuery += " FROM pagamento AS pg ";
 		
 		for(String h : obj.getHierarquia()){
-			sqlQuery += String.format("JOIN %s ON pg.cod_%s = %s.cod_%s ", h, h, h, h);
+			sqlQuery += String.format(" JOIN %s ON pg.cod_%s = %s.cod_%s ", h, h, h, h);
 		}
 		
 		if(obj.getOrgaosConsulta().size() > 0){
@@ -88,18 +88,18 @@ public class PagamentoService {
 		sqlQuery += " GROUP BY ";
 		
 		for(int i = 0; i < obj.getHierarquia().size(); i++){
-			sqlQuery += String.format("%s.cod_%s", obj.getHierarquia().get(i), obj.getHierarquia().get(i));
+			sqlQuery += String.format(" %s.cod_%s ", obj.getHierarquia().get(i), obj.getHierarquia().get(i));
 			if(i < obj.getHierarquia().size()-1){
-				sqlQuery += ", ";
+				sqlQuery += " , ";
 			}
 		}
 		
 		sqlQuery += " ORDER BY ";
 		
 		for(int i = 0; i < obj.getHierarquia().size(); i++){
-			sqlQuery += String.format("%s.nome_%s", obj.getHierarquia().get(i), obj.getHierarquia().get(i));
+			sqlQuery += String.format(" %s.nome_%s ", obj.getHierarquia().get(i), obj.getHierarquia().get(i));
 			if(i < obj.getHierarquia().size()-1){
-				sqlQuery += ", ";
+				sqlQuery += " , ";
 			}
 		}
 		
