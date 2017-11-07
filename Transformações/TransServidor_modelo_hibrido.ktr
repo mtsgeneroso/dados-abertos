@@ -437,9 +437,30 @@
   <notepads>
     <notepad>
       <note>Transforma&#xe7;&#xe3;o destinada a inser&#xe7;&#xe3;o das dimen&#xe7;&#xf5;es de servidores&#xa;- Codifica&#xe7;&#xe3;o&#x3a; ISO-8859-9</note>
-      <xloc>592</xloc>
-      <yloc>48</yloc>
+      <xloc>1312</xloc>
+      <yloc>848</yloc>
       <width>455</width>
+      <heigth>44</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>OBS&#x3a; O step CAMPOS_ANO_MES_DATAS deve ser mudado para cada m&#xea;s e cada ano, de cada arquivo csv, &#xa;quando for passar para o servidor de produ&#xe7;&#xe3;o.</note>
+      <xloc>1152</xloc>
+      <yloc>928</yloc>
+      <width>726</width>
       <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
@@ -458,14 +479,14 @@
     </notepad>
   </notepads>
   <connection>
-    <name>con_public</name>
-    <server>localhost</server>
+    <name>connection</name>
+    <server>texas.intranet</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>dados_abertos_servidores_hibrido</database>
+    <database>servidores_db</database>
     <port>5432</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4bb16bd64d980aac9</password>
+    <username>dmining</username>
+    <password>Encrypted 2be98afc86a84b280a610a079d095ecfa</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -515,11 +536,6 @@
     <hop>
       <from>inserir_uni_orgao_exercicio</from>
       <to>inserir_uni_orgao_lotacao</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>If COD value is null</from>
-      <to>validate_orgs</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -692,6 +708,11 @@
       <to>selecionar_carreira</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>If COD value is null</from>
+      <to>validate_orgs</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>If COD value is null</name>
@@ -720,37 +741,37 @@
     <fields>
       <field>
         <name>COD_ORGSUP_EXERCICIO</name>
-        <value>0</value>
+        <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>COD_ORGSUP_LOTACAO</name>
-        <value>0</value>
+        <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>COD_ORG_LOTACAO</name>
-        <value>0</value>
+        <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>COD_ORG_EXERCICIO</name>
-        <value>0</value>
+        <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>COD_UORG_EXERCICIO</name>
-        <value>0</value>
+        <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
       <field>
         <name>COD_UORG_LOTACAO</name>
-        <value>0</value>
+        <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
         </field>
@@ -860,7 +881,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#x2f;&#x2f;Valores de result&#x3a;&#xa;&#x2f;&#x2f; C - Possui cargo sem vinculo&#xa;&#x2f;&#x2f; F - Possui fun&#xe7;&#xe3;o&#xa;&#x2f;&#x2f; V - Possui cargo com vinculo&#xa;&#x2f;&#x2f; S - N&#xe3;o possui cargo, nem fun&#xe7;&#xe3;o e nem vinculo&#xa;var result &#x3d; null&#x3b;&#xa;if&#x28;escape&#x28;SITUACAO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;TIPO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; &#xa;	escape&#x28;DESCRICAO_CARGO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; &#x28;COD_ATIVIDADE &#x3d;&#x3d;&#x3d; 0 &#x7c;&#x7c; escape&#x28;CODIGO_ATIVIDADE&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29; &#x26;&#x26; escape&#x28;ATIVIDADE&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;S&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;&#x28;escape&#x28;COD_ATIVIDADE&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27; &#x7c;&#x7c; escape&#x28;COD_ATIVIDADE&#x29; &#x21;&#x3d; 0 &#x29; &#x26;&#x26; escape&#x28;ATIVIDADE&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;F&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;escape&#x28;SITUACAO_VINCULO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;TIPO_VINCULO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;DESCRICAO_CARGO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;V&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;escape&#x28;SITUACAO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;TIPO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;DESCRICAO_CARGO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;C&#x27;&#x3b;&#xa;&#x7d;&#xa;&#x2f;&#x2f;Alert&#x28;NOME&#x2b;&#x22;,&#x22;&#x2b;COD_CARREIRA&#x2b;&#x22;&#x3a; &#x22;&#x2b;CLA_CARGO&#x2b;&#x22;, &#x22;&#x2b;COD_CARGO&#x2b;&#x22;, &#x22;&#x2b;NI_CARGO&#x2b;&#x22;, &#x22;&#x2b;REF_CARGO&#x29;&#x3b;&#xa;&#x2f;&#x2f;Alert&#x28;COD_CARREIRA&#x29;&#x3b;&#xa;&#x2f;&#x2f;Alert&#x28;ATIVIDADE_ID&#x29;&#x3b;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#x2f;&#x2f;Valores de result&#x3a;&#xa;&#x2f;&#x2f; C - Possui cargo sem vinculo&#xa;&#x2f;&#x2f; F - Possui fun&#xe7;&#xe3;o&#xa;&#x2f;&#x2f; V - Possui cargo com vinculo&#xa;&#x2f;&#x2f; S - N&#xe3;o possui cargo, nem fun&#xe7;&#xe3;o e nem vinculo&#xa;var result &#x3d; null&#x3b;&#xa;&#x2f;&#x2a;if&#x28;&#x28;SITUACAO_VINCULO &#x3d;&#x3d;&#x3d;null &#x7c;&#x7c; escape&#x28;SITUACAO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29; &#x26;&#x26; &#x28;TIPO_VINCULO &#x3d;&#x3d;&#x3d;null &#x7c;&#x7c; escape&#x28;TIPO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29; &#x26;&#x26; &#xa;	&#x28;DESCRICAO_CARGO&#x3d;&#x3d;&#x3d;null &#x7c;&#x7c; escape&#x28;DESCRICAO_CARGO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29; &#x26;&#x26; &#x28;COD_ATIVIDADE &#x3d;&#x3d;&#x3d; 0 &#x7c;&#x7c; escape&#x28;CODIGO_ATIVIDADE&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x7c;&#x7c; CODIGO_ATIVIDADE &#x3d;&#x3d;&#x3d; null &#x29; &#x26;&#x26; &#x28;escape&#x28;ATIVIDADE&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x7c;&#x7c; ATIVIDADE &#x3d;&#x3d;&#x3d;null&#x29;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;S&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;&#x28;&#x28;escape&#x28;COD_ATIVIDADE&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27; &#x7c;&#x7c; escape&#x28;COD_ATIVIDADE&#x29; &#x21;&#x3d; 0&#x29; &#x26;&#x26; COD_ATIVIDADE &#x21;&#x3d; null &#x29; &#x26;&#x26; &#x28;escape&#x28;ATIVIDADE&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; ATIVIDADE &#x21;&#x3d; null&#x29;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;F&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;&#x28;SITUACAO_VINCULO &#x21;&#x3d; null &#x26;&#x26; escape&#x28;SITUACAO_VINCULO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29; &#x26;&#x26; &#x28;TIPO_VINCULO &#x21;&#x3d; null &#x26;&#x26; escape&#x28;TIPO_VINCULO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29; &#x26;&#x26; &#x28;DESCRICAO_CARGO &#x21;&#x3d; null &#x26;&#x26; escape&#x28;DESCRICAO_CARGO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;V&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;&#x28;escape&#x28;SITUACAO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x7c;&#x7c; SITUACAO_VINCULO &#x3d;&#x3d;&#x3d; null&#x29; &#x26;&#x26; &#x28;escape&#x28;TIPO_VINCULO&#x29; &#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x7c;&#x7c; TIPO_VINCULO &#x3d;&#x3d;&#x3d; null&#x29; &#x26;&#x26; &#x28;escape&#x28;DESCRICAO_CARGO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; DESCRICAO_CARGO &#x21;&#x3d; null&#x29;&#x29;&#x7b;&#xa;	result &#x3d; &#x27;C&#x27;&#x3b;&#xa;&#x7d;&#x2a;&#x2f;&#xa;&#xa;&#x2f;&#x2f; Quando o dado &#xe9; nulo&#xa;if&#x28;SITUACAO_VINCULO &#x3d;&#x3d;&#x3d;null &#x26;&#x26; TIPO_VINCULO &#x3d;&#x3d;&#x3d;null &#x26;&#x26; &#xa;	DESCRICAO_CARGO&#x3d;&#x3d;&#x3d;null &#x26;&#x26; &#x28;COD_ATIVIDADE &#x3d;&#x3d;&#x3d; 0 &#x7c;&#x7c; CODIGO_ATIVIDADE &#x3d;&#x3d;&#x3d; null&#x29; &#x26;&#x26; ATIVIDADE &#x3d;&#x3d;&#x3d;null&#x29;&#x7b;&#xa;	result &#x3d; &#x27;S&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;COD_ATIVIDADE &#x21;&#x3d; null &#x26;&#x26; ATIVIDADE &#x21;&#x3d; null&#x29;&#x7b;&#xa;	result &#x3d; &#x27;F&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;SITUACAO_VINCULO &#x21;&#x3d; null &#x26;&#x26; TIPO_VINCULO &#x21;&#x3d; null &#x26;&#x26; DESCRICAO_CARGO &#x21;&#x3d; null &#x29;&#x7b;&#xa;	result &#x3d; &#x27;V&#x27;&#x3b;&#xa;&#x7d;&#xa;&#xa;if&#x28;SITUACAO_VINCULO &#x3d;&#x3d;&#x3d; null &#x26;&#x26; TIPO_VINCULO &#x3d;&#x3d;&#x3d; null &#x26;&#x26; DESCRICAO_CARGO &#x21;&#x3d; null&#x29;&#x7b;&#xa;	result &#x3d; &#x27;C&#x27;&#x3b;&#xa;&#x7d;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>result</name>
         <rename>RESULTADO_AVALIACAO</rename>
         <type>String</type>
@@ -892,7 +913,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;dados servidores&#x2f;2016&#x2f;Particionamentos&#x2f;Result&#x2f;20160131_Cadastro_div3.csv</filename>
+    <filename>&#x2f;home&#x2f;alysson.sousa&#x2f;dados-abertos&#x2f;datas&#x2f;formata&#xe7;&#xe3;o&#x2f;2017&#x2f;parti&#xe7;&#xf5;es&#x2f;Result&#x2f;20170331_Cadastro_div4.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1398,7 +1419,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var ANO &#x3d; 2017&#x3b;&#xa;var MES &#x3d; 1&#x3b;&#xa;&#xa;&#x2f;&#x2f;datas&#xa;var data_ingresso_cf &#x3d; new Date&#x28;mm_ingresso_cf&#x2b;&#x22;&#x2f;&#x22;&#x2b;dd_ingresso_cf&#x2b;&#x22;&#x2f;&#x22;&#x2b;aaaa_ingresso_cf&#x29;&#x3b;&#xa;var data_ingresso_orgao &#x3d; new Date&#x28;mm_ingresso_orgao&#x2b;&#x22;&#x2f;&#x22;&#x2b;dd_ingresso_orgao&#x2b;&#x22;&#x2f;&#x22;&#x2b;aaaa_ingresso_orgao&#x29;&#x3b;&#xa;var data_diploma_sp &#x3d; new Date&#x28;mm_diploma_sp&#x2b;&#x22;&#x2f;&#x22;&#x2b;dd_diploma_sp&#x2b;&#x22;&#x2f;&#x22;&#x2b;aaaa_diploma_sp&#x29;&#x3b;&#xa;&#xa;&#x2f;&#x2f;textos&#xa;var diploma_isp &#x3d; DIPLOMA_INGRESSO_SERVICOPUBLICO&#x3b;&#xa;var documento_isp &#x3d; DOCUMENTO_INGRESSO_SERVICOPUBLICO&#x3b;&#xa;&#xa;if&#x28;escape&#x28;diploma_isp&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;diploma_isp&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;documento_isp&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;documento_isp&#x3d;&#x22;&#x22;&#x3b;&#x7d;</jsScript_script>
+        <jsScript_script>var ANO &#x3d; 2017&#x3b;&#xa;var MES &#x3d; 3&#x3b;&#xa;&#xa;&#x2f;&#x2f;datas&#xa;var data_ingresso_cf &#x3d; new Date&#x28;mm_ingresso_cf&#x2b;&#x22;&#x2f;&#x22;&#x2b;dd_ingresso_cf&#x2b;&#x22;&#x2f;&#x22;&#x2b;aaaa_ingresso_cf&#x29;&#x3b;&#xa;var data_ingresso_orgao &#x3d; new Date&#x28;mm_ingresso_orgao&#x2b;&#x22;&#x2f;&#x22;&#x2b;dd_ingresso_orgao&#x2b;&#x22;&#x2f;&#x22;&#x2b;aaaa_ingresso_orgao&#x29;&#x3b;&#xa;var data_diploma_sp &#x3d; new Date&#x28;mm_diploma_sp&#x2b;&#x22;&#x2f;&#x22;&#x2b;dd_diploma_sp&#x2b;&#x22;&#x2f;&#x22;&#x2b;aaaa_diploma_sp&#x29;&#x3b;&#xa;&#xa;&#x2f;&#x2f;textos&#xa;var diploma_isp &#x3d; DIPLOMA_INGRESSO_SERVICOPUBLICO&#x3b;&#xa;var documento_isp &#x3d; DOCUMENTO_INGRESSO_SERVICOPUBLICO&#x3b;&#xa;&#xa;if&#x28;escape&#x28;diploma_isp&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;diploma_isp&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;documento_isp&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;documento_isp&#x3d;&#x22;&#x22;&#x3b;&#x7d;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>ANO</name>
         <rename>ANO</rename>
         <type>Number</type>
@@ -1466,7 +1487,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -1519,7 +1540,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -1562,7 +1583,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -1638,7 +1659,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -1785,7 +1806,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -1932,7 +1953,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2068,7 +2089,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2077,6 +2098,18 @@
       <key>
         <name>Id_SERVIDOR_PORTAL</name>
         <field>id_servidor_portal</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>MES</name>
+        <field>mes</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>ANO</name>
+        <field>ano</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -2140,6 +2173,16 @@
         <rename>data_ingresso_orgao</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>mes</name>
+        <rename>MES</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>ano</name>
+        <rename>ANO</rename>
+        <update>N</update>
+      </value>
     </lookup>
     <cluster_schema/>
     <remotesteps>
@@ -2166,7 +2209,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2175,6 +2218,12 @@
       <key>
         <name>Id_SERVIDOR_PORTAL</name>
         <field>id_servidor_portal</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>COD_VINCULO</name>
+        <field>cod_vinculo</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -2243,6 +2292,16 @@
         <rename>diploma_ingresso_orgao_1</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>mes</name>
+        <rename>MES</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>ano</name>
+        <rename>ANO</rename>
+        <update>N</update>
+      </value>
     </lookup>
     <cluster_schema/>
     <remotesteps>
@@ -2269,7 +2328,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2327,7 +2386,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2375,7 +2434,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2418,7 +2477,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2461,7 +2520,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2509,7 +2568,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2563,7 +2622,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2611,7 +2670,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2665,7 +2724,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2713,7 +2772,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2767,7 +2826,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2821,7 +2880,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2851,22 +2910,22 @@
       <value>
         <name>MATRICULA</name>
         <rename>MATRICULA</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>data_diploma_ingresso_servico_publico</name>
         <rename>data_diploma_sp</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>diploma_ingresso_servico_publico</name>
         <rename>diploma_isp</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>documento_ingresso_servico_publico</name>
         <rename>documento_isp</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
     </lookup>
     <cluster_schema/>
@@ -2894,7 +2953,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2948,7 +3007,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -2996,7 +3055,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -3044,7 +3103,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -3098,7 +3157,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <cache>Y</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>1</cache_size>
@@ -3146,7 +3205,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -3194,7 +3253,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <cache>Y</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>1</cache_size>
@@ -3260,7 +3319,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -3308,7 +3367,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>con_public</connection>
+    <connection>connection</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -3567,7 +3626,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xa;var DESC_CARGO &#x3d; DESCRICAO_CARGO&#x3b;&#xa;var CLA_CARGO &#x3d; CLASSE_CARGO&#x3b;&#xa;var REF_CARGO &#x3d; REFERENCIA_CARGO&#x3b;&#xa;var NI_CARGO &#x3d; NIVEL_CARGO&#x3b;&#xa;&#xa;if&#x28;escape&#x28;DESCRICAO_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	DESC_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;CLASSE_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	CLA_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;REFERENCIA_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	REF_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;NIVEL_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	NI_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;var DESC_CARGO &#x3d; DESCRICAO_CARGO&#x3b;&#xa;var CLA_CARGO &#x3d; CLASSE_CARGO&#x3b;&#xa;var REF_CARGO &#x3d; REFERENCIA_CARGO&#x3b;&#xa;var NI_CARGO &#x3d; NIVEL_CARGO&#x3b;&#xa;&#xa;&#x2f;&#x2a;if&#x28;escape&#x28;DESCRICAO_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	DESC_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;CLASSE_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	CLA_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;REFERENCIA_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	REF_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;NIVEL_CARGO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	NI_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#x2a;&#x2f;&#xa;&#xa;if&#x28;DESCRICAO_CARGO &#x3d;&#x3d;&#x3d; null&#x29;&#x7b;&#xa;	DESC_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;CLASSE_CARGO &#x3d;&#x3d;&#x3d; null&#x29;&#x7b;&#xa;	CLA_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;REFERENCIA_CARGO &#x3d;&#x3d;&#x3d; null&#x29;&#x7b;&#xa;	REF_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;&#xa;if&#x28;NIVEL_CARGO &#x3d;&#x3d;&#x3d; null&#x29;&#x7b;&#xa;	NI_CARGO &#x3d; &#x27; &#x27;&#x3b;&#xa;&#x7d;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>DESC_CARGO</name>
         <rename>DESC_CARGO</rename>
         <type>String</type>
@@ -3621,7 +3680,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f; Valores do testFunction&#xa;&#x2f;&#x2f;	F - Valor padr&#xe3;o, possui CODIGO_ATIVIDADE e FUN&#xc7;&#xc3;O&#xa;&#x2f;&#x2f;	N - N&#xe3;o possui CODIGO_ATIVIDADE e nem FUN&#xc7;&#xc3;O&#xa;var testFunction &#x3d; &#x27;F&#x27;&#x3b;&#xa;var COD_ATIVIDADE &#x3d; 0&#x3b;&#xa;var sigla &#x3d; SIGLA_FUNCAO&#x3b;&#xa;var nivel_funcao &#x3d; NIVEL_FUNCAO&#x3b;&#xa;var opcao_parcial &#x3d; OPCAO_PARCIAL&#x3b;&#xa;var funcao &#x3d; FUNCAO&#x3b;&#xa;var nome_atividade &#x3d; ATIVIDADE&#x3b;&#xa;if&#x28;escape&#x28;CODIGO_ATIVIDADE&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;FUNCAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	testFunction &#x3d; &#x27;N&#x27;&#x3b;&#xa;&#x7d;else if&#x28;escape&#x28;CODIGO_ATIVIDADE&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x26;&#x26; escape&#x28;FUNCAO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	COD_ATIVIDADE &#x3d; 0&#x3b;&#xa;	nome_atividade &#x3d; &#x22;&#x22;&#x3b;&#xa;&#x7d;else&#x7b;&#xa;	COD_ATIVIDADE &#x3d; CODIGO_ATIVIDADE&#x3b;&#xa;	&#xa;	&#x2f;&#x2f;	C&#xd3;DIGO PARA TRANFORMAR O &#x22;CODIGO_ATIVIDADE&#x22; que possue letras&#xa;	&#x2f;&#x2f;	em um c&#xf3;digo num&#xe9;rico.&#xa;	if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;CODIGO_ATIVIDADE&#x29;&#x29;&#x7b; &#x2f;&#x2f;Testar se possue letras&#xa;		var hash &#x3d; &#x22;&#x22;&#x3b;&#xa;		for&#x28;var i&#x3d;0&#x3b;i&#x3c;CODIGO_ATIVIDADE.length&#x3b;i&#x2b;&#x2b; &#x29;&#x7b;&#xa;			if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;CODIGO_ATIVIDADE&#x5b;i&#x5d;&#x29;&#x29;&#x7b;&#x2f;&#x2f;se o caracter for uma letra&#xa;				hash &#x2b;&#x3d; CODIGO_ATIVIDADE.charCodeAt&#x28;i&#x29;&#x3b;&#x2f;&#x2f;pega o c&#xf3;digo ASCII da letra&#xa;			&#x7d;else&#x7b;&#xa;				hash &#x2b;&#x3d; CODIGO_ATIVIDADE&#x5b;i&#x5d;&#x3b;&#x2f;&#x2f;caso n&#xe3;o seja letra, pega o n&#xfa;mero&#xa;			&#x7d;&#xa;		&#x7d;&#xa;		COD_ATIVIDADE &#x3d; hash&#x3b;	&#xa;	&#x7d;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;sigla&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b; sigla &#x3d; &#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;funcao&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;funcao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;nivel_funcao&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b; nivel_funcao &#x3d; &#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;opcao_parcial&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b; opcao_parcial &#x3d; &#x22;&#x22;&#x3b;&#x7d;&#xa;&#xa;&#x2f;&#x2f;valida&#xe7;&#xe3;o de campos nulos&#xa;&#x2f;&#x2f;subtitui&#xe7;&#xe3;o por valores em UTF-8&#xa;var regime_juridico &#x3d; REGIME_JURIDICO&#x3b;&#xa;var uf_exercicio &#x3d; UF_EXERCICIO&#x3b;&#xa;var jornada_trabalho &#x3d; JORNADA_DE_TRABALHO&#x3b;&#xa;var diploma_ingresso_orgao &#x3d; DIPLOMA_INGRESSO_ORGAO&#x3b;&#xa;&#xa;if&#x28;escape&#x28;regime_juridico&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;regime_juridico&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;uf_exercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;uf_exercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;jornada_trabalho&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;jornada_trabalho&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;diploma_ingresso_orgao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;diploma_ingresso_orgao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f; Valores do testFunction&#xa;&#x2f;&#x2f;	F - Valor padr&#xe3;o, possui CODIGO_ATIVIDADE e FUN&#xc7;&#xc3;O&#xa;&#x2f;&#x2f;	N - N&#xe3;o possui CODIGO_ATIVIDADE e nem FUN&#xc7;&#xc3;O&#xa;var testFunction &#x3d; &#x27;F&#x27;&#x3b;&#xa;var COD_ATIVIDADE &#x3d; 0&#x3b;&#xa;var sigla &#x3d; SIGLA_FUNCAO&#x3b;&#xa;var nivel_funcao &#x3d; NIVEL_FUNCAO&#x3b;&#xa;var opcao_parcial &#x3d; OPCAO_PARCIAL&#x3b;&#xa;var funcao &#x3d; FUNCAO&#x3b;&#xa;var nome_atividade &#x3d; ATIVIDADE&#x3b;&#xa;if&#x28;&#x28;CODIGO_ATIVIDADE &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;CODIGO_ATIVIDADE&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29; &#x26;&#x26; &#x28;FUNCAO &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;FUNCAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x29;&#x7b;&#xa;	testFunction &#x3d; &#x27;N&#x27;&#x3b;&#xa;&#x7d;else if&#x28;&#x28;CODIGO_ATIVIDADE &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;CODIGO_ATIVIDADE&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29; &#x26;&#x26; &#x28;FUNCAO &#x21;&#x3d; null &#x7c;&#x7c; escape&#x28;FUNCAO&#x29; &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x29;&#x7b;&#xa;	COD_ATIVIDADE &#x3d; 0&#x3b;&#xa;	nome_atividade &#x3d; &#x22;&#x22;&#x3b;&#xa;&#x7d;else&#x7b;&#xa;	COD_ATIVIDADE &#x3d; CODIGO_ATIVIDADE&#x3b;&#xa;	&#xa;	&#x2f;&#x2f;	C&#xd3;DIGO PARA TRANFORMAR O &#x22;CODIGO_ATIVIDADE&#x22; que possue letras&#xa;	&#x2f;&#x2f;	em um c&#xf3;digo num&#xe9;rico.&#xa;	if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;CODIGO_ATIVIDADE&#x29;&#x29;&#x7b; &#x2f;&#x2f;Testar se possue letras&#xa;		var hash &#x3d; &#x22;&#x22;&#x3b;&#xa;		for&#x28;var i&#x3d;0&#x3b;i&#x3c;CODIGO_ATIVIDADE.length&#x3b;i&#x2b;&#x2b; &#x29;&#x7b;&#xa;			if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;CODIGO_ATIVIDADE&#x5b;i&#x5d;&#x29;&#x29;&#x7b;&#x2f;&#x2f;se o caracter for uma letra&#xa;				hash &#x2b;&#x3d; CODIGO_ATIVIDADE.charCodeAt&#x28;i&#x29;&#x3b;&#x2f;&#x2f;pega o c&#xf3;digo ASCII da letra&#xa;			&#x7d;else&#x7b;&#xa;				hash &#x2b;&#x3d; CODIGO_ATIVIDADE&#x5b;i&#x5d;&#x3b;&#x2f;&#x2f;caso n&#xe3;o seja letra, pega o n&#xfa;mero&#xa;			&#x7d;&#xa;		&#x7d;&#xa;		COD_ATIVIDADE &#x3d; hash&#x3b;	&#xa;	&#x7d;&#xa;&#x7d;&#xa;if&#x28;sigla &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;sigla&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b; sigla &#x3d; &#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;funcao &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;funcao&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;funcao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;nivel_funcao &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;nivel_funcao&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b; nivel_funcao &#x3d; &#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;opcao_parcial &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;opcao_parcial&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b; opcao_parcial &#x3d; &#x22;&#x22;&#x3b;&#x7d;&#xa;&#xa;&#x2f;&#x2f;valida&#xe7;&#xe3;o de campos nulos&#xa;&#x2f;&#x2f;subtitui&#xe7;&#xe3;o por valores em UTF-8&#xa;var regime_juridico &#x3d; REGIME_JURIDICO&#x3b;&#xa;var uf_exercicio &#x3d; UF_EXERCICIO&#x3b;&#xa;var jornada_trabalho &#x3d; JORNADA_DE_TRABALHO&#x3b;&#xa;var diploma_ingresso_orgao &#x3d; DIPLOMA_INGRESSO_ORGAO&#x3b;&#xa;&#xa;if&#x28;regime_juridico &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;regime_juridico&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;regime_juridico&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;uf_exercicio &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;uf_exercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;uf_exercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;jornada_trabalho&#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;jornada_trabalho&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;jornada_trabalho&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;diploma_ingresso_orgao &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;diploma_ingresso_orgao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;diploma_ingresso_orgao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;&#xa;&#x2f;&#x2f;Teste carreira&#xa;&#x2f;&#x2f;Alert&#x28;&#x22;Classe&#x3a;&#x22;&#x2b;CLA_CARGO&#x2b;&#x22;&#x3b; cod_cargo&#x3a;&#x22;&#x2b;COD_CARGO&#x2b;&#x22;&#x3b; nivel&#x3a;&#x22;&#x2b;NI_CARGO&#x2b;&#x22;&#x3b; referencia&#x3a;&#x22;&#x2b;	REF_CARGO&#x2b;&#x22;&#x3b; CARREIRA&#x3a;&#x22;&#x2b;COD_CARREIRA&#x29;&#x3b;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>testFunction</name>
         <rename>testFunction</rename>
         <type>String</type>
@@ -3703,6 +3762,36 @@
     </step>
 
   <step>
+    <name>teste_vazio</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#x2f;&#x2f;Alert&#x28;COD_UORG_LOTACAO&#x29;&#x3b;&#xa;Alert&#x28;COD_UORG_EXERCICIO&#x29;&#x3b;&#xa;if&#x28;COD_UORG_EXERCICIO &#x3d;&#x3d;&#x3d; null&#x29;&#x7b;&#xa;	Alert&#x28;&#x22;A string vazia de COD_UORG_LOTACAO &#xe9; igual a nulo&#x22;&#x29;&#x3b;&#xa;&#x7d;&#xa;&#x2f;&#x2a;else if&#x28;escape&#x28;UORG_EXERCICIO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	Alert&#x28;&#x22;A string vazia de COD_UORG_LOTACAO &#xe9; igual a &#x25;00&#x22;&#x29;&#x3b;&#xa;&#x7d;else if&#x28;UORG_EXERCICIO &#x3d;&#x3d;&#x3d; &#x27;&#x27;&#x29;&#x7b;&#xa;	Alert&#x28;&#x22;A string vazia de COD_UORG_LOTACAO &#xe9; igual a &#x27;&#x27;&#x22;&#x29;&#x3b;&#xa;&#x7d;else if&#x28;UORG_EXERCICIO &#x3d;&#x3d;&#x3d; &#x22;&#x22;&#x29;&#x7b;&#xa;	Alert&#x28;&#x22;A string vazia de COD_UORG_LOTACAO &#xe9; igual a &#x5c;&#x22;&#x5c;&#x22;&#x22;&#x29;&#x3b;&#xa;&#x7d;else&#x7b;&#xa;	Alert&#x28;&#x22;A string vazia de COD_UORG_LOTACAO &#xe9; igual a outra coisa&#x22;&#x29;&#x3b;&#xa;&#x7d;&#x2a;&#x2f;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>    </fields>    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>448</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
     <name>validate_orgs</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -3717,7 +3806,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;C&#xd3;DIGOS DOS &#xd3;RG&#xc3;OS&#xa;function hashing&#x28;string&#x29;&#x7b;&#xa;	if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;string&#x29;&#x29;&#x7b; &#x2f;&#x2f;Testar se possue letras&#xa;		var hash &#x3d; &#x22;&#x22;&#x3b;&#xa;		for&#x28;var i&#x3d;0&#x3b;i&#x3c;string.length&#x3b;i&#x2b;&#x2b; &#x29;&#x7b;&#xa;			if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;string&#x5b;i&#x5d;&#x29;&#x29;&#x7b;&#x2f;&#x2f;se o caracter for uma letra&#xa;				hash &#x2b;&#x3d; string.charCodeAt&#x28;i&#x29;&#x3b;&#x2f;&#x2f;pega o c&#xf3;digo ASCII da letra&#xa;			&#x7d;else&#x7b;&#xa;				hash &#x2b;&#x3d; string&#x5b;i&#x5d;&#x3b;&#x2f;&#x2f;caso n&#xe3;o seja letra, pega o n&#xfa;mero&#xa;			&#x7d;&#xa;		&#x7d;&#xa;		return hash&#x3b;	&#xa;	&#x7d;else&#x7b;&#xa;		return string&#x3b;&#xa;	&#x7d;&#xa;&#x7d;&#xa;&#xa;var codUorgLotacao &#x3d; hashing&#x28;COD_UORG_LOTACAO&#x29;&#x3b;&#xa;var codOrgLotacao &#x3d; hashing&#x28;COD_ORG_LOTACAO&#x29;&#x3b;&#xa;var codOrgSupLotacao &#x3d; hashing&#x28;COD_ORGSUP_LOTACAO&#x29;&#x3b;&#xa;var codUorgExercicio &#x3d; hashing&#x28;COD_UORG_EXERCICIO&#x29;&#x3b;&#xa;var codOrgExercicio &#x3d; hashing&#x28;COD_ORG_EXERCICIO&#x29;&#x3b;&#xa;var codOrgSupExercicio &#x3d; hashing&#x28;COD_ORGSUP_EXERCICIO&#x29;&#x3b;&#xa;&#xa;if&#x28;escape&#x28;COD_UORG_LOTACAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codUorgLotacao &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;COD_ORG_LOTACAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codOrgLotacao &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;COD_ORGSUP_LOTACAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x29;&#x7b;&#xa;	codOrgSupLotacao &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;COD_UORG_EXERCICIO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codUorgExercicio &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;COD_ORG_EXERCICIO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x29;&#x7b;&#xa;	codOrgExercicio &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;escape&#x28;COD_ORGSUP_EXERCICIO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codOrgSupExercicio &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;&#xa;&#x2f;&#x2f; descri&#xe7;&#xe3;o dos org&#xe3;os&#xa;var uorgLotacao &#x3d; UORG_LOTACAO&#x3b;&#xa;var orgLotacao &#x3d; ORG_LOTACAO&#x3b;&#xa;var orgSupLotacao &#x3d; ORGSUP_LOTACAO&#x3b;&#xa;var uorgExercicio &#x3d; UORG_EXERCICIO&#x3b;&#xa;var orgExercicio &#x3d; ORG_EXERCICIO&#x3b;&#xa;var orgSupExercicio &#x3d; ORGSUP_EXERCICIO&#x3b;&#xa;&#xa;if&#x28;escape&#x28;uorgLotacao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;uorgLotacao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;orgLotacao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;orgLotacao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;orgSupLotacao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;orgSupLotacao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;uorgExercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27; &#x29;&#x7b;uorgExercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;orgExercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27; &#x29;&#x7b;orgExercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;escape&#x28;orgSupExercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27; &#x29;&#x7b;orgSupExercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f;C&#xd3;DIGOS DOS &#xd3;RG&#xc3;OS&#xa;function hashing&#x28;string&#x29;&#x7b;&#xa;	if&#x28;string &#x21;&#x3d; null &#x26;&#x26; string &#x21;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;		if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;string&#x29;&#x29;&#x7b; &#x2f;&#x2f;Testar se possue letras&#xa;			var hash &#x3d; &#x22;&#x22;&#x3b;&#xa;			for&#x28;var i&#x3d;0&#x3b;i&#x3c;string.length&#x3b;i&#x2b;&#x2b; &#x29;&#x7b;&#xa;				if&#x28;&#x2f;&#x5b;a-zA-Z&#x5d;&#x2f;.test&#x28;string&#x5b;i&#x5d;&#x29;&#x29;&#x7b;&#x2f;&#x2f;se o caracter for uma letra&#xa;					hash &#x2b;&#x3d; string.charCodeAt&#x28;i&#x29;&#x3b;&#x2f;&#x2f;pega o c&#xf3;digo ASCII da letra&#xa;				&#x7d;else&#x7b;&#xa;					hash &#x2b;&#x3d; string&#x5b;i&#x5d;&#x3b;&#x2f;&#x2f;caso n&#xe3;o seja letra, pega o n&#xfa;mero&#xa;				&#x7d;&#xa;			&#x7d;&#xa;			return hash&#x3b;	&#xa;		&#x7d;else&#x7b;&#xa;			return string&#x3b;&#xa;		&#x7d;&#xa;	&#x7d;else&#x7b;&#xa;		return string&#xa;	&#x7d;&#xa;&#x7d;&#xa;&#xa;var codUorgLotacao &#x3d; hashing&#x28;COD_UORG_LOTACAO&#x29;&#x3b;&#xa;var codOrgLotacao &#x3d; hashing&#x28;COD_ORG_LOTACAO&#x29;&#x3b;&#xa;var codOrgSupLotacao &#x3d; hashing&#x28;COD_ORGSUP_LOTACAO&#x29;&#x3b;&#xa;var codUorgExercicio &#x3d; hashing&#x28;COD_UORG_EXERCICIO&#x29;&#x3b;&#xa;var codOrgExercicio &#x3d; hashing&#x28;COD_ORG_EXERCICIO&#x29;&#x3b;&#xa;var codOrgSupExercicio &#x3d; hashing&#x28;COD_ORGSUP_EXERCICIO&#x29;&#x3b;&#xa;&#xa;if&#x28;COD_UORG_LOTACAO &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;COD_UORG_LOTACAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codUorgLotacao &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;COD_ORG_LOTACAO &#x3d;&#x3d;&#x3d;null &#x7c;&#x7c; escape&#x28;COD_ORG_LOTACAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codOrgLotacao &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;COD_ORGSUP_LOTACAO &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;COD_ORGSUP_LOTACAO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x29;&#x7b;&#xa;	codOrgSupLotacao &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;COD_UORG_EXERCICIO&#x3d;&#x3d;&#x3d;null &#x7c;&#x7c; escape&#x28;COD_UORG_EXERCICIO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codUorgExercicio &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;COD_ORG_EXERCICIO &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;COD_ORG_EXERCICIO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27; &#x29;&#x7b;&#xa;	codOrgExercicio &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;if&#x28;COD_ORGSUP_EXERCICIO &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;COD_ORGSUP_EXERCICIO&#x29; &#x3d;&#x3d;&#x3d; &#x27;&#x25;00&#x27;&#x29;&#x7b;&#xa;	codOrgSupExercicio &#x3d; 0&#x3b;&#xa;&#x7d;&#xa;&#xa;&#x2f;&#x2f; descri&#xe7;&#xe3;o dos org&#xe3;os&#xa;var uorgLotacao &#x3d; UORG_LOTACAO&#x3b;&#xa;var orgLotacao &#x3d; ORG_LOTACAO&#x3b;&#xa;var orgSupLotacao &#x3d; ORGSUP_LOTACAO&#x3b;&#xa;var uorgExercicio &#x3d; UORG_EXERCICIO&#x3b;&#xa;var orgExercicio &#x3d; ORG_EXERCICIO&#x3b;&#xa;var orgSupExercicio &#x3d; ORGSUP_EXERCICIO&#x3b;&#xa;&#xa;if&#x28;uorgLotacao&#x3d;&#x3d;&#x3d;null &#x7c;&#x7c; escape&#x28;uorgLotacao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;uorgLotacao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;orgLotacao &#x3d;&#x3d;&#x3d;null &#x7c;&#x7c; escape&#x28;orgLotacao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;orgLotacao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;orgSupLotacao &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;orgSupLotacao&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27;&#x29;&#x7b;orgSupLotacao&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;uorgExercicio &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;uorgExercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27; &#x29;&#x7b;uorgExercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;orgExercicio &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;orgExercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27; &#x29;&#x7b;orgExercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;if&#x28;orgSupExercicio &#x3d;&#x3d;&#x3d; null &#x7c;&#x7c; escape&#x28;orgSupExercicio&#x29;&#x3d;&#x3d;&#x3d;&#x27;&#x25;00&#x27; &#x29;&#x7b;orgSupExercicio&#x3d;&#x22;&#x22;&#x3b;&#x7d;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>codUorgLotacao</name>
         <rename>codUorgLotacao</rename>
         <type>Integer</type>
