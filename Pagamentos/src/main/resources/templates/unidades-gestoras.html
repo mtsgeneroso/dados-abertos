@@ -69,7 +69,7 @@
 				<div class="row" id="botoes">
 					<div th:each="unidade : ${unidadesGestoras}">
 						<div class="col s12 m3 l2">
-							<a th:href="@{/unidade-gestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}">
+							<a th:href="@{/unidade_gestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}">
 								<div class="card-panel main-color-hoverable"
 									style="height: 120px;">
 									<p th:text="${unidade.nomeUnidadeGestora}" th:classappend="${#strings.length(unidade.nomeUnidadeGestora) > 60} ? 'truncate'" style="font-size: 12px">[...]</p>
@@ -94,7 +94,7 @@
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();
-		initInterface("/unidade-gestora/?id=" + id);
+		initInterface("/unidade_gestora/?id=" + id);
 	</script>
 </body>
 </html>

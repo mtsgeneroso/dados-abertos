@@ -52,7 +52,7 @@
 				<div th:each="unidade : ${unidadesGestoras}">
 					<div class="col s12 m4 l2">
 						<a
-							th:href="@{/unidade-gestora/{id}(id=${unidade.codUnidadeGestora})}"
+							th:href="@{/unidade_gestora/{id}(id=${unidade.codUnidadeGestora})}"
 							th:title="${unidade.nomeUnidadeGestora}">
 							<div class="card-panel main-color main-color-hoverable"
 								style="padding-top: 2px; height: 120px;">
@@ -78,7 +78,7 @@
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();
-		initInterface("/orgao-subordinado/?id=" + id);
+		initInterface("/orgao_subordinado/?id=" + id);
 	</script>
 </body>
 </html>

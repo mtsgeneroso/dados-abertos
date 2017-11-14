@@ -69,7 +69,7 @@
 				<div class="row" id="botoes">
 					<div th:each="orgao : ${orgaosSubordinados}">
 						<div class="col s12 m3 l2">
-							<a th:href="@{/orgao-subordinado/{id}(id=${orgao.codOrgaoSubordinado})}" th:title="${orgao.nomeOrgaoSubordinado}">
+							<a th:href="@{/orgao_subordinado/{id}(id=${orgao.codOrgaoSubordinado})}" th:title="${orgao.nomeOrgaoSubordinado}">
 								<div class="card-panel main-color-hoverable"
 									style="height: 120px;">
 									<p th:text="${orgao.nomeOrgaoSubordinado}" th:classappend="${#strings.length(orgao.nomeOrgaoSubordinado) > 60} ? 'truncate'" style="font-size: 12px">[...]</p>
@@ -93,7 +93,7 @@
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();
-		initInterface("/orgao-subordinado/?id=" + id);
+		initInterface("/orgao_subordinado/?id=" + id);
 	</script>
 </body>
 </html>

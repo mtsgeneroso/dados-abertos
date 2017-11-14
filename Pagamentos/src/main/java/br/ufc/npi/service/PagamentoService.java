@@ -64,6 +64,7 @@ public class PagamentoService {
 			sqlQuery += String.format(" JOIN %s ON pg.cod_%s = %s.cod_%s ", h, h, h, h);
 		}
 		
+		int contOrg = 0;
 		if(obj.getOrgaosConsulta().size() > 0){
 			sqlQuery += " WHERE ";
 			for(int h = 0; h < obj.getHierarquia().size(); h++){
@@ -76,10 +77,15 @@ public class PagamentoService {
 								sqlQuery += " OR ";
 							}
 						}
+						contOrg++;
 					}
+					
 				}
 				sqlQuery += " ) ";
-				if(h < obj.getHierarquia().size()-1){
+				if(contOrg == obj.getOrgaosConsulta().size()){
+					break;
+				}
+				else if(h < obj.getHierarquia().size()-1){
 					sqlQuery += " AND ";
 				}
 			}

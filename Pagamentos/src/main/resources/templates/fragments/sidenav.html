@@ -7,8 +7,8 @@
 			</div>
 		</li>
 		
-		<li><a class="collapsible-header" th:href="@{/consultaSimples}">Consulta Simples</a></li>
-		<li><a class="collapsible-header" th:href="@{/consultaHierarquica}">Consulta Hierárquica</a></li>
+		<li><a class="collapsible-header" th:href="@{/consulta-simples}">Consulta Simples</a></li>
+		<li><a class="collapsible-header" th:href="@{/consulta-hierarquica}">Consulta Hierárquica</a></li>
 		
 		<hr/>
 		 
@@ -20,7 +20,7 @@
 	            <div class="collapsible-body">
 	              <ul>
 					<li th:each="orgao : ${session.orgaosSuperiores}">
-						<a class="truncate" th:href="@{/orgaoSuperior/{id}(id=${orgao.codOrgaoSuperior})}" th:title="${orgao.nomeOrgaoSuperior}" th:text="${orgao.nomeOrgaoSuperior}">[...]</a>
+						<a class="truncate" th:href="@{/orgao_superior/{id}(id=${orgao.codOrgaoSuperior})}" th:title="${orgao.nomeOrgaoSuperior}" th:text="${orgao.nomeOrgaoSuperior}">[...]</a>
 					</li>
 				  </ul>
 				</div>
@@ -37,7 +37,7 @@
 	            <div class="collapsible-body">
 	              <ul>
 					<li th:each="orgao : ${session.orgaosSubordinados}">
-						<a class="truncate" th:href="@{/orgaoSubordinado/{id}(id=${orgao.codOrgaoSubordinado})}" th:title="${orgao.nomeOrgaoSubordinado}" th:text="${orgao.nomeOrgaoSubordinado}">[...]</a>
+						<a class="truncate" th:href="@{/orgao_subordinado/{id}(id=${orgao.codOrgaoSubordinado})}" th:title="${orgao.nomeOrgaoSubordinado}" th:text="${orgao.nomeOrgaoSubordinado}">[...]</a>
 					</li>
 				  </ul>
 				</div>     
@@ -54,7 +54,7 @@
 	            <div class="collapsible-body">
 	              <ul>
 					<li th:each="unidade : ${session.unidadesGestoras}">
-						<a class="truncate" th:href="@{/unidadeGestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}" th:text="${unidade.nomeUnidadeGestora}">[...]</a>
+						<a class="truncate" th:href="@{/unidade_gestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}" th:text="${unidade.nomeUnidadeGestora}">[...]</a>
 					</li>
 				  </ul>
 				</div>     

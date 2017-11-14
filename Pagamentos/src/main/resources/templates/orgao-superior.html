@@ -54,7 +54,7 @@
 				<div th:each="orgao : ${orgaosSubordinados}">
 					<div class="col s12 m4 l2">
 						<a
-							th:href="@{/orgao-subordinado/{id}(id=${orgao.codOrgaoSubordinado})}"
+							th:href="@{/orgao_subordinado/{id}(id=${orgao.codOrgaoSubordinado})}"
 							th:title="${orgao.nomeOrgaoSubordinado}">
 							<div class="card-panel main-color-hoverable"
 								style="padding-top: 2px; height: 120px;">
@@ -80,7 +80,7 @@
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();
-		initInterface("/orgao-superior/?id=" + id);
+		initInterface("/orgao_superior/?id=" + id);
 	</script>
 </body>
 </html>

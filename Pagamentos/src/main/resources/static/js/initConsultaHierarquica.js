@@ -56,33 +56,56 @@ function pegarValoresBusca(hierarquia, chips){
 	return orgaosConsulta;
 }
 
-function gerarCollapsible(orgaos){
-	tags_collapsible = "";
-	for(var i = 0; i<orgaos.length; i++){
-		tags_collapsible += "<li>" +
-		"<div class='collapsible-header'>" +
-		"<i class='material-icons'>chevron_right</i>" + orgaos[i].nome + " - R$ " + orgaos[i].valorPagamentos +
-		"</div>" +
-		"<div class='collapsible-body'>";
-
-		if(orgaos[i].subordinados != null){
-			tags_collapsible +=
-				"<ul class='collapsible' data-collapsible='expandable'>" +
-				gerarCollapsible(orgaos[i].subordinados) +
-				"</ul>";
-		}
-
-		else{
-			tags_collapsible += "<p>Sem dados</p>";
-		}
-
-		tags_collapsible += "</div></li>";
+function gerarTabela(orgaos, hierarquia){
+	tags = "<table id='tableResultado' class='responsive-table bordered'>";
+	tags += "<thead><tr class='tablesorter-headerRow'>";
+	for(var i = 0; i < hierarquia.length; i++){
+		tags += "<th>" + hierarquia[i] + "</th>";
 	}
-	return tags_collapsible;
+	tags += "<th>Valor (R$)</th>";
+	tags += "</tr></thead>";
+
+	tags += "<tfoot><tr class='tablesorter-ignoreRow'>";
+	for(var i = 0; i < hierarquia.length; i++){
+		tags += "<th>" + hierarquia[i] + "</th>";
+	}
+	tags += "<th>Valor (R$)</th></tr>";
+	tags += `<tr class="tablesorter-ignoreRow">
+      <th colspan="` + parseInt(hierarquia.length + 1) + `" class="ts-pager form-horizontal">
+        <button type="button" class="btn first"><i class="small material-icons">first_page</i></button>
+        <button type="button" class="btn prev"><i class="small material-icons">navigate_before</i></button>
+        <span class="pagedisplay"></span>
+        <!-- this can be any element, including an input -->
+        <button type="button" class="btn next"><i class="small material-icons">navigate_next</i></button>
+        <button type="button" class="btn last"><i class="small material-icons">last_page</i></button>
+		<select class="pagesize browser-default" title="Selecione número de linhas">
+          <option selected="selected" value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+        </select>
+        <select class="pagenum browser-default" title="Número de páginas"></select>
+	 </th>
+    </tr>`;
+
+	tags += "</tfoot>";
+
+	tags += "<tbody>";
+	for(var i = 0; i < orgaos.length; i++){
+		tags += "<tr>";
+		for(var j = 0; j < orgaos[i].length; j++){
+			tags += "<td>" + orgaos[i][j] + "</td>";
+		}
+		tags += "</tr>";
+	}
+	tags += "</tbody>";
+	tags += "</table>"
+	return tags;
 }
 
 $(document).ready(function(){
 	$('.modal').modal();
+	$("#loadChart").hide();
 	$("#itens-hierarquia, #hierarquia").sortable({
 		connectWith: ".conexaoHierarquia",
 		placeholder: "item-placeholder",
@@ -93,6 +116,7 @@ $(document).ready(function(){
 	$(".resultado-container").hide();
 	$(".btn-steps").hide();
 	$("#btn-prev").addClass("disabled");
+
 
 });
 
@@ -118,8 +142,8 @@ $('#btn-prosseguir').click(function(){
 
 		ProgressBar.singleStepAnimation = 0;
 		ProgressBar.init(hierarquia,
-			hierarquia[step],
-			"progress-bar-wrapper"
+				hierarquia[step],
+				"progress-bar-wrapper"
 		);
 
 		$("#" + hierarquia[step] + "-filtro").show();
@@ -129,25 +153,25 @@ $('#btn-prosseguir').click(function(){
 });
 
 $("#btn-next").click(function(){
-		$("#btn-prev").removeClass("disabled");
-		if(step < hierarquia.length){
-			step++;
-			//Limpa a barra atual
-			$(".progress-bar-wrapper").empty();
-			//Constroi nova barra no passo seguinte
-			ProgressBar.init(hierarquia,
+	$("#btn-prev").removeClass("disabled");
+	if(step < hierarquia.length){
+		step++;
+		//Limpa a barra atual
+		$(".progress-bar-wrapper").empty();
+		//Constroi nova barra no passo seguinte
+		ProgressBar.init(hierarquia,
 				hierarquia[step],
 				"progress-bar-wrapper"
-			);
-			if(step >= hierarquia.length-1){
-				$(this).addClass("disabled");
-			}
-			else{
-				$(this).removeClass("disabled");
-			}
+		);
+		if(step >= hierarquia.length-1){
+			$(this).addClass("disabled");
 		}
-		$(".filtro-orgaos").hide();
-		$("#" + hierarquia[step] + "-filtro").show();
+		else{
+			$(this).removeClass("disabled");
+		}
+	}
+	$(".filtro-orgaos").hide();
+	$("#" + hierarquia[step] + "-filtro").show();
 });
 
 $("#btn-prev").click(function(){
@@ -158,8 +182,8 @@ $("#btn-prev").click(function(){
 		$(".progress-bar-wrapper").empty();
 		//Constroi nova barra no passo seguinte
 		ProgressBar.init(hierarquia,
-			hierarquia[step],
-			"progress-bar-wrapper"
+				hierarquia[step],
+				"progress-bar-wrapper"
 		);
 		if(step <= 0){
 			$(this).addClass("disabled");
@@ -175,11 +199,12 @@ $("#btn-prev").click(function(){
 $("#btn-consultar").click(function(){
 
 	$(".passos-consulta").hide();
+	$("#loadChart").show();
 
 	orgaosConsulta = pegarValoresBusca(hierarquia, chips);
 	var consulta = {
-		"hierarquia" : hierarquia,
-		"orgaosConsulta": orgaosConsulta
+			"hierarquia" : hierarquia,
+			"orgaosConsulta": orgaosConsulta
 	};
 
 	$.ajax({
@@ -191,22 +216,42 @@ $("#btn-consultar").click(function(){
 		success: function(orgaos){
 			$(".resultado-container").show();
 			$(".consulta-container").hide();
-			$(".collapsible").append(gerarCollapsible(orgaos));
-			$('.collapsible').collapsible();
+			$("#resultados").append(gerarTabela(orgaos, hierarquia));
+			//Table sorter
+			$("table").tablesorter({
+				theme : "materialize",
+				widthFixed: true,
+				widgets : [ "filter", "zebra" ],
+
+				widgetOptions : {
+					// using the default zebra striping class name, so it actually isn't included in the theme variable above
+					// this is ONLY needed for materialize theming if you are using the filter widget, because rows are hidden
+					zebra : ["even", "odd"],
+
+					// reset filters button
+					filter_reset : ".reset"
+				}
+
+			}).tablesorterPager({
+
+				// target the pager markup - see the HTML block below
+				container: $(".ts-pager"),
+
+				// target the pager page select dropdown - choose a page
+				cssGoto  : ".pagenum",
+
+				// remove rows from the table to speed up the sort of large tables.
+				// setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
+				removeRows: false,
+
+				// output string - default is '{page}/{totalPages}';
+				// possible variables: {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
+				output: '{startRow} - {endRow} / {filteredRows} ({totalRows})'
+
+			});
+
+			$("#loadChart").hide();
 		}
 	});
 
 });
-
-function expandAll(){
-	$(".collapsible-header").addClass("active");
-	$(".collapsible").collapsible({accordion: false});
-}
-
-function collapseAll(){
-	$(".collapsible-header").removeClass(function(){
-		return "active";
-	});
-	$(".collapsible").collapsible({accordion: true});
-	$(".collapsible").collapsible({accordion: false});
-}

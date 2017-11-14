@@ -19,6 +19,8 @@
 <link th:href="@{css/style.css}" type="text/css" rel="stylesheet"
 	media="screen,projection" />
 <link th:href="@{webjars/jquery-ui/jquery-ui.min.css}"/>
+<link rel="stylesheet" th:href="@{js/tablesorter/css/theme.materialize.min.css}" />
+<link rel="stylesheet" th:href="@{js/tablesorter/css/jquery.tablesorter.pager.min.css}" />
 </head>
 <body>
 	<div th:include="fragments/navbar"></div>
@@ -165,15 +167,29 @@
 			</div>
 		</div>
 
-		<div class="resultado-container">
-			<a class="waves-effect waves-light btn main-color-hoverable" onClick="expandAll();"><i class="material-icons left">fullscreen</i>Expandir todos</a>
-  			<a class="waves-effect waves-light btn main-color-hoverable" onClick="collapseAll();"><i class="material-icons left">fullscreen_exit</i>Fechar todos</a>
-			<a th:href="@{/consulta-hierarquica}" class="waves-effect waves-light btn main-color-hoverable" id="btn-consultar">Nova
-				Consulta</a>
-			<ul class="collapsible" data-collapsible="expandable">
-			</ul>
+		<div id="loadChart" class="container">
+			<p>Carregando resultados...</p>
+			<div class="progress">
+				<div class="indeterminate"></div>
+			</div>
 		</div>
 
+		<div class="resultado-container">
+			<div class="row">
+				<a th:href="@{/consulta-hierarquica}" class="waves-effect waves-light btn main-color-hoverable" id="btn-consultar">Nova Consulta</a>
+					<a th:href="@{#}" onclick="printJS('docs/printjs.pdf')" class="waves-effect waves-light btn main-color-hoverable" id="btn-consultar">Imprimir</a>
+			</div>
+
+			<div class="row">
+				<div id="resultados">
+				</div>
+			</div>
+
+			<div class="row">
+				<a th:href="@{/consulta-hierarquica}" class="waves-effect waves-light btn main-color-hoverable" id="btn-consultar">Nova Consulta</a>
+				<a th:href="@{#}" onclick="printJS('docs/printjs.pdf')" class="waves-effect waves-light btn main-color-hoverable" id="btn-consultar">Imprimir</a>
+			</div>
+		</div>
 	</div>
 
 		<!-- Modal Órgãos Inexistentes -->

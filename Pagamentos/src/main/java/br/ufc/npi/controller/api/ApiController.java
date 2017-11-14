@@ -187,10 +187,10 @@ public class ApiController {
 	}
 	
 	@RequestMapping(path="/consulta-hierarquica", method=RequestMethod.POST)
-	public List<Dado> consultaHierarquica(@RequestBody ConsultaHierarquicaObj objConsulta){
+	public List<Object[]> consultaHierarquica(@RequestBody ConsultaHierarquicaObj objConsulta){
 		
-		pagamentoService.pagamentosConsultaHierarquica(objConsulta);
-		return null;
+		return pagamentoService.pagamentosConsultaHierarquica(objConsulta);
+		
 	}
 	
 	@RequestMapping(path="/pagamentos")

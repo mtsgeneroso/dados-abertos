@@ -70,7 +70,7 @@
 				<div class="row">
 					<div th:each="orgao : ${orgaosSuperiores}">
 						<div class="col s12 m3 l2">
-							<a th:href="@{/orgao-superior/{id}(id=${orgao.codOrgaoSuperior})}" th:title="${orgao.nomeOrgaoSuperior}">
+							<a th:href="@{/orgao_superior/{id}(id=${orgao.codOrgaoSuperior})}" th:title="${orgao.nomeOrgaoSuperior}">
 								<div class="card-panel main-color-hoverable" style="height: 150px;">
 									<p th:text="${orgao.nomeOrgaoSuperior}" th:classappend="${#strings.length(orgao.nomeOrgaoSuperior) > 60} ? 'truncate'" style="font-size: 12px">[...]</p>
 								</div>
@@ -94,7 +94,7 @@
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();
-		initInterface("/orgao-superior/?id=" + id);
+		initInterface("/orgao_superior/?id=" + id);
 	</script>
 </body>
 </html>
