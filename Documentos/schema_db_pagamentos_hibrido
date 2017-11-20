@@ -65,7 +65,7 @@ nome_favorecido VARCHAR (255)
 
 CREATE TABLE pagamento (
 cod_pagamento SERIAL PRIMARY KEY,
-valor REAL,
+valor DOUBLE PRECISION,
 cod_orgao_superior INTEGER,
 cod_orgao_subordinado INTEGER,
 cod_unidade_gestora INTEGER,
