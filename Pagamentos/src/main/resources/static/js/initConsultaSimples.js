@@ -19,7 +19,7 @@ $(document).ready(function(){
 	var chips = {};
 
 	//Lista todos os órgãos para o campo de pesquisa
-	$.getJSON("/api/orgaos", function(orgaos){
+	$.getJSON("/api/orgaos/", function(orgaos){
 		var dataSugestions = {};
 		for(var i = 0; i < orgaos.length; i++){
 			chips[orgaos[i].nome] = {
@@ -50,8 +50,6 @@ $(document).ready(function(){
 	//Ação de click no botão
 	$('#btn-consultar').click(function(){
 		
-		$("#loadChart").show();
-		
 		$(".grafico-container").show();
 		$(".grafico-container").empty();
 
@@ -80,6 +78,7 @@ $(document).ready(function(){
 
 		//Caso contrário
 		else{
+			$("#loadChart").show();
 			console.log(orgaosConsulta);
 			//Requisição ao controlado de cosulta para vários órgãos
 			$.ajax({
@@ -183,7 +182,7 @@ $(document).ready(function(){
 				}
 			});
 
-			$(".detalhes-container").append("<div class='row'><h5>Clique para ver detalhes:</h5></div>");
+			$(".detalhes-container").append("<div class='row'><div class='col s12'><h5>Clique para ver detalhes:</h5></div></div>");
 
 			for(var i = 0; i<orgaosConsulta.length; i++){
 				$(".detalhes-container").append("<div class='col l4 s12 m4'>" +

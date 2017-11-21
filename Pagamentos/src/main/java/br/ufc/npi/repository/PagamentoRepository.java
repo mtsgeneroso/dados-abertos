@@ -10,7 +10,8 @@ import br.ufc.npi.model.Pagamento;
 
 public interface PagamentoRepository extends JpaRepository<Pagamento, Integer>, PagamentoRepositoryCustom{
 
-	@Query(value="SELECT dt.mes, CAST(sum(pg.valor) as FLOAT) FROM pagamento AS pg, data AS dt "
+	@Query(value="SELECT dt.mes, CAST(sum(pg.valor) as FLOAT) "
+			+ "FROM pagamento AS pg, data AS dt "
 			+ "WHERE pg.cod_data = dt.cod_data "
 			+ "GROUP BY dt.mes "
 			+ "ORDER BY dt.mes ASC", 
@@ -35,7 +36,7 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Integer>, 
 	public List<Object[]> listPagamentosOrgSubordinadoByDataBetween(@Param("cod")Long codOrgSuperior);
 	
 	@Query(value="SELECT dt.mes, CAST(sum(pg.valor) as FLOAT) "
-			+ "from data dt, pagamento pg "
+			+ "FROM data dt, pagamento pg "
 			+ "WHERE pg.cod_data = dt.cod_data AND pg.cod_unidade_gestora = :cod "
 			+ "GROUP BY pg.cod_unidade_gestora, dt.mes "
 			+ "ORDER BY dt.mes ASC", 

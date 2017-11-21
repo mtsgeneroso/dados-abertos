@@ -40,60 +40,14 @@
 					<div class="card-panel main-color" id="panel-tags">
 						<span>Ítens:</span><br/>
 						<div id="itens-hierarquia" class="conexaoHierarquia">
-						  <div class="item card" id="orgao_superior">
-						  	<div class="item-header">
-						  		Órgão Superior
-						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">drag_handle</i>
-						  		</a>
-						  	</div>
-
-						  </div>
-
-						  <div class="item card" id="orgao_subordinado">
-						  	<div class="item-header">
-						  		Órgãos Subordinado
-						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">drag_handle</i>
-						  		</a>
-						  	</div>
-						  </div>
-
-						  <div class="item card" id="unidade_gestora">
-						  	<div class="item-header">
-						  		Unidade Gestora
-						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">drag_handle</i>
-						  		</a>
-						  	</div>
-						  </div>
-
-						  <div class="item card" id="acao">
-						  	<div class="item-header">
-						  		Ação
-						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">drag_handle</i>
-						  		</a>
-						  	</div>
-						  </div>
-
-						  <div class="item card" id="programa">
-						  	<div class="item-header">
-						  		Programa
-						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">drag_handle</i>
-						  		</a>
-						  	</div>
-						  </div>
-
-						  <div class="item card" id="favorecido">
-						  	<div class="item-header">
-						  		Favorecido
-						  		<a href="#" class="item-config">
-						  			<i class="material-icons right">drag_handle</i>
-						  		</a>
-						  	</div>
-						  </div>
+							<div class="item card" th:each="item : ${itensHierarquia}" th:id="${item.nomeTabela}">
+							  	<div class="item-header">
+							  		<spam th:text="${item.nome}">[...]</spam>
+							  		<a href="#" class="item-config">
+							  			<i class="material-icons right">drag_handle</i>
+							  		</a>
+							  	</div>
+							 </div>
 						</div>
 					</div>
 				</div>
@@ -122,42 +76,13 @@
 			<div class="row">
 				<div class="progress-bar-wrapper"></div>
 			</div>
-			<div class="row filtro-orgaos" id="orgao_superior-filtro">
+			<div class="row filtro-orgaos" th:each="item : ${itensHierarquia}" th:id="${item.nomeTabela} + '-filtro'">
 				<div class="col s12">
-					<h5>Órgãos Superiores:</h5>
-					<div class="chips chips-autocomplete" id="chips-orgao_superior"></div>
+					<h5 th:text="${item.nome}">[...]</h5>
+					<div class="chips chips-autocomplete" th:id="'chips-' + ${item.nomeTabela}"></div>
 				</div>
 			</div>
-			<div class="row filtro-orgaos" id="orgao_subordinado-filtro">
-				<div class="col s12">
-					<h5>Órgãos Subordinados:</h5>
-					<div class="chips chips-autocomplete" id="chips-orgao_subordinado"></div>
-				</div>
-			</div>
-			<div class="row filtro-orgaos" id="unidade_gestora-filtro">
-				<div class="col s12">
-					<h5>Unidades Gestoras:</h5>
-					<div class="chips chips-autocomplete" id="chips-unidade_gestora"></div>
-				</div>
-			</div>
-			<div class="row filtro-orgaos" id="acao-filtro">
-				<div class="col s12">
-					<h5>Ações:</h5>
-					<div class="chips chips-autocomplete" id="chips-acao"></div>
-				</div>
-			</div>
-			<div class="row filtro-orgaos" id="programa-filtro">
-				<div class="col s12">
-					<h5>Programas:</h5>
-					<div class="chips chips-autocomplete" id="chips-programa"></div>
-				</div>
-			</div>
-			<div class="row filtro-orgaos" id="favorecido-filtro">
-				<div class="col s12">
-					<h5>Favorecidos:</h5>
-					<div class="chips chips-autocomplete" id="chips-favorecido"></div>
-				</div>
-			</div>
+			
 			<div class="row btn-steps">
 				<div class="col s12">
 					<a class="waves-effect waves-light btn main-color-hoverable" id="btn-prev">Anterior</a>
@@ -177,7 +102,6 @@
 		<div class="resultado-container">
 			<div class="row">
 				<a th:href="@{/consulta-hierarquica}" class="waves-effect waves-light btn main-color-hoverable" id="btn-consultar">Nova Consulta</a>
-					<a th:href="@{#}" onclick="printJS('docs/printjs.pdf')" class="waves-effect waves-light btn main-color-hoverable" id="btn-consultar">Imprimir</a>
 			</div>
 
 			<div class="row">
@@ -187,7 +111,6 @@
 
 			<div class="row">
 				<a th:href="@{/consulta-hierarquica}" class="waves-effect waves-light btn main-color-hoverable" id="btn-consultar">Nova Consulta</a>
-				<a th:href="@{#}" onclick="printJS('docs/printjs.pdf')" class="waves-effect waves-light btn main-color-hoverable" id="btn-consultar">Imprimir</a>
 			</div>
 		</div>
 	</div>

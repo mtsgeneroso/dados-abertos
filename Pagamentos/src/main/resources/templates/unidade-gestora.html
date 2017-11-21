@@ -48,9 +48,10 @@
 			<br />
 			<canvas id="chart"></canvas>
 			<br /> <input type="hidden" name="currentId" th:value="${currentId}" />
-
+			
+			
 			<h5>Ações:</h5>
-			<div class="row" id="botoes">
+			 <div class="row" id="botoes">
 				<div th:each="acao : ${acoes}">
 					<div class="col s12 m4 l2">
 						<a th:href="@{#}" th:title="${acao.nomeAcao}">
@@ -65,7 +66,6 @@
 				</div>
 
 			</div>
-
 		</div>
 	</div>
 	</main>

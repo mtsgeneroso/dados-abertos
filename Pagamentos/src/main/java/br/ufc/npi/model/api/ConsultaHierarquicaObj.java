@@ -1,11 +1,11 @@
-package br.ufc.npi.model.request;
+package br.ufc.npi.model.api;
 
 import java.util.List;
 
 public class ConsultaHierarquicaObj {
 
 	private List<String> hierarquia;
-	private List<Dado> orgaosConsulta;
+	private List<OrgaoGovernamental> orgaosConsulta;
 	
 	public List<String> getHierarquia() {
 		return hierarquia;
@@ -13,10 +13,10 @@ public class ConsultaHierarquicaObj {
 	public void setHierarquia(List<String> hierarquia) {
 		this.hierarquia = hierarquia;
 	}
-	public List<Dado> getOrgaosConsulta() {
+	public List<OrgaoGovernamental> getOrgaosConsulta() {
 		return orgaosConsulta;
 	}
-	public void setOrgaosConsulta(List<Dado> orgaosConsulta) {
+	public void setOrgaosConsulta(List<OrgaoGovernamental> orgaosConsulta) {
 		this.orgaosConsulta = orgaosConsulta;
 	}
 	

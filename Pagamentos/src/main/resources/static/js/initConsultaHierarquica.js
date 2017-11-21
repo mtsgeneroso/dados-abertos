@@ -1,12 +1,20 @@
+//Definições para transformar strings vindas dos ID's
+tiposOrgaosHierarquia = {
+		"orgao_superior": "Órgão Superior",
+		"orgao_subordinado" : "Órgão Subordinado",
+		"unidade_gestora" : "Unidade Gestora",
+		"acao" : "Ação",
+		"programa" : "Programa",
+		"favorecido" : "Favorecido"
+}
+
 function initCamposBusca(tiposOrgaos){
 	chips = {}
-	console.log(tiposOrgaos);
 	tiposOrgaos.forEach(function(tipoOrgao, index){
-		var urlAPI = "/api/"+tipoOrgao;
+		var urlAPI = "/api/"+tipoOrgao+"/";
 		chips[tipoOrgao] = {};
 
 		$.getJSON(urlAPI, function(orgaos){
-
 			var dataSugestions = {};
 
 			orgaos.forEach(function(orgao, index){
@@ -122,6 +130,10 @@ $(document).ready(function(){
 
 $('#btn-prosseguir').click(function(){
 	hierarquia = $("#hierarquia").sortable("toArray");
+	hierarquiaUI = [];
+	hierarquia.forEach(function(tipoOrgao, index){
+		hierarquiaUI.push(tiposOrgaosHierarquia[tipoOrgao]);
+	});
 
 	if(hierarquia.length == 0){
 		$("#modal-hierarquia-vazia").modal("open");
@@ -141,8 +153,8 @@ $('#btn-prosseguir').click(function(){
 		assistirCamposBusca(hierarquia, chips);
 
 		ProgressBar.singleStepAnimation = 0;
-		ProgressBar.init(hierarquia,
-				hierarquia[step],
+		ProgressBar.init(hierarquiaUI,
+				hierarquiaUI[step],
 				"progress-bar-wrapper"
 		);
 
@@ -159,8 +171,8 @@ $("#btn-next").click(function(){
 		//Limpa a barra atual
 		$(".progress-bar-wrapper").empty();
 		//Constroi nova barra no passo seguinte
-		ProgressBar.init(hierarquia,
-				hierarquia[step],
+		ProgressBar.init(hierarquiaUI,
+				hierarquiaUI[step],
 				"progress-bar-wrapper"
 		);
 		if(step >= hierarquia.length-1){
@@ -181,8 +193,8 @@ $("#btn-prev").click(function(){
 		//Limpa a barra atual
 		$(".progress-bar-wrapper").empty();
 		//Constroi nova barra no passo seguinte
-		ProgressBar.init(hierarquia,
-				hierarquia[step],
+		ProgressBar.init(hierarquiaUI,
+				hierarquiaUI[step],
 				"progress-bar-wrapper"
 		);
 		if(step <= 0){
@@ -206,7 +218,7 @@ $("#btn-consultar").click(function(){
 			"hierarquia" : hierarquia,
 			"orgaosConsulta": orgaosConsulta
 	};
-
+	console.log(consulta);
 	$.ajax({
 		type: 'POST',
 		url: '/api/consulta-hierarquica',
@@ -216,7 +228,7 @@ $("#btn-consultar").click(function(){
 		success: function(orgaos){
 			$(".resultado-container").show();
 			$(".consulta-container").hide();
-			$("#resultados").append(gerarTabela(orgaos, hierarquia));
+			$("#resultados").append(gerarTabela(orgaos, hierarquiaUI));
 			//Table sorter
 			$("table").tablesorter({
 				theme : "materialize",

@@ -1,4 +1,4 @@
-package br.ufc.npi.model.request;
+package br.ufc.npi.model.api;
 
 public class Data {
 
