@@ -65,9 +65,7 @@ public class ApiController {
 	
 	@RequestMapping(path="/consulta-hierarquica", method=RequestMethod.POST)
 	public List<Object[]> consultaHierarquica(@RequestBody ConsultaHierarquicaObj objConsulta){
-		
 		return pagamentoService.pagamentosConsultaHierarquica(objConsulta);
-		
 	}
 	
 	@RequestMapping(path="/pagamentos")
@@ -99,113 +97,6 @@ public class ApiController {
 
 		return chart;
 		
-	}
-
-	@RequestMapping(path="/pagamentos/orgao_superior", method=RequestMethod.GET)
-	public Chart pagamentosOrgaoSuperior(@RequestParam("id")Long id){
-		
-		List<Object[]> pagamentos;
-		
-		if(id == 0){
-			pagamentos = pagamentoService.findByMonths();
-		}else{
-			pagamentos = pagamentoService.findPagamentosOrgSuperiorByMonths(id);
-		}
-		
-		Double valores[] = new Double[12];
-		for(int i = 0; i<valores.length; i++){
-			valores[i] = 0.0;
-		}
-		
-		for (int i = 0; i<pagamentos.size(); i++){
-			valores[(int)pagamentos.get(i)[0]-1] = (Double)(pagamentos.get(i)[1]); 
-		}
-
-
-		Dataset datasetPagamentos = new Dataset(
-				"Pagamentos",
-				valores);
-
-
-		Data data = new Data(
-				meses, 
-				new Dataset[]{datasetPagamentos});
-
-		Chart chart = new Chart("line", data);
-
-		return chart;
-
-	}
-
-	@RequestMapping(path="/pagamentos/orgao_subordinado", method=RequestMethod.GET)
-	public Chart pagamentosOrgaoSubordinado(@RequestParam("id")Long id){
-
-		List<Object[]> pagamentos;
-		
-		if(id == 0){
-			pagamentos = pagamentoService.findByMonths();
-		}else{
-			pagamentos = pagamentoService.findPagamentosOrgSubordinadoByMonths(id);
-		}
-		
-		Double valores[] = new Double[12];
-		for(int i = 0; i<valores.length; i++){
-			valores[i] = 0.0;
-		}
-
-		for (int i = 0; i<pagamentos.size(); i++){
-			valores[(int)pagamentos.get(i)[0]-1] = (Double)(pagamentos.get(i)[1]); 
-		}
-
-
-		Dataset datasetPagamentos = new Dataset(
-				"Pagamentos",
-				valores);
-
-		Data data = new Data(
-				meses, 
-				new Dataset[]{datasetPagamentos});
-
-		Chart chart = new Chart("line", data);
-
-		return chart;
-
-	}
-	
-	@RequestMapping(path="/pagamentos/unidade_gestora", method=RequestMethod.GET)
-	public Chart pagamentosUnidadeGestora(@RequestParam("id")Long id){
-
-		List<Object[]> pagamentos;
-		
-		if(id == 0){
-			pagamentos = pagamentoService.findByMonths();
-		}else{
-			pagamentos = pagamentoService.findPagamentosOrgSubordinadoByMonths(id);
-		}
-		
-		Double valores[] = new Double[12];
-		for(int i = 0; i<valores.length; i++){
-			valores[i] = 0.0;
-		}
-
-		for (int i = 0; i<pagamentos.size(); i++){
-			System.out.println((Double)pagamentos.get(i)[1]);
-			valores[(int)pagamentos.get(i)[0]-1] = (Double)pagamentos.get(i)[1];
-		}
-
-
-		Dataset datasetPagamentos = new Dataset(
-				"Pagamentos",
-				valores);
-
-		Data data = new Data(
-				meses, 
-				new Dataset[]{datasetPagamentos});
-
-		Chart chart = new Chart("line", data);
-
-		return chart;
-
 	}
 	
 	

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufc.npi.model.OrgaoSubordinado;
+import br.ufc.npi.model.api.Chart;
+import br.ufc.npi.model.api.Data;
+import br.ufc.npi.model.api.Dataset;
 import br.ufc.npi.model.api.MensagemJSON;
 import br.ufc.npi.model.api.OrgaoGovernamental;
 import br.ufc.npi.model.ui.TipoOrgaoGovernamental;
@@ -17,7 +20,7 @@ import br.ufc.npi.service.OrgaoSubordinadoService;
 
 @RestController
 @RequestMapping(path="/api/orgao_subordinado")
-public class OrgaoSubordinadoApiController implements IOrgaoApiControler{
+public class OrgaoSubordinadoApiController extends PagamentoApiController<Long> implements IOrgaoApiControler<Long>{
 	
 	@Autowired
 	private OrgaoSubordinadoService orgaoSubordinadoService;
@@ -52,6 +55,40 @@ public class OrgaoSubordinadoApiController implements IOrgaoApiControler{
 	@Override
 	public List<OrgaoGovernamental> find(OrgaoGovernamental orgaoConsulta) {
 		return null;
+	}
+
+	@RequestMapping(path="/pagamentos/{codigo}")
+	@Override
+	public Chart pagamentos(@PathVariable("codigo")Long codigo) {
+		List<Object[]> pagamentos;
+		
+		if(codigo == 0){
+			pagamentos = pagamentoService.findByMonths();
+		}else{
+			pagamentos = pagamentoService.findPagamentosOrgSubordinadoByMonths(codigo);
+		}
+		
+		Double valores[] = new Double[12];
+		for(int i = 0; i<valores.length; i++){
+			valores[i] = 0.0;
+		}
+
+		for (int i = 0; i<pagamentos.size(); i++){
+			valores[(int)pagamentos.get(i)[0]-1] = (Double)(pagamentos.get(i)[1]); 
+		}
+
+
+		Dataset datasetPagamentos = new Dataset(
+				"Pagamentos",
+				valores);
+
+		Data data = new Data(
+				meses, 
+				new Dataset[]{datasetPagamentos});
+
+		Chart chart = new Chart("line", data);
+
+		return chart;
 	}
 	
 }

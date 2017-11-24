@@ -4,13 +4,13 @@ $(document).ready(function(){
 	});
 });
 
-function initInterface(urlQuery){
+function initInterface(tipoOrgao, id){
 	
 	$("#rangeMeses").hide();
 	$("#chart").hide();
 	$("#mensagemChart").hide();
 
-	$.getJSON("/api/pagamentos" + urlQuery, function(chart){
+	$.getJSON("/api/" + tipoOrgao + "/pagamentos/" + id, function(chart){
 		if(chart.data.datasets[0].data.length === 0){
 			$("#loadChart").hide();
 			$("#mensagemChart").show();

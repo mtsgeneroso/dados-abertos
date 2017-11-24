@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.ufc.npi.model.OrgaoSubordinado;
 import br.ufc.npi.model.OrgaoSuperior;
 import br.ufc.npi.model.UnidadeGestora;
+import br.ufc.npi.model.api.Chart;
 import br.ufc.npi.model.api.MensagemJSON;
 import br.ufc.npi.model.api.OrgaoGovernamental;
 import br.ufc.npi.model.ui.TipoOrgaoGovernamental;
@@ -21,7 +22,7 @@ import br.ufc.npi.service.UnidadeGestoraService;
 
 @RestController
 @RequestMapping(path="/api/orgaos")
-public class OrgaosApiController implements IOrgaoApiControler{
+public class OrgaosApiController extends PagamentoApiController<Long> implements IOrgaoApiControler<Long>{
 	
 	@Autowired
 	private OrgaoSuperiorService orgaoSuperiorService;
@@ -72,6 +73,12 @@ public class OrgaosApiController implements IOrgaoApiControler{
 	@RequestMapping(path="/find", method=RequestMethod.POST)
 	@Override
 	public List<OrgaoGovernamental> find(OrgaoGovernamental orgaoConsulta) {
+		return null;
+	}
+
+	@Override
+	public Chart pagamentos(Long codigo) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

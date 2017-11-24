@@ -11,7 +11,7 @@ import br.ufc.npi.model.Acao;
 
 @Repository
 @Transactional
-public interface AcaoRepository extends JpaRepository<Acao, Long>{
+public interface AcaoRepository extends JpaRepository<Acao, String>{
 
 	public List<Acao> findByOrderByNomeAcaoAsc();
 	

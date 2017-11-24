@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufc.npi.model.Programa;
+import br.ufc.npi.model.api.Chart;
+import br.ufc.npi.model.api.MensagemJSON;
 import br.ufc.npi.model.api.OrgaoGovernamental;
 import br.ufc.npi.model.ui.TipoOrgaoGovernamental;
 import br.ufc.npi.service.ProgramaService;
 
 @RestController
 @RequestMapping(path="/api/programa")
-public class ProgramaApiController implements IOrgaoApiControler{
+public class ProgramaApiController extends PagamentoApiController<Long> implements IOrgaoApiControler<Long>{
 	
 	@Autowired
 	private ProgramaService programaService;
@@ -34,13 +36,27 @@ public class ProgramaApiController implements IOrgaoApiControler{
 	@RequestMapping(path="/{codigo}", method=RequestMethod.GET)
 	@Override
 	public Object get(Long codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		Programa programa = programaService.getById(codigo);
+		if(programa != null){
+			OrgaoGovernamental orgao = new OrgaoGovernamental();
+			orgao.setId(String.valueOf(codigo));
+			orgao.setNome(String.valueOf(programa.getCodPrograma()));
+			orgao.setTipo(TipoOrgaoGovernamental.PROGRAMA.getNomeTabela());
+			return orgao;
+		}else{
+			return new MensagemJSON("Órgão não encontrado.");
+		}
 	}
 
 	@RequestMapping(path="/find", method=RequestMethod.POST)
 	@Override
 	public List<OrgaoGovernamental> find(OrgaoGovernamental orgaoConsulta) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Chart pagamentos(Long codigo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

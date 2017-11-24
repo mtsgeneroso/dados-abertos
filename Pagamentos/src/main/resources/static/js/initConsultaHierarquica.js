@@ -1,13 +1,3 @@
-//Definições para transformar strings vindas dos ID's
-tiposOrgaosHierarquia = {
-		"orgao_superior": "Órgão Superior",
-		"orgao_subordinado" : "Órgão Subordinado",
-		"unidade_gestora" : "Unidade Gestora",
-		"acao" : "Ação",
-		"programa" : "Programa",
-		"favorecido" : "Favorecido"
-}
-
 function initCamposBusca(tiposOrgaos){
 	chips = {}
 	tiposOrgaos.forEach(function(tipoOrgao, index){
@@ -102,7 +92,12 @@ function gerarTabela(orgaos, hierarquia){
 	for(var i = 0; i < orgaos.length; i++){
 		tags += "<tr>";
 		for(var j = 0; j < orgaos[i].length; j++){
-			tags += "<td>" + orgaos[i][j] + "</td>";
+			if(j == orgaos[i].length -1){
+				tags += "<td class='celula'>" + orgaos[i][j] + "</td>";
+			}
+			else{
+				tags += "<td>" + orgaos[i][j] + "</td>";
+			}
 		}
 		tags += "</tr>";
 	}
@@ -124,15 +119,13 @@ $(document).ready(function(){
 	$(".resultado-container").hide();
 	$(".btn-steps").hide();
 	$("#btn-prev").addClass("disabled");
-
-
 });
 
 $('#btn-prosseguir').click(function(){
 	hierarquia = $("#hierarquia").sortable("toArray");
 	hierarquiaUI = [];
 	hierarquia.forEach(function(tipoOrgao, index){
-		hierarquiaUI.push(tiposOrgaosHierarquia[tipoOrgao]);
+		hierarquiaUI.push(tipoOrgaoGovernamental[tipoOrgao]);
 	});
 
 	if(hierarquia.length == 0){
@@ -209,16 +202,13 @@ $("#btn-prev").click(function(){
 });
 
 $("#btn-consultar").click(function(){
-
 	$(".passos-consulta").hide();
 	$("#loadChart").show();
-
 	orgaosConsulta = pegarValoresBusca(hierarquia, chips);
 	var consulta = {
-			"hierarquia" : hierarquia,
-			"orgaosConsulta": orgaosConsulta
-	};
-	console.log(consulta);
+		"hierarquia" : hierarquia,
+		"orgaosConsulta" : orgaosConsulta
+	}
 	$.ajax({
 		type: 'POST',
 		url: '/api/consulta-hierarquica',
@@ -229,41 +219,22 @@ $("#btn-consultar").click(function(){
 			$(".resultado-container").show();
 			$(".consulta-container").hide();
 			$("#resultados").append(gerarTabela(orgaos, hierarquiaUI));
-			//Table sorter
 			$("table").tablesorter({
 				theme : "materialize",
 				widthFixed: true,
-				widgets : [ "filter", "zebra" ],
-
+				widgets : ["filter", "zebra"],
 				widgetOptions : {
-					// using the default zebra striping class name, so it actually isn't included in the theme variable above
-					// this is ONLY needed for materialize theming if you are using the filter widget, because rows are hidden
 					zebra : ["even", "odd"],
-
-					// reset filters button
 					filter_reset : ".reset"
 				}
-
 			}).tablesorterPager({
-
-				// target the pager markup - see the HTML block below
 				container: $(".ts-pager"),
-
-				// target the pager page select dropdown - choose a page
 				cssGoto  : ".pagenum",
-
-				// remove rows from the table to speed up the sort of large tables.
-				// setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
 				removeRows: false,
-
-				// output string - default is '{page}/{totalPages}';
-				// possible variables: {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
 				output: '{startRow} - {endRow} / {filteredRows} ({totalRows})'
-
 			});
-
+			$(".celula").formatCurrency();
 			$("#loadChart").hide();
 		}
 	});
-
 });
