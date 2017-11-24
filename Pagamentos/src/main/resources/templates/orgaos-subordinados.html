@@ -32,7 +32,7 @@
 					<div class="col s12">
 
 						<div id="loadChart" class="container">
-							<p>Carregando gráfico...</p>
+							<p class="main-color-black-text">Carregando gráfico...</p>
 							<div class="progress">
       							<div class="indeterminate"></div>
   							</div>
@@ -43,7 +43,7 @@
 						</p>
 
 						<div id="mensagemChart">
-							<h5>Sem dados disponíveis</h5>
+							<h5 class="main-color-black-text">Sem dados disponíveis</h5>
 						</div>
 
 
@@ -53,7 +53,7 @@
 					</div>
 				</div>
 
-				<h5>Órgãos Subordinados:</h5>
+				<h5 class="main-color-black-text">Órgãos Subordinados:</h5>
 
 				<div class="row">
 					<div class="col s12 m6">
@@ -70,7 +70,7 @@
 					<div th:each="orgao : ${orgaosSubordinados}">
 						<div class="col s12 m3 l2">
 							<a th:href="@{/orgao_subordinado/{id}(id=${orgao.codOrgaoSubordinado})}" th:title="${orgao.nomeOrgaoSubordinado}">
-								<div class="card-panel main-color-hoverable"
+								<div class="card-panel main-color-black hoverable"
 									style="height: 120px;">
 									<p th:text="${orgao.nomeOrgaoSubordinado}" th:classappend="${#strings.length(orgao.nomeOrgaoSubordinado) > 60} ? 'truncate'" style="font-size: 12px">[...]</p>
 								</div>

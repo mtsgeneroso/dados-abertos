@@ -59,7 +59,7 @@ main {
 }
 
 .item-placeholder{
-	background-color: $main-color-black;
+	background-color: $bg-color;
 	border: 2px dotted black;
 	border-radius: 2px;
 	height: 40px;
@@ -79,7 +79,11 @@ main {
 
 .main-color-black{
 	background-color: $main-color-black;
-	color: $main-color;
+	color: white;
+	&:hover{
+		background-color: $main-color-black;
+		color: white;
+	}
 }
 
 .main-color-text{
@@ -105,7 +109,7 @@ main {
 .main-color-black-hoverable{
 	font-style: bold;
 	background-color: $main-color-black;
-	color: $main-color;
+	color: white;
 	&:hover{
 		background-color: $main-color;
 		color: $main-color-black;
