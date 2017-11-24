@@ -60,7 +60,7 @@ function gerarTabela(orgaos, hierarquia){
 	for(var i = 0; i < hierarquia.length; i++){
 		tags += "<th class='main-color-black-text'>" + hierarquia[i] + "</th>";
 	}
-	tags += "<th>Valor (R$)</th>";
+	tags += "<th class='main-color-black-text'>Valor (R$)</th>";
 	tags += "</tr></thead>";
 
 	tags += "<tfoot><tr class='tablesorter-ignoreRow'>";
