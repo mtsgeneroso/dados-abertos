@@ -49,7 +49,7 @@ $(document).ready(function(){
 
 	//Ação de click no botão
 	$('#btn-consultar').click(function(){
-		
+
 		$(".grafico-container").show();
 		$(".grafico-container").empty();
 
@@ -182,12 +182,12 @@ $(document).ready(function(){
 				}
 			});
 
-			$(".detalhes-container").append("<div class='row'><div class='col s12'><h5>Clique para ver detalhes:</h5></div></div>");
+			$(".detalhes-container").append("<div class='row'><div class='col s12'><h5 class='main-black-color-text'>Clique para ver detalhes:</h5></div></div>");
 
 			for(var i = 0; i<orgaosConsulta.length; i++){
 				$(".detalhes-container").append("<div class='col l4 s12 m4'>" +
 						"<a href='/"+orgaosConsulta[i].tipo+"/"+orgaosConsulta[i].id+"' class='truncate' target='_blank'>" +
-						"<div class='card-panel white-text main-color'>" +
+						"<div class='card-panel main-color-black hoverable'>" +
 						"<p class='center'>" +
 						"<i class='material-icons small'>open_in_new</i>" +
 						"</p>" +

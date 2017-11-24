@@ -29,7 +29,7 @@
 		<div class="container">
 
 			<div id="loadChart" class="container">
-				<p>Carregando gráfico...</p>
+				<p class="main-color-black-text">Carregando gráfico...</p>
 				<div class="progress">
 					<div class="indeterminate"></div>
 				</div>
@@ -40,7 +40,7 @@
 			</p>
 
 			<div id="mensagemChart">
-				<h5>Sem dados disponíveis</h5>
+				<h5 class="main-color-black-text">Sem dados disponíveis</h5>
 			</div>
 
 
@@ -50,12 +50,12 @@
 			<br /> <input type="hidden" name="currentId" th:value="${currentId}" />
 			
 			
-			<h5>Ações:</h5>
+			<h5 class="main-color-black-text">Ações:</h5>
 			 <div class="row" id="botoes">
 				<div th:each="acao : ${acoes}">
 					<div class="col s12 m4 l2">
 						<a th:href="@{#}" th:title="${acao.nomeAcao}">
-							<div class="card-panel main-color"
+							<div class="card-panel main-color-black hoverable"
 								style="padding-top: 2px; height: 120px;">
 								<p th:text="${acao.nomeAcao}"
 									th:classappend="${#strings.length(acao.nomeAcao) > 75} ? 'truncate'"

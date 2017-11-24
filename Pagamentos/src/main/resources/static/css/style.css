@@ -44,7 +44,7 @@ main {
   padding: 0.2em; }
 
 .item-placeholder {
-  background-color: #3f7575;
+  background-color: #eeeeee;
   border: 2px dotted black;
   border-radius: 2px;
   height: 40px; }
@@ -60,7 +60,10 @@ main {
 
 .main-color-black {
   background-color: #3f7575;
-  color: #90b5b5; }
+  color: white; }
+  .main-color-black:hover {
+    background-color: #3f7575;
+    color: white; }
 
 .main-color-text {
   font-style: bold;
@@ -81,7 +84,7 @@ main {
 .main-color-black-hoverable {
   font-style: bold;
   background-color: #3f7575;
-  color: #90b5b5; }
+  color: white; }
   .main-color-black-hoverable:hover {
     background-color: #90b5b5;
     color: #3f7575; }

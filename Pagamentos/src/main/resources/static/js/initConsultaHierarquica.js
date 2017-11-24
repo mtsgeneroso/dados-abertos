@@ -58,24 +58,24 @@ function gerarTabela(orgaos, hierarquia){
 	tags = "<table id='tableResultado' class='responsive-table bordered'>";
 	tags += "<thead><tr class='tablesorter-headerRow'>";
 	for(var i = 0; i < hierarquia.length; i++){
-		tags += "<th>" + hierarquia[i] + "</th>";
+		tags += "<th class='main-color-black-text'>" + hierarquia[i] + "</th>";
 	}
 	tags += "<th>Valor (R$)</th>";
 	tags += "</tr></thead>";
 
 	tags += "<tfoot><tr class='tablesorter-ignoreRow'>";
 	for(var i = 0; i < hierarquia.length; i++){
-		tags += "<th>" + hierarquia[i] + "</th>";
+		tags += "<th class='main-color-black-text'>" + hierarquia[i] + "</th>";
 	}
 	tags += "<th>Valor (R$)</th></tr>";
 	tags += `<tr class="tablesorter-ignoreRow">
       <th colspan="` + parseInt(hierarquia.length + 1) + `" class="ts-pager form-horizontal">
-        <button type="button" class="btn first"><i class="small material-icons">first_page</i></button>
-        <button type="button" class="btn prev"><i class="small material-icons">navigate_before</i></button>
+        <button type="button" class="btn first main-color-black"><i class="small material-icons">first_page</i></button>
+        <button type="button" class="btn prev main-color-black"><i class="small material-icons">navigate_before</i></button>
         <span class="pagedisplay"></span>
         <!-- this can be any element, including an input -->
-        <button type="button" class="btn next"><i class="small material-icons">navigate_next</i></button>
-        <button type="button" class="btn last"><i class="small material-icons">last_page</i></button>
+        <button type="button" class="btn next main-color-black"><i class="small material-icons">navigate_next</i></button>
+        <button type="button" class="btn last main-color-black"><i class="small material-icons">last_page</i></button>
 		<select class="pagesize browser-default" title="Selecione número de linhas">
           <option selected="selected" value="10">10</option>
           <option value="20">20</option>
@@ -111,9 +111,10 @@ $(document).ready(function(){
 	$("#loadChart").hide();
 	$("#itens-hierarquia, #hierarquia").sortable({
 		connectWith: ".conexaoHierarquia",
-		placeholder: "item-placeholder",
-		forcePlaceholderSize: false
-	}).disableSelection();
+		placeholder: "item-placeholder"//,
+		//forcePlaceholderSize: false
+	});
+	$("#itens-hierarquia, #hierarquia").disableSelection();
 	$(".item-content").hide();
 	$(".filtro-orgaos").hide();
 	$(".resultado-container").hide();
