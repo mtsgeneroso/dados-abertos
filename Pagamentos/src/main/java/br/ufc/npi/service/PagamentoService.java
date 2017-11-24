@@ -22,21 +22,33 @@ public class PagamentoService {
 	}
 
 	public List<Object[]> findByMonths(){
-		return pagamentoRepository.listByDataBetween();
+		return pagamentoRepository.list();
 	}
 
 	public List<Object[]> findPagamentosOrgSuperiorByMonths(Long codigoOrgSuperior){
-		return pagamentoRepository.listPagamentosOrgSuperiorByDataBetween(codigoOrgSuperior);
+		return pagamentoRepository.listPagamentosOrgSuperior(codigoOrgSuperior);
 	}
 
 	public List<Object[]> findPagamentosOrgSubordinadoByMonths(Long codigoOrgSubordinado){
-		return pagamentoRepository.listPagamentosOrgSubordinadoByDataBetween(codigoOrgSubordinado);
+		return pagamentoRepository.listPagamentosOrgSubordinado(codigoOrgSubordinado);
 	}
 
 	public List<Object[]> findPagamentosUnidadeGestoraByMonths(Long codigoUnidadeGestora){
-		return pagamentoRepository.listPagamentosUnidadeGestoraByDataBetween(codigoUnidadeGestora);
+		return pagamentoRepository.listPagamentosUnidadeGestora(codigoUnidadeGestora);
 	}	
 
+	public List<Object[]> findPagamentosAcaoByMonths(String codigoAcao){
+		return pagamentoRepository.listPagamentosAcoes(codigoAcao);
+	}
+	
+	public List<Object[]> findPagamentosProgramaByMonths(Long codigoPrograma){
+		return pagamentoRepository.listPagamentosProgramas(codigoPrograma);
+	}
+	
+	public List<Object[]> findPagamentosFavorecidoByMonths(String codigoFavorecido){
+		return pagamentoRepository.listPagamentosFavorecido(codigoFavorecido);
+	}
+	
 	public List<Object[]> findPagamentosByMonths(String orgaoTipo, Long codOrgao){
 		if(orgaoTipo.equals(TipoOrgaoGovernamental.ORGAO_SUPERIOR.getNomeTabela())){
 			return this.findPagamentosOrgSuperiorByMonths(codOrgao);
@@ -72,7 +84,13 @@ public class PagamentoService {
 				sqlQuery += " ( ";
 				for(int i = 0; i < obj.getOrgaosConsulta().size(); i++){
 					if(obj.getOrgaosConsulta().get(i).getTipo().equals(obj.getHierarquia().get(h))){
-						sqlQuery += String.format(" %s.cod_%s = %s ", obj.getOrgaosConsulta().get(i).getTipo(), obj.getOrgaosConsulta().get(i).getTipo(), obj.getOrgaosConsulta().get(i).getId());
+						//Ação e Favorecido têm chaves primárias de tipo String, por isso esse IF é necessário
+						if(obj.getOrgaosConsulta().get(i).getTipo().equals(TipoOrgaoGovernamental.ACAO.getNomeTabela()) ||
+								obj.getOrgaosConsulta().get(i).getTipo().equals(TipoOrgaoGovernamental.FAVORECIDO.getNomeTabela())){
+							sqlQuery += String.format(" %s.cod_%s = '%s' ", obj.getOrgaosConsulta().get(i).getTipo(), obj.getOrgaosConsulta().get(i).getTipo(), obj.getOrgaosConsulta().get(i).getId());
+						}else{
+							sqlQuery += String.format(" %s.cod_%s = %s ", obj.getOrgaosConsulta().get(i).getTipo(), obj.getOrgaosConsulta().get(i).getTipo(), obj.getOrgaosConsulta().get(i).getId());
+						}
 						if(i < obj.getOrgaosConsulta().size()-1){
 							if(obj.getOrgaosConsulta().get(i+1).getTipo().equals(obj.getOrgaosConsulta().get(i).getTipo())){
 								sqlQuery += " OR ";
@@ -109,6 +127,10 @@ public class PagamentoService {
 				sqlQuery += " , ";
 			}
 		}
+		
+		//Removendo eventuais erros na construção da String
+		sqlQuery = sqlQuery.replace("AND  (  )", "");
+		sqlQuery = sqlQuery.replace("OR  (  )", "");
 
 		return pagamentoRepository.consultaHierarquica(sqlQuery);
 

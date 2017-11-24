@@ -18,4 +18,8 @@ public class AcaoService {
 		return acaoRepository.findByOrderByNomeAcaoAsc();
 	}
 	
+	public Acao getById(String id){
+		return acaoRepository.findOne(id);
+	}
+	
 }

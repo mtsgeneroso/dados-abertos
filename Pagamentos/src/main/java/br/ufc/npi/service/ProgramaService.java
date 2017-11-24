@@ -18,4 +18,8 @@ public class ProgramaService {
 		return programaRepository.findByOrderByNomeProgramaAsc();
 	}
 	
+	public Programa getById(Long id){
+		return programaRepository.findOne(id);
+	}
+	
 }

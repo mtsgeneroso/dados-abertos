@@ -17,5 +17,9 @@ public class FavorecidoService {
 	public List<Favorecido> findAll(){
 		return favorecidoRepository.findByOrderByNomeFavorecidoAsc();
 	}
+
+	public Favorecido getById(String id){
+		return favorecidoRepository.findOne(id);
+	}
 	
 }

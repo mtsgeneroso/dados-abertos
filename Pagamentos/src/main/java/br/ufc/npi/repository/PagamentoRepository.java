@@ -16,7 +16,7 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Integer>, 
 			+ "GROUP BY dt.mes "
 			+ "ORDER BY dt.mes ASC", 
 			nativeQuery=true)
-	public List<Object[]> listByDataBetween();
+	public List<Object[]> list();
 	
 	
 	@Query(value="SELECT dt.mes, CAST(sum(pg.valor) as FLOAT) "
@@ -25,7 +25,7 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Integer>, 
 			+ "GROUP BY pg.cod_orgao_superior, dt.mes "
 			+ "ORDER BY dt.mes ASC", 
 			nativeQuery=true)
-	public List<Object[]> listPagamentosOrgSuperiorByDataBetween(@Param("cod")Long codOrgSuperior);
+	public List<Object[]> listPagamentosOrgSuperior(@Param("cod")Long codOrgSuperior);
 	
 	@Query(value="SELECT dt.mes, CAST(sum(pg.valor) as FLOAT) "
 			+ "FROM pagamento AS pg, data dt "
@@ -33,7 +33,7 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Integer>, 
 			+ "GROUP BY pg.cod_orgao_subordinado, dt.mes "
 			+ "ORDER BY dt.mes ASC", 
 			nativeQuery=true)
-	public List<Object[]> listPagamentosOrgSubordinadoByDataBetween(@Param("cod")Long codOrgSuperior);
+	public List<Object[]> listPagamentosOrgSubordinado(@Param("cod")Long codOrgSuperior);
 	
 	@Query(value="SELECT dt.mes, CAST(sum(pg.valor) as FLOAT) "
 			+ "FROM data dt, pagamento pg "
@@ -41,6 +41,30 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Integer>, 
 			+ "GROUP BY pg.cod_unidade_gestora, dt.mes "
 			+ "ORDER BY dt.mes ASC", 
 			nativeQuery=true)
-	public List<Object[]> listPagamentosUnidadeGestoraByDataBetween(@Param("cod")Long codUnidadeGestora);
+	public List<Object[]> listPagamentosUnidadeGestora(@Param("cod")Long codUnidadeGestora);
+	
+	@Query(value="SELECT dt.mes, CAST(sum(pg.valor) as FLOAT) "
+			+ "FROM data dt, pagamento pg "
+			+ "WHERE pg.cod_data = dt.cod_data AND pg.cod_acao = :cod "
+			+ "GROUP BY pg.cod_acao, dt.mes "
+			+ "ORDER BY dt.mes ASC", 
+			nativeQuery=true)
+	public List<Object[]> listPagamentosAcoes(@Param("cod")String codAcao);
+	
+	@Query(value="SELECT dt.mes, CAST(sum(pg.valor) as FLOAT) "
+			+ "FROM data dt, pagamento pg "
+			+ "WHERE pg.cod_data = dt.cod_data AND pg.cod_programa = :cod "
+			+ "GROUP BY pg.cod_programa, dt.mes "
+			+ "ORDER BY dt.mes ASC", 
+			nativeQuery=true)
+	public List<Object[]> listPagamentosProgramas(@Param("cod")Long codPrograma);
+	
+	@Query(value="SELECT dt.mes, CAST(sum(pg.valor) as FLOAT) "
+			+ "FROM data dt, pagamento pg "
+			+ "WHERE pg.cod_data = dt.cod_data AND pg.cod_favorecido = :cod "
+			+ "GROUP BY pg.cod_favorecido, dt.mes "
+			+ "ORDER BY dt.mes ASC", 
+			nativeQuery=true)
+	public List<Object[]> listPagamentosFavorecido(@Param("cod")String codFavorecido);
 	
 }

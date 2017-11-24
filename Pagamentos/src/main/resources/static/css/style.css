@@ -42,8 +42,6 @@ main {
 
 .item-header {
   padding: 0.2em; }
-  .item-header:active {
-    cursor: move; }
 
 .item-placeholder {
   background-color: #3f7575;
