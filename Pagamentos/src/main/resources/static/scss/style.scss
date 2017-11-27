@@ -18,6 +18,14 @@ main {
 	flex: 1 0 auto;
 }
 
+.breadcrumb:before {
+    color: $main-color-black;
+}
+
+.breadcrumb, .breadcrumb:last-child {
+   color: $main-color-black;
+}
+
 .icon-block {
 	padding: 0 15px;
 }
@@ -59,7 +67,7 @@ main {
 }
 
 .item-placeholder{
-	background-color: $bg-color;
+	background-color: $main-color;
 	border: 2px dotted black;
 	border-radius: 2px;
 	height: 40px;

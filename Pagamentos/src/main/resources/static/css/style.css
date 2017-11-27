@@ -14,6 +14,12 @@ body {
 main {
   flex: 1 0 auto; }
 
+.breadcrumb:before {
+  color: #3f7575; }
+
+.breadcrumb, .breadcrumb:last-child {
+  color: #3f7575; }
+
 .icon-block {
   padding: 0 15px; }
 
@@ -44,7 +50,7 @@ main {
   padding: 0.2em; }
 
 .item-placeholder {
-  background-color: #eeeeee;
+  background-color: #90b5b5;
   border: 2px dotted black;
   border-radius: 2px;
   height: 40px; }
