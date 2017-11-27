@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-<title>Unidades Gestoras</title>
+<title>Ações</title>
 
 <!-- CSS  -->
 <link
@@ -53,26 +53,26 @@
 					</div>
 				</div>
 
-				<h5 class="main-color-black-text">Unidades Gestoras:</h5>
+				<h5 class="main-color-black-text">Ações:</h5>
 
 				<div class="row">
-					<div class="col s12 m6">
-						<div class="input-field">
-							<input id="filter" type="text" class="validate"/>
-		          			<label for="filter">Filtrar Órgãos</label>
-						</div>
+				<div class="col s12 m6">
+					<div class="input-field">
+						<input id="filter" type="text" onkeyup="javascript:filter('.card-panel')" class="validate" /> <label
+							for="filter">Filtrar Ações</label>
 					</div>
 				</div>
+			</div>
 
 				<input type="hidden" name="currentId" value="0"/>
 
 				<div class="row" id="botoes">
-					<div th:each="unidade : ${unidadesGestoras}">
+					<div th:each="acao : ${acoes}">
 						<div class="col s12 m3 l2">
-							<a th:href="@{/unidade_gestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}">
+							<a th:href="@{/acao/{id}(id=${acao.codAcao})}" th:title="${acao.nomeAcao}">
 								<div class="card-panel main-color-black hoverable"
-									style="height: 120px;">
-									<p th:text="${#strings.toUpperCase(unidade.nomeUnidadeGestora)}" th:classappend="${#strings.length(unidade.nomeUnidadeGestora) > 60} ? 'truncate'" style="font-size: 12px">[...]</p>
+									style="padding-top: 2px; height: 120px;">
+									<p th:text="${#strings.toUpperCase(acao.nomeAcao)}" th:classappend="${#strings.length(acao.nomeAcao) > 60} ? 'truncate'" style="font-size: 12px">[...]</p>
 								</div>
 							</a>
 						</div>
@@ -94,7 +94,7 @@
 	<script th:src="@{/js/init.js}"></script>
 	<script>
 		var id = $("input[name=currentId]").val();
-		initInterface("unidade_gestora", id);
+		initInterface("acao", id);
 	</script>
 </body>
 </html>

@@ -18,8 +18,10 @@ import br.ufc.npi.model.UnidadeGestora;
 import br.ufc.npi.model.api.OrgaoGovernamental;
 import br.ufc.npi.model.ui.Breadcumb;
 import br.ufc.npi.model.ui.TipoOrgaoGovernamental;
+import br.ufc.npi.service.AcaoService;
 import br.ufc.npi.service.OrgaoSubordinadoService;
 import br.ufc.npi.service.OrgaoSuperiorService;
+import br.ufc.npi.service.ProgramaService;
 import br.ufc.npi.service.UnidadeGestoraService;
 
 @Controller
@@ -32,8 +34,12 @@ public class MainController {
 	private OrgaoSubordinadoService orgaoSubordinadoService;
 	@Autowired
 	private UnidadeGestoraService unidadeGestoraService;
+	@Autowired
+	private AcaoService acaoService;
+	@Autowired
+	private ProgramaService programaService;
 	
-	private Breadcumb inicio = new Breadcumb(0L, "INÍCIO", "/");
+	private Breadcumb inicio = new Breadcumb("0", "INÍCIO", "/");
 	
 	
 	@RequestMapping(path="/")
@@ -41,6 +47,15 @@ public class MainController {
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
 		model.addAttribute("caminho", caminho);
+		
+		ArrayList<TipoOrgaoGovernamental> itensHierarquia = new ArrayList<>();
+		itensHierarquia.add(TipoOrgaoGovernamental.ORGAO_SUPERIOR);
+		itensHierarquia.add(TipoOrgaoGovernamental.ORGAO_SUBORDINADO);
+		itensHierarquia.add(TipoOrgaoGovernamental.UNIDADE_GESTORA);
+		itensHierarquia.add(TipoOrgaoGovernamental.ACAO);
+		itensHierarquia.add(TipoOrgaoGovernamental.PROGRAMA);
+		model.addAttribute("itensHierarquia", itensHierarquia);
+		
 		return "index";
 	}
 	
@@ -49,7 +64,7 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(0L, "CONSULTA HIERÁRQUICA", "/consulta-hierarquica"));
+		caminho.add(new Breadcumb("0", "CONSULTA HIERÁRQUICA", "/consulta-hierarquica"));
 		model.addAttribute("caminho", caminho);
 		
 		ArrayList<TipoOrgaoGovernamental> itensHierarquia = new ArrayList<>();
@@ -69,7 +84,7 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(0L, "CONSULTA SIMPLES", "/consulta-simples"));
+		caminho.add(new Breadcumb("0", "CONSULTA SIMPLES", "/consulta-simples"));
 		model.addAttribute("caminho", caminho);
 		
 		return "consulta-simples";
@@ -83,7 +98,7 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(0L, "ÓRGÃOS SUPERIORES", "/"+TipoOrgaoGovernamental.ORGAO_SUPERIOR.getNomeTabela()));
+		caminho.add(new Breadcumb("0", "ÓRGÃOS SUPERIORES", "/"+TipoOrgaoGovernamental.ORGAO_SUPERIOR.getNomeTabela()));
 		model.addAttribute("caminho", caminho);
 		
 		return "orgaos-superiores";
@@ -98,7 +113,7 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(0L, "ÓRGÃOS SUBORDINADOS", "/"+TipoOrgaoGovernamental.ORGAO_SUBORDINADO.getNomeTabela()));
+		caminho.add(new Breadcumb("0", "ÓRGÃOS SUBORDINADOS", "/"+TipoOrgaoGovernamental.ORGAO_SUBORDINADO.getNomeTabela()));
 		model.addAttribute("caminho", caminho);
 		
 		return "orgaos-subordinados";
@@ -113,10 +128,25 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(0L, "UNIDADES GESTORAS", "/"+TipoOrgaoGovernamental.UNIDADE_GESTORA.getNomeTabela()));
+		caminho.add(new Breadcumb("0", "UNIDADES GESTORAS", "/"+TipoOrgaoGovernamental.UNIDADE_GESTORA.getNomeTabela()));
 		model.addAttribute("caminho", caminho);
 		
 		return "unidades-gestoras";
+		
+	}
+	
+	@RequestMapping(path="/acao")
+	public String paginaAcoes(Model model){
+		
+		List<Acao> acoes = acaoService.findAll();
+		model.addAttribute("acoes", acoes);
+		
+		ArrayList<Breadcumb> caminho = new ArrayList<>();
+		caminho.add(inicio);
+		caminho.add(new Breadcumb("0", "AÇÕES", "/"+TipoOrgaoGovernamental.ACAO.getNomeTabela()));
+		model.addAttribute("caminho", caminho);
+		
+		return "acoes";
 		
 	}
 	
@@ -131,7 +161,7 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(orgaoSuperior.getCodOrgaoSuperior(), orgaoSuperior.getNomeOrgaoSuperior(),"/"+TipoOrgaoGovernamental.ORGAO_SUPERIOR.getNomeTabela()+"/"+id));
+		caminho.add(new Breadcumb(String.valueOf(orgaoSuperior.getCodOrgaoSuperior()), orgaoSuperior.getNomeOrgaoSuperior(),"/"+TipoOrgaoGovernamental.ORGAO_SUPERIOR.getNomeTabela()+"/"+id));
 		
 		model.addAttribute("caminho", caminho);
 		
@@ -151,8 +181,8 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(orgaoSuperior.getCodOrgaoSuperior(), orgaoSuperior.getNomeOrgaoSuperior(), "/"+TipoOrgaoGovernamental.ORGAO_SUPERIOR.getNomeTabela()+"/" + orgaoSuperior.getCodOrgaoSuperior()));
-		caminho.add(new Breadcumb(orgaoSubordinado.getCodOrgaoSubordinado(), orgaoSubordinado.getNomeOrgaoSubordinado(),"/"+TipoOrgaoGovernamental.ORGAO_SUBORDINADO.getNomeTabela()+"/"+id));
+		caminho.add(new Breadcumb(String.valueOf(orgaoSuperior.getCodOrgaoSuperior()), orgaoSuperior.getNomeOrgaoSuperior(), "/"+TipoOrgaoGovernamental.ORGAO_SUPERIOR.getNomeTabela()+"/" + orgaoSuperior.getCodOrgaoSuperior()));
+		caminho.add(new Breadcumb(String.valueOf(orgaoSubordinado.getCodOrgaoSubordinado()), orgaoSubordinado.getNomeOrgaoSubordinado(),"/"+TipoOrgaoGovernamental.ORGAO_SUBORDINADO.getNomeTabela()+"/"+id));
 		
 		model.addAttribute("caminho", caminho);
 		
@@ -175,9 +205,9 @@ public class MainController {
 		
 		ArrayList<Breadcumb> caminho = new ArrayList<>();
 		caminho.add(inicio);
-		caminho.add(new Breadcumb(orgaoSuperior.getCodOrgaoSuperior(), orgaoSuperior.getNomeOrgaoSuperior(), "/"+TipoOrgaoGovernamental.ORGAO_SUPERIOR.getNomeTabela()+"/" + orgaoSuperior.getCodOrgaoSuperior()));
-		caminho.add(new Breadcumb(orgaoSubordinado.getCodOrgaoSubordinado(), orgaoSubordinado.getNomeOrgaoSubordinado(),"/"+TipoOrgaoGovernamental.ORGAO_SUBORDINADO.getNomeTabela()+"/"+orgaoSubordinado.getCodOrgaoSubordinado()));
-		caminho.add(new Breadcumb(unidadeGestora.getCodUnidadeGestora(), unidadeGestora.getNomeUnidadeGestora(), "/"+TipoOrgaoGovernamental.UNIDADE_GESTORA.getNomeTabela()+"/" + id));
+		caminho.add(new Breadcumb(String.valueOf(orgaoSuperior.getCodOrgaoSuperior()), orgaoSuperior.getNomeOrgaoSuperior(), "/"+TipoOrgaoGovernamental.ORGAO_SUPERIOR.getNomeTabela()+"/" + orgaoSuperior.getCodOrgaoSuperior()));
+		caminho.add(new Breadcumb(String.valueOf(orgaoSubordinado.getCodOrgaoSubordinado()), orgaoSubordinado.getNomeOrgaoSubordinado(),"/"+TipoOrgaoGovernamental.ORGAO_SUBORDINADO.getNomeTabela()+"/"+orgaoSubordinado.getCodOrgaoSubordinado()));
+		caminho.add(new Breadcumb(String.valueOf(unidadeGestora.getCodUnidadeGestora()), unidadeGestora.getNomeUnidadeGestora(), "/"+TipoOrgaoGovernamental.UNIDADE_GESTORA.getNomeTabela()+"/" + id));
 		
 		model.addAttribute("caminho", caminho);
 		
@@ -185,5 +215,22 @@ public class MainController {
 		
 	}
 	
+	@RequestMapping(path="/acao/{id}")
+	public String acao(@PathVariable("id")String id, Model model){
+		
+		Acao acao = acaoService.getById(id);
+		
+		model.addAttribute("currentId", id);
+		
+		ArrayList<Breadcumb> caminho = new ArrayList<>();
+		caminho.add(inicio);
+		caminho.add(new Breadcumb("0", "AÇÕES", "/"+TipoOrgaoGovernamental.ACAO.getNomeTabela()));
+		caminho.add(new Breadcumb(acao.getCodAcao(), acao.getNomeAcao().toUpperCase(), "/"+TipoOrgaoGovernamental.ACAO.getNomeTabela()+"/"+acao.getCodAcao()));
+		
+		model.addAttribute("caminho", caminho);
+		
+		return "acao";
+		
+	}
 	
 }

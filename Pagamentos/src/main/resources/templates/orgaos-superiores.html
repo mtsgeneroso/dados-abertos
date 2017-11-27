@@ -76,7 +76,7 @@
 							th:title="${orgao.nomeOrgaoSuperior}">
 							<div class="card-panel main-color-black hoverable"
 								style="padding-top: 2px; height: 120px;">
-								<p th:text="${orgao.nomeOrgaoSuperior}"
+								<p th:text="${#strings.toUpperCase(orgao.nomeOrgaoSuperior)}"
 									th:classappend="${#strings.length(orgao.nomeOrgaoSuperior) > 60} ? 'truncate'"
 									style="font-size: 12px">[...]</p>
 							</div>

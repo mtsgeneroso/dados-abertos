@@ -2,7 +2,7 @@ package br.ufc.npi.model.ui;
 
 public class Breadcumb {
 	
-	private Long id;
+	private String id;
 	private String titulo;
 	private String url;
 	public String getTitulo() {
@@ -17,16 +17,16 @@ public class Breadcumb {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Breadcumb(Long id, String titulo, String url) {
+	public Breadcumb(String id, String titulo, String url) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.url = url;
 	}
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
