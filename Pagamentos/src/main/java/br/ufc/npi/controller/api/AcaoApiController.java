@@ -13,7 +13,6 @@ import br.ufc.npi.model.Acao;
 import br.ufc.npi.model.api.Chart;
 import br.ufc.npi.model.api.Data;
 import br.ufc.npi.model.api.Dataset;
-import br.ufc.npi.model.api.MensagemJSON;
 import br.ufc.npi.model.api.OrgaoGovernamental;
 import br.ufc.npi.model.ui.TipoOrgaoGovernamental;
 import br.ufc.npi.service.AcaoService;
@@ -38,17 +37,13 @@ public class AcaoApiController extends PagamentoApiController<String> implements
 
 	@RequestMapping(path="/{codigo}", method=RequestMethod.GET)
 	@Override
-	public Object get(@PathVariable("codigo")String codigo) {
+	public OrgaoGovernamental get(@PathVariable("codigo")String codigo) {
 		Acao acao = acaoService.getById(codigo);
-		if(acao != null){
-			OrgaoGovernamental orgao = new OrgaoGovernamental();
-			orgao.setId(String.valueOf(codigo));
-			orgao.setNome(acao.getCodAcao());
-			orgao.setTipo(TipoOrgaoGovernamental.ACAO.getNomeTabela());
-			return orgao;
-		}else{
-			return new MensagemJSON("Órgão não encontrado.");
-		}
+		OrgaoGovernamental orgao = new OrgaoGovernamental();
+		orgao.setId(String.valueOf(codigo));
+		orgao.setNome(acao.getCodAcao());
+		orgao.setTipo(TipoOrgaoGovernamental.ACAO.getNomeTabela());
+		return orgao;
 	}
 	
 	@RequestMapping(path="/find", method=RequestMethod.POST)

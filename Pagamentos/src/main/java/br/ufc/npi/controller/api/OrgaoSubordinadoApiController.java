@@ -13,7 +13,6 @@ import br.ufc.npi.model.OrgaoSubordinado;
 import br.ufc.npi.model.api.Chart;
 import br.ufc.npi.model.api.Data;
 import br.ufc.npi.model.api.Dataset;
-import br.ufc.npi.model.api.MensagemJSON;
 import br.ufc.npi.model.api.OrgaoGovernamental;
 import br.ufc.npi.model.ui.TipoOrgaoGovernamental;
 import br.ufc.npi.service.OrgaoSubordinadoService;
@@ -21,10 +20,10 @@ import br.ufc.npi.service.OrgaoSubordinadoService;
 @RestController
 @RequestMapping(path="/api/orgao_subordinado")
 public class OrgaoSubordinadoApiController extends PagamentoApiController<Long> implements IOrgaoApiControler<Long>{
-	
+
 	@Autowired
 	private OrgaoSubordinadoService orgaoSubordinadoService;
-	
+
 	@RequestMapping(path="/", method=RequestMethod.GET)
 	@Override
 	public List<OrgaoGovernamental> list(){
@@ -35,20 +34,16 @@ public class OrgaoSubordinadoApiController extends PagamentoApiController<Long> 
 		}
 		return orgaos;
 	}
-	
+
 	@RequestMapping(path="/{codigo}", method=RequestMethod.GET)
 	@Override
-	public Object get(@PathVariable("codigo") Long codigo){
+	public OrgaoGovernamental get(@PathVariable("codigo") Long codigo){
 		OrgaoSubordinado orgaoSubordinado = orgaoSubordinadoService.getById(codigo);
-		if(orgaoSubordinado != null){
-			OrgaoGovernamental orgao = new OrgaoGovernamental();
-			orgao.setId(String.valueOf(codigo));
-			orgao.setNome(orgaoSubordinado.getNomeOrgaoSubordinado());
-			orgao.setTipo(TipoOrgaoGovernamental.ORGAO_SUBORDINADO.getNomeTabela());
-			return orgao;
-		}else{
-			return new MensagemJSON("Órgão não encontrado.");
-		}	
+		OrgaoGovernamental orgao = new OrgaoGovernamental();
+		orgao.setId(String.valueOf(codigo));
+		orgao.setNome(orgaoSubordinado.getNomeOrgaoSubordinado());
+		orgao.setTipo(TipoOrgaoGovernamental.ORGAO_SUBORDINADO.getNomeTabela());
+		return orgao;	
 	}
 
 	@RequestMapping(path="/find", method=RequestMethod.POST)
@@ -61,13 +56,13 @@ public class OrgaoSubordinadoApiController extends PagamentoApiController<Long> 
 	@Override
 	public Chart pagamentos(@PathVariable("codigo")Long codigo) {
 		List<Object[]> pagamentos;
-		
+
 		if(codigo == 0){
 			pagamentos = pagamentoService.findByMonths();
 		}else{
 			pagamentos = pagamentoService.findPagamentosOrgSubordinadoByMonths(codigo);
 		}
-		
+
 		Double valores[] = new Double[12];
 		for(int i = 0; i<valores.length; i++){
 			valores[i] = 0.0;
@@ -90,5 +85,5 @@ public class OrgaoSubordinadoApiController extends PagamentoApiController<Long> 
 
 		return chart;
 	}
-	
+
 }

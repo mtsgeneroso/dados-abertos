@@ -220,7 +220,7 @@ $("#btn-consultar").click(function(){
 			$(".resultado-container").show();
 			$(".consulta-container").hide();
 			$("#resultados").append(gerarTabela(orgaos, hierarquiaUI));
-			$("table").tablesorter({
+			$("#tableResultado").tablesorter({
 				theme : "materialize",
 				widthFixed: true,
 				widgets : ["filter", "zebra"],

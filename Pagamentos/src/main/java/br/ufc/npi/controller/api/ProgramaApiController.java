@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ufc.npi.model.Programa;
 import br.ufc.npi.model.api.Chart;
-import br.ufc.npi.model.api.MensagemJSON;
 import br.ufc.npi.model.api.OrgaoGovernamental;
 import br.ufc.npi.model.ui.TipoOrgaoGovernamental;
 import br.ufc.npi.service.ProgramaService;
@@ -18,10 +17,10 @@ import br.ufc.npi.service.ProgramaService;
 @RestController
 @RequestMapping(path="/api/programa")
 public class ProgramaApiController extends PagamentoApiController<Long> implements IOrgaoApiControler<Long>{
-	
+
 	@Autowired
 	private ProgramaService programaService;
-	
+
 	@RequestMapping(path="/", method=RequestMethod.GET)
 	@Override
 	public List<OrgaoGovernamental> list() {
@@ -35,17 +34,13 @@ public class ProgramaApiController extends PagamentoApiController<Long> implemen
 
 	@RequestMapping(path="/{codigo}", method=RequestMethod.GET)
 	@Override
-	public Object get(Long codigo) {
+	public OrgaoGovernamental get(Long codigo) {
 		Programa programa = programaService.getById(codigo);
-		if(programa != null){
-			OrgaoGovernamental orgao = new OrgaoGovernamental();
-			orgao.setId(String.valueOf(codigo));
-			orgao.setNome(String.valueOf(programa.getCodPrograma()));
-			orgao.setTipo(TipoOrgaoGovernamental.PROGRAMA.getNomeTabela());
-			return orgao;
-		}else{
-			return new MensagemJSON("Órgão não encontrado.");
-		}
+		OrgaoGovernamental orgao = new OrgaoGovernamental();
+		orgao.setId(String.valueOf(codigo));
+		orgao.setNome(String.valueOf(programa.getCodPrograma()));
+		orgao.setTipo(TipoOrgaoGovernamental.PROGRAMA.getNomeTabela());
+		return orgao;
 	}
 
 	@RequestMapping(path="/find", method=RequestMethod.POST)

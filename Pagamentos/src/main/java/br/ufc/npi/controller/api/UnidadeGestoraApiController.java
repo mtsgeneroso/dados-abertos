@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufc.npi.model.OrgaoSuperior;
 import br.ufc.npi.model.UnidadeGestora;
 import br.ufc.npi.model.api.Chart;
 import br.ufc.npi.model.api.Data;
 import br.ufc.npi.model.api.Dataset;
-import br.ufc.npi.model.api.MensagemJSON;
 import br.ufc.npi.model.api.OrgaoGovernamental;
 import br.ufc.npi.model.ui.TipoOrgaoGovernamental;
 import br.ufc.npi.service.UnidadeGestoraService;
@@ -22,10 +20,10 @@ import br.ufc.npi.service.UnidadeGestoraService;
 @RestController
 @RequestMapping(path="/api/unidade_gestora")
 public class UnidadeGestoraApiController extends PagamentoApiController<Long> implements IOrgaoApiControler<Long>{
-	
+
 	@Autowired
 	private UnidadeGestoraService unidadeGestoraService;
-	
+
 	@RequestMapping(path="/", method=RequestMethod.GET)
 	@Override
 	public List<OrgaoGovernamental> list() {
@@ -39,17 +37,13 @@ public class UnidadeGestoraApiController extends PagamentoApiController<Long> im
 
 	@RequestMapping(path="/{codigo}", method=RequestMethod.GET)
 	@Override
-	public Object get(@PathVariable("codigo")Long codigo) {
+	public OrgaoGovernamental get(@PathVariable("codigo")Long codigo) {
 		UnidadeGestora unidadeGestoa = unidadeGestoraService.getById(codigo);
-		if(unidadeGestoa != null){
-			OrgaoGovernamental orgao = new OrgaoGovernamental();
-			orgao.setId(String.valueOf(codigo));
-			orgao.setNome(unidadeGestoa.getNomeUnidadeGestora());
-			orgao.setTipo(TipoOrgaoGovernamental.UNIDADE_GESTORA.getNomeTabela());
-			return orgao;
-		}else{
-			return new MensagemJSON("Órgão não encontrado.");
-		}
+		OrgaoGovernamental orgao = new OrgaoGovernamental();
+		orgao.setId(String.valueOf(codigo));
+		orgao.setNome(unidadeGestoa.getNomeUnidadeGestora());
+		orgao.setTipo(TipoOrgaoGovernamental.UNIDADE_GESTORA.getNomeTabela());
+		return orgao;
 	}
 
 	@RequestMapping(path="/find", method=RequestMethod.POST)

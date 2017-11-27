@@ -13,7 +13,6 @@ import br.ufc.npi.model.OrgaoSubordinado;
 import br.ufc.npi.model.OrgaoSuperior;
 import br.ufc.npi.model.UnidadeGestora;
 import br.ufc.npi.model.api.Chart;
-import br.ufc.npi.model.api.MensagemJSON;
 import br.ufc.npi.model.api.OrgaoGovernamental;
 import br.ufc.npi.model.ui.TipoOrgaoGovernamental;
 import br.ufc.npi.service.OrgaoSubordinadoService;
@@ -52,13 +51,13 @@ public class OrgaosApiController extends PagamentoApiController<Long> implements
 
 	@RequestMapping(path="/{codigo}", method=RequestMethod.GET)
 	@Override
-	public Object get(@PathVariable("codigo") Long codigo) {
+	public OrgaoGovernamental get(@PathVariable("codigo") Long codigo) {
 		OrgaoSuperiorApiController orgaoSuperiorApi = new OrgaoSuperiorApiController();
-		Object response = orgaoSuperiorApi.get(codigo);
-		if(response instanceof MensagemJSON){
+		OrgaoGovernamental response = orgaoSuperiorApi.get(codigo);
+		if(response == null){
 			OrgaoSubordinadoApiController orgaoSubordinadoApi = new OrgaoSubordinadoApiController();
 			response = orgaoSubordinadoApi.get(codigo);
-			if(response instanceof MensagemJSON){
+			if(response == null){
 				UnidadeGestoraApiController unidadeGestoraApi = new UnidadeGestoraApiController();
 				response = unidadeGestoraApi.get(codigo);
 				return response;

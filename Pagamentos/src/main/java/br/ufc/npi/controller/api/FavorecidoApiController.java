@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufc.npi.model.Acao;
 import br.ufc.npi.model.Favorecido;
 import br.ufc.npi.model.api.Chart;
 import br.ufc.npi.model.api.Data;
 import br.ufc.npi.model.api.Dataset;
-import br.ufc.npi.model.api.MensagemJSON;
 import br.ufc.npi.model.api.OrgaoGovernamental;
 import br.ufc.npi.model.ui.TipoOrgaoGovernamental;
 import br.ufc.npi.service.FavorecidoService;
@@ -22,10 +20,10 @@ import br.ufc.npi.service.FavorecidoService;
 @RestController
 @RequestMapping(path="/api/favorecido")
 public class FavorecidoApiController extends PagamentoApiController<String> implements IOrgaoApiControler<String>{
-	
+
 	@Autowired
 	private FavorecidoService favorecidoService;
-	
+
 	@RequestMapping(path="/", method=RequestMethod.GET)
 	@Override
 	public List<OrgaoGovernamental> list() {
@@ -39,17 +37,13 @@ public class FavorecidoApiController extends PagamentoApiController<String> impl
 
 	@RequestMapping(path="/{codigo}", method=RequestMethod.GET)
 	@Override
-	public Object get(@PathVariable("codigo") String codigo) {
+	public OrgaoGovernamental get(@PathVariable("codigo") String codigo) {
 		Favorecido favorecido = favorecidoService.getById(codigo);
-		if(favorecido != null){
-			OrgaoGovernamental orgao = new OrgaoGovernamental();
-			orgao.setId(String.valueOf(codigo));
-			orgao.setNome(favorecido.getCodFavorecido());
-			orgao.setTipo(TipoOrgaoGovernamental.FAVORECIDO.getNomeTabela());
-			return orgao;
-		}else{
-			return new MensagemJSON("Órgão não encontrado.");
-		}
+		OrgaoGovernamental orgao = new OrgaoGovernamental();
+		orgao.setId(String.valueOf(codigo));
+		orgao.setNome(favorecido.getCodFavorecido());
+		orgao.setTipo(TipoOrgaoGovernamental.FAVORECIDO.getNomeTabela());
+		return orgao;
 	}
 
 	@RequestMapping(path="/find", method=RequestMethod.POST)
@@ -58,7 +52,7 @@ public class FavorecidoApiController extends PagamentoApiController<String> impl
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@RequestMapping(path="/pagamentos/{codigo}")
 	@Override
 	public Chart pagamentos(@PathVariable("codigo")String codigo) {
