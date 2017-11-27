@@ -64,14 +64,12 @@
 					</div>
 				</div>
 
-				<input type="hidden" name="currentId" value="0"/>
-
 				<div class="row" id="botoes">
 					<div th:each="unidade : ${unidadesGestoras}">
 						<div class="col s12 m3 l2">
 							<a th:href="@{/unidade_gestora/{id}(id=${unidade.codUnidadeGestora})}" th:title="${unidade.nomeUnidadeGestora}">
 								<div class="card-panel main-color-black hoverable"
-									style="height: 120px;">
+									style="padding-top: 2px; height: 120px;">
 									<p th:text="${#strings.toUpperCase(unidade.nomeUnidadeGestora)}" th:classappend="${#strings.length(unidade.nomeUnidadeGestora) > 60} ? 'truncate'" style="font-size: 12px">[...]</p>
 								</div>
 							</a>
@@ -93,8 +91,7 @@
 	<script th:src="@{/js/filtrarOrgaos.js}"></script>
 	<script th:src="@{/js/init.js}"></script>
 	<script>
-		var id = $("input[name=currentId]").val();
-		initInterface("unidade_gestora", id);
+		initInterface("unidade_gestora", "0");
 	</script>
 </body>
 </html>

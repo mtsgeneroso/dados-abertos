@@ -66,8 +66,6 @@
 				</div>
 			</div>
 
-			<input type="hidden" name="currentId" value="0" />
-
 			<div class="row" id="botoes">
 				<div th:each="orgao : ${orgaosSubordinados}">
 					<div class="col s12 m3 l2">
@@ -75,7 +73,7 @@
 							th:href="@{/orgao_subordinado/{id}(id=${orgao.codOrgaoSubordinado})}"
 							th:title="${orgao.nomeOrgaoSubordinado}">
 							<div class="card-panel main-color-black hoverable"
-								style="height: 120px;">
+								style="padding-top: 2px; height: 120px;">
 								<p th:text="${#strings.toUpperCase(orgao.nomeOrgaoSubordinado)}"
 									th:classappend="${#strings.length(orgao.nomeOrgaoSubordinado) > 60} ? 'truncate'"
 									style="font-size: 12px">[...]</p>
@@ -98,8 +96,7 @@
 	<script th:src="@{/js/filtrarOrgaos.js}"></script>
 	<script th:src="@{/js/init.js}"></script>
 	<script>
-		var id = $("input[name=currentId]").val();
-		initInterface("orgao_subordinado", id);
+		initInterface("orgao_subordinado", "0");
 	</script>
 </body>
 </html>

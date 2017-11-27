@@ -57,8 +57,6 @@
 
 			<h5 class="main-color-black-text">Órgãos Superiores:</h5>
 
-			<input type="hidden" name="currentId" value="0" />
-
 			<div class="row">
 				<div class="col s12 m6">
 					<div class="input-field">
@@ -98,8 +96,7 @@
 	<div th:include="fragments/scripts"></div>
 	<script th:src="@{/js/init.js}"></script>
 	<script>
-		var id = $("input[name=currentId]").val();
-		initInterface("orgao_superior", id);
+		initInterface("orgao_superior", "0");
 	</script>
 </body>
 </html>
