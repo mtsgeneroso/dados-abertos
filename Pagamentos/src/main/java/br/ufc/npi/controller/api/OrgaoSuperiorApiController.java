@@ -14,7 +14,6 @@ import br.ufc.npi.model.OrgaoSuperior;
 import br.ufc.npi.model.api.Chart;
 import br.ufc.npi.model.api.Data;
 import br.ufc.npi.model.api.Dataset;
-import br.ufc.npi.model.api.MensagemJSON;
 import br.ufc.npi.model.api.OrgaoGovernamental;
 import br.ufc.npi.model.ui.TipoOrgaoGovernamental;
 import br.ufc.npi.service.OrgaoSuperiorService;
@@ -23,13 +22,13 @@ import br.ufc.npi.service.PagamentoService;
 @RestController
 @RequestMapping(path="/api/orgao_superior")
 public class OrgaoSuperiorApiController extends PagamentoApiController<Long> implements IOrgaoApiControler<Long>{
-	
+
 	@Autowired
 	private OrgaoSuperiorService orgaoSuperiorService;
-	
+
 	@Autowired
 	private PagamentoService pagamentoService;
-	
+
 	@RequestMapping(path="/", method=RequestMethod.GET)
 	public List<OrgaoGovernamental> list(){
 		ArrayList<OrgaoGovernamental> orgaos = new ArrayList<OrgaoGovernamental>();
@@ -39,21 +38,17 @@ public class OrgaoSuperiorApiController extends PagamentoApiController<Long> imp
 		}
 		return orgaos;
 	}
-	
+
 	@RequestMapping(path="/{codigo}", method=RequestMethod.GET)
-	public Object get(@PathVariable("codigo") Long codigo){
+	public OrgaoGovernamental get(@PathVariable("codigo") Long codigo){
 		OrgaoSuperior orgaoSuperior = orgaoSuperiorService.getById(codigo);
-		if(orgaoSuperior != null){
-			OrgaoGovernamental orgao = new OrgaoGovernamental();
-			orgao.setId(String.valueOf(codigo));
-			orgao.setNome(orgaoSuperior.getNomeOrgaoSuperior());
-			orgao.setTipo(TipoOrgaoGovernamental.ORGAO_SUPERIOR.getNomeTabela());
-			return orgao;
-		}else{
-			return new MensagemJSON("Órgão não encontrado.");
-		}	
+		OrgaoGovernamental orgao = new OrgaoGovernamental();
+		orgao.setId(String.valueOf(codigo));
+		orgao.setNome(orgaoSuperior.getNomeOrgaoSuperior());
+		orgao.setTipo(TipoOrgaoGovernamental.ORGAO_SUPERIOR.getNomeTabela());
+		return orgao;
 	}
-	
+
 	@RequestMapping(path="/find", method=RequestMethod.POST)
 	public List<OrgaoGovernamental> find(@RequestParam OrgaoGovernamental orgaoConsulta){
 		return null;
@@ -68,12 +63,12 @@ public class OrgaoSuperiorApiController extends PagamentoApiController<Long> imp
 		}else{
 			pagamentos = pagamentoService.findPagamentosOrgSuperiorByMonths(codigo);
 		}
-		
+
 		Double valores[] = new Double[12];
 		for(int i = 0; i<valores.length; i++){
 			valores[i] = 0.0;
 		}
-		
+
 		for (int i = 0; i<pagamentos.size(); i++){
 			valores[(int)pagamentos.get(i)[0]-1] = (Double)(pagamentos.get(i)[1]); 
 		}
@@ -92,5 +87,5 @@ public class OrgaoSuperiorApiController extends PagamentoApiController<Long> imp
 
 		return chart;
 	}
-	
+
 }
