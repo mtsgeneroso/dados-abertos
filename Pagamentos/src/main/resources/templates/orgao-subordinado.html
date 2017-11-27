@@ -42,19 +42,28 @@
 				<h5>Sem dados disponíveis</h5>
 			</div>
 
-			<br />
-			<br />
+			<br /> <br />
 			<canvas id="chart"></canvas>
 			<br /> <input type="hidden" name="currentId" th:value="${currentId}" />
 
 			<h5 class="main-color-black-text">Unidades Gestoras:</h5>
+			
+			<div class="row">
+				<div class="col s12 m6">
+					<div class="input-field">
+						<input id="filter" type="text" onkeyup="javascript:filter('.card-panel')" class="validate" /> <label
+							for="filter">Filtrar Órgãos</label>
+					</div>
+				</div>
+			</div>
+			
 			<div class="row" id="botoes">
 				<div th:each="unidade : ${unidadesGestoras}">
 					<div class="col s12 m4 l2">
 						<a
 							th:href="@{/unidade_gestora/{id}(id=${unidade.codUnidadeGestora})}"
 							th:title="${unidade.nomeUnidadeGestora}">
-							<div class="card-panel main-color main-color-hoverable"
+							<div class="card-panel main-color main-color-black hoverable"
 								style="padding-top: 2px; height: 120px;">
 								<p th:text="${unidade.nomeUnidadeGestora}"
 									th:classappend="${#strings.length(unidade.nomeUnidadeGestora) > 75} ? 'truncate'"
