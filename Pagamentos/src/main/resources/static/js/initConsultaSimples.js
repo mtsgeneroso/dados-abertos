@@ -182,7 +182,7 @@ $(document).ready(function(){
 				}
 			});
 
-			$(".detalhes-container").append("<div class='row'><div class='col s12'><h5 class='main-black-color-text'>Clique para ver detalhes:</h5></div></div>");
+			$(".detalhes-container").append("<div class='row'><div class='col s12'><h5 class='main-color-black-text'>Clique para ver detalhes:</h5></div></div>");
 
 			for(var i = 0; i<orgaosConsulta.length; i++){
 				$(".detalhes-container").append("<div class='col l4 s12 m4'>" +

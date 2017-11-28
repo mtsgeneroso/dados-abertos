@@ -2,6 +2,8 @@ package br.ufc.npi.model.ui;
 
 public class Breadcumb {
 	
+	public static Breadcumb inicio = new Breadcumb("0", "INÍCIO", "/");
+	
 	private String id;
 	private String titulo;
 	private String url;
