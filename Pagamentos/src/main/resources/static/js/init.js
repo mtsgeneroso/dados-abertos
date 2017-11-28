@@ -1,9 +1,3 @@
-$(document).ready(function(){
-	$("#filter").keypress(function(){
-		console.log($("#filter").val());
-	});
-});
-
 function initInterface(tipoOrgao, id){
 	
 	$("#rangeMeses").hide();
