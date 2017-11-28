@@ -1,8 +1,23 @@
-<footer class="page-footer main-color">
+<footer class="page-footer main-color-black">
+	<div class="container">
+		<div class="row">
+			<div class="col l6 s12">
+				<img th:src="@{/img/logo-ufc.png}" class="responsive-img" width="300px"/>
+			</div>
+			<div class="col l4 offset-l2 s12">
+				<h5 class="white-text">Sobre nós</h5>
+				<ul>
+					<li><a class="grey-text text-lighten-3" th:href="@{/quem-somos}">Quem somos</a></li>
+					<li><a class="grey-text text-lighten-3" th:href="@{http://www.quixada.ufc.br/}" target="_blank">UFC Campus Quixadá</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 	<div class="footer-copyright">
 		<div class="container">
-			Desenvolvido por <a class="main-color-black-text"
-				th:href="@{http://www.npi.quixada.ufc.br/}" target="_blank">NPI - Núcleo de Práticas em Informática</a>
+			Desenvolvido por <a class="white-text"
+				th:href="@{http://www.npi.quixada.ufc.br/}" target="_blank">NPI
+				- Núcleo de Práticas em Informática</a>
 		</div>
 	</div>
 </footer>
