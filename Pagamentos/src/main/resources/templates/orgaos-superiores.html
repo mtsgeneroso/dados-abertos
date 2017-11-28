@@ -25,76 +25,78 @@
 
 	<main>
 
-		<div class="section no-pad-bot" id="index-banner">
-			<div class="container">
+	<div class="section no-pad-bot" id="index-banner">
+		<div class="container">
 
-				<div class="row">
-					<div class="col s12">
+			<div class="row">
+				<div class="col s12">
 
-						<div id="loadChart" class="container">
-							<p class="main-color-black-text">Carregando gráfico...</p>
-							<div class="progress">
-      							<div class="indeterminate"></div>
-  							</div>
-						</div>
-
-						<p>
-						<div id="rangeMeses"></div>
-						</p>
-
-						<div id="mensagemChart">
-							<h5 class="main-color-black-text">Sem dados disponíveis</h5>
-						</div>
-
-
-						<br/><br/>
-						<canvas id="chart"></canvas>
-						<br/>
-					</div>
-				</div>
-
-
-				<h5 class="main-color-black-text">Órgãos Superiores:</h5>
-
-				<div class="row">
-					<div class="col s12 m6">
-						<div class="input-field">
-							<input id="filter" type="text" class="validate"/>
-		          			<label for="filter">Filtrar Órgãos</label>
+					<div id="loadChart" class="container">
+						<p class="main-color-black-text">Carregando gráfico...</p>
+						<div class="progress">
+							<div class="indeterminate"></div>
 						</div>
 					</div>
-				</div>
 
-				<input type="hidden" name="currentId" value="0"/>
+					<p>
+					<div id="rangeMeses"></div>
+					</p>
 
-				<div class="row">
-					<div th:each="orgao : ${orgaosSuperiores}">
-						<div class="col s12 m3 l2">
-							<a th:href="@{/orgao_superior/{id}(id=${orgao.codOrgaoSuperior})}" th:title="${orgao.nomeOrgaoSuperior}">
-								<div class="card-panel main-color-black hoverable" style="height: 150px;">
-									<p th:text="${orgao.nomeOrgaoSuperior}" th:classappend="${#strings.length(orgao.nomeOrgaoSuperior) > 60} ? 'truncate'" style="font-size: 12px">[...]</p>
-								</div>
-							</a>
-						</div>
+					<div id="mensagemChart">
+						<h5 class="main-color-black-text">Sem dados disponíveis</h5>
 					</div>
+
+
+					<br />
+					<br />
+					<canvas id="chart"></canvas>
+					<br />
 				</div>
-
-
-
-
 			</div>
+
+
+			<h5 class="main-color-black-text">Órgãos Superiores:</h5>
+
+			<div class="row">
+				<div class="col s12 m6">
+					<div class="input-field">
+						<input id="filter" type="text"
+							onkeyup="javascript:filter('.card-panel')" class="validate" /> <label
+							for="filter">Filtrar Órgãos</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div th:each="orgao : ${orgaosSuperiores}">
+					<div class="col s12 m3 l2">
+						<a th:href="@{/orgao_superior/{id}(id=${orgao.codOrgaoSuperior})}"
+							th:title="${orgao.nomeOrgaoSuperior}">
+							<div class="card-panel main-color-black hoverable"
+								style="padding-top: 2px; height: 120px;">
+								<p th:text="${#strings.toUpperCase(orgao.nomeOrgaoSuperior)}"
+									th:classappend="${#strings.length(orgao.nomeOrgaoSuperior) > 60} ? 'truncate'"
+									style="font-size: 12px">[...]</p>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+
+
+
+
 		</div>
+	</div>
 	</main>
 
 	<div th:include="fragments/footer"></div>
 
 	<!--  Scripts-->
 	<div th:include="fragments/scripts"></div>
-	<script th:src="@{/js/filtrarOrgaos.js}"></script>
 	<script th:src="@{/js/init.js}"></script>
 	<script>
-		var id = $("input[name=currentId]").val();
-		initInterface("orgao_superior", id);
+		initInterface("orgao_superior", "0");
 	</script>
 </body>
 </html>

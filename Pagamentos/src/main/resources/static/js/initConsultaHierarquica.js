@@ -67,22 +67,22 @@ function gerarTabela(orgaos, hierarquia){
 	for(var i = 0; i < hierarquia.length; i++){
 		tags += "<th class='main-color-black-text'>" + hierarquia[i] + "</th>";
 	}
-	tags += "<th>Valor (R$)</th></tr>";
+	tags += "<th class='main-color-black-text'>Valor (R$)</th></tr>";
 	tags += `<tr class="tablesorter-ignoreRow">
       <th colspan="` + parseInt(hierarquia.length + 1) + `" class="ts-pager form-horizontal">
         <button type="button" class="btn first main-color-black"><i class="small material-icons">first_page</i></button>
         <button type="button" class="btn prev main-color-black"><i class="small material-icons">navigate_before</i></button>
-        <span class="pagedisplay"></span>
+        <span class="pagedisplay main-color-black-text"></span>
         <!-- this can be any element, including an input -->
         <button type="button" class="btn next main-color-black"><i class="small material-icons">navigate_next</i></button>
         <button type="button" class="btn last main-color-black"><i class="small material-icons">last_page</i></button>
-		<select class="pagesize browser-default" title="Selecione número de linhas">
+		<select class="pagesize browser-default main-color-black-text" title="Selecione número de linhas">
           <option selected="selected" value="10">10</option>
           <option value="20">20</option>
           <option value="30">30</option>
           <option value="40">40</option>
         </select>
-        <select class="pagenum browser-default" title="Número de páginas"></select>
+        <select class="pagenum browser-default main-color-black-text" title="Número de páginas"></select>
 	 </th>
     </tr>`;
 
@@ -220,7 +220,7 @@ $("#btn-consultar").click(function(){
 			$(".resultado-container").show();
 			$(".consulta-container").hide();
 			$("#resultados").append(gerarTabela(orgaos, hierarquiaUI));
-			$("table").tablesorter({
+			$("#tableResultado").tablesorter({
 				theme : "materialize",
 				widthFixed: true,
 				widgets : ["filter", "zebra"],
