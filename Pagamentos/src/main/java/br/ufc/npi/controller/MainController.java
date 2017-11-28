@@ -82,4 +82,15 @@ public class MainController {
 		return "consulta-simples";
 	}
 	
+	@RequestMapping(path="/quem-somos")
+	public String quemSomos(Model model){
+		
+		ArrayList<Breadcumb> caminho = new ArrayList<>();
+		caminho.add(inicio);
+		caminho.add(new Breadcumb("0", "QUEM SOMOS", "/quem-somos"));
+		model.addAttribute("caminho", caminho);
+		
+		return "sobre";
+	}
+	
 }
