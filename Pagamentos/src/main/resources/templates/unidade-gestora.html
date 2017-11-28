@@ -46,7 +46,8 @@
 
 			<br /> <br />
 			<canvas id="chart"></canvas>
-			<br /> <input type="hidden" name="currentId" th:value="${currentId}" />
+			<br /> 
+			<input type="hidden" name="currentId" th:value="${currentId}"/>
 
 			<h5 class="main-color-black-text">Ações:</h5>
 			
@@ -62,10 +63,10 @@
 			<div class="row" id="botoes">
 				<div th:each="acao : ${acoes}">
 					<div class="col s12 m4 l2">
-						<a th:href="@{#}" th:title="${acao.nomeAcao}">
+						<a th:href="@{/acao/{id}(id=${acao.codAcao})}" th:title="${acao.nomeAcao}">
 							<div class="card-panel main-color-black hoverable"
 								style="padding-top: 2px; height: 120px;">
-								<p th:text="${acao.nomeAcao}"
+								<p th:text="${#strings.toUpperCase(acao.nomeAcao)}"
 									th:classappend="${#strings.length(acao.nomeAcao) > 75} ? 'truncate'"
 									style="font-size: 12px">[...]</p>
 							</div>

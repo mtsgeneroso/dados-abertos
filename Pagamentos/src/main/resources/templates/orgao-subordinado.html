@@ -61,11 +61,11 @@
 				<div th:each="unidade : ${unidadesGestoras}">
 					<div class="col s12 m4 l2">
 						<a
-							th:href="@{/unidade_gestora/{id}(id=${unidade.codUnidadeGestora})}"
+							th:href="@{/unidade_gestora/{id}(id=${unidade.codUnidadeGestora)}"
 							th:title="${unidade.nomeUnidadeGestora}">
 							<div class="card-panel main-color main-color-black hoverable"
 								style="padding-top: 2px; height: 120px;">
-								<p th:text="${unidade.nomeUnidadeGestora}"
+								<p th:text="${#strings.toUpperCase(unidade.nomeUnidadeGestora})"
 									th:classappend="${#strings.length(unidade.nomeUnidadeGestora) > 75} ? 'truncate'"
 									style="font-size: 12px">[...]</p>
 							</div>
