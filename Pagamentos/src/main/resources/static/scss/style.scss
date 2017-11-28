@@ -19,11 +19,11 @@ main {
 }
 
 .breadcrumb:before {
-    color: $main-color-black;
+    color: white;
 }
 
 .breadcrumb, .breadcrumb:last-child {
-   color: $main-color-black;
+   color: white;
 }
 
 .icon-block {
@@ -122,6 +122,10 @@ main {
 		background-color: $main-color;
 		color: $main-color-black;
 	}
+}
+
+.bg-color{
+	background-color: $bg-color;
 }
 
 //Progress Bar
