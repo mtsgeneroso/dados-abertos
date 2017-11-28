@@ -118,6 +118,7 @@ $(document).ready(function(){
 	$(".item-content").hide();
 	$(".filtro-orgaos").hide();
 	$(".resultado-container").hide();
+	$(".btn-nova-consulta").hide();
 	$(".btn-steps").hide();
 	$("#btn-prev").addClass("disabled");
 });
@@ -219,22 +220,31 @@ $("#btn-consultar").click(function(){
 		success: function(orgaos){
 			$(".resultado-container").show();
 			$(".consulta-container").hide();
-			$("#resultados").append(gerarTabela(orgaos, hierarquiaUI));
-			$("#tableResultado").tablesorter({
-				theme : "materialize",
-				widthFixed: true,
-				widgets : ["filter", "zebra"],
-				widgetOptions : {
-					zebra : ["even", "odd"],
-					filter_reset : ".reset"
-				}
-			}).tablesorterPager({
-				container: $(".ts-pager"),
-				cssGoto  : ".pagenum",
-				removeRows: false,
-				output: '{startRow} - {endRow} / {filteredRows} ({totalRows})'
-			});
-			$(".celula").formatCurrency();
+			if(orgaos.length == 0){
+				$("#resultados").append(`<div class="container center">
+				<h5>Nenhum resultado encontrado.</h5>
+				<a href="/consulta-hierarquica" class="waves-effect waves-light btn main-color-black hoverable center" id="btn-consultar">Nova Consulta</a>
+				</div>`);
+			}
+			else{
+				$(".btn-nova-consulta").show();
+				$("#resultados").append(gerarTabela(orgaos, hierarquiaUI));
+				$("#tableResultado").tablesorter({
+					theme : "materialize",
+					widthFixed: true,
+					widgets : ["filter", "zebra"],
+					widgetOptions : {
+						zebra : ["even", "odd"],
+						filter_reset : ".reset"
+					}
+				}).tablesorterPager({
+					container: $(".ts-pager"),
+					cssGoto  : ".pagenum",
+					removeRows: false,
+					output: '{startRow} - {endRow} / {filteredRows} ({totalRows})'
+				});
+				$(".celula").formatCurrency();
+			}
 			$("#loadChart").hide();
 		}
 	});

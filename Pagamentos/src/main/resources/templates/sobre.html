@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+<title>BODS - Início</title>
+
+<!-- CSS  -->
+<link
+	th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}"
+	rel="stylesheet" />
+<link th:href="@{webjars/materializecss/css/materialize.min.css}"
+	type="text/css" rel="stylesheet" media="screen,projection" />
+<link th:href="@{css/nouislider.css}" type="text/css" rel="stylesheet" />
+<link th:href="@{css/style.css}" type="text/css" rel="stylesheet"
+	media="screen,projection" />
+</head>
+<body>
+	<div th:include="fragments/navbar"></div>
+
+	<main> <!-- <div th:include="fragments/sidenav"></div> -->
+
+	<div class="container main-container">
+
+		<h1 class="header center main-color-black-text">Quem somos</h1>
+			<div class="row center">
+				<div class="col s12 m2 offset-m2">
+					<img th:src="@{/img/equipe/crislanio.jpg}" class="circle responsive-img"/>
+				</div>
+				<div class="col s12 m2">
+					<img th:src="@{/img/equipe/ticiana.jpg}" class="circle responsive-img"/>
+				</div>
+				<div class="col s12 m2">
+					<img th:src="@{/img/equipe/daiane.jpg}" class="circle responsive-img"/>
+				</div>
+				<div class="col s12 m2">
+					<img th:src="@{/img/equipe/raul.jpg}" class="circle responsive-img"/>
+				</div>
+			</div>
+			<div class="row center">
+				<div class="col s12 m2 offset-m2">
+					<img th:src="@{/img/equipe/yago.jpg}" class="circle responsive-img"/>
+				</div>
+				<div class="col s12 m2">
+					<img th:src="@{/img/equipe/matheus.jpg}" class="circle responsive-img"/>
+				</div>
+				<div class="col s12 m2">
+					<img th:src="@{/img/equipe/alysson.jpg}" class="circle responsive-img"/>
+				</div>
+				<div class="col s12 m2">
+					<img th:src="@{/img/equipe/wendell.jpg}" class="circle responsive-img"/>
+				</div>
+			</div>
+			<div class="row center">
+				<div class="col s12 m2 offset-m2">
+					<img th:src="@{/img/equipe/jk.jpg}" class="circle responsive-img"/>
+				</div>
+				<div class="col s12 m2">
+					<img th:src="@{/img/equipe/mikael.jpg}" class="circle responsive-img"/>
+				</div>
+				<div class="col s12 m2">
+					<img th:src="@{/img/equipe/rayson.jpg}" class="circle responsive-img"/>
+				</div>
+				<div class="col s12 m2">
+					<img th:src="@{/img/equipe/decio.jpg}" class="circle responsive-img"/>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<div th:include="fragments/footer"></div>
+
+
+	<!--  Scripts-->
+	<div th:include="fragments/scripts"></div>
+
+</body>
+</html>

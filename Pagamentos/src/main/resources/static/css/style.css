@@ -15,10 +15,10 @@ main {
   flex: 1 0 auto; }
 
 .breadcrumb:before {
-  color: #3f7575; }
+  color: white; }
 
 .breadcrumb, .breadcrumb:last-child {
-  color: #3f7575; }
+  color: white; }
 
 .icon-block {
   padding: 0 15px; }
@@ -94,6 +94,9 @@ main {
   .main-color-black-hoverable:hover {
     background-color: #90b5b5;
     color: #3f7575; }
+
+.bg-color {
+  background-color: #eeeeee; }
 
 ul.progress-bar {
   width: 100%;
